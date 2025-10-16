@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Abonnements{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Choisissez votre plan</h2>
+
+    {% if plans is empty %}
+        <p class="text-center text-muted">Aucun plan disponible pour le moment.</p>
+    {% else %}
+        <div class="row g-4 justify-content-center">
+            {% for plan in plans %}
+                <div class="col-md-4">
+                    <div class="card h-100 text-center shadow-sm">
+                        {% if plan.illustration %}
+                            <img src="{{ asset('images/plans/' ~ plan.illustration) }}" class="card-img-top" alt="{{ plan.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ plan.title }}</h5>
+                            {% if plan.description %}
+                                <p class="card-text">{{ plan.description }}</p>
+                            {% endif %}
+                            <p class="card-text"><strong>{{ plan.price / 100 }} € / mois</strong></p>
+
+                            {% if subscription and subscription.plan.id == plan.id %}
+                                <span class="badge bg-success mb-2">Abonné ✅</span>
+                                <p>Votre abonnement est actif jusqu'au {{ subscription.expireDate|date('d/m/Y') }}</p>
+                                {% if subscription.isRecurring %}
+                                    <small class="text-muted">Renouvellement automatique activé</small>
+                                {% endif %}
+                            {% else %}
+                                <a href="{{ path('app_subscribe_checkout', {'planId': plan.id}) }}" class="btn btn-primary">S'abonner</a>
+                            {% endif %}
+
+                            {% if plan.features is not empty %}
+                                <hr>
+                                <h6>Avantages :</h6>
+                                <ul class="list-unstyled text-start">
+                                    {% for feature in plan.features %}
+                                        <li>• {{ feature }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

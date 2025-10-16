@@ -1,0 +1,59 @@
+<div class="need-read border p-4 rounded shadow mb-4">
+    {#<h3 class="text-xl font-semibold">{{ need.title }}</h3>#}
+    {% if need.type %}
+        <p class="text-gray-700 mt-2"><strong>{{ need.type }}</strong></p>
+    {% endif %}
+
+    {% if need.description %}
+        <p class="text-gray-700 mt-2">
+            On en a tous besoin, à des degrés différents
+        </p>
+    {# --- Bouton toggle description pour le besoin --- #}
+    <button class="btn btn-outline-light my-3" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#descNeed{{ need.id }}" 
+            aria-expanded="false" 
+            aria-controls="descNeed{{ need.id }}">
+        Description
+    </button>
+
+    <div class="collapse mb-4" id="descNeed{{ need.id }}">
+        <p class="mt-3 px-4">{{ need.description }}</p>
+    </div>
+{% endif %}
+
+    
+    {% if need.fulfilment is not empty %}
+    <p class="text-sm text-green-700 mt-2"><strong>Comment le combler ?</strong></p>
+    <ul class="list-unstyled ms-3">
+        {% for item in need.fulfilment %}
+            <p>{{ item }}</p>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+ 
+    <button
+        class="btn btn-outline-light mt-3"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#form-{{ need.id }}"
+        aria-expanded="false"
+        aria-controls="form-{{ need.id }}"
+    >
+        Ajouter ce besoin à mon profil
+    </button>
+
+    <div class="collapse mt-3" id="form-{{ need.id }}">
+    <div class="border p-4 rounded shadow bg-yellow-100">
+        {{ include('need/_form.html.twig') }}
+    </div>
+</div>
+
+
+
+
+
+</div>
+

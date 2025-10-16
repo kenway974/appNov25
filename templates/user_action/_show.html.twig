@@ -1,0 +1,55 @@
+{% if userAction.action.isDoableNow %}
+    <p><strong>Faisable à tout moment</strong></p>
+{% endif %}
+
+{% if userAction.action.title and userAction.deadline %}
+    J'ai jusqu'au<strong> {{ userAction.deadline|date('d/m/Y') }} </strong> pour <strong> {{ userAction.action.title }} </strong>
+{% endif %}
+
+{% if userAction.action.duration %}
+    <p>Ça me prendra<strong> {{ userAction.action.duration }} minutes</strong></p>
+{% endif %}
+
+{% if userAction.action.intension %}
+    <p>et mon intention sera de <strong> {{ userAction.action.intension }} </strong></p>
+{% endif %}
+
+<hr>
+
+{% if userAction.action.type %}
+    <p><strong>{{ userAction.action.type }}</strong></p>
+{% endif %}
+
+{% if userAction.action.description %}
+    <p><strong>Description :</strong> {{ userAction.action.description }}</p>
+{% endif %}
+
+
+<hr>
+
+{% if userAction.frequency %}
+    <p>Je le fais au moins tous les <strong>{{ userAction.frequency }}</strong> jours</p>
+{% endif %}
+
+{% if userAction.completions is not null %}
+    <p>Je l'ai déjà fait <strong>{{ userAction.completions }}</strong> fois</p>
+{% endif %}
+
+<hr>
+
+{% if userAction.action.blocks|length > 0 %}
+    <div>
+        <p><strong>Je peux avoir certains blocages à l'action...</strong></p>
+            {% for block in userAction.action.blocks %}
+                    <span><a href="{{ path('app_block_show_from_need', {'id': userAction.id}) }}">
+                            {{ block.title }}
+                        </a></span> </br>
+            {% endfor %}
+    </div>
+{% endif %}
+
+
+
+<form method="post" action="{{ path('app_action_complete', { id: userAction.id }) }}" style="margin-top: 1rem;">
+    <button type="submit" class="btn btn-outline-light">Marquer comme terminée</button>
+</form>

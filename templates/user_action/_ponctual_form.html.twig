@@ -1,0 +1,21 @@
+<form action="{{ path('app_dashboard') }}" method="POST" class="mb-3">
+    <!-- Token CSRF -->
+    <input type="hidden" name="user_action[_token]" value="{{ csrf_token('user_action') }}">
+    <!-- Identifiants pour le contrôleur -->
+    <input type="hidden" name="user_action[needId]" value="{{ userNeed.id }}">
+    <input type="hidden" name="user_action[actionId]" value="{{ action.id }}">
+    <!-- Récurrence -->
+    <input type="hidden" id="isRecurring-{{ userNeed.id }}-{{ action.id }}" 
+           name="user_action[isRecurring]" value="0">
+
+    <p><strong>{{ action.title }}</strong></p>
+
+    <!-- Champs -->
+    <div class="mb-2" id="deadlineField-{{ userNeed.id }}-{{ action.id }}">
+        <label for="deadline-{{ userNeed.id }}-{{ action.id }}">Deadline</label>
+        <input type="date" id="deadline-{{ userNeed.id }}-{{ action.id }}" 
+               name="user_action[deadline]" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+</form>

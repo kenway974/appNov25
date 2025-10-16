@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'action{% endblock %}
+
+{% block body %}
+<h1>Détails de l'action</h1>
+
+<h2>{{ action.title }}</h2>
+
+<p><strong>Description :</strong> {{ action.description ?: 'Aucune description' }}</p>
+
+<p><strong>Type :</strong> {{ action.type ?: 'Non spécifié' }}</p>
+<p><strong>Intension :</strong> {{ action.intension ?: 'Non spécifiée' }}</p>
+<p><strong>Durée :</strong> {{ action.duration ?: 'Non définie' }} min</p>
+<p><strong>Faisable maintenant :</strong> {{ action.isDoableNow ? 'Oui' : 'Non' }}</p>
+
+<a href="{{ path('app_action_add', {'id': action.id}) }}" class="btn btn-primary">
+    Ajouter cette action
+</a>
+
+<a href="{{ path('app_action') }}" class="btn btn-secondary">Retour à la liste</a>
+{% endblock %}

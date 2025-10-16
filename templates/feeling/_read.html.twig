@@ -1,0 +1,75 @@
+<div class="container mt-4 d-flex flex-column align-items-center text-center">
+
+    <div class="w-100" style="max-width: 700px; gap: 2rem; display:flex; flex-direction:column;">
+
+        {# Section déclencheurs de l'émotion #}
+        {% if feeling.triggers %}
+            <p class="mb-3 fw-semibold"><strong>Ça peut m'arriver quand...</strong></p>
+
+            <div class="d-flex flex-column align-items-center mb-4 gap-2">
+                {% for trigger in feeling.triggers %}
+                    <span class="text-center px-3 py-1 rounded-pill" style="color:#fff; font-weight:500;">
+                        {{ trigger }}
+                    </span>
+                {% endfor %}
+            </div>
+
+            <p class="mb-5 fst-italic text-white-75">ou à n'importe quel autre moment.</p>
+        {% endif %}
+
+        {# Message général sur l'émotion #}
+        <p class="mb-5" style="font-size:1.1rem; font-weight:600; color:#fff; line-height:1.6;">
+            Mais ce n'est pas ce qui compte, l'émotion est là pour me guider !
+        </p>
+
+        {# Section "Pourquoi je ressens ça ?" avec bouton toggle #}
+        {% if feeling.needs|length > 0 %}
+            <div class="d-inline-flex gap-2 mb-4 justify-content-center">
+                <button class="btn btn-outline-light btn-sm px-4 py-2" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseNeedsForFeeling{{ feeling.id }}"
+                        aria-expanded="false"
+                        aria-controls="collapseNeedsForFeeling{{ feeling.id }}">
+                    Pourquoi je ressens ça ?
+                </button>
+            </div>
+
+            {# Contenu des besoins - collapse Bootstrap #}
+            <div class="collapse" id="collapseNeedsForFeeling{{ feeling.id }}">
+                <div class="mb-4 p-4 rounded bg-secondary bg-opacity-10">
+
+                    {% if feeling.description %}
+                        <p class="mt-3 mb-4 fst-italic text-white-75" style="line-height:1.5;">
+                            {{ feeling.description }}
+                        </p>
+                        <hr style="border-color: rgba(255,255,255,0.2);">
+                    {% endif %}
+
+                    <h3 class="mt-4 mb-4 text-white fw-bold">J'ai peut-être besoin de...</h3>
+
+                    {% for need in feeling.needs %}
+                        <div class="mb-4 w-100">
+                            <h5 class="mb-2"
+                                role="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseNeedDetails{{ need.id }}"
+                                aria-expanded="false"
+                                aria-controls="collapseNeedDetails{{ need.id }}"
+                                style="cursor:pointer; color:#1d6df7; font-weight:600;">
+                                {{ need.title }}
+                            </h5>
+
+                            <div class="collapse" id="collapseNeedDetails{{ need.id }}">
+                                <div class="mb-4 p-4 rounded bg-secondary bg-opacity-10" style="max-width: 600px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+                                    {{ include('need/_read.html.twig', { need: need }) }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+</div>

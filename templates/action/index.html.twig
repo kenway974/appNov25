@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des actions{% endblock %}
+
+{% block body %}
+<div class="mt-5">
+    <h2 class="text-center mb-4">Actions par type</h2>
+
+    {% if actionsByType is not empty %}
+    <div id="carouselActionsByType" class="carousel slide">
+
+        <!-- 🔹 Indicateurs -->
+        <div class="carousel-indicators">
+            {% for type, actions in actionsByType %}
+                <button type="button" 
+                        data-bs-target="#carouselActionsByType" 
+                        data-bs-slide-to="{{ loop.index0 }}" 
+                        class="{{ loop.first ? 'active' : '' }}" 
+                        aria-current="{{ loop.first ? 'true' : 'false' }}" 
+                        aria-label="Slide {{ loop.index }}">
+                    {{ type|capitalize }}
+                </button>
+            {% endfor %}
+        </div>
+
+        <!-- 🔹 Slides -->
+        <div class="carousel-inner">
+            {% for type, actions in actionsByType %}
+                <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                    <h3 class="text-center mb-3">{{ type|capitalize }}</h3>
+
+                    {% if actions is empty %}
+                        <p class="text-center">Aucune action trouvée pour ce type.</p>
+                    {% else %}
+                        <div class="d-flex flex-column align-items-center gap-3">
+                            {% for action in actions %}
+                                <div class="action-toggle-title text-center"
+                                     data-action-id="{{ action.id }}"
+                                     style="cursor:pointer; width:80%; padding:1rem; border-radius:12px; background-color: rgba(255,255,255,0.1);">
+                                    {% if action.icon %}
+                                        <img src="{{ asset('images/icons/' ~ action.icon) }}" alt="" width="32" class="me-2">
+                                    {% endif %}
+                                    <h5>{{ action.title }}</h5>
+                                </div>
+
+                                <div class="action-content d-none mt-2" id="contentAction{{ action.id }}">
+                                    <p>{{ action.description }}</p>
+
+                                    <ul class="list-unstyled mb-3">
+                                        {% if action.intension %}
+                                            <li><strong>Intention :</strong> {{ action.intension }}</li>
+                                        {% endif %}
+                                        {% if action.duration %}
+                                            <li><strong>Durée :</strong> {{ action.duration }} min</li>
+                                        {% endif %}
+                                        {% if action.isDoableNow %}
+                                            <li><strong>Faisable maintenant :</strong> ✅ Oui</li>
+                                        {% else %}
+                                            <li><strong>Faisable maintenant :</strong> ❌ Non</li>
+                                        {% endif %}
+                                    </ul>
+
+                                    {% if action.needs is not empty %}
+                                        <strong>Besoins liés :</strong>
+                                        <ul>
+                                            {% for need in action.needs %}
+                                                <li>{{ need.title }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <p>Aucun besoin lié.</p>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- 🔹 Contrôles -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselActionsByType" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselActionsByType" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Suivant</span>
+        </button>
+    </div>
+
+    {% else %}
+        <p class="text-center text-white">Aucune action trouvée.</p>
+    {% endif %}
+</div>
+
+<!-- 🔹 JS Toggle -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.action-toggle-title').forEach(el => {
+        el.addEventListener('click', () => {
+            const id = el.dataset.actionId;
+            const content = document.querySelector('#contentAction' + id);
+            content.classList.toggle('d-none');
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,18 @@
+<div class="container-fluid section-top" id="home-benefits">
+    <div class="benefits-list">
+        {% set phrases = [
+            {'icon': 'icon/icon2.png', 'text': 'Petit à petit, tout deviendra clair pour moi, et je serai maître de mes décisions.'},
+            {'icon': 'icon/icon3.png', 'text': 'Je réduirai mon stress et la frustration, en gérant mieux mes priorités et mes émotions.'},
+            {'icon': 'icon/icon4.png', 'text': 'Sans m\'en rendre compte, je vais accomplir mes objectifs et me rapprocher de celui que je veux être.'},
+            {'icon': 'icon/icon1.png', 'text': 'Je serai fier(ère) et en paix avec moi-même, car mes actions reflèteront ce que je suis vraiment !'},
+            {'icon': 'icon/icon5.png', 'text': 'Je vivrai enfin comme je l\'ai toujours voulu.'}
+        ] %}
+
+        {% for phrase in phrases %}
+            <div class="benefits-item" data-index="{{ loop.index0 }}">
+                <img src="{{ asset(phrase.icon) }}" alt="Icon {{ loop.index }}" class="benefits-icon">
+                <span class="benefits-text">{{ phrase.text }}</span>
+            </div>
+        {% endfor %}
+    </div>
+</div>

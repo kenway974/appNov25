@@ -1,0 +1,24 @@
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel" style="background-color: #000922ff; color: #fff;">
+    <div class="offcanvas-header">
+        <img src="{{ asset('icons/logo-512.png') }}" class="offcanvas-title" id="offcanvasMenuLabel" alt="Logo"
+             style="height:24px; width:auto; background:transparent;">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasMenu" aria-label="Fermer"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="list-unstyled">
+            <li><a class="dropdown-item" href="#">Profil</a></li>
+            <li><a class="dropdown-item" href="{{ path('app_subscribe_main') }}">Abonnement</a></li>
+            <li><a class="dropdown-item" href="{{ path('app_feeling') }}">Feeling</a></li>
+            <li><a class="dropdown-item" href="{{ path('app_action') }}">Actions</a></li>
+            <li><a class="dropdown-item" href="{{ path('app_block') }}">Blocages</a></li>
+            <li><a class="dropdown-item" href="{{ path('app_about') }}">À propos</a></li>
+            <li><a class="dropdown-item" href="{{ path('app_faq') }}">FAQ</a></li>
+            <li><hr></li>
+            {% if app.user %}
+                <li><a class="dropdown-item text-danger" href="{{ path('app_logout') }}">Se déconnecter</a></li>
+            {% else %}
+                <li><a class="dropdown-item text-primary" href="{{ path('app_login') }}">Se connecter</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>

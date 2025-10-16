@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bloc : {{ block.title ?? 'Sans titre' }}{% endblock %}
+
+{% block body %}
+<div id="blocksCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        {% for block in allBlocks %}
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                <div class="text-center p-5" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center;">
+
+                    <h2 class="mb-4">{{ block.title ?? 'Sans titre' }}</h2>
+
+                    {# TYPE avec tooltip #}
+                    {% if block.type %}
+                        <p class="mb-4">
+                            <span class="badge bg-secondary fs-6"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="top"
+                                  title="Type de bloc">
+                                {{ block.type }}
+                            </span>
+                        </p>
+                    {% endif %}
+
+                    {# ICON #}
+                    {% if block.icon %}
+                        <img src="{{ asset('images/' ~ block.icon) }}" 
+                             alt="{{ block.title }}" 
+                             style="width: 150px; border-radius: 16px; margin: 20px 0;">
+                    {% endif %}
+
+                    {# --- Bouton toggle description --- #}
+                    <button class="btn btn-outline-light my-3" 
+                            type="button" 
+                            data-bs-toggle="collapse" 
+                            data-bs-target="#descNeed{{ block.id }}" 
+                            aria-expanded="false" 
+                            aria-controls="descNeed{{ block.id }}">
+                        D'où ça vient ?
+                    </button>
+
+                    <div class="collapse mb-4" id="descNeed{{ block.id }}">
+                        <p class="mt-3 px-4">{{ block.description }}</p>
+                    </div>
+
+                    {# BELIEFS avec tooltip #}
+                    {% if block.beliefs is not empty %}
+                        <div class="mb-4 beliefs-section">
+                            <p class="fw-bold "
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="top"
+                                       title="Croyance limitante">>Ces croyances que je peux avoir ne sont que des pensées, elles ne représentent pas la réalité :</p>
+                            <div class="d-flex flex-column gap-2">
+                                {% for belief in block.beliefs %}
+                                    <p class="belief-text mb-1">
+                                        {{ belief }}
+                                    </p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {# REFRAMINGS avec tooltip #}
+                    {% if block.reframings is not empty %}
+                        <div class="mb-4">
+                            <p class="fw-bold"
+                                        data-bs-toggle="tooltip"
+                                       data-bs-placement="top"
+                                       title="Nouvelle manière de voir les choses">>En revanche, je peux penser autrement et changer ma perception des choses :</p>
+                            <div class="d-flex flex-column gap-2">
+                                {% for reframing in block.reframings %}
+                                    <p >
+                                        {{ reframing }}
+                                    </p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {# ACTIONS avec tooltip #}
+                    {% if block.actions|length > 0 %}
+                        <div class="mb-4">
+                            <p class="fw-bold">Actions liées :</p>
+                            <ul class="list-unstyled d-flex flex-column gap-2">
+                                {% for action in block.actions %}
+                                    <li data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        title="Action que je peux entreprendre">
+                                        {{ action.title ?? 'Action sans titre' }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    {# FEELINGS #}
+                    {% if block.feelings|length > 0 %}
+                        <div class="mb-4">
+                            <p class="fw-bold">Émotions liées :</p>
+                            <ul class="list-unstyled d-flex flex-column gap-2">
+                                {% for feeling in block.feelings %}
+                                    <li>{{ feeling.title ?? 'Émotion sans nom' }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {# Controls #}
+    <button class="carousel-control-prev" type="button" data-bs-target="#blocksCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Précédent</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#blocksCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Suivant</span>
+    </button>
+</div>
+{% endblock %}
+

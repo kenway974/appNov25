@@ -1,0 +1,327 @@
+body {
+    color: #ffffff; /* texte blanc */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 1); /* ombre portée pour surélévation et lisibilité */
+    background: 
+        linear-gradient(
+            to bottom,
+            #000000 0%,   /* presque noir total */
+            #000000 20%,  
+            #000004 40%,  /* bleu nuit très profond */
+            #000008 60%,  /* lavande ultra sombre */
+            #000010 80%,  /* lavande/noir profond */
+            #050017 100%  /* lavande foncé très sombre */
+        ),
+}
+
+a {
+  color: rgb(185, 204, 233);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(255, 255, 255);          /* quand la souris passe dessus */
+  text-decoration: underline;
+}
+
+a:active {
+  color: orange;       /* quand on clique */
+}
+
+
+/* Par défaut : la div prend toute la largeur */
+.mobile-user-needs {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Sur petits écrans (mobile) : on limite la largeur à 820px */
+@media (max-width: 820px) {
+    .mobile-user-needs {
+        max-width: 70%;
+    }
+}
+
+
+/* NAVBAR */
+    .custom-navbar {
+        background-color: #f8f9fa;
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-left,
+    .navbar-center,
+    .navbar-right {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-left {
+        flex: 1;
+    }
+
+    .navbar-center {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .navbar-right {
+        flex: 1;
+        justify-content: flex-end;
+    }
+
+    /* Optionnel : spacing pour dropdowns */
+    .navbar-right .dropdown {
+        margin-right: 1rem;
+    }
+
+    #offcanvasMenu {
+        width: 30%; /* Ajuste la largeur à ta convenance */
+    }
+
+    @media (max-width: 768px) {
+        #offcanvasMenu {
+            width: 40%; /* prend presque tout l'écran */
+        }
+    }
+        
+
+    
+/* HOME */
+
+    .hero-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-bg video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2; /* fond vidéo */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 0, 15, 0.5); /* ajuste l’opacité selon besoin */
+    z-index: -1; /* overlay entre vidéo et contenu */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.btn-cta {
+    padding: 0.75rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #4f9cf9, #1d6df7);
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-cta:hover {
+    background: linear-gradient(90deg, #1d6df7, #4f9cf9);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+
+
+    /* BENEFITS */
+        #home-benefits {
+            padding: 4rem 1rem;
+            text-align: center; /* centre le texte */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* centre horizontalement les items */
+        }
+
+        .benefits-item {
+            display: flex;
+            flex-direction: column; /* icône au-dessus du texte */
+            align-items: center;    /* centre horizontalement icône + texte */
+            justify-content: center; /* centre verticalement si besoin */
+            margin-bottom: 5rem;
+            opacity: 0;
+            transform: translateX(0);
+            padding: 20px;
+        }
+        .benefits-text {
+            width: 60%;
+            font-weight: 300;       /* texte plus fin */
+            font-size: 1.4rem;
+        }
+        .benefits-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 0 1.5rem 0; /* espace entre icône et texte */
+        }
+
+        
+
+
+        /* Animations */
+        .slide-right {
+            animation: slideRight 0.8s forwards;
+        }
+
+        .slide-left {
+            animation: slideLeft 0.8s forwards;
+        }
+
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+    /* CTA */
+
+        /* Card du CTA */
+    .cta {
+    width: 90%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cta:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+
+    .cta-card {
+        background: none; /* pour que l'image soit visible telle quelle */
+        border-radius: 20px;
+        padding: 0;
+        max-width: 400px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        overflow: hidden;
+        position: relative; /* nécessaire pour positionner le bouton */
+    }
+
+    .cta-img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+
+    .cta-overlay-btn {
+        position: absolute;
+        bottom: 20px; /* distance depuis le bas de l'image */
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.75rem 2rem;
+        font-size: 1.2rem;
+        border-radius: 50px;
+        background: linear-gradient(90deg, #ff7e5f, #feb47b);
+        color: white;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+    .cta-overlay-btn:hover {
+        background: linear-gradient(90deg, #feb47b, #ff7e5f);
+        transform: translateX(-50%) translateY(-3px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Bloc "en savoir plus" */
+    #home-en-savoir-plus {
+        padding: 30px;
+    }
+
+    #home-en-savoir-plus h3 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+    #home-en-savoir-plus p {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* Définitions */
+
+        .home-definition-container {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* centre horizontalement */
+    align-items: center;     /* centre vertical si hauteur définie */
+}
+
+.home-definition-container img {
+    max-width: 80%;
+    height: auto; /* garde le ratio */
+}
+
+
+.grid div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid img {
+    width: 60px; /* ajuste selon ton besoin */
+    height: 60px;
+}
+
+.grid p {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.belief-text {
+            color: #8b97a1; /* gris neutre, proche de text-muted Bootstrap */
+            font-style: italic; /* optionnel, pour donner un effet "pensée" */
+        }
