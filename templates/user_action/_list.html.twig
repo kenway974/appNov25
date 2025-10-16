@@ -1,0 +1,56 @@
+<div id="carouselUserActions" class="carousel slide">
+
+        <div class="carousel-indicators">
+            {% for userAction in userActions %}
+                <button type="button" data-bs-target="#carouselUserActions" 
+                        data-bs-slide-to="{{ loop.index0 }}" 
+                        class="{{ loop.first ? 'active' : '' }}" 
+                        aria-current="{{ loop.first ? 'true' : 'false' }}" 
+                        aria-label="Slide {{ loop.index }}"></button>
+            {% endfor %}
+        </div>
+
+        <div class="carousel-inner">
+            {% for userAction in userActions %}
+                <div class="carousel-item {{ loop.first ? 'active' : '' }} text-center position-relative">
+
+                    {# IMAGE visible au départ #}
+                    {% if userAction.action.icon %}
+                        <div class="img-wrap position-relative user-action-toggle" data-action-id="{{ userAction.id }}" style="width:60%; margin:0 auto; cursor:pointer;">
+                            <img src="{{ asset('images/' ~ userAction.action.icon) }}" 
+                                 class="d-block w-100 rounded-3" 
+                                 alt="{{ userAction.action.title }} icon">
+
+                            {# TITRE + DEADLINE overlay #}
+                            <div class="action-overlay text-white text-center position-absolute top-50 start-50 translate-middle">
+                                <h5>{{ userAction.action.title ?? 'Action sans titre' }}</h5>
+                                {% if userAction.deadline %}
+                                    <p>Avant le <strong>{{ userAction.deadline|date('d/m/Y') }}</strong></p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {# CONTENU caché au départ #}
+                    <div class="user-action-toggle gutter mb-3 d-none" 
+                         id="contentAction{{ userAction.id }}" 
+                         data-action-id="{{ userAction.id }}" 
+                         style="margin: 0 auto; padding: 1rem; border-radius: 12px; background-color: rgba(255,255,255,0.1); width: 60%;">
+                        {{ include('user_action/_show.html.twig') }}
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+
+        {# Contrôles prev / next #}
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselUserActions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselUserActions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
+    </div>

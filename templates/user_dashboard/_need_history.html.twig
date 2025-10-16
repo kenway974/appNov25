@@ -1,0 +1,39 @@
+<h2>Historique du besoin : {{ userNeed.need.title }}</h2>
+
+<canvas id="historyChart"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('historyChart').getContext('2d');
+    const historyChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ labels|json_encode|raw }},
+            datasets: [{
+                label: 'Score',
+                data: {{ scores|json_encode|raw }},
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                tension: 0.3, // courbe lissée
+                fill: true,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true, position: 'top' },
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Date' }
+                },
+                y: {
+                    title: { display: true, text: 'Score' },
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

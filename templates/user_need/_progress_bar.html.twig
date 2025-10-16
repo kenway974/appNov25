@@ -1,0 +1,18 @@
+<div class="progress w-100" style="height: 20px;">
+                            <div class="progress-bar" 
+                                 role="progressbar" 
+                                 style="width: {{ userNeed.score }}%;
+                                        background-color: 
+                                            {% if userNeed.score >= 88 %}#2e7d32
+                                            {% elseif userNeed.score >= 75 %}#4caf50
+                                            {% elseif userNeed.score >= 63 %}#7cb342
+                                            {% elseif userNeed.score >= 50 %}#cddc39
+                                            {% elseif userNeed.score >= 38 %}#ffeb3b
+                                            {% elseif userNeed.score >= 25 %}#ffc107
+                                            {% elseif userNeed.score >= 13 %}#ff7043
+                                            {% else %}#f44336{% endif %};"
+                                 aria-valuenow="{{ userNeed.score }}" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="100">
+                            </div>
+                        </div>

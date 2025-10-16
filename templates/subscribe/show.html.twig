@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Abonnement{% endblock %}
+
+{% block body %}
+<h1>Mon abonnement</h1>
+
+<h1>{{ subscription.subscription.title }}</h1>
+<h3>{{ subscription.subscription.description }}</h3>
+<a href="{{ path('app_subscribe_cancel') }}">Annuler</a>
+
+{% endblock %}

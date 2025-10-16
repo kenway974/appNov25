@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des besoins{% endblock %}
+
+{% block body %}
+<div class="mt-5">
+    <h2 class="text-center mb-4">Besoins par type</h2>
+
+    {% if needsByType is not empty %}
+    <div id="carouselNeedsByType" class="carousel slide">
+
+        <!-- 🔹 Indicateurs -->
+        <div class="carousel-indicators">
+            {% for type, needs in needsByType %}
+                <button type="button" 
+                        data-bs-target="#carouselNeedsByType" 
+                        data-bs-slide-to="{{ loop.index0 }}" 
+                        class="{{ loop.first ? 'active' : '' }}" 
+                        aria-current="{{ loop.first ? 'true' : 'false' }}" 
+                        aria-label="Slide {{ loop.index }}">
+                    {{ type|capitalize }}
+                </button>
+            {% endfor %}
+        </div>
+
+        <!-- 🔹 Slides -->
+        <div class="carousel-inner">
+            {% for type, needs in needsByType %}
+                <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                    <h3 class="text-center mb-3">{{ type|capitalize }}</h3>
+
+                    {% if needs is empty %}
+                        <p class="text-center">Aucun besoin trouvé pour ce type.</p>
+                    {% else %}
+                        <div class="d-flex flex-column align-items-center gap-3">
+                            {% for need in needs %}
+                                <div class="need-toggle-title text-center"
+                                     data-need-id="{{ need.id }}"
+                                     style="cursor:pointer; width:80%; padding:1rem; border-radius:12px; background-color: rgba(255,255,255,0.1);">
+                                    {% if need.icon %}
+                                        <img src="{{ asset('images/icons/' ~ need.icon) }}" alt="" width="32" class="me-2">
+                                    {% endif %}
+                                    <h5>{{ need.title }}</h5>
+                                </div>
+
+                                <div class="need-content d-none mt-2" id="contentNeed{{ need.id }}">
+                                    <p>{{ need.description }}</p>
+
+                                    {% if need.actions is not empty %}
+                                        <strong>Actions liées :</strong>
+                                        <ul>
+                                            {% for action in need.actions %}
+                                                <li>{{ action.title }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <p>Aucune action liée.</p>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- 🔹 Contrôles -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselNeedsByType" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselNeedsByType" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Suivant</span>
+        </button>
+    </div>
+
+    {% else %}
+        <p class="text-center text-white">Aucun besoin trouvé.</p>
+    {% endif %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.need-toggle-title').forEach(el => {
+        el.addEventListener('click', () => {
+            const id = el.dataset.needId;
+            const content = document.querySelector('#contentNeed' + id);
+            content.classList.toggle('d-none');
+        });
+    });
+});
+</script>
+{% endblock %}

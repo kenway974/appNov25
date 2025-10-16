@@ -1,0 +1,92 @@
+<!-- Section Besoins -->
+<div class="container text-center mt-4">
+    <div class="row gx-5 row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+        {% for userNeed in userNeeds %}
+            <div class="col" style="padding-bottom: 15px;">
+                
+                <!-- Card header qui toggle le collapse -->
+                <div class="p-3 rounded-3" 
+                     style="background: rgba(0, 0, 0, 0.1); cursor: pointer;"
+                     data-bs-toggle="collapse" 
+                     data-bs-target="#collapseNeed{{ userNeed.id }}" 
+                     aria-expanded="false" 
+                     aria-controls="collapseNeed{{ userNeed.id }}">
+                    
+                    <div class="d-flex flex-column align-items-center">
+                        {% if userNeed.need.icon %}
+                            <img src="{{ asset('icons/need/' ~ userNeed.need.icon) }}" 
+                                 alt="{{ userNeed.need.title }} icon" 
+                                 class="mb-2 rounded-circle"
+                                 style="width: 45px; height: 45px; padding: 5px; background: #f0f0f0;">
+                        {% endif %}
+
+                        <p class="mb-1 text-white fs-5">{{ userNeed.need.title }}</p>
+                        <p class="mb-2 text-white fs-6">{{ userNeed.need.type }}</p>
+
+                        {{ include('user_need/_progress_bar.html.twig') }}
+                    </div>
+                </div>
+
+                <!-- Contenu du collapse -->
+                <div class="collapse mt-2" id="collapseNeed{{ userNeed.id }}">
+                    <div class="card card-body p-3 text-center" 
+                         style="background: rgba(53, 53, 53, 0.2); color: #fff; border-radius: 8px;">
+
+                        <p>{{ userNeed.need.description }}</p>
+
+                        {% if userNeed.need.fulfilment is not empty %}
+                            <strong>Fulfilments :</strong>
+                            <ul class="list-unstyled mt-2">
+                                {% for item in userNeed.need.fulfilment %}
+                                    <li><u>{{ item }}</u></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+                        <p><strong>Type :</strong> {{ userNeed.need.type }}</p>
+
+                        <!-- Liste des actions -->
+                        <ul>
+                            {% for action in userNeed.need.actions %}
+                                <li class="mt-2">
+                                    {{ action.title }}
+
+                                    <!-- Formulaire ponctuel -->
+<button type="button"
+        class="btn btn-sm btn-outline-primary"
+        onclick="toggleForm('ponctual-{{ userNeed.id }}-{{ action.id }}')">
+    Le faire une fois
+</button>
+<div id="form-ponctual-{{ userNeed.id }}-{{ action.id }}" style="display:none;" class="mt-2">
+    {{ include('user_action/_ponctual_form.html.twig') }}
+</div>
+
+<!-- Formulaire régulier -->
+<button type="button"
+        class="btn btn-sm btn-outline-primary"
+        onclick="toggleForm('repeat-{{ userNeed.id }}-{{ action.id }}')">
+    Le faire régulièrement
+</button>
+<div id="form-repeat-{{ userNeed.id }}-{{ action.id }}" style="display:none;" class="mt-2">
+    {{ include('user_action/_repeat_form.html.twig') }}
+</div>
+
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+function toggleForm(id) {
+    const div = document.getElementById("form-" + id);
+    if (!div) return;
+    div.style.display = div.style.display === "none" ? "block" : "none";
+}
+</script>

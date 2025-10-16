@@ -1,0 +1,43 @@
+{% if notifications %}
+    {% for notif in notifications %}
+        <li class="dropdown-item d-flex justify-content-between align-items-start" data-id="{{ notif.id }}" >
+            <div>
+                {% if notif.userAction.action.title %}
+                    <strong>{{ notif.userAction.action.title }}</strong><br>
+                {% endif %}
+                
+                {% if notif.title %}
+                    <strong>{{ notif.title }}</strong><br>
+                {% endif %} 
+
+                {% if notif.message %}
+                    {{ notif.message }}<br>
+                {% else %}
+                    <em>Pas de message</em><br>
+                {% endif %}
+
+                {% if notif.receivedAt %}
+                    <small class="text-muted d-block">
+                        Reçue le {{ notif.receivedAt|date('d/m/Y H:i') }}
+                    </small>
+                {% endif %}
+
+                {% if not notif.isRead %}
+                    <span class="badge bg-warning">Non lue</span>
+                {% endif %}
+            </div>
+
+            <div class="btn-group btn-group-sm ms-2">
+                <a href="{{ path('app_action_complete', {'id': notif.userAction.id}) }}" class="btn btn-success" title="Marquer comme fait">
+                    ✓
+                </a>
+                <a href="{{ path('app_notification_delete', {'id': notif.id}) }}" class="btn btn-danger" title="Supprimer">
+                    🗑
+                </a>
+            </div>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+    {% endfor %}
+{% else %}
+    <li class="dropdown-item">Aucune notification</li>
+{% endif %}

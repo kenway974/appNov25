@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Bloc{% endblock %}
+
+{% block body %}
+<h1>{{ block.title }}</h1>
+
+<p><strong>Type :</strong> {{ block.type }}</p>
+
+{% if block.description %}
+    <p><strong>Description :</strong> {{ block.description }}</p>
+{% endif %}
+
+{% if block.beliefs is not empty %}
+    <h3>Croyances limitantes</h3>
+    <ul>
+        {% for belief in block.beliefs %}
+            <li>{{ belief }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if block.reframings is not empty %}
+    <h3>Reformulations / Solutions</h3>
+    <ul>
+        {% for reframe in block.reframings %}
+            <li>{{ reframe }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if block.actions|length > 0 %}
+    <h3>Actions associées</h3>
+    <ul>
+        {% for action in block.actions %}
+            <li>
+                <a href="{{ path('app_add_action', {'id': action.id}) }}">
+                    {{ action.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<a href="{{ path('app_block') }}" class="btn btn-secondary">Retour à la liste des blocs</a>
+{% endblock %}

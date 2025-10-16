@@ -1,0 +1,48 @@
+<nav class="navbar custom-navbar px-4" style="background: linear-gradient(135deg, #001381ff, #050049ff);">
+    <div class="container-fluid justify-content-between w-100">
+
+        <!-- Menu à gauche -->
+        <div class="navbar-left">
+            {# Bouton toggle visible uniquement sur petits écrans #}
+            <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu"
+                style="background:transparent; border:none; padding:0;">
+                <img src="{{ asset('icons/menu-offcanvas-icon.png') }}" alt="Logo" style="height:24px; width:auto;">
+            </button>
+
+            {# Menu offcanvas #}
+            {{ include('partials/_menu_burger.html.twig') }}
+
+            {% if app.user %}
+            {% else %}
+                <a class="btn btn-success" href="{{ path('app_login') }}" style="background:transparent; border:none; padding:0;">Login</a>
+            {% endif %}
+        </div>
+
+        <!-- Home au centre -->
+        <div class="navbar-center">
+            <a class="navbar-brand" href="{{ path('app_home') }}" style="background:transparent; border:none; padding:0;">                    
+                <img src="{{ asset('icons/logo-192.png') }}" alt="Logo" style="height:24px; width:auto; background:transparent;">
+            </a>
+        </div>
+
+        <!-- Notifications et Dashboard à droite -->
+        {% if app.user %}
+            <div class="navbar-right d-flex align-items-center">
+                <!-- Notifications -->
+                <div class="nav-item dropdown me-3">
+                    <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                        style="background:transparent; border:none; padding:0;">
+                        <img src="{{ asset('icons/notifications-icon.png') }}" alt="Logo" style="height:24px; width:auto; background:transparent;">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                        {{ include('notification/_index.html.twig', { notifications: notifications|default([]) }) }}
+                    </ul>
+                </div>
+
+                <!-- Dashboard -->
+                <a class="btn btn-primary" href="{{ path('app_dashboard') }}" style="background:transparent; border:none; padding:0;">Dashboard</a>
+            </div>
+        {% endif %}
+
+    </div>
+</nav>

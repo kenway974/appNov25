@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des blocages{% endblock %}
+
+{% block body %}
+<div class="mt-5">
+    <h2 class="text-center mb-4">Blocages par type</h2>
+
+    {% if blocksByType is not empty %}
+    <div id="carouselBlocksByType" class="carousel slide">
+
+        <!-- 🔹 Indicateurs -->
+        <div class="carousel-indicators">
+            {% for type, blocks in blocksByType %}
+                <button type="button" 
+                        data-bs-target="#carouselBlocksByType" 
+                        data-bs-slide-to="{{ loop.index0 }}" 
+                        class="{{ loop.first ? 'active' : '' }}" 
+                        aria-current="{{ loop.first ? 'true' : 'false' }}" 
+                        aria-label="Slide {{ loop.index }}">
+                    {{ type|capitalize }}
+                </button>
+            {% endfor %}
+        </div>
+
+        <!-- 🔹 Slides -->
+        <div class="carousel-inner">
+            {% for type, blocks in blocksByType %}
+                <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                    <h3 class="text-center mb-3">{{ type|capitalize }}</h3>
+
+                    {% if blocks is empty %}
+                        <p class="text-center">Aucun blocage trouvé pour ce type.</p>
+                    {% else %}
+                        <div class="d-flex flex-column align-items-center gap-3">
+                            {% for block in blocks %}
+                                <div class="block-toggle-title text-center"
+                                     data-block-id="{{ block.id }}"
+                                     style="cursor:pointer; width:80%; padding:1rem; border-radius:12px; background-color: rgba(255,255,255,0.1);">
+                                    {% if block.icon %}
+                                        <img src="{{ asset('images/icons/' ~ block.icon) }}" alt="" width="32" class="me-2">
+                                    {% endif %}
+                                    <h5>{{ block.title }}</h5>
+                                </div>
+
+                                <div class="block-content d-none mt-2" id="contentBlock{{ block.id }}">
+                                    {% if block.description %}
+                                        <p>{{ block.description }}</p>
+                                    {% endif %}
+
+                                    <!-- 🔹 Croyances -->
+                                    {% if block.beliefs is not empty %}
+                                        <strong>Croyances limitantes :</strong>
+                                        <ul>
+                                            {% for belief in block.beliefs %}
+                                                <li>{{ belief }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+
+                                    <!-- 🔹 Recadrages -->
+                                    {% if block.reframings is not empty %}
+                                        <strong>Recadrages possibles :</strong>
+                                        <ul>
+                                            {% for reframing in block.reframings %}
+                                                <li>{{ reframing }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+
+                                    <!-- 🔹 Actions liées -->
+                                    {% if block.actions is not empty %}
+                                        <strong>Actions liées :</strong>
+                                        <ul>
+                                            {% for action in block.actions %}
+                                                <li>{{ action.title }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <p>Aucune action liée.</p>
+                                    {% endif %}
+
+                                    <!-- 🔹 Feelings liés -->
+                                    {% if block.feelings is not empty %}
+                                        <strong>Émotions liées :</strong>
+                                        <ul>
+                                            {% for feeling in block.feelings %}
+                                                <li>{{ feeling.title }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- 🔹 Contrôles -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselBlocksByType" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselBlocksByType" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Suivant</span>
+        </button>
+    </div>
+
+    {% else %}
+        <p class="text-center text-white">Aucun bloc trouvé.</p>
+    {% endif %}
+</div>
+
+<!-- 🔹 JS Toggle -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.block-toggle-title').forEach(el => {
+        el.addEventListener('click', () => {
+            const id = el.dataset.blockId;
+            const content = document.querySelector('#contentBlock' + id);
+            content.classList.toggle('d-none');
+        });
+    });
+});
+</script>
+{% endblock %}

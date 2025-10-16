@@ -1,0 +1,42 @@
+<div class="collapse mt-2" id="collapseNeed{{ userNeed.id }}">
+    <div class="card card-body p-3 text-center" 
+         style="background: rgba(53, 53, 53, 0.2); color: #fff; border-radius: 8px;">
+
+        <p>{{ userNeed.need.description }}</p>
+
+        {% if userNeed.need.fulfilment is not empty %}
+    <strong>Fulfilments :</strong>
+    <ul class="list-unstyled mt-2">
+        {% for item in userNeed.need.fulfilment %}
+            <li><u>{{ item }}</u></li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+        <p><strong>Type :</strong> {{ userNeed.need.type }}</p>
+
+</div>
+
+<div>
+        <ul>
+            {% for action in userNeed.need.actions %}
+                <li>
+                    {{ action.title }}
+
+                    <button type="button"
+                            class="btn btn-sm btn-outline-primary"
+                            onclick="event.stopPropagation(); toggleForm('{{ userNeed.id }}-{{ action.id }}')">
+                        Ajouter
+                    </button>
+
+                    <div id="form-{{ userNeed.id }}-{{ action.id }}" style="display:none;" class="mt-2">
+                        {{ form_start(forms[userNeed.id][action.id]) }}
+                            {{ form_widget(forms[userNeed.id][action.id]) }}
+                            <button type="submit" class="btn btn-sm btn-outline-primary" >Valider</button>
+                        {{ form_end(forms[userNeed.id][action.id]) }}
+                    </div>
+                </li>
+            {% endfor %}
+    </ul>
+    </div>
+</div>

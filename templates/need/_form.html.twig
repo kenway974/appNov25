@@ -1,0 +1,10 @@
+<form method="post" action="{{ path('app_feeling') }}">
+        <input type="hidden" name="need_id" value="{{ need.id }}">
+
+        <label for="priority_{{ need.id }}">
+            À quel point ça te paraît important ?
+        </label>
+        <input type="number" id="priority_{{ need.id }}" name="priority" min="0" max="100" value="0">
+
+        <button type="submit">Valider</button>
+    </form>

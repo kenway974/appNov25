@@ -1,0 +1,34 @@
+{# templates/partials/_footer.html.twig #}
+<footer style="background: linear-gradient(135deg, #3b4b63, #4a657d); padding: 1rem; margin-top: 2rem; text-align: center;">
+    <!-- Logo du site -->
+    <div>
+        <img src="{{ asset('images/logo.png') }}" alt="Logo du site" style="height:40px;">
+        <div>MonSite</div>
+    </div>
+
+    <!-- Boutons Connexion / Inscription -->
+    <div style="margin: 0.5rem 0;">
+        <a href="{{ path('app_login') }}">Se connecter</a> |
+        <a href="{{ path('app_register') }}">S'inscrire</a>
+    </div>
+
+    <!-- Sommaire -->
+    <div style="margin: 0.5rem 0;">
+        <span>Sommaire :</span>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            <li><a href="{{ path('app_home') }}">Accueil</a></li>
+            <li><a href="{{ path('app_about') }}">À propos</a></li>
+            <li><a href="{{ path('app_feeling') }}">Voir les ressentis</a></li>
+            <li><a href="{{ path('app_action') }}">Voir les actions</a></li>
+        </ul>
+    </div>
+
+    <!-- Liens légaux -->
+    <div style="margin-top: 1rem;">
+        <a href="{{ path('app_cgu') }}">CGU</a> |
+        <a href="{{ path('app_privacy_policy') }}">Politique de confidentialité</a> |
+        <a href="{{ path('app_cookies') }}">Politique de cookies</a>
+        <br>
+        <span>© {{ "now"|date("Y") }} MonSite. Tous droits réservés.</span>
+    </div>
+</footer>
