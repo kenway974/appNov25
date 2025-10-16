@@ -16,20 +16,28 @@ class SubscriptionRepository extends ServiceEntityRepository
         parent::__construct($registry, Subscription::class);
     }
 
-    /**
-     * Récupère les abonnements actifs dont la date d'expiration est dépassée
-     *
-     * @param \DateTimeInterface $now
-     * @return Subscription[]
-     */
-    public function findActiveExpired(\DateTimeInterface $now): array
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.isActive = :active')
-            ->andWhere('s.expireDate <= :now')
-            ->setParameter('active', true)
-            ->setParameter('now', $now)
-            ->getQuery()
-            ->getResult();
-    }
+//    /**
+//     * @return Subscription[] Returns an array of Subscription objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('s')
+//            ->andWhere('s.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('s.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
+
+//    public function findOneBySomeField($value): ?Subscription
+//    {
+//        return $this->createQueryBuilder('s')
+//            ->andWhere('s.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//        ;
+//    }
 }
