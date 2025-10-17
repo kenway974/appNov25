@@ -24,7 +24,6 @@ final class DashboardController extends AbstractController
         Request $request,
         UserNeedRepository $userNeedRepo,
         UserActionRepository $userActionRepo,
-        UserNeedHistoryRepository $historyRepo,
         EntityManagerInterface $em
     ): Response {
         /** @var \App\Entity\User $user */
