@@ -16,28 +16,14 @@ class PlanRepository extends ServiceEntityRepository
         parent::__construct($registry, Plan::class);
     }
 
-    //    /**
-    //     * @return Plan[] Returns an array of Plan objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Plan
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Retourne tous les plans actifs, triés par prix croissant
+     */
+    public function findAllActive(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.price', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }
