@@ -33,23 +33,27 @@ final class FeelingController extends AbstractController
             $needId = $request->request->get('need_id');
             $priority = $request->request->get('priority');
 
-            // on retrouve le Need correspondant
-            $need = null;
-            foreach ($allNeeds as $n) {
-                if ($n->getId() == $needId) {
-                    $need = $n;
-                    break;
+            if ($needId && $priority !== null) {
+                $priority = (int) $priority;
+
+                $need = null;
+                foreach ($allNeeds as $n) {
+                    if ($n->getId() == $needId) {
+                        $need = $n;
+                        break;
+                    }
+                }
+
+                if ($need && $this->getUser()) {
+                    $userNeedManager->createUserNeed($this->getUser(), $need, [
+                        'priority' => $priority
+                    ]);
+
+                    return $this->redirectToRoute('app_dashboard');
                 }
             }
-
-            if ($need) {
-                $userNeedManager->createUserNeed($this->getUser(), $need, [
-                    'priority' => $priority
-                ]);
-
-                return $this->redirectToRoute('app_dashboard');
-            }
         }
+
 
         return $this->render('feeling/index.html.twig', [
             'feelingsByEmotion' => $feelingsByEmotion,

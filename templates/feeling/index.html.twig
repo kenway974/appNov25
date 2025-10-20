@@ -68,4 +68,66 @@
 {% endif %}
 </div>
 
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        // On attend que le DOM soit chargé
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // On cible tous les éléments qui déclenchent le choix d’un "user need"
+            document.querySelectorAll('.user-need-title').forEach(function(el) {
+
+                // Ajout d’un écouteur sur chaque titre
+                el.addEventListener('click', function() {
+
+                    // Récupération de l'ID depuis l’attribut data-id
+                    const id = this.dataset.id;
+
+                    // Sécurité : on ne fait rien si l’ID est manquant
+                    if (!id) {
+                        console.warn('Aucun ID trouvé sur cet élément.');
+                        return;
+                    }
+
+                    // Envoi de la requête AJAX vers la route Symfony
+                    fetch('{{ path('set_selected_user_need') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            // Jeton CSRF généré côté serveur (sécurité)
+                            'X-CSRF-TOKEN': '{{ csrf_token('set_user_need') }}'
+                        },
+                        // On envoie l’ID du besoin au backend
+                        body: JSON.stringify({ id: id })
+                    })
+                    .then(res => {
+                        // Vérifie que la réponse est OK
+                        if (!res.ok) {
+                            throw new Error('Erreur serveur : ' + res.status);
+                        }
+                        return res.text();
+                    })
+                    .then(data => {
+                        // Confirmation dans la console
+                        console.log('✅ ID enregistré en session :', data);
+
+                        // (Optionnel) Feedback visuel temporaire pour l’utilisateur
+                        /*el.classList.add('bg-success', 'text-white');
+                        setTimeout(() => {
+                            el.classList.remove('bg-success', 'text-white');
+                        }, 1500);*/
+                    })
+                    .catch(err => {
+                        // Gestion d’erreur propre
+                        console.error('⚠️ Erreur lors de l’enregistrement :', err);
+                    });
+                });
+            });
+        });
+        </script>
+
 {% endblock %}

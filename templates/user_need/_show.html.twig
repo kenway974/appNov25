@@ -18,25 +18,32 @@
 </div>
 
 <div>
-        <ul>
-            {% for action in userNeed.need.actions %}
-                <li>
-                    {{ action.title }}
+    <ul>
+        {% for action in userNeed.need.actions %}
+            <li class="mb-3">
+                {{ action.title }}
 
-                    <button type="button"
-                            class="btn btn-sm btn-outline-primary"
-                            onclick="event.stopPropagation(); toggleForm('{{ userNeed.id }}-{{ action.id }}')">
-                        Ajouter
-                    </button>
+                <!-- Bouton d’ouverture du formulaire -->
+                <button
+                    class="btn btn-sm btn-outline-primary ms-2"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#form-{{ userNeed.id }}-{{ action.id }}"
+                    aria-expanded="false"
+                    aria-controls="form-{{ userNeed.id }}-{{ action.id }}"
+                >
+                    Ajouter
+                </button>
 
-                    <div id="form-{{ userNeed.id }}-{{ action.id }}" style="display:none;" class="mt-2">
-                        {{ form_start(forms[userNeed.id][action.id]) }}
-                            {{ form_widget(forms[userNeed.id][action.id]) }}
-                            <button type="submit" class="btn btn-sm btn-outline-primary" >Valider</button>
-                        {{ form_end(forms[userNeed.id][action.id]) }}
+                <!-- Formulaire masqué par défaut -->
+                <div class="collapse mt-2" id="form-{{ userNeed.id }}-{{ action.id }}">
+                    <div class="border p-3 rounded shadow-sm bg-light">
+                        {{ include('action/_form.html.twig', { action: action }) }}
                     </div>
-                </li>
-            {% endfor %}
+                </div>
+            </li>
+        {% endfor %}
     </ul>
-    </div>
+</div>
+
 </div>
