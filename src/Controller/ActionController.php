@@ -14,7 +14,9 @@ use Symfony\Component\HttpFoundation\Request; // <- correction ici
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
- 
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+
 #[Route('/action')]
 final class ActionController extends AbstractController
 { 
@@ -113,6 +115,34 @@ final class ActionController extends AbstractController
         $this->addFlash('success', 'Action mise à jour avec succès.');
 
         return $this->redirectToRoute('app_dashboard'); // ou autre route où tu veux rediriger
+    }
+
+    #[Route('/set-selected-user-action', name: 'set_selected_user_action', methods: ['POST'])]
+    public function setSelectedUserAction(Request $request, SessionInterface $session, CsrfTokenManagerInterface $csrf): Response
+    {
+        $token = $request->headers->get('X-CSRF-TOKEN');
+
+        if (!$csrf->isTokenValid(new CsrfToken('set_user_action', $token))) {
+            return new Response('Invalid CSRF token', 403);
+        }
+
+        $data = json_decode($request->getContent(), true);
+        $userNeedId = $data['userNeedId'] ?? null;
+        $actionId = $data['actionId'] ?? null;
+        $type = $data['type'] ?? null;
+
+        if (!$userNeedId || !$actionId || !$type) {
+            return new Response('Missing data', 400);
+        }
+
+        // Stockage en session
+        $session->set('selected_user_action', [
+            'userNeedId' => $userNeedId,
+            'actionId' => $actionId,
+            'type' => $type
+        ]);
+
+        return new Response("UserNeed $userNeedId - Action $actionId ($type) enregistré");
     }
 
 }
