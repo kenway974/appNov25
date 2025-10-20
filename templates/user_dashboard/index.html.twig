@@ -73,26 +73,5 @@
         <p class="text-center text-white mt-4">Aucun besoin trouvé.</p>
     {% endif %}
 
-<!-- Script pour enregistrer le besoin sélectionné -->
-<script>
-document.querySelectorAll('.user-need-title').forEach(function(el) {
-    el.addEventListener('click', function() {
-        const id = this.dataset.id;
 
-        fetch('{{ path('set_selected_user_need') }}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-TOKEN': '{{ csrf_token('set_user_need') }}'
-            },
-            body: JSON.stringify({ id: id })
-        })
-        .then(res => res.text())
-        .then(data => {
-            console.log('ID enregistré en session:', data);
-        });
-    });
-});
-</script>
 {% endblock %}
