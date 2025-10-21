@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ActionRepository::class)]
 class Action
@@ -62,6 +63,8 @@ class Action
         $this->needs = new ArrayCollection();
     }
 
+    // --- Getters et Setters ---
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,7 +78,6 @@ class Action
     public function setTitle(string $title): static
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -87,7 +89,6 @@ class Action
     public function setDescription(?string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -99,7 +100,6 @@ class Action
     public function setIntension(?string $intension): static
     {
         $this->intension = $intension;
-
         return $this;
     }
 
@@ -111,7 +111,6 @@ class Action
     public function setIsDoableNow(?bool $isDoableNow): static
     {
         $this->isDoableNow = $isDoableNow;
-
         return $this;
     }
 
@@ -123,13 +122,9 @@ class Action
     public function setDuration(?int $duration): static
     {
         $this->duration = $duration;
-
         return $this;
     }
 
-    /**
-     * @return Collection<int, UserAction>
-     */
     public function getUserActions(): Collection
     {
         return $this->userActions;
@@ -141,25 +136,19 @@ class Action
             $this->userActions->add($userAction);
             $userAction->setAction($this);
         }
-
         return $this;
     }
 
     public function removeUserAction(UserAction $userAction): static
     {
         if ($this->userActions->removeElement($userAction)) {
-            // set the owning side to null (unless already changed)
             if ($userAction->getAction() === $this) {
                 $userAction->setAction(null);
             }
         }
-
         return $this;
     }
 
-    /**
-     * @return Collection<int, Block>
-     */
     public function getBlocks(): Collection
     {
         return $this->blocks;
@@ -170,14 +159,12 @@ class Action
         if (!$this->blocks->contains($block)) {
             $this->blocks->add($block);
         }
-
         return $this;
     }
 
     public function removeBlock(Block $block): static
     {
         $this->blocks->removeElement($block);
-
         return $this;
     }
 
@@ -189,7 +176,6 @@ class Action
     public function setType(?string $type): static
     {
         $this->type = $type;
-
         return $this;
     }
 
@@ -201,13 +187,9 @@ class Action
     public function setIcon(?string $icon): static
     {
         $this->icon = $icon;
-
         return $this;
     }
 
-    /**
-     * @return Collection<int, Need>
-     */
     public function getNeeds(): Collection
     {
         return $this->needs;
@@ -219,7 +201,6 @@ class Action
             $this->needs->add($need);
             $need->addAction($this);
         }
-
         return $this;
     }
 
@@ -228,7 +209,6 @@ class Action
         if ($this->needs->removeElement($need)) {
             $need->removeAction($this);
         }
-
         return $this;
     }
 }

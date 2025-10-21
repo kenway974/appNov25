@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -24,6 +25,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank(message: 'L\'email est obligatoire.')]
+    #[Assert\Email(message: 'L\'adresse email n\'est pas valide.')]
+    #[Assert\Length(
+        max: 180,
+        maxMessage: 'L\'email ne peut pas dépasser {{ limit }} caractères.'
+    )]
     private ?string $email = null;
 
     /**
@@ -36,9 +43,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Le mot de passe est obligatoire.', groups: ['registration'])]
+    #[Assert\Length(
+        min: 8,
+        minMessage: 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
+        groups: ['registration']
+    )]
     private ?string $password = null;
 
     #[ORM\Column(length: 25)]
+    #[Assert\NotBlank(message: 'Le username est obligatoire.')]
+    #[Assert\Length(
+        min: 3,
+        max: 25,
+        minMessage: 'Le username doit contenir au moins {{ limit }} caractères.',
+        maxMessage: 'Le username ne peut pas dépasser {{ limit }} caractères.'
+    )]
     private ?string $username = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -50,22 +70,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?UserSubscription $userSubscription = null;
-
     /**
      * @var Collection<int, UserNeed>
      */
     #[ORM\OneToMany(targetEntity: UserNeed::class, mappedBy: 'user')]
+    #[Assert\Count(
+        max: 5,
+        maxMessage: 'Un utilisateur ne peut pas avoir plus de {{ limit }} besoins.'
+    )]
     private Collection $userNeeds;
 
     /**
      * @var Collection<int, UserAction>
      */
     #[ORM\OneToMany(targetEntity: UserAction::class, mappedBy: 'user')]
+    #[Assert\Count(
+        max: 10,
+        maxMessage: 'Un utilisateur ne peut pas avoir plus de {{ limit }} actions.'
+    )]
     private Collection $userActions;
 
-    /**
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?UserSubscription $userSubscription = null;
+
+    /** 
      * @var Collection<int, Notification>
      */
     #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'user')]
