@@ -64,15 +64,9 @@ class UserNeed
     #[Assert\Type(\DateTime::class)]
     private ?\DateTime $lastUpdated = null;
 
-    /**
-     * @var Collection<int, UserNeedHistory>
-     */
-    #[ORM\OneToMany(targetEntity: UserNeedHistory::class, mappedBy: 'userNeed', cascade: ['persist', 'remove'])]
-    private Collection $userNeedHistories;
     public function __construct()
     {
         $this->userActions = new ArrayCollection();
-        $this->userNeedHistories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -178,36 +172,6 @@ class UserNeed
     public function setLastUpdated(?\DateTime $lastUpdated): static
     {
         $this->lastUpdated = $lastUpdated;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, UserNeedHistory>
-     */
-    public function getUserNeedHistories(): Collection
-    {
-        return $this->userNeedHistories;
-    }
-
-    public function addUserNeedHistory(UserNeedHistory $userNeedHistory): static
-    {
-        if (!$this->userNeedHistories->contains($userNeedHistory)) {
-            $this->userNeedHistories->add($userNeedHistory);
-            $userNeedHistory->setUserNeed($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserNeedHistory(UserNeedHistory $userNeedHistory): static
-    {
-        if ($this->userNeedHistories->removeElement($userNeedHistory)) {
-            // set the owning side to null (unless already changed)
-            if ($userNeedHistory->getUserNeed() === $this) {
-                $userNeedHistory->setUserNeed(null);
-            }
-        }
 
         return $this;
     }

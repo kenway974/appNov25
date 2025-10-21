@@ -2,18 +2,17 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\ActionFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Factory\{ActionFactory, BlockFactory, FeelingFactory, NeedFactory};
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        BlockFactory::createAll();
+        // Crée 10 actions aléatoires
+        ActionFactory::createMany(10);
 
-        // Le flush est géré automatiquement par Foundry, pas besoin ici
-        // mais tu peux le garder si tu ajoutes d’autres persistance manuelles
-        $manager->flush();
+        // On flush pas besoin car Zenstruck Foundry gère la persistance
     }
 }
