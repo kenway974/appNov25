@@ -90,9 +90,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private Collection $userActions;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?UserSubscription $userSubscription = null;
-
     /** 
      * @var Collection<int, Notification>
      */
@@ -102,12 +99,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
-    /**
-     * @var Collection<int, UserNeedHistory>
-     */
-    #[ORM\OneToMany(targetEntity: UserNeedHistory::class, mappedBy: 'user')]
-    private Collection $userNeedHistories;
-
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
@@ -116,7 +107,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->userNeeds = new ArrayCollection();
         $this->userActions = new ArrayCollection();
         $this->notifications = new ArrayCollection();
-        $this->userNeedHistories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -157,18 +147,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $roles[] = 'ROLE_USER';
         }
 
-        if ($this->isSubscriberActive() && !in_array('ROLE_SUBSCRIBER', $roles)) {
-            $roles[] = 'ROLE_SUBSCRIBER';
-        }
+        //if ($this->isSubscriberActive() && !in_array('ROLE_SUBSCRIBER', $roles)) {
+        //    $roles[] = 'ROLE_SUBSCRIBER';
+        //}
 
         return array_unique($roles);
     }
 
-    public function isSubscriberActive(): bool
+    /*public function isSubscriberActive(): bool
     {
         $sub = $this->getUserSubscription();
         return $sub && $sub->isActive();
-    }
+    }*/
 
 
     /**
@@ -258,23 +248,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUserSubscription(): ?UserSubscription
-    {
-        return $this->userSubscription;
-    }
-
-    public function setUserSubscription(UserSubscription $userSubscription): static
-    {
-        // set the owning side of the relation if necessary
-        if ($userSubscription->getUser() !== $this) {
-            $userSubscription->setUser($this);
-        }
-
-        $this->userSubscription = $userSubscription;
 
         return $this;
     }
@@ -377,36 +350,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, UserNeedHistory>
-     */
-    public function getUserNeedHistories(): Collection
-    {
-        return $this->userNeedHistories;
-    }
-
-    public function addUserNeedHistory(UserNeedHistory $userNeedHistory): static
-    {
-        if (!$this->userNeedHistories->contains($userNeedHistory)) {
-            $this->userNeedHistories->add($userNeedHistory);
-            $userNeedHistory->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserNeedHistory(UserNeedHistory $userNeedHistory): static
-    {
-        if ($this->userNeedHistories->removeElement($userNeedHistory)) {
-            // set the owning side to null (unless already changed)
-            if ($userNeedHistory->getUser() === $this) {
-                $userNeedHistory->setUser(null);
-            }
-        }
 
         return $this;
     }
