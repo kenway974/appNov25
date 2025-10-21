@@ -6,6 +6,7 @@ use App\Repository\UserNeedRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserNeedRepository::class)]
 class UserNeed
@@ -17,36 +18,57 @@ class UserNeed
 
     #[ORM\ManyToOne(inversedBy: 'userNeeds')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull(message: 'Un utilisateur est requis.')]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'userNeeds')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull(message: 'Un besoin est requis.')]
     private ?Need $need = null;
 
     #[ORM\Column]
+    #[Assert\NotNull(message: 'La priorité est obligatoire.')]
+    #[Assert\Type('integer')]
+    #[Assert\Range(
+        notInRangeMessage: 'La priorité doit être comprise entre {{ min }} et {{ max }}.',
+        min: 1,
+        max: 5
+    )]
     private ?int $priority = null;
 
     #[ORM\Column]
+    #[Assert\NotNull(message: 'Le score est obligatoire.')]
+    #[Assert\Type('integer')]
+    #[Assert\Range(
+        notInRangeMessage: 'Le score doit être compris entre {{ min }} et {{ max }}.',
+        min: 0,
+        max: 100
+    )]
     private ?int $score = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Type('array')]
     private ?array $notes = null;
 
     /**
      * @var Collection<int, UserAction>
      */
-    #[ORM\OneToMany(targetEntity: UserAction::class, mappedBy: 'userNeed')]
+    #[ORM\OneToMany(targetEntity: UserAction::class, mappedBy: 'userNeed', cascade: ['persist', 'remove'])]
+    #[Assert\Count(
+        max: 3,
+        maxMessage: 'Un besoin utilisateur ne peut pas avoir plus de 3 actions.'
+    )]
     private Collection $userActions;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Type(\DateTime::class)]
     private ?\DateTime $lastUpdated = null;
 
     /**
      * @var Collection<int, UserNeedHistory>
      */
-    #[ORM\OneToMany(targetEntity: UserNeedHistory::class, mappedBy: 'userNeed')]
+    #[ORM\OneToMany(targetEntity: UserNeedHistory::class, mappedBy: 'userNeed', cascade: ['persist', 'remove'])]
     private Collection $userNeedHistories;
-
     public function __construct()
     {
         $this->userActions = new ArrayCollection();
