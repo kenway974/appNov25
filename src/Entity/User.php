@@ -70,6 +70,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+
+
     /**
      * @var Collection<int, UserNeed>
      */
@@ -104,6 +106,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $stripeCustomerId = null;
+
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Subscription $subscription = null;
 
     public function __construct()
     {
@@ -153,6 +158,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         //if ($this->isSubscriberActive() && !in_array('ROLE_SUBSCRIBER', $roles)) {
         //    $roles[] = 'ROLE_SUBSCRIBER';
         //}
+        if (!in_array('ROLE_SUBSCRIBER', $roles)) {
+            $roles[] = 'ROLE_SUBSCRIBER';
+        }
 
         return array_unique($roles);
     }
@@ -162,6 +170,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $sub = $this->getUserSubscription();
         return $sub && $sub->isActive();
     }*/
+
 
 
     /**
@@ -254,6 +263,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 
     /**
      * @return Collection<int, UserNeed>
@@ -377,6 +387,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStripeCustomerId(?string $stripeCustomerId): static
     {
         $this->stripeCustomerId = $stripeCustomerId;
+
+        return $this;
+    }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscription $subscription): static
+    {
+        if ($subscription === null && $this->subscription !== null) {
+            $this->subscription->setUser(null);
+        }
+
+        if ($subscription !== null && $subscription->getUser() !== $this) {
+            $subscription->setUser($this);
+        }
+
+        $this->subscription = $subscription;
 
         return $this;
     }
