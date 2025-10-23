@@ -1,0 +1,82 @@
+[
+    {
+        "title": "Je suis trop timide",
+        "description": "Difficulté à interagir avec les autres par peur du jugement.",
+        "type": "social",
+        "beliefs": ["Je ne suis pas intéressant", "Les autres vont me juger"],
+        "reframings": ["Je peux m'exprimer petit à petit", "Les autres sont souvent bienveillants"],
+        "icon": "shyness.png"
+    },
+    {
+        "title": "Je suis trop fatigué",
+        "description": "Manque d'énergie pour réaliser les actions importantes.",
+        "type": "physique",
+        "beliefs": ["Je n'y arriverai pas", "Je dois tout faire malgré tout"],
+        "reframings": ["Mon corps a besoin de repos", "Je peux déléguer ou reporter certaines tâches"],
+        "icon": "fatigue.png"
+    },
+    {
+        "title": "Je doute de moi",
+        "description": "Incertitude et manque de confiance dans mes capacités.",
+        "type": "émotionnel",
+        "beliefs": ["Je ne suis pas capable", "Je vais échouer"],
+        "reframings": ["J'ai déjà réussi avant", "Je peux apprendre de mes erreurs"],
+        "icon": "self_doubt.png"
+    },
+    {
+        "title": "J'ai peur de mal faire",
+        "description": "Anxiété à l'idée de prendre une mauvaise décision ou d'agir incorrectement.",
+        "type": "cognitif",
+        "beliefs": ["Si je fais mal, ça sera catastrophique", "Je dois être parfait"],
+        "reframings": ["Je peux ajuster en cours de route", "L'erreur est une opportunité d'apprentissage"],
+        "icon": "fear.png"
+    },
+    {
+        "title": "Je me compare aux autres",
+        "description": "Sentiment d'infériorité ou de frustration par rapport aux autres.",
+        "type": "social",
+        "beliefs": ["Les autres sont meilleurs que moi", "Je ne suis jamais assez bien"],
+        "reframings": ["Chacun avance à son rythme", "Je peux me concentrer sur mes progrès"],
+        "icon": "comparison.png"
+    },
+    {
+        "title": "Je manque de sommeil",
+        "description": "Mon corps et mon esprit n’ont pas le repos nécessaire pour fonctionner efficacement.",
+        "type": "physique",
+        "beliefs": ["Je n’ai pas le temps de dormir", "Je dois rester productif coûte que coûte"],
+        "reframings": ["Le repos est une partie essentielle de ma performance", "Dormir m’aide à être plus clair et plus efficace"],
+        "icon": "sleep.png"
+    },
+    {
+        "title": "Je me sens dépassé",
+        "description": "Trop de choses à gérer en même temps, impression d’être submergé.",
+        "type": "émotionnel",
+        "beliefs": ["Je dois tout faire seul", "Je n’ai pas le droit de ralentir"],
+        "reframings": ["Je peux demander de l’aide", "Faire une chose à la fois me permet d’avancer plus sûrement"],
+        "icon": "overwhelmed.png"
+    },
+    {
+        "title": "Je perds ma concentration",
+        "description": "Difficulté à rester focalisé sur une tâche sans se disperser.",
+        "type": "cognitif",
+        "beliefs": ["Je ne peux pas me concentrer", "Je suis nul pour rester attentif"],
+        "reframings": ["Je peux améliorer ma concentration avec des pauses", "Je peux m’organiser par petites étapes"],
+        "icon": "focus.png"
+    },
+    {
+        "title": "Je redoute le conflit",
+        "description": "Je préfère éviter les discussions difficiles ou les désaccords.",
+        "type": "social",
+        "beliefs": ["Le conflit détruit les relations", "Je vais blesser l’autre si je m’affirme"],
+        "reframings": ["Le dialogue peut renforcer la relation", "Je peux m’exprimer calmement et avec respect"],
+        "icon": "conflict.png"
+    },
+    {
+        "title": "Je me sens vidé émotionnellement",
+        "description": "Je n’ai plus d’énergie pour ressentir ou m’impliquer émotionnellement.",
+        "type": "émotionnel",
+        "beliefs": ["Je dois rester fort", "Je n’ai pas le droit d’être vulnérable"],
+        "reframings": ["Je peux me recharger en prenant soin de moi", "Accepter mes émotions est une forme de force"],
+        "icon": "emotional_drain.png"
+    }
+]

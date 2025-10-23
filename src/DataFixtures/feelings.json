@@ -1,0 +1,51 @@
+[
+  {
+    "title": "Je redoute le regard des autres",
+    "description": "Je me sens observé(e) et jugé(e), ce qui augmente ma tension intérieure.",
+    "triggers": ["rencontre sociale", "prise de parole", "exposition publique"],
+    "emotion": "Tensions / appréhensions",
+    "color": "#f5b7b1"
+  },
+  {
+    "title": "Je me sens jugé(e)",
+    "description": "J’ai peur de ce que les autres pensent de moi.",
+    "triggers": ["conversation difficile", "critique perçue"],
+    "emotion": "Tensions / appréhensions",
+    "color": "#f5b7b1"
+  },
+  {
+    "title": "J’ai peur d’oublier quelque chose",
+    "description": "Je redoute d’avoir oublié un détail important.",
+    "triggers": ["travail", "organisation", "responsabilités"],
+    "emotion": "Inquiétudes / stress",
+    "color": "#f9e79f"
+  },
+  {
+    "title": "Je me sens dépassé(e) par tout ce que j’ai à faire",
+    "description": "Je ne sais plus par où commencer.",
+    "triggers": ["surcharge", "deadlines", "manque de repos"],
+    "emotion": "Inquiétudes / stress",
+    "color": "#f9e79f"
+  },
+  {
+    "title": "Je me sens vide ou inutile",
+    "description": "Je n’arrive pas à me sentir utile ou motivé(e).",
+    "triggers": ["perte de sens", "isolement"],
+    "emotion": "Malaise intérieur",
+    "color": "#aed6f1"
+  },
+  {
+    "title": "J’ai la mâchoire serrée",
+    "description": "Mon corps exprime la colère contenue.",
+    "triggers": ["injustice", "frustration"],
+    "emotion": "Colère / irritation",
+    "color": "#f1948a"
+  },
+  {
+    "title": "J’ai la tête lourde",
+    "description": "Mon corps réclame du repos.",
+    "triggers": ["manque de sommeil", "stress accumulé"],
+    "emotion": "Fatigue / surcharge",
+    "color": "#d6dbdf"
+  }
+]
