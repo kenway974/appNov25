@@ -1,0 +1,191 @@
+[
+    {
+        "title": "Médite, connecte-toi à ton environnement",
+        "description": "Prends quelques minutes pour observer ton environnement et te recentrer.",
+        "intension": "Calmer l'esprit",
+        "isDoableNow": true,
+        "duration": 10,
+        "type": "détente",
+        "icon": "meditation.png"
+    },
+    {
+        "title": "Médite, connecte-toi à toi-même",
+        "description": "Se concentrer sur ses sensations et ses pensées pour mieux se comprendre.",
+        "intension": "Introspection",
+        "isDoableNow": true,
+        "duration": 15,
+        "type": "émotionnel",
+        "icon": "introspection.png"
+    },
+    {
+        "title": "Journalling, sois fier de toi",
+        "description": "Écrire sur ses réussites pour renforcer la confiance en soi.",
+        "intension": "Valorisation",
+        "isDoableNow": true,
+        "duration": 10,
+        "type": "émotionnel",
+        "icon": "journal.png"
+    },
+    {
+        "title": "Journalling, exprime ta gratitude",
+        "description": "Noter les choses positives dans sa vie pour ressentir de la gratitude.",
+        "intension": "Gratitude",
+        "isDoableNow": true,
+        "duration": 10,
+        "type": "émotionnel",
+        "icon": "gratitude.png"
+    },
+    {
+        "title": "Journalling, trouve les opportunités dans les épreuves",
+        "description": "Réfléchir aux apprentissages et opportunités dans les situations difficiles.",
+        "intension": "Résilience",
+        "isDoableNow": true,
+        "duration": 15,
+        "type": "cognitif",
+        "icon": "resilience.png"
+    },
+    {
+        "title": "Sors en forêt ou dans un parc",
+        "description": "Se connecter à la nature pour se détendre et respirer.",
+        "intension": "Relaxation",
+        "isDoableNow": true,
+        "duration": 30,
+        "type": "physique",
+        "icon": "nature.png"
+    },
+    {
+        "title": "Parle à un random dans la rue",
+        "description": "Oser interagir avec un inconnu pour sortir de sa zone de confort.",
+        "intension": "Sociabilité",
+        "isDoableNow": false,
+        "duration": 5,
+        "type": "relationnel",
+        "icon": "social.png"
+    },
+    {
+        "title": "Fais une courte marche sans téléphone",
+        "description": "Marche 10 à 15 minutes en pleine conscience, sans distraction.",
+        "intension": "Présence",
+        "isDoableNow": true,
+        "duration": 15,
+        "type": "physique",
+        "icon": "walk.png"
+    },
+    {
+        "title": "Range un petit espace autour de toi",
+        "description": "Remets de l’ordre sur ton bureau, ton lit ou une étagère.",
+        "intension": "Clarté mentale",
+        "isDoableNow": true,
+        "duration": 10,
+        "type": "administratif",
+        "icon": "tidy.png"
+    },
+    {
+        "title": "Appelle un proche que tu n’as pas vu depuis longtemps",
+        "description": "Recrée du lien avec quelqu’un de cher pour nourrir la connexion.",
+        "intension": "Relation authentique",
+        "isDoableNow": false,
+        "duration": 15,
+        "type": "relationnel",
+        "icon": "call.png"
+    },
+    {
+        "title": "Fais une session de pompes ou d’étirements",
+        "description": "Active ton corps quelques minutes pour relancer ton énergie.",
+        "intension": "Vitalité",
+        "isDoableNow": true,
+        "duration": 5,
+        "type": "physique",
+        "icon": "stretch.png"
+    },
+    {
+        "title": "Note 3 choses que tu veux accomplir aujourd’hui",
+        "description": "Clarifie tes priorités et commence petit.",
+        "intension": "Focalisation",
+        "isDoableNow": true,
+        "duration": 5,
+        "type": "travail/études",
+        "icon": "focus.png"
+    },
+    {
+        "title": "Ferme les yeux et respire profondément",
+        "description": "Respire 5 fois profondément pour relâcher la tension.",
+        "intension": "Apaisement",
+        "isDoableNow": true,
+        "duration": 3,
+        "type": "détente",
+        "icon": "breathe.png"
+    },
+    {
+        "title": "Apprends une petite chose nouvelle",
+        "description": "Lis un article ou regarde une vidéo sur un sujet que tu aimes.",
+        "intension": "Curiosité",
+        "isDoableNow": true,
+        "duration": 10,
+        "type": "cognitif",
+        "icon": "learn.png"
+    },
+    {
+        "title": "Fixe-toi un mini défi de la journée",
+        "description": "Choisis une petite action qui te sort de ta routine.",
+        "intension": "Progression personnelle",
+        "isDoableNow": false,
+        "duration": 5,
+        "type": "challenge",
+        "icon": "challenge.png"
+    },
+    {
+        "title": "Écoute un morceau de musique qui te fait du bien",
+        "description": "Laisse-toi emporter par le rythme ou les paroles.",
+        "intension": "Émotion positive",
+        "isDoableNow": true,
+        "duration": 5,
+        "type": "émotionnel",
+        "icon": "music.png"
+    },
+    {
+        "title": "Ferme toutes tes notifications pendant 30 minutes",
+        "description": "Protège ton attention et ton calme intérieur.",
+        "intension": "Concentration",
+        "isDoableNow": true,
+        "duration": 30,
+        "type": "cognitif",
+        "icon": "focus_mode.png"
+    },
+    {
+        "title": "Prends un verre d’eau et étire-toi",
+        "description": "Hydrate-toi et détends ton corps quelques secondes.",
+        "intension": "Soin de soi",
+        "isDoableNow": true,
+        "duration": 2,
+        "type": "physique",
+        "icon": "water.png"
+    },
+    {
+        "title": "Réponds à un message que tu repousses depuis longtemps",
+        "description": "Libère une tension légère en bouclant une petite tâche.",
+        "intension": "Soulagement",
+        "isDoableNow": true,
+        "duration": 5,
+        "type": "administratif",
+        "icon": "message.png"
+    },
+    {
+        "title": "Fais une sieste ou repose-toi 10 minutes",
+        "description": "Accorde-toi une pause consciente, sans culpabilité.",
+        "intension": "Récupération",
+        "isDoableNow": true,
+        "duration": 10,
+        "type": "détente",
+        "icon": "nap.png"
+    },
+    {
+        "title": "Complimente quelqu’un sincèrement",
+        "description": "Exprime une reconnaissance authentique envers quelqu’un autour de toi.",
+        "intension": "Connexion positive",
+        "isDoableNow": true,
+        "duration": 2,
+        "type": "relationnel",
+        "icon": "compliment.png"
+    }
+]

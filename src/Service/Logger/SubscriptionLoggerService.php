@@ -3,31 +3,81 @@
 namespace App\Service\Logger;
 
 use Psr\Log\LoggerInterface;
-use App\Entity\UserSubscription;
+use App\Entity\User;
+use App\Entity\Subscription;
 
 class SubscriptionLoggerService
 {
     public function __construct(private LoggerInterface $logger) {}
 
-    // ---------------- Subscription / Payment ----------------
-    public function logSubscribe(UserSubscription $userSubscription): void
+    // ---------------- SUBSCRIPTIONS ----------------
+
+    public function logSubscribed(User $user, Subscription $subscription): void
     {
-        $user = $userSubscription->getUser();
-        $subscriptionTitle = $userSubscription->getSubscription()->getTitle();
-        $this->logger->info("SUBSCRIBE: User {$user->getId()} subscribed to '{$subscriptionTitle}'.");
+        $this->logger->info(sprintf(
+            "SUBSCRIPTION_STARTED: User #%d subscribed to plan #%d (status=%s, start_date=%s, end_date=%s, recurring=%s).",
+            $user->getId(),
+            $subscription->getPlan()?->getId() ?? 0,
+            $subscription->getStatus() ?? 'N/A',
+            $subscription->getStartDate()?->format('Y-m-d H:i:s') ?? 'none',
+            $subscription->getEndDate()?->format('Y-m-d H:i:s') ?? 'none',
+            $subscription->isRecurring() ? 'true' : 'false'
+        ));
     }
 
-    public function logSubscriptionCancelled(UserSubscription $userSubscription): void
+    public function logCanceled(User $user, Subscription $subscription): void
     {
-        $user = $userSubscription->getUser();
-        $subscriptionTitle = $userSubscription->getSubscription()->getTitle();
-        $this->logger->info("SUBSCRIPTION_CANCELLED: User {$user->getId()} cancelled '{$subscriptionTitle}'.");
+        $this->logger->info(sprintf(
+            "SUBSCRIPTION_CANCELED: User #%d canceled subscription #%d (plan_id=%d, status=%s, end_date=%s).",
+            $user->getId(),
+            $subscription->getId(),
+            $subscription->getPlan()?->getId() ?? 0,
+            $subscription->getStatus() ?? 'N/A',
+            $subscription->getEndDate()?->format('Y-m-d H:i:s') ?? 'none'
+        ));
     }
 
-    public function logPaymentFailed(UserSubscription $userSubscription, string $reason): void
+    public function logRenewed(User $user, Subscription $subscription): void
     {
-        $user = $userSubscription->getUser();
-        $subscriptionTitle = $userSubscription->getSubscription()->getTitle();
-        $this->logger->warning("PAYMENT_FAILED: User {$user->getId()} failed payment for '{$subscriptionTitle}'. Reason: {$reason}");
+        $this->logger->info(sprintf(
+            "SUBSCRIPTION_RENEWED: User #%d renewed subscription #%d (plan_id=%d, new_end_date=%s, recurring=%s).",
+            $user->getId(),
+            $subscription->getId(),
+            $subscription->getPlan()?->getId() ?? 0,
+            $subscription->getEndDate()?->format('Y-m-d H:i:s') ?? 'none',
+            $subscription->isRecurring() ? 'true' : 'false'
+        ));
+    }
+
+    public function logExpired(User $user, Subscription $subscription): void
+    {
+        $this->logger->warning(sprintf(
+            "SUBSCRIPTION_EXPIRED: User #%d subscription #%d (plan_id=%d) expired at %s.",
+            $user->getId(),
+            $subscription->getId(),
+            $subscription->getPlan()?->getId() ?? 0,
+            $subscription->getEndDate()?->format('Y-m-d H:i:s') ?? 'unknown'
+        ));
+    }
+
+    public function logStatusUpdated(User $user, Subscription $subscription): void
+    {
+        $this->logger->info(sprintf(
+            "SUBSCRIPTION_STATUS_UPDATED: User #%d subscription #%d status changed to '%s'.",
+            $user->getId(),
+            $subscription->getId(),
+            $subscription->getStatus() ?? 'N/A'
+        ));
+    }
+
+    // ---------------- AUTRE (optionnel) ----------------
+
+    public function logCustom(User $user, string $message): void
+    {
+        $this->logger->info(sprintf(
+            "CUSTOM_SUBSCRIPTION_LOG: User #%d - %s",
+            $user->getId(),
+            $message
+        ));
     }
 }
