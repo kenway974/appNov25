@@ -1,0 +1,62 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev               
+    image: symfony-app:dev
+    container_name: symfony_app
+    ports:
+      - "8080:80"              
+    volumes:
+      - ./:/var/www/html        
+      - ./docker/php/uploads:/var/www/html/public/uploads
+    env_file:
+      - .env.local
+    depends_on:
+      - db
+      - redis
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: symfony_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: symfony
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: symfonypass
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: symfony_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  stripe-cli:
+    image: stripe/stripe-cli:latest
+    container_name: stripe_cli
+    env_file:
+      - .env.local
+    command: >
+      listen --api-key $${STRIPE_SECRET_KEY}
+             --forward-to http://app/stripe/webhook
+    depends_on:
+      - app
+    restart: "no"
+
+
+
+volumes:
+  db_data:
+  redis_data:
