@@ -8,27 +8,27 @@
 <div class="mt-5">
     <h2 class="text-center mb-4">Feelings par émotion</h2>
 
-    {% if feelingsByEmotion is not empty %}
-    <div id="carouselFeelingsByEmotion" class="carousel slide">
 
-        <!-- Indicators -->
+    {% if feelingsByEmotion is not empty %}
+    <div id="carouselFeelingsByEmotion" class="carousel slide" data-bs-ride="carousel">
+
+        <!-- Indicators --> 
         <div class="carousel-indicators">
             {% for emotion, feelings in feelingsByEmotion %}
-                <button type="button" 
-                        data-bs-target="#carouselFeelingsByEmotion" 
-                        data-bs-slide-to="{{ loop.index0 }}" 
-                        class="{{ loop.first ? 'active' : '' }}" 
-                        aria-current="{{ loop.first ? 'true' : 'false' }}" 
+                <button type="button"
+                        data-bs-target="#carouselFeelingsByEmotion"
+                        data-bs-slide-to="{{ loop.index0 }}"
+                        class="{{ loop.first ? 'active' : '' }}"
+                        {% if loop.first %}aria-current="true"{% endif %}
                         aria-label="Slide {{ loop.index }}">
-                    {{ emotion }}
                 </button>
             {% endfor %}
-        </div>
+        </div> 
 
         <!-- Slides -->
         <div class="carousel-inner">
             {% for emotion, feelings in feelingsByEmotion %}
-                <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                <div class="carousel-item {{ loop.first ? 'active' : '' }}" style="min-height: 250px;">
                     <h3 class="text-center mb-3">{{ emotion }}</h3>
 
                     {% if feelings is empty %}
@@ -36,15 +36,14 @@
                     {% else %}
                         <div class="d-flex flex-column align-items-center gap-3">
                             {% for feeling in feelings %}
-                                <div class="feeling-toggle-title text-center" data-feeling-id="{{ feeling.id }}" 
+                                <div class="feeling-toggle-title text-center"
+                                     data-feeling-id="{{ feeling.id }}"
                                      style="cursor:pointer; width:80%; padding:1rem; border-radius:12px; background-color: rgba(255,255,255,0.1);">
-                                    
                                     <h5>{{ feeling.title }}</h5>
-
                                 </div>
-                                    <div class="feeling-content d-none mt-2" id="contentFeeling{{ feeling.id }}">
-                                        {{ include('feeling/_read.html.twig', { feeling: feeling }) }}
-                                    </div>
+                                <div class="feeling-content d-none mt-2" id="contentFeeling{{ feeling.id }}">
+                                    {{ include('feeling/_read.html.twig', { feeling: feeling }) }}
+                                </div>
                             {% endfor %}
                         </div>
                     {% endif %}
@@ -61,11 +60,11 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
-
     </div>
 {% else %}
     <p class="text-center text-white">Aucun feeling trouvé.</p>
 {% endif %}
+        
 </div>
 
 
@@ -73,6 +72,7 @@
 
 {% block javascripts %}
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // On attend que le DOM soit chargé
         document.addEventListener('DOMContentLoaded', function() {
@@ -128,6 +128,17 @@
                 });
             });
         });
-        </script>
+
+        document.querySelectorAll('.feeling-toggle-title').forEach(function(title) {
+        title.addEventListener('click', function() {
+            const id = this.dataset.feelingId;
+            const content = document.getElementById('contentFeeling' + id);
+            if (content) {
+                content.classList.toggle('d-none');
+            }
+        });
+    });
+    </script>
+
 
 {% endblock %}

@@ -28,13 +28,11 @@ a:active {
 }
 
 
-/* Par défaut : la div prend toute la largeur */
 .mobile-user-needs {
     width: 100%;
     margin: 0 auto;
 }
 
-/* Sur petits écrans (mobile) : on limite la largeur à 820px */
 @media (max-width: 820px) {
     .mobile-user-needs {
         max-width: 70%;

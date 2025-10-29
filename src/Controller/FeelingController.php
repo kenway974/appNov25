@@ -23,7 +23,7 @@ final class FeelingController extends AbstractController
         FeelingRepository $feelingRepository,
         Request $request
     ): Response {
-        $emotions = ['Tristesse', 'Colère', 'Peur', 'Honte', 'Culpabilité', 'Frustration'];
+        $emotions = ['Tristesse', 'Colère', 'Peur', 'Anxiété'];
 
         $feelingsByEmotion = $feelingService->getFeelingsGroupedByEmotion($emotions, $feelingRepository);
         $allNeeds = $feelingService->getAllNeedsFromFeelings($feelingsByEmotion);
