@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   app:
     build:
@@ -24,10 +22,10 @@ services:
     image: mysql:8.0
     container_name: symfony_db
     environment:
-      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_ROOT_PASSWORD: mdp
       MYSQL_DATABASE: symfony
       MYSQL_USER: symfony
-      MYSQL_PASSWORD: symfonypass
+      MYSQL_PASSWORD: mdp
     volumes:
       - db_data:/var/lib/mysql
     ports:

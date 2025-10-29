@@ -325,3 +325,72 @@ a:active {
             color: #8b97a1; /* gris neutre, proche de text-muted Bootstrap */
             font-style: italic; /* optionnel, pour donner un effet "pensée" */
         }
+
+
+/* PLAN */
+
+.premium-page {
+    background: #111;
+    color: #fff;
+    min-height: 100vh;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.premium-header h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.plan-card {
+    background: #222;
+    border-radius: 12px;
+    padding: 25px;
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.plan-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.plan-title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.plan-price {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.plan-description {
+    font-size: 14px;
+    margin: 10px 0 20px;
+}
+
+.btn-subscribe {
+    display: block;
+    background: #444;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.plan-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.plan-features .feature {
+    font-size: 14px;
+    margin: 10px 0;
+}

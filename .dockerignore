@@ -2,8 +2,7 @@ vendor/
 node_modules/
 
 .env
-.env.dev
-.env.prod
+.env.local
 .env.local.php
 .env.test
 
@@ -13,6 +12,7 @@ var/sessions/
 
 public/build/
 
+# Git / IDE / systèmes
 .git
 .gitignore
 .idea/

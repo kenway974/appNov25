@@ -82,6 +82,8 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-di
 # Permissions
 RUN chown -R www-data:www-data /var/www/html/var || true
 
+RUN echo "memory_limit=512M" > /usr/local/etc/php/conf.d/memory-limit.ini
+
 ENV APP_ENV=prod
 ENV APP_DEBUG=0
 
