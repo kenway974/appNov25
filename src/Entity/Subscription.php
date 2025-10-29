@@ -38,6 +38,12 @@ class Subscription
     #[ORM\Column(length: 255)]
     private ?string $transactionId = null;
 
+    #[ORM\Column(length: 255, nullable: true, unique: true)]
+    private ?string $stripeSubscriptionId = null; // Nouveau champ Stripe
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $stripePriceId = null; // Nouveau champ Stripe
+
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
@@ -145,6 +151,28 @@ class Subscription
     {
         $this->transactionId = $transactionId;
 
+        return $this;
+    }
+
+        public function getStripeSubscriptionId(): ?string
+    {
+        return $this->stripeSubscriptionId;
+    }
+
+    public function setStripeSubscriptionId(?string $stripeSubscriptionId): static
+    {
+        $this->stripeSubscriptionId = $stripeSubscriptionId;
+        return $this;
+    }
+
+    public function getStripePriceId(): ?string
+    {
+        return $this->stripePriceId;
+    }
+
+    public function setStripePriceId(?string $stripePriceId): static
+    {
+        $this->stripePriceId = $stripePriceId;
         return $this;
     }
 

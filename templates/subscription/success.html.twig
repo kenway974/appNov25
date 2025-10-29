@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Abonnement réussi{% endblock %}
+
+{% block body %}
+<div style="text-align: center; padding: 50px;">
+    <h1>🎉 Merci !</h1>
+    <p>Votre abonnement a été activé avec succès.</p>
+    <p>Vous pouvez maintenant profiter de tous les avantages.</p>
+    <a href="{{ path('app_home') }}" style="display:inline-block; margin-top:20px; padding:10px 20px; background:#4CAF50; color:white; text-decoration:none; border-radius:5px;">
+        Retour à l'accueil
+    </a>
+</div>
+{% endblock %}

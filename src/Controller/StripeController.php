@@ -5,9 +5,7 @@ namespace App\Controller;
 use App\Entity\Plan;
 use App\Entity\User;
 use App\Repository\PlanRepository;
-use App\Repository\SubscriptionRepository;
-use App\Service\StripeService;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\StripePaymentService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,14 +14,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StripeController extends AbstractController
 {
+    public function __construct(private StripePaymentService $stripePaymentService) {}
+
     #[Route('/create-checkout-session/{planId}', name:'app_create_checkout_session', methods: ['POST'])]
-    public function createCheckoutSession(
-        int $planId,
-        PlanRepository $planRepository,
-        StripeService $stripeService,
-        EntityManagerInterface $em,
-        Request $request
-    ): JsonResponse {
+    public function createCheckoutSession(int $planId, PlanRepository $planRepository, Request $request): JsonResponse
+    {
         /** @var User $user */
         $user = $this->getUser();
         if (!$user) {
@@ -35,38 +30,15 @@ class StripeController extends AbstractController
             return $this->json(['error' => 'Plan not found or no stripe price configured'], 404);
         }
 
-        $stripe = $stripeService->client();
+        $successUrl = $this->generateUrl('app_subscription_success', [], true) . '?session_id={CHECKOUT_SESSION_ID}';
+        $cancelUrl  = $this->generateUrl('app_subscription_cancel', [], true);
 
-        // Create or retrieve Stripe Customer
-        if (!$user->getStripeCustomerId()) {
-            $customer = $stripe->customers->create([
-                'email' => $user->getEmail(),
-                'metadata' => ['app_user_id' => $user->getId()]
-            ]);
-            $user->setStripeCustomerId($customer->id);
-            $em->persist($user);
-            $em->flush();
-        } else {
-            $customer = $stripe->customers->retrieve($user->getStripeCustomerId(), []);
-        }
-
-        // Create Checkout Session (mode=subscription)
-        $session = $stripe->checkout->sessions->create([
-            'customer' => $customer->id,
-            'mode' => 'subscription',
-            'line_items' => [[
-                'price' => $plan->getStripePriceId(),
-                'quantity' => 1
-            ]],
-            'subscription_data' => [
-                'metadata' => [
-                    'user_id' => $user->getId(),
-                    'plan_id' => $plan->getId()
-                ]
-            ],
-            'success_url' => $this->generateUrl('app_subscription_success', [], true) . '?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => $this->generateUrl('app_subscription_cancel', [], true)
-        ]);
+        // Appel du service pour créer la session
+        $session = $this->stripePaymentService->createCheckoutSession(
+            (float)$plan->getPrice(), // si tu as un champ price pour paiement unique
+            $successUrl,
+            $cancelUrl
+        );
 
         return $this->json(['id' => $session->id]);
     }
@@ -74,7 +46,6 @@ class StripeController extends AbstractController
     #[Route('/subscription/success', name:'app_subscription_success', methods:['GET'])]
     public function success(Request $request): Response
     {
-        // session_id disponible si besoin : $request->query->get('session_id')
         return $this->render('subscription/success.html.twig');
     }
 

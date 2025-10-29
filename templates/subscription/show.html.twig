@@ -1,0 +1,30 @@
+{# templates/subscription/show.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Abonnement{% endblock %}
+
+{% block body %}
+    {% set subscription = app.user.subscription %}
+
+    {# Si pas de subscription, redirige vers /plans #}
+    {% if not subscription %}
+        {% redirect('/plans') %}
+    {% endif %}
+
+    <div class="subscription-card">
+        <h1>Votre abonnement</h1>
+
+        <h2>{{ subscription.plan.title ?? 'Premium' }}</h2>
+        <p>{{ subscription.plan.price ?? '4.99€' }}/mois</p>
+
+        {% if subscription.isActive %}
+            <p>Début : {{ subscription.startDate ? subscription.startDate|date('d/m/Y') : '-' }}</p>
+            <p>Fin : {{ subscription.endDate ? subscription.endDate|date('d/m/Y') : '-' }}</p>
+        {% else %}
+            <form action="{{ path('app_create_checkout_session', {planId: subscription.plan.id}) }}" method="POST">
+                <button type="submit">Renouveler l'abonnement</button>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}
