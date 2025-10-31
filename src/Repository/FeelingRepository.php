@@ -22,12 +22,16 @@ class FeelingRepository extends ServiceEntityRepository
     public function findByEmotion(string $emotion): array
     {
         return $this->createQueryBuilder('f')
+            // Eager loading des Needs liés
+            ->leftJoin('f.needs', 'n')
+            ->addSelect('n')
             ->andWhere('f.emotion = :emotion')
             ->setParameter('emotion', $emotion)
             ->orderBy('f.id', 'ASC')
             ->getQuery()
             ->getResult();
     }
+
 
 
     //    public function findOneBySomeField($value): ?Feeling

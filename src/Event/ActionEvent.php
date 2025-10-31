@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Event\Action;
+namespace App\Event;
 
 use App\Entity\UserAction;
 use Symfony\Contracts\EventDispatcher\Event;
 
-final class UserActionAddedEvent extends Event
+final class ActionEvent extends Event
 {
     public function __construct(private UserAction $userAction)
     {
@@ -17,26 +17,3 @@ final class UserActionAddedEvent extends Event
     }
 }
 
-final class UserActionUpdatedEvent extends Event
-{
-    public function __construct(private UserAction $userAction)
-    {
-    }
-
-    public function getUserAction(): UserAction
-    {
-        return $this->userAction;
-    }
-}
-
-final class UserActionCompletedEvent extends Event
-{
-    public function __construct(private UserAction $userAction)
-    {
-    }
-
-    public function getUserAction(): UserAction
-    {
-        return $this->userAction;
-    }
-}

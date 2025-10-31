@@ -1,6 +1,21 @@
-<div class="container-fluid d-flex justify-content-center align-items-center my-5 cta">
+<section class="container-fluid d-flex justify-content-center align-items-center my-5 cta"
+         id="home-cta"
+         aria-labelledby="cta-title">
+
   <div class="card card-body text-center cta-card position-relative">
-    <img src="{{ asset('images/goals.png') }}" alt="Illustration CTA" class="cta-img">
-    <a href="{{ path('app_feeling') }}" class="btn btn-cta cta-overlay-btn">Commencer</a>
+
+    <h2 id="cta-title" class="visually-hidden">
+      Passe à l’action avec ton premier ressenti
+    </h2>
+
+    <img src="{{ asset('images/goals.png') }}"
+         alt="Atteindre ses objectifs grâce à ses émotions"
+         class="cta-img">
+
+    <a href="{{ path('app_feeling') }}"
+       class="btn btn-cta cta-overlay-btn">
+       Explorer mes émotions
+    </a>
   </div>
-</div>
+
+</section>

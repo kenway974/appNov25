@@ -1,42 +1,12 @@
 <?php
 
-namespace App\Event\Need;
+namespace App\Event;
 
 use App\Entity\User;
 use App\Entity\Need;
 use Symfony\Contracts\EventDispatcher\Event;
 
-final class UserNeedAddedEvent extends Event
-{
-    public function __construct(private User $user, private Need $need) {}
-
-    public function getUser(): User
-    {
-        return $this->user;
-    }
-
-    public function getNeed(): Need
-    {
-        return $this->need;
-    }
-}
-
-final class UserNeedRemovedEvent extends Event
-{
-    public function __construct(private User $user, private Need $need) {}
-
-    public function getUser(): User
-    {
-        return $this->user;
-    }
-
-    public function getNeed(): Need
-    {
-        return $this->need;
-    }
-}
-
-final class UserNeedUpdatedEvent extends Event
+final class NeedEvent extends Event
 {
     public function __construct(private User $user, private Need $need) {}
 

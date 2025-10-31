@@ -6,10 +6,11 @@ use App\Service\SubscriptionManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
-class DeactivateExpiredSubscriptionsCommand extends Command
+#[AsCommand(name: 'app:desactivate-expired-subscription', description: 'Désactive les subscriptions expirées')]
+class DesactivateExpiredSubscriptionCommand extends Command
 {
-    protected static $defaultName = 'app:deactivate-expired-subscriptions';
     private SubscriptionManager $subscriptionManager;
 
     public function __construct(SubscriptionManager $subscriptionManager)

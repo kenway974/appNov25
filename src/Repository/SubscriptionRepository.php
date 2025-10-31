@@ -15,17 +15,22 @@ class SubscriptionRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Subscription::class);
     }
-    
+
     /**
-     * Récupère la souscription d’un utilisateur (si elle existe)
+     * Récupère toutes les subscriptions expirées encore actives
+     *
+     * @return Subscription[]
      */
-    public function findOneByUserId(int $userId): ?Subscription
+    public function findExpiredSubscriptions(): array
     {
+        $now = new \DateTimeImmutable();
+
         return $this->createQueryBuilder('s')
-            ->join('s.user', 'u')
-            ->andWhere('u.id = :uid')
-            ->setParameter('uid', $userId)
+            ->andWhere('s.endDate <= :now')
+            ->andWhere('s.isActive = :active')
+            ->setParameter('now', $now)
+            ->setParameter('active', true)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getResult();
     }
 }

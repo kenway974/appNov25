@@ -5,23 +5,22 @@ namespace App\Service;
 use App\Entity\Need;
 use App\Entity\User;
 use App\Entity\UserNeed;
+use App\Repository\UserNeedRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class UserNeedManager
 {
-    private EntityManagerInterface $em;
+    public function __construct(
+        private EntityManagerInterface $em,
+        private UserNeedRepository $userNeedRepo
+    ) {}
 
-    public function __construct(EntityManagerInterface $em)
-    {
-        $this->em = $em;
-    }
- 
     /**
      * Crée un UserNeed à partir des données d'un formulaire manuel.
      *
-     * @param User   $user
-     * @param Need   $need
-     * @param array  $data  (par ex. $_POST ou $request->request->all())
+     * @param User  $user
+     * @param Need  $need
+     * @param array $data  (par ex. $_POST ou $request->request->all())
      */
     public function createUserNeed(User $user, Need $need, array $data): UserNeed
     {
@@ -29,16 +28,53 @@ class UserNeedManager
         $userNeed->setUser($user);
         $userNeed->setNeed($need);
 
-        // On récupère les champs envoyés dans le form manuel
-        $priority = $data['priority'] ?? 0;
+        $priority = (int) ($data['priority'] ?? 0);
+        if ($priority < 0 || $priority > 100) {
+            throw new \InvalidArgumentException('La priorité doit être comprise entre 0 et 100.');
+        }
 
-        $userNeed->setPriority((int) $priority);
-        $userNeed->setScore(100 - (int) $priority);
+        $userNeed->setPriority($priority);
+        $userNeed->setScore(100 - $priority);
         $userNeed->setLastUpdated(new \DateTime());
 
         $this->em->persist($userNeed);
         $this->em->flush();
 
         return $userNeed;
+    }
+
+    /**
+     * Met à jour les scores des UserNeed selon leur priorité et la dernière mise à jour.
+     *
+     * @param int|null $daysOverride Optionnel : force le nombre de jours écoulés (utile pour tests)
+     * @return int Nombre de UserNeed mis à jour
+     */
+    public function updateScores(?int $daysOverride = null): int
+    {
+        $now = new \DateTime();
+        $userNeeds = $this->userNeedRepo->findAll(); // ✅ Utiliser le repository injecté
+        $updatedCount = 0;
+
+        foreach ($userNeeds as $userNeed) {
+            /** @var UserNeed $userNeed */
+            $last = $userNeed->getLastUpdated();
+            $days = $daysOverride ?? $last->diff($now)->days;
+
+            if ($days >= 1) {
+                $decrement = $days * $userNeed->getPriority();
+                $newScore = max(0, $userNeed->getScore() - $decrement);
+
+                $userNeed->setScore($newScore);
+                $userNeed->setLastUpdated($now);
+
+                $updatedCount++;
+            }
+        }
+
+        if ($updatedCount > 0) {
+            $this->em->flush();
+        }
+
+        return $updatedCount;
     }
 }

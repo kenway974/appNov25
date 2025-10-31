@@ -1,18 +1,31 @@
-<div class="container-fluid section-top" id="home-benefits">
-    <div class="benefits-list">
+<section class="container-fluid section-top" id="home-benefits" aria-labelledby="benefits-title">
+    
+    <h2 id="benefits-title" class="section-title">
+        Pourquoi relier émotions, besoins et actions ?
+    </h2>
+
+    <p class="section-intro">
+        Tu peux transformer ton ressenti en énergie constructive.
+        En comprenant ce que tu vis vraiment, tu fais des choix alignés
+        avec tes valeurs et tu avances vers ce qui compte pour toi.
+    </p>
+
+    <ul class="benefits-list" role="list">
+
         {% set phrases = [
-            {'icon': 'icon/icon2.png', 'text': 'Petit à petit, tout deviendra clair pour moi, et je serai maître de mes décisions.'},
-            {'icon': 'icon/icon3.png', 'text': 'Je réduirai mon stress et la frustration, en gérant mieux mes priorités et mes émotions.'},
-            {'icon': 'icon/icon4.png', 'text': 'Sans m\'en rendre compte, je vais accomplir mes objectifs et me rapprocher de celui que je veux être.'},
-            {'icon': 'icon/icon1.png', 'text': 'Je serai fier(ère) et en paix avec moi-même, car mes actions reflèteront ce que je suis vraiment !'},
-            {'icon': 'icon/icon5.png', 'text': 'Je vivrai enfin comme je l\'ai toujours voulu.'}
+            {'icon': 'icon/icon2.png', 'alt': 'Décisions plus claires', 'text': 'Petit à petit, tout deviendra clair pour moi, et je serai maître de mes décisions.'},
+            {'icon': 'icon/icon3.png', 'alt': 'Moins de stress', 'text': 'Je réduirai mon stress et la frustration, en gérant mieux mes priorités et mes émotions.'},
+            {'icon': 'icon/icon4.png', 'alt': 'Atteinte des objectifs', 'text': 'Sans m’en rendre compte, je vais accomplir mes objectifs et me rapprocher de celui que je veux être.'},
+            {'icon': 'icon/icon1.png', 'alt': 'Fierté personnelle', 'text': 'Je serai fier(ère) et en paix avec moi-même, car mes actions refléteront ce que je suis vraiment !'},
+            {'icon': 'icon/icon5.png', 'alt': 'Vivre selon ses valeurs', 'text': 'Je vivrai enfin comme je l’ai toujours voulu.'}
         ] %}
 
         {% for phrase in phrases %}
-            <div class="benefits-item" data-index="{{ loop.index0 }}">
-                <img src="{{ asset(phrase.icon) }}" alt="Icon {{ loop.index }}" class="benefits-icon">
+            <li class="benefits-item" data-index="{{ loop.index0 }}">
+                <img src="{{ asset(phrase.icon) }}" alt="{{ phrase.alt }}" class="benefits-icon">
                 <span class="benefits-text">{{ phrase.text }}</span>
-            </div>
+            </li>
         {% endfor %}
-    </div>
-</div>
+
+    </ul>
+</section>

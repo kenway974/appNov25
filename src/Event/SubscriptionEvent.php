@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Event\Subscription;
+namespace App\Event;
 
 use App\Entity\User;
 use App\Entity\Plan;
@@ -10,32 +10,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 /**
  * Event déclenché lorsqu'un utilisateur crée un Subscription (s'abonne à un plan)
  */
-final class UserSubscribedEvent extends Event
-{
-    public function __construct(private Subscription $subscription)
-    {
-    }
-
-    public function getSubscription(): Subscription
-    {
-        return $this->subscription;
-    }
-
-    public function getUser(): User
-    {
-        return $this->subscription->getUser();
-    }
-
-    public function getPlan(): Plan
-    {
-        return $this->subscription->getPlan();
-    }
-}
-
-/**
- * Event déclenché lorsqu'un utilisateur annule son Subscription
- */
-final class UserSubscriptionCancelledEvent extends Event
+final class SubscriptionEvent extends Event
 {
     public function __construct(private Subscription $subscription)
     {

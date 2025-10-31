@@ -69,18 +69,17 @@ a:active {
         justify-content: flex-end;
     }
 
-    /* Optionnel : spacing pour dropdowns */
     .navbar-right .dropdown {
         margin-right: 1rem;
     }
 
     #offcanvasMenu {
-        width: 30%; /* Ajuste la largeur à ta convenance */
+        width: 30%;
     }
 
     @media (max-width: 768px) {
         #offcanvasMenu {
-            width: 40%; /* prend presque tout l'écran */
+            width: 40%;
         }
     }
         
@@ -391,4 +390,23 @@ a:active {
 .plan-features .feature {
     font-size: 14px;
     margin: 10px 0;
+}
+
+
+/* FEELING */
+
+.feeling-mobile {
+    display: block;
+}
+.feeling-desktop {
+    display: none;
+}
+
+@media (min-width: 820px) {
+    .feeling-mobile {
+        display: none;
+    }
+    .feeling-desktop {
+        display: block;
+    }
 }

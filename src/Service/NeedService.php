@@ -18,7 +18,7 @@ class NeedService
     {
         return $this->types;
     }
-
+ 
     /**
      * Récupère les besoins groupés par type
      *

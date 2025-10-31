@@ -9,6 +9,7 @@ use App\Repository\FeelingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\FeelingService;
 use App\Service\UserNeedManager;
+use App\Service\UserNeedService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +17,10 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class FeelingController extends AbstractController
 {
-    #[Route('/feeling', name: 'app_feeling')]
+#[Route('/feeling', name: 'app_feeling')]
     public function indexFeeling(
         FeelingService $feelingService,
-        UserNeedManager $userNeedManager,
+        UserNeedManager $userNeedManager, // <-- nouveau service
         FeelingRepository $feelingRepository,
         Request $request
     ): Response {
@@ -28,12 +29,11 @@ final class FeelingController extends AbstractController
         $feelingsByEmotion = $feelingService->getFeelingsGroupedByEmotion($emotions, $feelingRepository);
         $allNeeds = $feelingService->getAllNeedsFromFeelings($feelingsByEmotion);
 
-        // ⚡ Gestion du POST manuel
         if ($request->isMethod('POST')) {
             $needId = $request->request->get('need_id');
             $priority = $request->request->get('priority');
 
-            if ($needId && $priority !== null) {
+            if ($needId && $priority !== null && $this->getUser()) {
                 $priority = (int) $priority;
 
                 $need = null;
@@ -44,7 +44,7 @@ final class FeelingController extends AbstractController
                     }
                 }
 
-                if ($need && $this->getUser()) {
+                if ($need) {
                     $userNeedManager->createUserNeed($this->getUser(), $need, [
                         'priority' => $priority
                     ]);
@@ -53,7 +53,6 @@ final class FeelingController extends AbstractController
                 }
             }
         }
-
 
         return $this->render('feeling/index.html.twig', [
             'feelingsByEmotion' => $feelingsByEmotion,

@@ -4,7 +4,7 @@ namespace App\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class UserAuthenticationTest extends WebTestCase
+class UserAuthentificationTest extends WebTestCase
 {
     public function testRegistration(): void
     {
@@ -14,8 +14,11 @@ class UserAuthenticationTest extends WebTestCase
 
         $form = $crawler->selectButton('S’inscrire')->form([
             'registration_form[email]' => 'newuser@example.com',
+            'registration_form[username]' => 'alimmsa',
             'registration_form[password][first]' => 'password123',
             'registration_form[password][second]' => 'password123',
+            'registration_form[roles]' => '[ROLE_USER]',
+            'registration_form[is_verified]' => true,
         ]);
         $client->submit($form);
         $this->assertResponseRedirects('/dashboard');

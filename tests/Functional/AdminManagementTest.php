@@ -7,6 +7,26 @@ use App\Repository\UserRepository;
 
 class AdminManagementTest extends WebTestCase
 {
+    protected function setUp(): void
+{
+    parent::setUp();
+
+    $client = static::createClient();
+    $em = $client->getContainer()->get('doctrine')->getManager();
+
+    $userRepository = $em->getRepository(\App\Entity\User::class);
+    $admin = $userRepository->findOneBy(['email' => 'admin@example.com']);
+
+    if (!$admin) {
+        $admin = new \App\Entity\User();
+        $admin->setEmail('admin@example.com');
+        $admin->setPassword('password123'); // pour loginUser, l’encodage n’est pas nécessaire
+        $admin->setRoles(['ROLE_ADMIN']);
+        $em->persist($admin);
+        $em->flush();
+    }
+}
+
     public function testManageUsers(): void
     {
         $client = static::createClient();
