@@ -2,8 +2,10 @@ vendor/
 node_modules/
 
 .env
-.env.local
-.env.local.php
+.env.prod
+.env.dev
+.env.prod.php
+.env.dev.php
 .env.test
 
 var/cache/

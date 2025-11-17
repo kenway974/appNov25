@@ -153,6 +153,10 @@ class UserNeed
 
     public function addUserAction(UserAction $userAction): static
     {
+        if ($this->userActions->count() >= 3) {
+            throw new \LogicException('Un UserNeed ne peut pas avoir plus de 3 UserActions.');
+        }
+
         if (!$this->userActions->contains($userAction)) {
             $this->userActions->add($userAction);
             $userAction->setUserNeed($this);
@@ -160,6 +164,7 @@ class UserNeed
 
         return $this;
     }
+
 
     public function removeUserAction(UserAction $userAction): static
     {

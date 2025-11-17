@@ -402,7 +402,7 @@ a:active {
     display: none;
 }
 
-@media (min-width: 820px) {
+@media (min-width: 1080px) {
     .feeling-mobile {
         display: none;
     }

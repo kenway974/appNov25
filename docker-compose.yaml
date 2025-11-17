@@ -3,57 +3,51 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: dev               
-    image: symfony-app:dev
+      target: prod
     container_name: symfony_app
     ports:
-      - "8080:80"              
-    volumes:
-      - ./:/var/www/html        
-      - ./docker/php/uploads:/var/www/html/public/uploads
-    env_file:
-      - .env.local
+      - "8080:80"
+    environment:
+      DATABASE_URL: mysql://symfony:${MYSQL_PASSWORD}@db:3306/symfony
+      REDIS_URL: redis://redis:6379
     depends_on:
       - db
       - redis
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
 
   db:
     image: mysql:8.0
     container_name: symfony_db
     environment:
-      MYSQL_ROOT_PASSWORD: mdp
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: symfony
       MYSQL_USER: symfony
-      MYSQL_PASSWORD: mdp
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
 
   redis:
     image: redis:7-alpine
     container_name: symfony_redis
-    ports:
-      - "6379:6379"
     volumes:
       - redis_data:/data
     restart: unless-stopped
-
-  stripe-cli:
-    image: stripe/stripe-cli:latest
-    container_name: stripe_cli
-    env_file:
-      - .env.local
-    command: >
-      listen --api-key $${STRIPE_SECRET_KEY}
-             --forward-to http://app/stripe/webhook
-    depends_on:
-      - app
-    restart: "no"
-
-
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
 
 volumes:
   db_data:

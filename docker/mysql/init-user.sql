@@ -1,0 +1,3 @@
+CREATE USER 'bonAdmin1'@'%' IDENTIFIED BY 'rapiderapide419420';
+GRANT ALL PRIVILEGES ON *.* TO 'bonAdmin1'@'%';
+FLUSH PRIVILEGES;

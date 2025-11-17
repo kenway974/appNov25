@@ -41,14 +41,12 @@ final class NeedController extends AbstractController
         SessionInterface $session,
         CsrfTokenManagerInterface $csrf
     ): Response {
-        // Récupération du token CSRF envoyé dans les headers
         $token = $request->headers->get('X-CSRF-TOKEN');
 
         if (!$csrf->isTokenValid(new CsrfToken('set_user_need', $token))) {
             return new Response('Invalid CSRF token', 403);
         }
 
-        // Récupération de l’ID depuis le corps de la requête JSON
         $data = json_decode($request->getContent(), true);
         $id = $data['id'] ?? null;
 
@@ -56,12 +54,11 @@ final class NeedController extends AbstractController
             return new Response('No ID provided', 400);
         }
 
-        // On stocke l'ID du need sélectionné en session
         $session->set('selected_need', $id);
 
-        // On peut retourner l’ID pour confirmation côté JS
         return new Response((string) $id);
     }
+    
     /*
     #[Route('/add-need/{id}', name: 'app_need_add')]
     public function addNeed(

@@ -15,35 +15,72 @@ class UserNeedTest extends TestCase
         $userNeed = new UserNeed();
 
         $user = new User();
-        $userNeed->setUser($user);
-        $this->assertSame($user, $userNeed->getUser());
-
         $need = new Need();
-        $userNeed->setNeed($need);
-        $this->assertSame($need, $userNeed->getNeed());
-
-        $userNeed->setPriority(3);
-        $this->assertSame(3, $userNeed->getPriority());
-
-        $userNeed->setScore(75);
-        $this->assertSame(75, $userNeed->getScore());
-
+        $date = new \DateTime('2025-10-21');
         $notes = ['note1', 'note2'];
+
+        $userNeed->setUser($user);
+        $userNeed->setNeed($need);
+        $userNeed->setPriority(3);
+        $userNeed->setScore(75);
         $userNeed->setNotes($notes);
+        $userNeed->setLastUpdated($date);
+
+        $this->assertSame($user, $userNeed->getUser());
+        $this->assertSame($need, $userNeed->getNeed());
+        $this->assertSame(3, $userNeed->getPriority());
+        $this->assertSame(75, $userNeed->getScore());
         $this->assertSame($notes, $userNeed->getNotes());
+        $this->assertSame($date, $userNeed->getLastUpdated());
+    }
 
-        $lastUpdated = new \DateTime('2025-10-21');
-        $userNeed->setLastUpdated($lastUpdated);
-        $this->assertSame($lastUpdated, $userNeed->getLastUpdated());
-
-        // Test des UserActions
+    public function testAddAndRemoveUserAction(): void
+    {
+        $userNeed = new UserNeed();
         $userAction = new UserAction();
+
         $userNeed->addUserAction($userAction);
-        $this->assertTrue($userNeed->getUserActions()->contains($userAction));
+
+        $this->assertCount(1, $userNeed->getUserActions());
+        $this->assertContains($userAction, $userNeed->getUserActions());
         $this->assertSame($userNeed, $userAction->getUserNeed());
 
         $userNeed->removeUserAction($userAction);
-        $this->assertFalse($userNeed->getUserActions()->contains($userAction));
+
+        $this->assertCount(0, $userNeed->getUserActions());
+        $this->assertNotContains($userAction, $userNeed->getUserActions());
         $this->assertNull($userAction->getUserNeed());
+    }
+
+    public function testMaxActions(): void
+    {
+        $userNeed = new UserNeed();
+
+        // Ajout de 3 actions -> OK
+        for ($i = 0; $i < 3; $i++) {
+            $userNeed->addUserAction(new UserAction());
+        }
+
+        $this->assertCount(3, $userNeed->getUserActions());
+
+        // Une 4e doit lever une exception
+        $this->expectException(\LogicException::class);
+        $userNeed->addUserAction(new UserAction());
+    }
+
+    public function testTooMuchActions(): void
+    {
+        $userNeed = new UserNeed();
+
+        // Ajout de 3 actions -> OK
+        for ($i = 0; $i < 4; $i++) {
+            $userNeed->addUserAction(new UserAction());
+        }
+
+        $this->assertCount(3, $userNeed->getUserActions());
+
+        // Une 4e doit lever une exception
+        $this->expectException(\LogicException::class);
+        $userNeed->addUserAction(new UserAction());
     }
 }
