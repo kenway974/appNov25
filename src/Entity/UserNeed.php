@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity]
 #[ORM\Table(
     name: 'need',
     indexes: [
@@ -16,7 +15,6 @@ use Symfony\Component\Validator\Constraints as Assert;
         new ORM\Index(name: 'idx_score', columns: ['score'])
     ]
 )]
-
 #[ORM\Entity(repositoryClass: UserNeedRepository::class)]
 class UserNeed
 {

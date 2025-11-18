@@ -2,11 +2,13 @@
 framework:
     secret: '%env(APP_SECRET)%'
 
-    # Note that the session will be started ONLY if you read or write from it.
-    session: 
-        handler_id: 'cache.adapter.redis'
-        cookie_secure: auto
+    # Cache principal de l'application
+    cache:
+        app: cache.adapter.filesystem
 
+    # Session Symfony
+    session:
+        handler_id: 'cache.app'
     #esi: true
     #fragments: true
     csrf_protection: true

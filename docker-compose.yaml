@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   app:
     build:
@@ -7,15 +9,18 @@ services:
     container_name: symfony_app
     ports:
       - "8080:80"
+    env_file:
+      - .env.local  
     environment:
-      DATABASE_URL: mysql://symfony:${MYSQL_PASSWORD}@db:3306/symfony
-      REDIS_URL: redis://redis:6379
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_PUBLIC_KEY: ${STRIPE_PUBLIC_KEY}
+    command: >
+      sh -c "php bin/console cache:warmup && apache2-foreground"
     depends_on:
       - db
-      - redis
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/"]
+      test: ["CMD", "curl", "-f", "http://localhost/ || exit 1"]
       interval: 30s
       timeout: 5s
       retries: 5
@@ -24,27 +29,15 @@ services:
     image: mysql:8.0
     container_name: symfony_db
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: symfony
-      MYSQL_USER: symfony
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: gestuellegestuelle240419   # mot de passe root
+      MYSQL_DATABASE: symfony_db                  
+      MYSQL_USER: lhdls                   
+      MYSQL_PASSWORD: rapiderapide419420
     volumes:
       - db_data:/var/lib/mysql
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 30s
-      timeout: 5s
-      retries: 5
-
-  redis:
-    image: redis:7-alpine
-    container_name: symfony_redis
-    volumes:
-      - redis_data:/data
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
       interval: 30s
       timeout: 5s
       retries: 5
