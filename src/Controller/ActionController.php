@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\UserAction;
+use App\Form\UserActionFormType;
 use App\Form\UserActionType;
 use App\Repository\ActionRepository;
 use App\Repository\UserActionRepository;
 use App\Repository\UserNeedRepository;
+use App\Security\Voter\UserActionVoter;
 use App\Service\ActionService;
 use App\Service\UserActionManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request; // <- correction ici
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -62,6 +65,12 @@ final class ActionController extends AbstractController
         UserActionManager $manager,
         SessionInterface $session
     ): Response {
+        $user = $this->getUser();
+        if (!$user) {
+            throw new AccessDeniedException('Vous devez être connecté.');
+        }
+
+        // Récupère l'action (entité fixe) pour la lier a userAction
         $action = $actionRepo->find($id);
 
         if (!$action) {
@@ -75,15 +84,17 @@ final class ActionController extends AbstractController
         if ($userNeedId) {
             $userNeed = $userNeedRepo->find($userNeedId);
         }
-        
-        dump($action);
-        dd($userNeed);
+
+        // Check que ce soit le bon user
+        if ($userNeed && $userNeed->getUser() !== $user) {
+            throw new AccessDeniedException('Accès interdit à ce besoin utilisateur.');
+        }
 
         $userAction = new UserAction();
         $userAction->setAction($action);
         $userAction->setUserNeed($userNeed);
 
-        $form = $this->createForm(UserActionType::class, $userAction);
+        $form = $this->createForm(UserActionFormType::class, $userAction);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -99,23 +110,41 @@ final class ActionController extends AbstractController
         ]);
     }
 
-    #[Route('/complete/{id}', name: 'app_action_complete', requirements: ['id' => '\d+'], methods: ['POST', 'GET'])]
+    #[Route('/complete/{id}', name: 'app_action_complete', requirements: ['id' => '\d+'], methods: ['POST'])]
     public function completeUserAction(
         int $id,
+        Request $request,
         UserActionManager $manager,
         UserActionRepository $userActionRepo
     ): Response {
-        $userAction = $userActionRepo->findById($id); // je suppose que tu as une méthode find dans ton manager
+        $userAction = $userActionRepo->find($id);
+
+        // vérifie que useraction existe
         if (!$userAction) {
             throw $this->createNotFoundException('UserAction non trouvée');
+        }
+
+        // verifie user et appartenance useraction
+        $this->denyAccessUnlessGranted(
+            UserActionVoter::COMPLETE,
+            $userAction
+        );
+
+        // verifie csrf
+        if (!$this->isCsrfTokenValid(
+            'complete_user_action_' . $userAction->getId(),
+            $request->request->get('_token')
+            )) {
+            throw $this->createAccessDeniedException('Token CSRF invalide.');
         }
 
         $manager->completeUserAction($userAction);
 
         $this->addFlash('success', 'Action mise à jour avec succès.');
 
-        return $this->redirectToRoute('app_dashboard'); // ou autre route où tu veux rediriger
+        return $this->redirectToRoute('app_dashboard');
     }
+
 
     #[Route('/set-selected-user-action', name: 'set_selected_user_action', methods: ['POST'])]
     public function setSelectedUserAction(Request $request, SessionInterface $session, CsrfTokenManagerInterface $csrf): Response

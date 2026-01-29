@@ -50,6 +50,13 @@
 
 
 
-<form method="post" action="{{ path('app_action_complete', { id: userAction.id }) }}" style="margin-top: 1rem;">
-    <button type="submit" class="btn btn-outline-light">Marquer comme terminée</button>
-</form>
+{% if is_granted('USER_ACTION_COMPLETE', userAction) %}
+    <form method="post"
+          action="{{ path('app_action_complete', { id: userAction.id }) }}">
+        <input type="hidden" name="_token"
+               value="{{ csrf_token('complete_user_action_' ~ userAction.id) }}">
+        <button class="btn btn-success">Terminer</button>
+    </form>
+{% endif %}
+
+

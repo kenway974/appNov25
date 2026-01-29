@@ -8,7 +8,7 @@ framework:
 
     # Session Symfony
     session:
-        handler_id: 'cache.app'
+        handler_id: null
     #esi: true
     #fragments: true
     csrf_protection: true

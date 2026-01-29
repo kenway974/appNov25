@@ -1,48 +1,89 @@
-<nav class="navbar custom-navbar px-4" style="background: linear-gradient(135deg, #001381ff, #050049ff);">
-    <div class="container-fluid justify-content-between w-100">
+<nav class="navbar custom-navbar px-4"
+     style="background: linear-gradient(135deg, #001381ff, #050049ff);">
 
-        <!-- Menu à gauche -->
+    <div class="container-fluid navbar-container w-100">
+
+        <!-- =====================
+             GAUCHE : BURGER (mobile)
+             ===================== -->
         <div class="navbar-left">
-            {# Bouton toggle visible uniquement sur petits écrans #}
-            <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu"
-                style="background:transparent; border:none; padding:0;">
-                <img src="{{ asset('icons/menu-offcanvas-icon.png') }}" alt="Logo" style="height:24px; width:auto;">
+            <!-- Burger visible sur mobile uniquement -->
+            <button class="btn burger-btn"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasMenu"
+                    aria-controls="offcanvasMenu">
+                <img src="{{ asset('icons/menu-offcanvas-icon.png') }}"
+                     alt="Menu"
+                     height="24">
             </button>
 
-            {# Menu offcanvas #}
+            <!-- MENU OFFCANVAS (mobile uniquement) -->
             {{ include('partials/_menu_burger.html.twig') }}
-
-            {% if app.user %}
-            {% else %}
-                <a class="btn btn-success" href="{{ path('app_login') }}" style="background:transparent; border:none; padding:0;">Login</a>
-            {% endif %}
         </div>
 
-        <!-- Home au centre -->
+        <!-- =====================
+             CENTRE : LOGO
+             ===================== -->
         <div class="navbar-center">
-            <a class="navbar-brand" href="{{ path('app_home') }}" style="background:transparent; border:none; padding:0;">                    
-                <img src="{{ asset('icons/logo-192.png') }}" alt="Logo" style="height:24px; width:auto; background:transparent;">
+            <a class="navbar-brand"
+               href="{{ path('app_home') }}">
+                <img src="{{ asset('icons/logo-192.png') }}"
+                     alt="Home"
+                     height="24">
             </a>
         </div>
 
-        <!-- Notifications et Dashboard à droite -->
-        {% if app.user %}
-            <div class="navbar-right d-flex align-items-center">
+        <!-- =====================
+             MENU DESKTOP (centré)
+             ===================== -->
+        <div class="navbar-menu-desktop">
+            <a href="{{ path('app_subscription') }}" class="menu-link">Abonnement</a>
+            <a href="{{ path('app_feeling') }}" class="menu-link">Feeling</a>
+            <a href="{{ path('app_action') }}" class="menu-link">Actions</a>
+            <a href="{{ path('app_block') }}" class="menu-link">Blocages</a>
+        </div>
+
+        <!-- =====================
+             DROITE : LOGIN / DASHBOARD
+             ===================== -->
+        <div class="navbar-right">
+
+            {% if app.user %}
                 <!-- Notifications -->
                 <div class="nav-item dropdown me-3">
-                    <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                        style="background:transparent; border:none; padding:0;">
-                        <img src="{{ asset('icons/notifications-icon.png') }}" alt="Logo" style="height:24px; width:auto; background:transparent;">
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       id="notificationDropdown"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        <img src="{{ asset('icons/notifications-icon.png') }}"
+                             alt="Notifications"
+                             height="24">
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
-                        {{ include('notification/_index.html.twig', { notifications: notifications|default([]) }) }}
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        {{ include('notification/_index.html.twig', {
+                            notifications: notifications|default([])
+                        }) }}
                     </ul>
                 </div>
 
                 <!-- Dashboard -->
-                <a class="btn btn-primary" href="{{ path('app_dashboard') }}" style="background:transparent; border:none; padding:0;">Dashboard</a>
-            </div>
-        {% endif %}
+                <a href="{{ path('app_dashboard') }}"
+                   class="btn btn-link dashboard-btn">
+                    Dashboard
+                </a>
+            {% else %}
+                <!-- Login -->
+                <a href="{{ path('app_login') }}"
+                   class="btn btn-link login-btn">
+                    Login
+                </a>
+            {% endif %}
+
+        </div>
 
     </div>
 </nav>

@@ -1,7 +1,11 @@
 [
   {
     "email": "admin@example.com",
-    "password": "password123",
-    "roles": ["ROLE_ADMIN"]
+    "password": "$2y$10$mHy9VFMjONu6C9STVqBoZ.ajAZ7DX.2QoV6oQM/9L3X56In6yiWSi",
+    "roles": ["ROLE_ADMIN"],
+    "isVerified": true,
+    "createdAt": "NOW()",
+    "updatedAt": "NOW()"
   }
 ]
+

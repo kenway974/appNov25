@@ -3,80 +3,80 @@
 {% block title %}Liste des émotions{% endblock %}
 
 {% block body %}
-
-<!-- Section Feelings -->
-<div class="mt-5">
+<!-- MOBILE -->
+<div class="d-lg-none mt-5">
     <h2 class="text-center mb-4">Feelings par émotion</h2>
 
-
-    {% if feelingsByEmotion is not empty %}
     <div id="carouselFeelingsByEmotion" class="carousel slide" data-bs-ride="carousel">
-
-        <!-- Indicators --> 
-        <div class="carousel-indicators">
-            {% for emotion, feelings in feelingsByEmotion %}
-                <button type="button"
-                        data-bs-target="#carouselFeelingsByEmotion"
-                        data-bs-slide-to="{{ loop.index0 }}"
-                        class="{{ loop.first ? 'active' : '' }}"
-                        {% if loop.first %}aria-current="true"{% endif %}
-                        aria-label="Slide {{ loop.index }}">
-                </button>
-            {% endfor %}
-        </div> 
-
-        <!-- Slides -->
         <div class="carousel-inner">
+
             {% for emotion, feelings in feelingsByEmotion %}
-                <div class="carousel-item {{ loop.first ? 'active' : '' }}" style="min-height: 250px;">
+                <div class="carousel-item {{ loop.first ? 'active' : '' }}">
                     <h3 class="text-center mb-3">{{ emotion }}</h3>
 
-                    {% if feelings is empty %}
-                        <p class="text-center">Aucun besoin trouvé pour cette émotion.</p>
-                    {% else %}
-                        <div class="d-flex flex-column align-items-center gap-3">
-                            {% for feeling in feelings %}
-                                <div class="feeling-mobile">
-    <div class="feeling-toggle-title"
-         data-feeling-id="{{ feeling.id }}">
-        <h5>{{ feeling.title }}</h5>
-    </div>
-    <div class="feeling-content d-none" id="contentFeeling{{ feeling.id }}">
-        {{ include('feeling/_read.html.twig', { feeling: feeling }) }}
-    </div>
-</div>
+                    {% for feeling in feelings %}
+                        <div class="mb-2">
+                            <button class="btn btn-outline-light w-100"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#feeling{{ feeling.id }}">
+                                {{ feeling.title }}
+                            </button>
 
-<div class="feeling-desktop card" style="background-color: rgba(53, 53, 53, 0.05); border: none;">
-    <div class="card-body">
-        <h5 class="card-title text-center">{{ feeling.title }}</h5>
-        <p class="card-text">
-            {{ include('feeling/_read.html.twig', { feeling: feeling }) }}
-        </p>
-    </div>
-</div>
-
-
-                            {% endfor %}
+                            <div id="feeling{{ feeling.id }}" class="collapse mt-2">
+                                {{ include('feeling/_read.html.twig', { feeling }) }}
+                            </div>
                         </div>
-                    {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselFeelingsByEmotion" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselFeelingsByEmotion" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</div>
+
+<!-- DESKTOP -->
+<div class="d-none d-lg-block mt-5">
+    <h2 class="text-center mb-4">Feelings par émotion</h2>
+
+    {% for emotion, feelings in feelingsByEmotion %}
+        <h3 class="mb-3">{{ emotion }}</h3>
+
+        <div class="row g-3 mb-5">
+            {% for feeling in feelings %}
+                <div class="col-md-4">
+                    <div class="card h-100">
+
+                        <div class="card-body">
+                            <!-- Titre cliquable -->
+                            <h5 class="card-title">
+                                <button class="btn btn-link p-0 text-decoration-none"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#feeling{{ feeling.id }}"
+                                        aria-expanded="false"
+                                        aria-controls="feeling{{ feeling.id }}">
+                                    {{ feeling.title }}
+                                </button>
+                            </h5>
+
+                            <!-- Contenu masqué -->
+                            <div id="feeling{{ feeling.id }}" class="collapse mt-2">
+                                {{ include('feeling/_read.html.twig', { feeling }) }}
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             {% endfor %}
         </div>
 
-        <!-- Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselFeelingsByEmotion" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselFeelingsByEmotion" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-{% else %}
-    <p class="text-center text-white">Aucun feeling trouvé.</p>
-{% endif %}
-        
+    {% endfor %}
 </div>
 
 

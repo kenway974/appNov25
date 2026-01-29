@@ -40,49 +40,113 @@ a:active {
 }
 
 
-/* NAVBAR */
-    .custom-navbar {
-        background-color: #f8f9fa;
-        padding: 0.5rem 1rem;
-        display: flex;
-        align-items: center;
+/* =========================
+   BASE NAVBAR (MOBILE FIRST)
+   ========================= */
+
+.custom-navbar {
+    position: relative;
+    padding: 0.5rem 1rem;
+}
+
+.navbar-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 56px;
+}
+
+/* ZONES LATÉRALES */
+.navbar-left,
+.navbar-right {
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+
+/* Burger à gauche */
+.navbar-left {
+    justify-content: flex-start;
+}
+
+/* Login / Dashboard à droite */
+.navbar-right {
+    margin-left: auto;
+    justify-content: flex-end;
+}
+
+/* =========================
+   LOGO CENTRÉ (MOBILE)
+   ========================= */
+
+.navbar-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+/* =========================
+   MENU DESKTOP (CACHÉ MOBILE)
+   ========================= */
+
+.navbar-menu-desktop {
+    display: none;
+}
+
+/* =========================
+   BOUTONS
+   ========================= */
+
+.burger-btn,
+.login-btn,
+.dashboard-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: white;
+    text-decoration: none;
+}
+
+/* Offcanvas largeur mobile */
+#offcanvasMenu {
+    width: 70%;
+}
+
+/* =========================
+   DESKTOP (≥ 769px)
+   ========================= */
+
+@media (min-width: 769px) {
+
+    .navbar-container {
+        height: auto;
     }
 
-    .navbar-left,
-    .navbar-center,
-    .navbar-right {
-        display: flex;
-        align-items: center;
-    }
-
-    .navbar-left {
-        flex: 1;
-    }
-
+    /* Logo revient à gauche */
     .navbar-center {
-        flex: 1;
-        justify-content: center;
+        position: static;
+        transform: none;
+        margin-left: 1rem;
     }
 
-    .navbar-right {
-        flex: 1;
-        justify-content: flex-end;
+    /* Burger disparaît */
+    .burger-btn {
+        display: none;
     }
 
-    .navbar-right .dropdown {
-        margin-right: 1rem;
+    /* Menu desktop centré */
+    .navbar-menu-desktop {
+        display: flex;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        gap: 2rem;
+        align-items: center;
     }
+}
 
-    #offcanvasMenu {
-        width: 30%;
-    }
-
-    @media (max-width: 768px) {
-        #offcanvasMenu {
-            width: 40%;
-        }
-    }
-        
 
     
 /* HOME */

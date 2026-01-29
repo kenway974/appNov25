@@ -52,6 +52,3 @@ services:
         tags:
             - { name: 'kernel.event_subscriber' }
     
-    App\EventSubscriber\NotificationEventSubscriber:
-        tags:
-            - { name: 'kernel.event_subscriber' }

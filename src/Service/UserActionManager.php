@@ -32,9 +32,6 @@ class UserActionManager
 
         $this->em->persist($userAction);
         $this->em->flush();
-
-        // 🔔 Déclenchement de l’événement "ajouté"
-        $this->dispatcher->dispatch(new UserActionAddedEvent($userAction));
     }
 
     /**
@@ -42,6 +39,7 @@ class UserActionManager
      */
     public function completeUserAction(UserAction $userAction): void
     {
+        // augemnte le socre du userneed associé
         $userNeed = $userAction->getUserNeed();
         if ($userNeed) {
             $userNeed->setScore(100);
@@ -61,17 +59,10 @@ class UserActionManager
             }
 
             $this->em->flush();
-
-            // 🔔 Déclenchement de l’événement "complété"
-            $this->dispatcher->dispatch(new UserActionCompletedEvent($userAction));
-
         } else {
             // Action ponctuelle : supprimer le userAction
             $this->em->remove($userAction);
             $this->em->flush();
-
-            // 🔔 Déclenchement de l’événement "complété" avant suppression
-            $this->dispatcher->dispatch(new UserActionCompletedEvent($userAction));
         }
     }
 
@@ -82,8 +73,5 @@ class UserActionManager
     {
         $this->em->remove($userAction);
         $this->em->flush();
-
-        // 🔔 Déclenchement de l’événement "mis à jour/supprimé"
-        $this->dispatcher->dispatch(new UserActionUpdatedEvent($userAction));
     }
 }

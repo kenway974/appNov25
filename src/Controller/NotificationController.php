@@ -2,74 +2,37 @@
 
 namespace App\Controller;
 
-use App\Entity\Notification;
-use App\Repository\NotificationRepository;
+use App\Service\NotificationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\CurrentUser;
-use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/notifiaction')]
-final class NotificationController extends AbstractController
+#[Route('/notifications')]
+class NotificationController extends AbstractController
 {
-    #[Route(name: 'app_notifications')]
-    public function index(
-        NotificationRepository $notificationRepo,
-        #[CurrentUser] ?User $user = null
-    ): Response {
-        if (!$user) {
-            // Si pas connecté, renvoyer vide ou rediriger
-            return $this->render('notification/index.html.twig', [
-                'notifications' => [],
-            ]);
-        }
+    public function __construct(private NotificationService $notificationService) {}
 
-        // Récupère toutes les notifications pour l'utilisateur connecté
-        $notifications = $notificationRepo->findBy(
-            ['user' => $user],
-            ['receivedAt' => 'DESC'] // optionnel, ordre décroissant
-        );
+    #[Route('/user/{userId}', name: 'get_user_notifications', methods: ['GET'])]
+    public function getUserNotifications(int $userId): JsonResponse
+    {
+        $notifications = $this->notificationService->getUserNotifications($userId);
+        $data = array_map(fn($n) => [
+            'id' => $n->getId(),
+            'title' => $n->getTitle(),
+            'message' => $n->getMessage(),
+            'type' => $n->getType(),
+            'isRead' => $n->getIsRead(),
+            'createdAt' => $n->getCreatedAt()->format('c'),
+            'context' => $n->getContext(),
+        ], $notifications);
 
-        return $this->render('notification/_modal.html.twig', [
-            'notifications' => $notifications,
-        ]);
+        return $this->json($data);
     }
 
-    #[Route('/{id}/delete', name: 'app_notification_delete', methods: ['POST','GET'])]
-    public function delete(Notification $notification, EntityManagerInterface $em): Response
+    #[Route('/mark-read/{id}', name: 'mark_notification_read', methods: ['POST'])]
+    public function markRead(string $id): JsonResponse
     {
-        // Optionnel : vérifier que l'utilisateur est propriétaire de la notif
-        $user = $this->getUser();
-        if ($notification->getUser() !== $user) {
-            $this->addFlash('danger', 'Vous ne pouvez pas supprimer cette notification.');
-            return $this->redirectToRoute('app_dashboard'); // ou la page précédente
-        }
-
-        $em->remove($notification);
-        $em->flush();
-
-        $this->addFlash('success', 'Notification supprimée avec succès.');
-
-        // Rediriger vers la page précédente ou vers un tableau de notifications
-        return $this->redirectToRoute('app_dashboard');
-    }
-
-    #[Route('/{id}/read', name: 'app_notification_read', methods: ['POST'])]
-    public function markAsRead(Notification $notification, EntityManagerInterface $em): JsonResponse
-    {
-        $user = $this->getUser();
-        if ($notification->getUser() !== $user) {
-            return $this->json(['success' => false], 403);
-        }
-
-        if (!$notification->IsRead()) {
-            $notification->setIsRead(true);
-            $em->flush();
-        }
-
-        return $this->json(['success' => true]);
+        $this->notificationService->markAsRead($id);
+        return $this->json(['status' => 'ok']);
     }
 }

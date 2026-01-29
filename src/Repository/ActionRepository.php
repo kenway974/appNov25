@@ -63,4 +63,21 @@ class ActionRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Récupère les actions dont la durée est inférieure ou égale à $maxDuration
+     *
+     * @param int $maxDuration Durée maximale en minutes (ou unité utilisée)
+     * @return Action[]
+     */
+    public function findByMaxDuration(int $maxDuration): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.duration <= :maxDuration')
+            ->setParameter('maxDuration', $maxDuration)
+            ->orderBy('a.duration', 'ASC') // optionnel : tri par durée croissante
+            ->getQuery()
+            ->getResult();
+    }
+
 }

@@ -32,6 +32,10 @@ class Action
     #[ORM\Column(nullable: true)]
     private ?int $duration = null;
 
+    #[ORM\Column(length: 25, nullable: true)]
+    private ?string $type = null;
+
+
     /**
      * @var Collection<int, UserAction>
      */
@@ -44,8 +48,6 @@ class Action
     #[ORM\ManyToMany(targetEntity: Block::class, inversedBy: 'actions')]
     private Collection $blocks;
 
-    #[ORM\Column(length: 25, nullable: true)]
-    private ?string $type = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $icon = null;

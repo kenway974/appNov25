@@ -2,47 +2,62 @@
 
 namespace App\Service;
 
-use App\Entity\Notification;
-use App\Entity\UserAction;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Document\Notification;
+use Doctrine\ODM\MongoDB\DocumentManager;
 
 class NotificationService
 {
-    public function __construct(
-        private EntityManagerInterface $em
-    ) {}
+    public function __construct(private DocumentManager $dm) {}
 
-    /**
-     * Crée et persiste une nouvelle notification à partir d'une UserAction.
-     *
-     * @param UserAction|null $userAction Action liée à la notification
-     *
-     * @return Notification|null
-     */
-    public function createNotification(?UserAction $userAction = null): ?Notification
+    public function createNotification(int $userId, string $title, string $message, string $type, array $context = []): Notification
     {
-        if (!$userAction) {
-            return null; // rien à faire si pas d'action
-        }
-
         $notification = new Notification();
+        $notification->setUserId($userId)
+                     ->setTitle($title)
+                     ->setMessage($message)
+                     ->setType($type)
+                     ->setIsRead(false)
+                     ->setCreatedAt(new \DateTimeImmutable())
+                     ->setContext($context);
 
-        $title = "C'est fait ?";
-        $message = "Ne t'en veux pas si ce n'est pas fait, mais ne tarde pas...";
-        $type = "actionCheck";
-
-        $notification
-            ->setUser($userAction->getUser())
-            ->setTitle($title)
-            ->setMessage($message)
-            ->setType($type)
-            ->setReceivedAt(new \DateTimeImmutable())
-            ->setIsRead(false)
-            ->setUserAction($userAction);
-
-        $this->em->persist($notification);
-        $this->em->flush();
+        $this->dm->persist($notification);
+        $this->dm->flush();
 
         return $notification;
     }
+
+    public function getUserNotifications(int $userId, bool $onlyUnread = false): array
+    {
+        $criteria = ['userId' => $userId];
+        if ($onlyUnread) {
+            $criteria['isRead'] = false;
+        }
+
+        return $this->dm->getRepository(Notification::class)
+                        ->findBy($criteria, ['createdAt' => 'DESC']);
+    }
+
+    public function markAsRead(string $notificationId): void
+    {
+        $notification = $this->dm->getRepository(Notification::class)->find($notificationId);
+        if ($notification) {
+            $notification->setIsRead(true);
+            $this->dm->flush();
+        }
+    }
+
+    public function delete(string $notificationId): void
+    {
+        $notification = $this->dm
+            ->getRepository(Notification::class)
+            ->find($notificationId);
+
+        if (!$notification) {
+            return;
+        }
+
+        $this->dm->remove($notification);
+        $this->dm->flush();
+    }
+
 }
