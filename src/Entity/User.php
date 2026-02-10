@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email', repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['username'], message: 'There is already an account with this username', repositoryClass: UserRepository::class)]
 #[Vich\Uploadable]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -91,12 +92,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private Collection $userActions;
 
-    /** 
-     * @var Collection<int, Notification>
-     */
-    #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'user')]
-    private Collection $notifications;
-
     #[ORM\Column]
     private bool $isVerified = false;
 
@@ -113,7 +108,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->userNeeds = new ArrayCollection();
         $this->userActions = new ArrayCollection();
-        $this->notifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -324,35 +318,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Notification>
-     */
-    public function getNotifications(): Collection
-    {
-        return $this->notifications;
-    }
-
-    public function addNotification(Notification $notification): static
-    {
-        if (!$this->notifications->contains($notification)) {
-            $this->notifications->add($notification);
-            $notification->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNotification(Notification $notification): static
-    {
-        if ($this->notifications->removeElement($notification)) {
-            // set the owning side to null (unless already changed)
-            if ($notification->getUser() === $this) {
-                $notification->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function isVerified(): bool
     {
