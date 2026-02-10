@@ -57,9 +57,6 @@ class UserAction
     #[Assert\NotNull(message: 'Un besoin utilisateur est requis.')]
     private ?UserNeed $userNeed = null;
 
-    #[ORM\OneToOne(mappedBy: 'userAction', cascade: ['persist', 'remove'])]
-    private ?Notification $notification = null;
-
     #[ORM\Column(nullable: true)]
     #[Assert\Type('bool')]
     private ?bool $isRecurring = null;
@@ -173,28 +170,6 @@ class UserAction
     public function setUserNeed(?UserNeed $userNeed): static
     {
         $this->userNeed = $userNeed;
-
-        return $this;
-    }
-
-    public function getNotification(): ?Notification
-    {
-        return $this->notification;
-    }
-
-    public function setNotification(?Notification $notification): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($notification === null && $this->notification !== null) {
-            $this->notification->setUserAction(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($notification !== null && $notification->getUserAction() !== $this) {
-            $notification->setUserAction($this);
-        }
-
-        $this->notification = $notification;
 
         return $this;
     }
