@@ -219,36 +219,66 @@ a:active {
 
 
     /* BENEFITS */
-        #home-benefits {
-            padding: 4rem 1rem;
-            text-align: center; /* centre le texte */
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* centre horizontalement les items */
-        }
+#home-benefits {
+    padding: 4rem 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-        .benefits-item {
-            display: flex;
-            flex-direction: column; /* icône au-dessus du texte */
-            align-items: center;    /* centre horizontalement icône + texte */
-            justify-content: center; /* centre verticalement si besoin */
-            margin-bottom: 5rem;
-            opacity: 0;
-            transform: translateX(0);
-            padding: 20px;
-        }
-        .benefits-text {
-            width: 60%;
-            font-weight: 300;       /* texte plus fin */
-            font-size: 1.4rem;
-        }
-        .benefits-icon {
-            width: 40px;
-            height: 40px;
-            margin: 0 0 1.5rem 0; /* espace entre icône et texte */
-        }
+.benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 0;
+    width: 100%;
+}
 
-        
+.benefits-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateX(0);
+    padding: 20px;
+}
+
+.benefits-text {
+    width: 80%; 
+    font-weight: 300;
+    font-size: 1.4rem;
+}
+
+.benefits-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 1.5rem;
+}
+
+.benefits-item:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+    .benefits-list {
+        flex-direction: row;   
+        flex-wrap: wrap;         
+        justify-content: center; 
+        gap: 2rem;             
+    }
+
+    .benefits-item {
+        flex: 1 1 calc(33% - 2rem); 
+        max-width: 300px;        
+    }
+
+    .benefits-text {
+        width: 100%; 
+    }
+}
 
 
         /* Animations */

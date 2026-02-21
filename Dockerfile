@@ -5,13 +5,17 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libssl-dev \
     pkg-config \
+    libicu-dev \
  && pecl install -n mongodb \
  && docker-php-ext-enable mongodb \
+ && docker-php-ext-install intl opcache \
  && rm -rf /var/lib/apt/lists/*
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 COPY . .
 
-RUN php -m | grep mongodb
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 CMD ["php-fpm"]

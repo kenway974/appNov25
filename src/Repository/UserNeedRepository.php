@@ -17,16 +17,29 @@ class UserNeedRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return UserNeed[]
-     */
-    public function findByUserId(int $userId): array
-    {
-        return $this->createQueryBuilder('un')
-            ->andWhere('un.user = :userId')
-            ->setParameter('userId', $userId)
-            ->orderBy('un.id', 'ASC')
-            ->getQuery()
-            ->getResult();
-    }
+ * @return UserNeed[]
+ */
+public function findByUserId(int $userId): array
+{
+    return $this->createQueryBuilder('un')
+        ->andWhere('un.user = :userId')
+        ->setParameter('userId', $userId)
+        ->orderBy('un.priority', 'ASC')
+        ->getQuery()
+        ->getResult();
+
+    /*
+    $dql = 'SELECT un 
+            FROM App\Entity\UserNeed un 
+            WHERE un.user = :userId 
+            ORDER BY un.priority ASC';
+
+    return $this->getEntityManager()
+                ->createQuery($dql)
+                ->setParameter('userId', $userId)
+                ->getResult();
+    */
+}
+
 
 }

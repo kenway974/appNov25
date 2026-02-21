@@ -49,32 +49,31 @@ class UserNeedManager
      * @param int|null $daysOverride Optionnel : force le nombre de jours écoulés (utile pour tests)
      * @return int Nombre de UserNeed mis à jour
      */
-    public function updateScores(?int $daysOverride = null): int
+    public function updateScores(): void
     {
+        // init date, sort tous les UserNeed en BDD
         $now = new \DateTime();
-        $userNeeds = $this->userNeedRepo->findAll(); // ✅ Utiliser le repository injecté
-        $updatedCount = 0;
+        $userNeeds = $this->userNeedRepo->findAll();
 
+        // pour chaque UserNeed
         foreach ($userNeeds as $userNeed) {
             /** @var UserNeed $userNeed */
+            // calcule le nombre de jours écoulés depuis la dernière mise à jour
             $last = $userNeed->getLastUpdated();
-            $days = $daysOverride ?? $last->diff($now)->days;
+            $days = $last->diff($now)->days;
 
+            // si au moins 1 jour s'est écoulé, décrémente le score en fonction de la priorité
             if ($days >= 1) {
                 $decrement = $days * $userNeed->getPriority();
                 $newScore = max(0, $userNeed->getScore() - $decrement);
 
                 $userNeed->setScore($newScore);
                 $userNeed->setLastUpdated($now);
-
-                $updatedCount++;
             }
         }
 
-        if ($updatedCount > 0) {
-            $this->em->flush();
-        }
+        $this->em->flush();
 
-        return $updatedCount;
+        return;
     }
 }

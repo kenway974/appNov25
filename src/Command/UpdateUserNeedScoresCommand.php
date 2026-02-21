@@ -27,9 +27,9 @@ class UpdateUserNeedScoresCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $count = $this->userNeedManager->updateScores();
+        $this->userNeedManager->updateScores();
 
-        $output->writeln(sprintf('%d UserNeed ont été mis à jour.', $count));
+        $output->writeln('Les scores des UserNeed ont été mis à jour.');
         return Command::SUCCESS;
     }
 }

@@ -15,7 +15,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: dev
+      #target: dev
     volumes:
       - .:/var/www/html
     env_file:

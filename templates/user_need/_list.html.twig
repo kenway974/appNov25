@@ -48,36 +48,16 @@
                         <!-- Liste des actions -->
                         <ul>
                             {% for action in userNeed.need.actions %}
-    <li class="mt-2">
-        {{ action.title }}
-
-        <!-- Formulaire ponctuel -->
-        <button type="button"
-                class="btn btn-sm btn-outline-primary action-btn"
-                data-user-need="{{ userNeed.id }}"
-                data-action="{{ action.id }}"
-                data-type="ponctual">
-            Le faire une fois
-        </button>
-        <div id="form-ponctual-{{ userNeed.id }}-{{ action.id }}" style="display:none;" class="mt-2">
-            {{ include('user_action/_ponctual_form.html.twig') }}
-        </div>
-
-        <!-- Formulaire régulier -->
-        <button type="button"
-                class="btn btn-sm btn-outline-primary action-btn"
-                data-user-need="{{ userNeed.id }}"
-                data-action="{{ action.id }}"
-                data-type="repeat">
-            Le faire régulièrement
-        </button>
-        <div id="form-repeat-{{ userNeed.id }}-{{ action.id }}" style="display:none;" class="mt-2">
-            {{ include('user_action/_repeat_form.html.twig') }}
-        </div>
-    </li>
-{% endfor %}
-
+                                <li class="mt-2">
+                                        <div class="mt-2">
+                                            {{ include('action/_read.html.twig', {
+                                                action: action
+                                            }) }}
+                                        </div>
+                                    </li>
+                            {% endfor %}
                         </ul>
+
 
                     </div>
                 </div>

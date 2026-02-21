@@ -55,15 +55,10 @@ final class ActionController extends AbstractController
         ]);
     }
 
-
+/*
     #[Route('/add-action/{id}', name: 'app_action_add', requirements: ['id' => '\d+'])]
     public function addAction(
-        int $id,
-        Request $request,
-        ActionRepository $actionRepo,
-        UserNeedRepository $userNeedRepo,
-        UserActionManager $manager,
-        SessionInterface $session
+        int $id, Request $request, ActionRepository $actionRepo, UserNeedRepository $userNeedRepo, UserActionManager $manager, SessionInterface $session
     ): Response {
         $user = $this->getUser();
         if (!$user) {
@@ -90,6 +85,7 @@ final class ActionController extends AbstractController
             throw new AccessDeniedException('Accès interdit à ce besoin utilisateur.');
         }
 
+        // lie l'action et le need à un UserAction (entité liée à l'utilisateur)
         $userAction = new UserAction();
         $userAction->setAction($action);
         $userAction->setUserNeed($userNeed);
@@ -98,7 +94,7 @@ final class ActionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->create($this->getUser(), $userAction);
+            $manager->create($this->getUser(), $userAction); // appel service
             $this->addFlash('success', 'Action ajoutée à votre profil.');
             return $this->redirectToRoute('app_dashboard');
         }
@@ -108,23 +104,18 @@ final class ActionController extends AbstractController
             'action' => $action,
             'userNeed' => $userNeed,
         ]);
-    }
+    }*/
 
     #[Route('/complete/{id}', name: 'app_action_complete', requirements: ['id' => '\d+'], methods: ['POST'])]
-    public function completeUserAction(
-        int $id,
-        Request $request,
-        UserActionManager $manager,
-        UserActionRepository $userActionRepo
+    public function completeUserAction(int $id, Request $request, UserActionManager $manager, UserActionRepository $userActionRepo
     ): Response {
         $userAction = $userActionRepo->find($id);
 
-        // vérifie que useraction existe
+        // vérifie que useraction existe et appartient à l'utilisateur
         if (!$userAction) {
             throw $this->createNotFoundException('UserAction non trouvée');
-        }
+        } 
 
-        // verifie user et appartenance useraction
         $this->denyAccessUnlessGranted(
             UserActionVoter::COMPLETE,
             $userAction
@@ -138,7 +129,7 @@ final class ActionController extends AbstractController
             throw $this->createAccessDeniedException('Token CSRF invalide.');
         }
 
-        $manager->completeUserAction($userAction);
+        $manager->completeUserAction($userAction); // appel service
 
         $this->addFlash('success', 'Action mise à jour avec succès.');
 

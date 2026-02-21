@@ -8,6 +8,7 @@ use App\Form\UserDashboardIllustrationType;
 use App\Repository\UserNeedRepository;
 use App\Repository\UserActionRepository;
 use App\Repository\UserNeedHistoryRepository;
+use App\Service\UserActionManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,17 +16,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 #[Route('/dashboard')]
 final class DashboardController extends AbstractController
 {
     #[Route(name: 'app_dashboard', methods: ['GET', 'POST'])]
-    public function index(
-        Request $request,
-        UserNeedRepository $userNeedRepo,
-        UserActionRepository $userActionRepo,
-        EntityManagerInterface $em
-    ): Response {
+    public function index(Request $request, CsrfTokenManagerInterface $csrfTokenManager, UserNeedRepository $userNeedRepo, UserActionRepository $userActionRepo, EntityManagerInterface $em, UserActionManager $manager    
+        ): Response {
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
 
@@ -39,31 +38,35 @@ final class DashboardController extends AbstractController
             return $this->redirectToRoute('app_dashboard');
         }
 
-        // Traitement des UserActions envoyées via <form> HTML
+        // Traitement du formulaire d'ajout d'action
         if ($request->isMethod('POST') && $request->request->has('user_action')) {
-            $data = $request->request->get('user_action');
 
-            // Récupération des IDs passés en GET (si tu les ajoutes dans l'action du form)
+            // Vérification CSRF
+            $submittedToken = $data['_token'] ?? '';
+            if (!$csrfTokenManager->isTokenValid(new CsrfToken('user_action', $submittedToken))) {
+                throw $this->createAccessDeniedException('Token CSRF invalide.');
+            }
+
+            $data = $request->request->get('user_action', null) ?? [];
+
+            // Récupération des IDs passés en GET
             $needId = $request->query->get('needId');
             $actionId = $request->query->get('actionId');
 
             if ($needId && $actionId) {
+                // Récupère le UserNeed et l'Action correspondante
                 $userNeed = $userNeedRepo->find($needId);
-                $action = $userNeed ? $userNeed->getNeed()->getActions()->filter(fn($a) => $a->getId() == $actionId)->first() : null;
+                $action = $userNeed
+                    ? $userNeed->getNeed()->getActions()->filter(fn($a) => $a->getId() == $actionId)->first()
+                    : null;
 
+                // Lie l'action et le need à UserAction, persiste, appel service et redirige
                 if ($userNeed && $action) {
                     $userAction = new UserAction();
-                    $userAction->setUser($user);
                     $userAction->setAction($action);
+                    $userAction->setUserNeed($userNeed);
 
-                    // Champs personnalisés
-                    $userAction->setIsRecurring(isset($data['isRecurring']) && $data['isRecurring'] == 1);
-                    $userAction->setDeadline($data['deadline'] ? new \DateTime($data['deadline']) : null);
-                    $userAction->setStartDate($data['startDate'] ? new \DateTime($data['startDate']) : null);
-                    $userAction->setFrequency($data['frequency'] ?? null);
-
-                    $em->persist($userAction);
-                    $em->flush();
+                    $manager->create($user, $userAction, $data);
 
                     return $this->redirectToRoute('app_dashboard');
                 }
@@ -82,7 +85,7 @@ final class DashboardController extends AbstractController
         ]);
     }
 
-
+ 
 
 
 

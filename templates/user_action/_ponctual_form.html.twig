@@ -4,17 +4,17 @@
     <!-- Identifiants pour le contrôleur -->
     <input type="hidden" name="user_action[needId]" value="{{ userNeed.id }}">
     <input type="hidden" name="user_action[actionId]" value="{{ action.id }}">
-    <!-- Récurrence -->
+    <!-- Récurrence (ici ponctuel) -->
     <input type="hidden" id="isRecurring-{{ userNeed.id }}-{{ action.id }}" 
            name="user_action[isRecurring]" value="0">
 
-    <p><strong>{{ action.title }}</strong></p>
+    <h4 class="h6 mb-2">{{ action.title }}</h4>
 
     <!-- Champs -->
     <div class="mb-2" id="deadlineField-{{ userNeed.id }}-{{ action.id }}">
         <label for="deadline-{{ userNeed.id }}-{{ action.id }}">Deadline</label>
         <input type="date" id="deadline-{{ userNeed.id }}-{{ action.id }}" 
-               name="user_action[deadline]" class="form-control">
+               name="user_action[deadline]" class="form-control" required>
     </div>
 
     <button type="submit" class="btn btn-primary">Enregistrer</button>
