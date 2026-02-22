@@ -13,7 +13,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.7",
         "doctrine/mongodb-odm-bundle": ">=5.6",
         "doctrine/orm": "^3.6.2",
-        "easycorp/easyadmin-bundle": "^4.28.1",
+        "easycorp/easyadmin-bundle": "^4.29.1",
         "minishlink/web-push": "^9.0.4",
         "mongodb/mongodb": ">=2.1.2",
         "ext-pdo": "*",
@@ -110,13 +110,13 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^4.3.1",
-        "phpunit/phpunit": "^11.5.51",
+        "phpunit/phpunit": "^11.5.55",
         "symfony/browser-kit": "7.3.*",
         "symfony/css-selector": "7.3.*",
         "symfony/debug-bundle": "7.3.*",
-        "symfony/maker-bundle": "^1.65.1",
+        "symfony/maker-bundle": "^1.66.0",
         "symfony/stopwatch": "7.3.*",
         "symfony/web-profiler-bundle": "7.3.*",
-        "zenstruck/foundry": "^2.9.0"
+        "zenstruck/foundry": "^2.9.2"
     }
 }
