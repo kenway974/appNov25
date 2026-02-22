@@ -16,6 +16,8 @@
         "easycorp/easyadmin-bundle": "^4.28.1",
         "minishlink/web-push": "^9.0.4",
         "mongodb/mongodb": ">=2.1.2",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*",
         "phpdocumentor/reflection-docblock": "^5.6.6",
         "phpstan/phpdoc-parser": "^2.3.2",
         "stripe/stripe-php": "^18.2",
