@@ -6,7 +6,8 @@
         "isDoableNow": true,
         "duration": 10,
         "type": "détente",
-        "icon": "meditation.png"
+        "icon": "meditation.png",
+        "isRecurring": false
     },
     {
         "title": "Médite, connecte-toi à toi-même",
@@ -15,7 +16,8 @@
         "isDoableNow": true,
         "duration": 15,
         "type": "émotionnel",
-        "icon": "introspection.png"
+        "icon": "introspection.png",
+        "isRecurring": false
     },
     {
         "title": "Journalling, sois fier de toi",
@@ -24,7 +26,8 @@
         "isDoableNow": true,
         "duration": 10,
         "type": "émotionnel",
-        "icon": "journal.png"
+        "icon": "journal.png",
+        "isRecurring": true
     },
     {
         "title": "Journalling, exprime ta gratitude",
@@ -33,7 +36,8 @@
         "isDoableNow": true,
         "duration": 10,
         "type": "émotionnel",
-        "icon": "gratitude.png"
+        "icon": "gratitude.png",
+        "isRecurring": true
     },
     {
         "title": "Journalling, trouve les opportunités dans les épreuves",
@@ -42,7 +46,8 @@
         "isDoableNow": true,
         "duration": 15,
         "type": "cognitif",
-        "icon": "resilience.png"
+        "icon": "resilience.png",
+        "isRecurring": true
     },
     {
         "title": "Sors en forêt ou dans un parc",
@@ -51,7 +56,8 @@
         "isDoableNow": true,
         "duration": 30,
         "type": "physique",
-        "icon": "nature.png"
+        "icon": "nature.png",
+        "isRecurring": true
     },
     {
         "title": "Parle à un random dans la rue",
@@ -60,7 +66,8 @@
         "isDoableNow": false,
         "duration": 5,
         "type": "relationnel",
-        "icon": "social.png"
+        "icon": "social.png",
+        "isRecurring": false
     },
     {
         "title": "Fais une courte marche sans téléphone",
@@ -69,7 +76,8 @@
         "isDoableNow": true,
         "duration": 15,
         "type": "physique",
-        "icon": "walk.png"
+        "icon": "walk.png",
+        "isRecurring": true
     },
     {
         "title": "Range un petit espace autour de toi",
@@ -78,7 +86,8 @@
         "isDoableNow": true,
         "duration": 10,
         "type": "administratif",
-        "icon": "tidy.png"
+        "icon": "tidy.png",
+        "isRecurring": true
     },
     {
         "title": "Appelle un proche que tu n’as pas vu depuis longtemps",
@@ -87,105 +96,7 @@
         "isDoableNow": false,
         "duration": 15,
         "type": "relationnel",
-        "icon": "call.png"
-    },
-    {
-        "title": "Fais une session de pompes ou d’étirements",
-        "description": "Active ton corps quelques minutes pour relancer ton énergie.",
-        "intension": "Vitalité",
-        "isDoableNow": true,
-        "duration": 5,
-        "type": "physique",
-        "icon": "stretch.png"
-    },
-    {
-        "title": "Note 3 choses que tu veux accomplir aujourd’hui",
-        "description": "Clarifie tes priorités et commence petit.",
-        "intension": "Focalisation",
-        "isDoableNow": true,
-        "duration": 5,
-        "type": "travail/études",
-        "icon": "focus.png"
-    },
-    {
-        "title": "Ferme les yeux et respire profondément",
-        "description": "Respire 5 fois profondément pour relâcher la tension.",
-        "intension": "Apaisement",
-        "isDoableNow": true,
-        "duration": 3,
-        "type": "détente",
-        "icon": "breathe.png"
-    },
-    {
-        "title": "Apprends une petite chose nouvelle",
-        "description": "Lis un article ou regarde une vidéo sur un sujet que tu aimes.",
-        "intension": "Curiosité",
-        "isDoableNow": true,
-        "duration": 10,
-        "type": "cognitif",
-        "icon": "learn.png"
-    },
-    {
-        "title": "Fixe-toi un mini défi de la journée",
-        "description": "Choisis une petite action qui te sort de ta routine.",
-        "intension": "Progression personnelle",
-        "isDoableNow": false,
-        "duration": 5,
-        "type": "challenge",
-        "icon": "challenge.png"
-    },
-    {
-        "title": "Écoute un morceau de musique qui te fait du bien",
-        "description": "Laisse-toi emporter par le rythme ou les paroles.",
-        "intension": "Émotion positive",
-        "isDoableNow": true,
-        "duration": 5,
-        "type": "émotionnel",
-        "icon": "music.png"
-    },
-    {
-        "title": "Ferme toutes tes notifications pendant 30 minutes",
-        "description": "Protège ton attention et ton calme intérieur.",
-        "intension": "Concentration",
-        "isDoableNow": true,
-        "duration": 30,
-        "type": "cognitif",
-        "icon": "focus_mode.png"
-    },
-    {
-        "title": "Prends un verre d’eau et étire-toi",
-        "description": "Hydrate-toi et détends ton corps quelques secondes.",
-        "intension": "Soin de soi",
-        "isDoableNow": true,
-        "duration": 2,
-        "type": "physique",
-        "icon": "water.png"
-    },
-    {
-        "title": "Réponds à un message que tu repousses depuis longtemps",
-        "description": "Libère une tension légère en bouclant une petite tâche.",
-        "intension": "Soulagement",
-        "isDoableNow": true,
-        "duration": 5,
-        "type": "administratif",
-        "icon": "message.png"
-    },
-    {
-        "title": "Fais une sieste ou repose-toi 10 minutes",
-        "description": "Accorde-toi une pause consciente, sans culpabilité.",
-        "intension": "Récupération",
-        "isDoableNow": true,
-        "duration": 10,
-        "type": "détente",
-        "icon": "nap.png"
-    },
-    {
-        "title": "Complimente quelqu’un sincèrement",
-        "description": "Exprime une reconnaissance authentique envers quelqu’un autour de toi.",
-        "intension": "Connexion positive",
-        "isDoableNow": true,
-        "duration": 2,
-        "type": "relationnel",
-        "icon": "compliment.png"
+        "icon": "call.png",
+        "isRecurring": false
     }
 ]
