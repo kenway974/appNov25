@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table(
-    name: 'need',
+    name: 'userneed',
     indexes: [
         new ORM\Index(name: 'idx_priority', columns: ['priority']),
         new ORM\Index(name: 'idx_score', columns: ['score'])

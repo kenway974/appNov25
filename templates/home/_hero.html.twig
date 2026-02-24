@@ -1,12 +1,9 @@
 <section class="hero-container" id="home-feeling" aria-labelledby="hero-title">
 
     <div class="hero-bg">
-        <video autoplay muted loop playsinline aria-label="Fond animé étoilé">
-            <source src="{{ asset('videos/home-etoiles-filantes.mp4') }}" type="video/mp4">
-            <p>Votre navigateur ne supporte pas la vidéo. 
+        <img src="{{ asset('images/image.jpg') }}" alt="hero image" class="hero-image" aria-label="Image d'illustration pour la section héro">
+            <source src="{{ asset('images/image.jpg') }}" type="image/jpeg">
                 <a href="{{ path('app_feeling') }}">Accéder au contenu principal</a>
-            </p>
-        </video>
         <div class="hero-overlay"></div>
     </div>
 
@@ -18,7 +15,7 @@
         </div>
     </div>
 
-    <svg xmlns="http://www.w3.org/2000/svg"
+<!--    <svg xmlns="http://www.w3.org/2000/svg"
          viewBox="0 0 1440 320"
          preserveAspectRatio="none"
          aria-hidden="true"
@@ -33,6 +30,6 @@
         </defs>
         <path fill="url(#imgPattern)"
               d="M0,224L48,234.7C96,245,192,267,288,250.7C384,235,480,181,576,160C672,139,768,149,864,154.7C960,160,1056,160,1152,149.3C1248,139,1344,117,1392,106.7L1440,96V320H0Z" />
-    </svg>
+    </svg> -!>
 
 </section>

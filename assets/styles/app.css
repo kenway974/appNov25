@@ -1,16 +1,4 @@
 body {
-    color: #ffffff; /* texte blanc */
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 1); /* ombre portée pour surélévation et lisibilité */
-    background: 
-        linear-gradient(
-            to bottom,
-            #000000 0%,   /* presque noir total */
-            #000000 20%,  
-            #000004 40%,  /* bleu nuit très profond */
-            #000008 60%,  /* lavande ultra sombre */
-            #000010 80%,  /* lavande/noir profond */
-            #050017 100%  /* lavande foncé très sombre */
-        ),
 }
 
 a {
@@ -151,53 +139,7 @@ a:active {
     
 /* HOME */
 
-    .hero-container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.hero-bg video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -2; /* fond vidéo */
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(2, 0, 15, 0.5); /* ajuste l’opacité selon besoin */
-    z-index: -1; /* overlay entre vidéo et contenu */
-}
-
-.hero-content {
-    position: relative;
-    z-index: 1;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-}
-
-.hero-text h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-.hero-text p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-}
+ 
 
 .btn-cta {
     padding: 0.75rem 2rem;
@@ -220,7 +162,6 @@ a:active {
 
     /* BENEFITS */
 #home-benefits {
-    padding: 4rem 1rem;
     text-align: center;
     display: flex;
     flex-direction: column;

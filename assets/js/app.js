@@ -1,5 +1,7 @@
-/*
+import '../styles/app.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; 
+
+/*
 import './register-sw.js'; 
 
 
@@ -7,7 +9,6 @@ import './register-sw.js';
 *
 * This file will be included onto the page via the importmap() Twig function,
 * which should already be in your base.html.twig.
-import './styles/app.css';
 */
 console.log('app.js chargé'); // Test
 

@@ -58,6 +58,9 @@ class Action
     #[ORM\ManyToMany(targetEntity: Need::class, mappedBy: 'actions')]
     private Collection $needs;
 
+    #[ORM\Column]
+    private ?bool $isRecurring = null;
+
     public function __construct()
     {
         $this->userActions = new ArrayCollection();
@@ -211,6 +214,18 @@ class Action
         if ($this->needs->removeElement($need)) {
             $need->removeAction($this);
         }
+        return $this;
+    }
+
+    public function isRecurring(): ?bool
+    {
+        return $this->isRecurring;
+    }
+
+    public function setIsRecurring(bool $isRecurring): static
+    {
+        $this->isRecurring = $isRecurring;
+
         return $this;
     }
 }
