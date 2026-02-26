@@ -12,7 +12,45 @@ import './register-sw.js';
 */
 console.log('app.js chargé'); // Test
 
+/*
+document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.action-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
 
+                    // Récupération des IDs et type
+                    const userNeedId = this.dataset.userNeed;
+                    const actionId = this.dataset.action;
+                    const type = this.dataset.type;
+
+                    // Toggle du formulaire correspondant
+                    const formId = `${type}-${userNeedId}-${actionId}`;
+                    const formDiv = document.getElementById('form-' + formId);
+                    if (formDiv) {
+                        formDiv.style.display = formDiv.style.display === 'none' ? 'block' : 'none';
+                    }
+
+                    // Envoi AJAX pour enregistrer en session
+                    fetch('{{ path('set_selected_user_action') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': '{{ csrf_token('set_user_action') }}'
+                        },
+                        body: JSON.stringify({
+                            userNeedId: userNeedId,
+                            actionId: actionId,
+                            type: type
+                        })
+                    })
+                    .then(res => res.text())
+                    .then(data => console.log('✅ IDs enregistrés en session :', data))
+                    .catch(err => console.error('⚠️ Erreur lors de l’enregistrement :', err));
+                });
+            });
+        });
+
+        */
 document.addEventListener('DOMContentLoaded', () => {
     const items = document.querySelectorAll('.benefits-item');
 

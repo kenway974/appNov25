@@ -18,32 +18,37 @@
 </div>
 
 <div>
-    <ul>
-        {% for action in userNeed.need.actions %}
-            <li class="mb-3">
-                {{ action.title }}
 
-                <!-- Bouton d’ouverture du formulaire -->
-                <button
-                    class="btn btn-sm btn-outline-primary ms-2"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#form-{{ userNeed.id }}-{{ action.id }}"
-                    aria-expanded="false"
-                    aria-controls="form-{{ userNeed.id }}-{{ action.id }}"
-                >
-                    Ajouter
-                </button>
+    {% if app.user and 'ROLE_SUBSCRIBER' in app.user.roles %}
+        <ul>
+            {% for action in userNeed.need.actions %}
+                <li class="mb-3">
+                    {{ action.title }}
 
-                <!-- Formulaire masqué par défaut -->
-                <div class="collapse mt-2" id="form-{{ userNeed.id }}-{{ action.id }}">
-                    <div class="border p-3 rounded shadow-sm bg-light">
-                        {{ include('action/_form.html.twig', { action: action }) }}
+                    <button
+                        class="btn btn-sm btn-outline-primary ms-2"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#form-{{ userNeed.id }}-{{ action.id }}"
+                        aria-expanded="false"
+                        aria-controls="form-{{ userNeed.id }}-{{ action.id }}"
+                    >
+                        Ajouter
+                    </button>
+
+                    <div class="collapse mt-2" id="form-{{ userNeed.id }}-{{ action.id }}">
+                        <div class="border p-3 rounded shadow-sm bg-light">
+                            {{ include('action/_form.html.twig', { action: action }) }}
+                        </div>
                     </div>
-                </div>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% elseif app.user and 'ROLE_USER' in app.user.roles %}
+        <a href="{{ path('app_subscription') }}" class="btn btn-primary">
+            S’abonner pour accéder aux actions
+        </a>
+    {% endif %}
 
 </div>
