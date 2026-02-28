@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Abonnement annulé{% endblock %}
+
+{% block body %}   
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h1 class="fw-bold">Choisissez votre formule</h1>
+            <p class="text-muted">Des options simples, sans surprise.</p>
+        </div>
+
+        <div class="row justify-content-center g-4">
+            {% for plan in plans %}
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body d-flex flex-column">
+
+                            <h3 class="card-title text-center fw-bold mb-3">
+                                {{ plan.title }}
+                            </h3>
+
+                            <p class="text-center text-muted">
+                                {{ plan.description }}
+                            </p>
+
+                            <div class="text-center my-4">
+                                <span class="display-6 fw-bold">
+                                    {{ plan.price|number_format(2, ',', ' ') }} €
+                                </span>
+                                <div class="text-muted small">
+                                    pour {{ plan.duration }} jours
+                                </div>
+                            </div>
+
+                            {% if plan.features %}
+                                <ul class="list-unstyled mb-4">
+                                    {% for feature in plan.features %}
+                                        <li class="mb-2">
+                                            ✓ {{ feature }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+
+                            <div class="mt-auto text-center">
+                                <a href="{{ path('app_subscription_checkout', { slug: plan.slug }) }}"
+                                class="btn btn-primary w-100">
+                                    S'abonner
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

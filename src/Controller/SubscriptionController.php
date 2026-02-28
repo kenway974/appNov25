@@ -22,7 +22,8 @@ class SubscriptionController extends AbstractController
         $user = $this->getUser();
 
         // Récupère la souscription de l’utilisateur (si elle existe)
-        $subscription = $subscriptionRepository->findOneByUserId($user->getId());
+        //$subscription = $subscriptionRepository->findBy(['user' => $user]);
+        $subscription = $user->getSubscription();
 
         // Si l’utilisateur a un rôle subscriber → affiche la souscription
         if ($this->isGranted('ROLE_SUBSCRIBER') && $subscription) {
@@ -34,7 +35,7 @@ class SubscriptionController extends AbstractController
         // Sinon, affiche la liste des plans disponibles
         $plans = $planRepository->findAllActive();
 
-        return $this->render('subscription/choose_plan.html.twig', [
+        return $this->render('subscription/plan.html.twig', [
             'plans' => $plans,
         ]);
     }

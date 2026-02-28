@@ -40,6 +40,8 @@ final class DashboardController extends AbstractController
 
         // Traitement du formulaire d'ajout d'action
         if ($request->isMethod('POST') && $request->request->has('user_action')) {
+            
+            $data = $request->request->get('user_action', null) ?? [];
 
             // Vérification CSRF
             $submittedToken = $data['_token'] ?? '';
@@ -47,11 +49,9 @@ final class DashboardController extends AbstractController
                 throw $this->createAccessDeniedException('Token CSRF invalide.');
             }
 
-            $data = $request->request->get('user_action', null) ?? [];
-
             // Récupération des IDs passés en GET
-            $needId = $request->query->get('needId');
-            $actionId = $request->query->get('actionId');
+            $needId = $request->request->get('needId');
+            $actionId = $request->request->get('actionId');
 
             if ($needId && $actionId) {
                 // Récupère le UserNeed et l'Action correspondante
