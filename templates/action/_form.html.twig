@@ -1,71 +1,33 @@
 <form method="post" action="{{ path('app_dashboard') }}">
-    <!-- Liaison automatique avec les entités -->
-    <input type="hidden" name="action_id" value="{{ action.id }}">
-    <input type="hidden" name="user_need_id" value="{{ userNeed.id }}">
 
-    <!-- Date de début -->
+    <input type="hidden" name="needId" value="{{ userNeed.id }}">
+    <input type="hidden" name="actionId" value="{{ action.id }}">
+    <input type="hidden" name="user_action[_token]" value="{{ csrf_token('user_action') }}">
+
+
     <div class="mb-3">
-        <label for="startDate_{{ action.id }}" class="form-label">
-            Date de début
-        </label>
+        <label class="form-label">Date limite</label>
         <input type="date"
-               id="startDate_{{ action.id }}"
-               name="startDate"
+               name="user_action[deadline]"
                class="form-control"
                required>
     </div>
 
-    <!-- Date limite -->
-    <div class="mb-3">
-        <label for="deadline_{{ action.id }}" class="form-label">
-            Date limite
-        </label>
-        <input type="date"
-               id="deadline_{{ action.id }}"
-               name="deadline"
-               class="form-control">
-    </div>
+    {% if action.isRecurring == true %}
+        <div class="mb-3">
+            <label class="form-label">Fréquence (par semaine)</label>
+            <input type="number"
+                   name="user_action[frequency]"
+                   min="1"
+                   max="7"
+                   value="1"
+                   class="form-control">
+        </div>
+    {% endif %}
 
-    <!-- Fréquence -->
-    <div class="mb-3">
-        <label for="frequency_{{ action.id }}" class="form-label">
-            Fréquence (par semaine)
-        </label>
-        <input type="number"
-               id="frequency_{{ action.id }}"
-               name="frequency"
-               min="1"
-               max="7"
-               value="1"
-               class="form-control">
-    </div>
 
-    <!-- Récurrence -->
-    <div class="form-check mb-3">
-        <input class="form-check-input"
-               type="checkbox"
-               id="isRecurring_{{ action.id }}"
-               name="isRecurring"
-               value="1">
-        <label class="form-check-label" for="isRecurring_{{ action.id }}">
-            Cette action est récurrente
-        </label>
-    </div>
-
-    <!-- Statut -->
-    <div class="mb-3">
-        <label for="status_{{ action.id }}" class="form-label">
-            Statut initial
-        </label>
-        <select id="status_{{ action.id }}" name="status" class="form-select">
-            <option value="pending">À faire</option>
-            <option value="in_progress">En cours</option>
-            <option value="done">Terminée</option>
-        </select>
-    </div>
-
-    <!-- Bouton de validation -->
     <button type="submit" class="btn btn-primary w-100">
         Ajouter cette action à mon profil
     </button>
+
 </form>

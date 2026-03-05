@@ -38,10 +38,10 @@ final class DashboardController extends AbstractController
             return $this->redirectToRoute('app_dashboard');
         }
 
+        $data = $request->request->all('user_action');
+
         // Traitement du formulaire d'ajout d'action
-        if ($request->isMethod('POST') && $request->request->has('user_action')) {
-            
-            $data = $request->request->get('user_action', null) ?? [];
+        if ($request->isMethod('POST') && !empty($data)) {            
 
             // Vérification CSRF
             $submittedToken = $data['_token'] ?? '';

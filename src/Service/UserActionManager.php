@@ -24,34 +24,47 @@ class UserActionManager
     /**
      * Crée une nouvelle UserAction pour un utilisateur.
      */
-   public function create(User $user, UserAction $userAction, array $formData = []): void
+    public function create(User $user, UserAction $userAction, array $formData = []): void
     {
         $now = new DateTime();
 
-        // Associe l'action à l'utilisateur, set les champs de base
         $userAction->setUser($user);
         $userAction->setLastUpdate($now);
-        $userAction->setStatus("À faire");
 
-        // set StartDate depuis le form ou maintenant
-        if (isset($formData['startDate']) && $formData['startDate']) {
-            $userAction->setStartDate(new DateTime($formData['startDate']));
+        // Status (toujours défini)
+        $status = $formData['status'] ?? 'À faire';
+        $userAction->setStatus($status);
+
+        // Deadline (toujours défini)
+        if (!empty($formData['deadline'])) {
+            $deadline = new DateTime($formData['deadline']);
         } else {
-            $userAction->setStartDate($now);
+            $deadline = (clone $now);
         }
 
-        // Vérifie si l'action est récurrente
-        if ($userAction->getAction()->getIsRecurring()) {
-            // fréquence depuis form ou défaut
-            $frequency = isset($formData['frequency']) ? (int) $formData['frequency'] : 7;
+        $userAction->setDeadline($deadline);
+
+        // IsRecurring (toujours défini)
+        $isRecurring = $userAction->getAction()->isRecurring();
+        $userAction->setIsRecurring($isRecurring);
+
+        if ($isRecurring) {
+
+            // Frequency obligatoire si récurrent
+            $frequency = isset($formData['frequency']) 
+                ? (int) $formData['frequency'] 
+                : 1;
+
             $userAction->setFrequency($frequency);
-            $userAction->setDeadline((clone $userAction->getStartDate()));
+
+            // Pour une action récurrente :
+            // startDate = deadline
+            $userAction->setStartDate(clone $deadline);
+
         } else {
+
             // Action ponctuelle
-            $deadline = isset($formData['deadline']) && $formData['deadline']
-                ? new DateTime($formData['deadline'])
-                : ($now->modify('+1 day'));
-            $userAction->setDeadline($deadline);
+            $userAction->setFrequency(null);
         }
 
         $this->em->persist($userAction);

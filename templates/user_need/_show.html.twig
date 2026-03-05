@@ -19,7 +19,7 @@
 
 <div>
 
-    {% if app.user.subscription and app.user.subscription.isActive %}
+    {% if app.user.subscription.isActive == 1 %}
         <ul>
             {% for action in userNeed.need.actions %}
                 <li class="mb-3">
