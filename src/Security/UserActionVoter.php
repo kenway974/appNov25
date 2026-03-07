@@ -42,7 +42,7 @@ class UserActionVoter extends Voter
     private function canComplete(UserAction $userAction, User $user): bool
     {
         return $userAction->getUser() === $user
-            && $userAction->getStatus() === 'A faire';
+            && $userAction->getStatus() === 'À faire';
     }
 
     private function canView(UserAction $userAction, User $user): bool
