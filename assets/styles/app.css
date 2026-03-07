@@ -140,32 +140,70 @@ a:active {
 /* HOME */
 
  
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* prend toute la hauteur de l'écran */
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* remplit sans déformation */
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); /* assombrit légèrement */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    justify-content: center; /* centre horizontal */
+    align-items: center;     /* centre vertical */
+    text-align: center;
+    padding: 0 20px;
+    color: white;
+}
+
+.hero-text {
+    max-width: 700px;
+}
 
 .btn-cta {
-    padding: 0.75rem 2rem;
-    font-size: 1.2rem;
-    border-radius: 50px;
-    background: linear-gradient(90deg, #4f9cf9, #1d6df7);
-    color: white;
-    text-transform: uppercase;
-    font-weight: bold;
-    transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: 20px;
 }
-
-.btn-cta:hover {
-    background: linear-gradient(90deg, #1d6df7, #4f9cf9);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-}
-
 
 
     /* BENEFITS */
-#home-benefits {
+
+.benefits-section {
+    padding: 80px 20px;       /* espace haut et bas généreux */
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 30px;      /* espace sous le titre */
+}
+
+.section-intro {
+    max-width: 700px;         /* largeur confortable pour lire */
+    margin: 0 auto; 
+    margin-bottom: 3rem;        
+    line-height: 1.7;         /* respiration du texte */
+    font-size: 1.1rem;
 }
 
 .benefits-list {
@@ -253,90 +291,142 @@ a:active {
             }
         }
 
-    /* CTA */
-
-        /* Card du CTA */
-    .cta {
-    width: 90%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .cta:hover {
-        transform: scale(1.03);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-
-
-    .cta-card {
-        background: none; /* pour que l'image soit visible telle quelle */
-        border-radius: 20px;
-        padding: 0;
-        max-width: 400px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        overflow: hidden;
-        position: relative; /* nécessaire pour positionner le bouton */
-    }
-
-    .cta-img {
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: cover;
-    }
-
-    .cta-overlay-btn {
-        position: absolute;
-        bottom: 20px; /* distance depuis le bas de l'image */
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 0.75rem 2rem;
-        font-size: 1.2rem;
-        border-radius: 50px;
-        background: linear-gradient(90deg, #ff7e5f, #feb47b);
-        color: white;
-        font-weight: bold;
-        text-transform: uppercase;
-        transition: all 0.3s ease;
-    }
-
-    .cta-overlay-btn:hover {
-        background: linear-gradient(90deg, #feb47b, #ff7e5f);
-        transform: translateX(-50%) translateY(-3px);
-        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-    }
-
-    /* Bloc "en savoir plus" */
-    #home-en-savoir-plus {
-        padding: 30px;
-    }
-
-    #home-en-savoir-plus h3 {
-        font-size: 2rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-    }
-
-    #home-en-savoir-plus p {
-        font-size: 1.2rem;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-    /* Définitions */
-
-        .home-definition-container {
-    width: 100%;
-    display: flex;
-    justify-content: center; /* centre horizontalement */
-    align-items: center;     /* centre vertical si hauteur définie */
+/* Container général */
+#home-cta {
+  padding: 60px 15px;
+  background-color: #f9f9f9;
 }
 
-.home-definition-container img {
+/* Titre principal */
+#home-cta h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #222;
+}
+
+/* Cartes */
+#home-cta .card {
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+}
+
+/* Effet hover pour toutes les cartes */
+#home-cta .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre des cartes */
+#home-cta .card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #111;
+}
+
+/* Texte descriptif */
+#home-cta .card p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Boutons */
+#home-cta .btn {
+  font-weight: 600;
+  padding: 10px 25px;
+  border-radius: 50px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Effet hover sur bouton */
+#home-cta .btn:hover {
+  transform: translateY(-2px);
+}
+
+
+
+/* Images des cartes */
+#home-cta .card img {
+  max-width: 120px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+/* Responsive - mobile */
+@media (max-width: 767px) {
+  #home-cta .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #home-cta .col-md-5 {
+    max-width: 90%;
+  }
+}
+
+/* Liste des définitions */
+
+@media (max-width: 768px) {
+  #home-en-savoir-plus {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     max-width: 80%;
-    height: auto; /* garde le ratio */
+  }
 }
 
+.definition-list {
+  list-style: none;
+  padding: 0 1rem; /* padding horizontal pour ne pas toucher les bords */
+  margin: 0 auto;
+  max-width: 900px;
+}
 
+/* Items */
+.definition-item {
+  display: flex;
+  flex-direction: column; /* titre au-dessus du texte */
+  margin-bottom: 2.5rem;
+}
+
+/* Texte et titre */
+.definition-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.definition-text {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Alternance droite/gauche pour tous les écrans */
+.definition-item:nth-child(odd) {
+  align-items: flex-end; /* aligne l'item à droite */
+  text-align: right;
+}
+
+.definition-item:nth-child(even) {
+  align-items: flex-start; /* aligne l'item à gauche */
+  text-align: left;
+}
+
+/* Limiter la largeur pour conserver le zig-zag et éviter de toucher les bords */
+.definition-item > .definition-title,
+.definition-item > .definition-text {
+  max-width: 60%; /* sur mobile le texte reste à l'intérieur */
+}
+
+/* Sur desktop, on peut garder la largeur plus restreinte */
+@media (min-width: 768px) {
+  .definition-item > .definition-title,
+  .definition-item > .definition-text {
+    max-width: 45%;
+  }
+}  
 .grid div {
     display: flex;
     flex-direction: column;
