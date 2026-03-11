@@ -1,0 +1,59 @@
+/* === Dashboard minimaliste === */
+.dashboard-header,
+.dashboard-actions,
+.dashboard-needs {
+    margin: 2rem auto;           /* espace vertical entre sections */
+    max-width: 900px;            /* centrage et largeur limitée */
+    padding: 1rem;               /* respiration interne */
+    background-color: #1a1a1a;  /* léger contraste sur fond général */
+    border-radius: 6px;          /* arrondi discret */
+}
+
+.dashboard-header img.rounded-circle {
+    display: block;
+    margin: 0 auto 1rem;         /* centré + marge dessous */
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.dashboard-header h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.dashboard-header button,
+.dashboard-actions .btn,
+.dashboard-needs .btn {
+    display: inline-block;
+    margin: 0.5rem auto;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ffffff33;
+    background-color: #ffffff11;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dashboard-header button:hover,
+.dashboard-actions .btn:hover,
+.dashboard-needs .btn:hover {
+    background-color: #ffffff22;
+}
+
+.dashboard-actions h2,
+.dashboard-needs h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.dashboard-needs p {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.mobile-user-needs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* espace entre besoins */
+}

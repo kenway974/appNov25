@@ -1,0 +1,293 @@
+   
+/* HOME */
+
+ 
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* prend toute la hauteur de l'écran */
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* remplit sans déformation */
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); /* assombrit légèrement */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    justify-content: center; /* centre horizontal */
+    align-items: center;     /* centre vertical */
+    text-align: center;
+    padding: 0 20px;
+    color: white;
+}
+
+.hero-text {
+    max-width: 700px;
+}
+
+.btn-cta {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+
+    /* BENEFITS */
+
+.benefits-section {
+    padding: 80px 20px;       /* espace haut et bas généreux */
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 30px;      /* espace sous le titre */
+}
+
+.section-intro {
+    max-width: 700px;         /* largeur confortable pour lire */
+    margin: 0 auto; 
+    margin-bottom: 3rem;        
+    line-height: 1.7;         /* respiration du texte */
+    font-size: 1.1rem;
+}
+
+.benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 0;
+    width: 100%;
+}
+
+.benefits-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateX(0);
+    padding: 20px;
+}
+
+.benefits-text {
+    width: 80%; 
+    font-weight: 300;
+    font-size: 1.4rem;
+}
+
+.benefits-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 1.5rem;
+}
+
+.benefits-item:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+    .benefits-list {
+        flex-direction: row;   
+        flex-wrap: wrap;         
+        justify-content: center; 
+        gap: 2rem;             
+    }
+
+    .benefits-item {
+        flex: 1 1 calc(33% - 2rem); 
+        max-width: 300px;        
+    }
+
+    .benefits-text {
+        width: 100%; 
+    }
+}
+
+
+        /* Animations */
+        .slide-right {
+            animation: slideRight 0.8s forwards;
+        }
+
+        .slide-left {
+            animation: slideLeft 0.8s forwards;
+        }
+
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+/* Container général */
+#home-cta {
+  padding: 60px 15px;
+  background-color: #f9f9f9;
+}
+
+/* Titre principal */
+#home-cta h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #222;
+}
+
+/* Cartes */
+#home-cta .card {
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+}
+
+/* Effet hover pour toutes les cartes */
+#home-cta .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre des cartes */
+#home-cta .card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #111;
+}
+
+/* Texte descriptif */
+#home-cta .card p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Boutons */
+#home-cta .btn {
+  font-weight: 600;
+  padding: 10px 25px;
+  border-radius: 50px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Effet hover sur bouton */
+#home-cta .btn:hover {
+  transform: translateY(-2px);
+}
+
+
+
+/* Images des cartes */
+#home-cta .card img {
+  max-width: 120px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+/* Responsive - mobile */
+@media (max-width: 767px) {
+  #home-cta .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #home-cta .col-md-5 {
+    max-width: 90%;
+  }
+}
+
+/* Liste des définitions */
+
+@media (max-width: 768px) {
+  #home-en-savoir-plus {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    max-width: 80%;
+  }
+}
+
+.definition-list {
+  list-style: none;
+  padding: 0 1rem; /* padding horizontal pour ne pas toucher les bords */
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+/* Items */
+.definition-item {
+  display: flex;
+  flex-direction: column; /* titre au-dessus du texte */
+  margin-bottom: 2.5rem;
+}
+
+/* Texte et titre */
+.definition-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.definition-text {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Alternance droite/gauche pour tous les écrans */
+.definition-item:nth-child(odd) {
+  align-items: flex-end; /* aligne l'item à droite */
+  text-align: right;
+}
+
+.definition-item:nth-child(even) {
+  align-items: flex-start; /* aligne l'item à gauche */
+  text-align: left;
+}
+
+/* Limiter la largeur pour conserver le zig-zag et éviter de toucher les bords */
+.definition-item > .definition-title,
+.definition-item > .definition-text {
+  max-width: 60%; /* sur mobile le texte reste à l'intérieur */
+}
+
+/* Sur desktop, on peut garder la largeur plus restreinte */
+@media (min-width: 768px) {
+  .definition-item > .definition-title,
+  .definition-item > .definition-text {
+    max-width: 45%;
+  }
+}  

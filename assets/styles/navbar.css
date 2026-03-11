@@ -1,0 +1,153 @@
+/* =========================
+   BASE NAVBAR (MOBILE FIRST)
+   ========================= */
+
+.custom-navbar {
+    position: sticky;  /* garde la navbar visible */
+    top: 0;            /* distance depuis le haut */
+    z-index: 9999;
+    background: #039e00;
+    transition: top 0.3s ease;
+}
+
+.navbar-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 56px;
+}
+
+/* ZONES LATÉRALES */
+.navbar-left,
+.navbar-right {
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+
+/* Burger à gauche */
+.navbar-left {
+    justify-content: flex-start;
+}
+
+/* Login / Dashboard à droite */
+.navbar-right {
+    margin-left: auto;
+    justify-content: flex-end;
+}
+
+/* =========================
+   LOGO CENTRÉ (MOBILE)
+   ========================= */
+
+.navbar-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+/* =========================
+   MENU DESKTOP (CACHÉ MOBILE)
+   ========================= */
+
+.navbar-menu-desktop {
+    display: none;
+}
+
+.navbar-menu-desktop .menu-link {
+    font-family: 'Montserrat', sans-serif;
+    color: #FFFFFF; /* blanc */
+    text-decoration: none;
+    padding: 8px 12px;
+    transition: color 0.3s ease;
+}
+
+.navbar-menu-desktop .menu-link:hover {
+    color: #F6BC4D; /* accent Ecoride au hover */
+}
+
+/* =========================
+   BOUTONS
+   ========================= 
+   */
+
+.burger-btn,
+.login-btn,
+.dashboard-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: white;
+    text-decoration: none;
+}
+/* Offcanvas largeur mobile */
+#offcanvasMenu {
+    position: fixed;
+    width: 70%;
+    z-index: 1050;
+}
+
+/* =========================
+   DESKTOP (≥ 769px)
+   ========================= */
+
+@media (min-width: 769px) {
+
+    .navbar-container {
+        height: auto;
+    }
+
+    /* Logo revient à gauche */
+    .navbar-center {
+        position: static;
+        transform: none;
+        margin-left: 1rem;
+    }
+
+    /* Burger disparaît */
+    .burger-btn {
+        display: none;
+    }
+
+    /* Menu desktop centré */
+    .navbar-menu-desktop {
+        display: flex;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        gap: 2rem;
+        align-items: center;
+    }
+}
+
+/* Liens dropdown */
+.dropdown-item {
+    font-family: 'Montserrat', sans-serif;
+    color: #FFFFFF; /* blanc par défaut */
+    text-decoration: none;
+    padding: 8px 12px;
+    display: block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Survol */
+.dropdown-item:hover {
+    background-color: #004AAD; /* fond bleu Ecoride */
+    color: #FFFD62; /* texte jaune clair */
+}
+
+/* Séparateur */
+.dropdown-item + hr {
+    border-color: #E8EEF0;
+}
+
+/* Styles spécifiques pour liens de déconnexion / connexion */
+.dropdown-item.text-danger {
+    color: #FF0000; /* rouge pour danger */
+}
+
+.dropdown-item.text-primary {
+    color: #004AAD; /* bleu principal */
+}
