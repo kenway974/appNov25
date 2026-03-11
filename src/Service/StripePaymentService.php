@@ -9,20 +9,15 @@ class StripePaymentService
         private StripeService $stripeService
     ) {}
 
-    public function createCheckoutSession(float $amount, string $successUrl, string $cancelUrl): Session
+    public function createCheckoutSession(string $priceId, string $successUrl, string $cancelUrl): Session
     {
         $client = $this->stripeService->client();
-        $amountInCents = (int) ($amount * 100);
 
         return $client->checkout->sessions->create([
-            'mode' => 'payment',
+            'mode' => 'subscription',
             'payment_method_types' => ['card'],
             'line_items' => [[
-                'price_data' => [
-                    'currency' => 'eur',
-                    'product_data' => ['name' => 'Paiement Abonnement Premium'],
-                    'unit_amount' => $amountInCents,
-                ],
+                'price' => $priceId,
                 'quantity' => 1,
             ]],
             'success_url' => $successUrl,

@@ -31,7 +31,7 @@ class Plan
     #[ORM\Column]
     private ?int $duration = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    #[ORM\Column(type: Types::JSON, nullable: true)]
     private ?array $features = null;
 
     #[ORM\Column(length: 255, nullable: true)]

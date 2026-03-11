@@ -50,7 +50,8 @@ class Subscription
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\OneToOne(mappedBy: 'subscription', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: User::class, inversedBy: 'subscription', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id", nullable: true, onDelete: "SET NULL")]
     private ?User $user = null;
 
     public function getId(): ?int
@@ -207,17 +208,20 @@ class Subscription
 
     public function setUser(?User $user): static
     {
-        // unset the owning side of the relation if necessary
-        if ($user === null && $this->user !== null) {
-            $this->user->setSubscription(null);
+        if ($this->user === $user) return $this; // stop recursion
+
+        if ($this->user !== null) {
+            $oldUser = $this->user;
+            $this->user = null;
+            $oldUser->setSubscription(null);
         }
 
-        // set the owning side of the relation if necessary
-        if ($user !== null && $user->getSubscription() !== $this) {
-            $user->setSubscription($this);
+        if ($user !== null) {
+            $this->user = $user;
+            if ($user->getSubscription() !== $this) {
+                $user->setSubscription($this);
+            }
         }
-
-        $this->user = $user;
 
         return $this;
     }

@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Repository\PlanRepository;
 use App\Service\StripePaymentService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,8 +17,8 @@ class StripeController extends AbstractController
 {
     public function __construct(private StripePaymentService $stripePaymentService) {}
 
-    #[Route('/create-checkout-session/{planId}', name:'app_create_checkout_session', methods: ['POST'])]
-    public function createCheckoutSession(int $planId, PlanRepository $planRepository, Request $request): JsonResponse
+    #[Route('/create-checkout-session', name:'app_create_checkout_session', methods: ['POST'])]
+    public function createCheckoutSession(PlanRepository $planRepository, Request $request): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -25,22 +26,34 @@ class StripeController extends AbstractController
             return $this->json(['error' => 'Unauthorized'], 401);
         }
 
+        $planId = $request->request->get('planId');
+
         $plan = $planRepository->find($planId);
-        if (!$plan || !$plan->getStripePriceId()) {
-            return $this->json(['error' => 'Plan not found or no stripe price configured'], 404);
+
+        if (!$plan) {
+            return $this->json(['error' => 'Plan not found'], 404);
         }
 
-        $successUrl = $this->generateUrl('app_subscription_success', [], true) . '?session_id={CHECKOUT_SESSION_ID}';
-        $cancelUrl  = $this->generateUrl('app_subscription_cancel', [], true);
+        $successUrl = $this->generateUrl(
+            'app_subscription_success',
+            [],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        ) . '?session_id={CHECKOUT_SESSION_ID}';
 
-        // Appel du service pour créer la session
+        $cancelUrl = $this->generateUrl(
+            'app_subscription_cancel',
+            [],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        $priceId = $plan->getStripePriceId();
         $session = $this->stripePaymentService->createCheckoutSession(
-            (float)$plan->getPrice(), // si tu as un champ price pour paiement unique
+            $priceId,
             $successUrl,
             $cancelUrl
         );
 
-        return $this->json(['id' => $session->id]);
+        return $this->redirect($session->url);
     }
 
     #[Route('/subscription/success', name:'app_subscription_success', methods:['GET'])]

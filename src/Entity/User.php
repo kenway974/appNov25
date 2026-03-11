@@ -103,7 +103,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $stripeCustomerId = null;
 
-    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Subscription::class)]
     private ?Subscription $subscription = null;
 
     public function __construct()
@@ -145,16 +145,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        
+
         if (!in_array('ROLE_USER', $roles)) {
             $roles[] = 'ROLE_USER';
-        }
-
-        //if ($this->isSubscriberActive() && !in_array('ROLE_SUBSCRIBER', $roles)) {
-        //    $roles[] = 'ROLE_SUBSCRIBER';
-        //}
-        if (!in_array('ROLE_SUBSCRIBER', $roles)) {
-            $roles[] = 'ROLE_SUBSCRIBER';
         }
 
         return array_unique($roles);
@@ -364,15 +357,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setSubscription(?Subscription $subscription): static
     {
-        if ($subscription === null && $this->subscription !== null) {
-            $this->subscription->setUser(null);
+        if ($this->subscription === $subscription) return $this; // stop recursion
+
+        if ($this->subscription !== null) {
+            $oldSub = $this->subscription;
+            $this->subscription = null;
+            $oldSub->setUser(null);
         }
 
-        if ($subscription !== null && $subscription->getUser() !== $this) {
-            $subscription->setUser($this);
+        if ($subscription !== null) {
+            $this->subscription = $subscription;
+            if ($subscription->getUser() !== $this) {
+                $subscription->setUser($this);
+            }
         }
-
-        $this->subscription = $subscription;
 
         return $this;
     }

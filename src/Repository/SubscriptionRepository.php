@@ -33,4 +33,30 @@ class SubscriptionRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Récupère la subscription d'un utilisateur à partir de son email
+     */
+    public function findOneByUserEmail(string $email): ?Subscription
+    {
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.user', 'u')
+            ->andWhere('u.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * Récupère la subscription d'un utilisateur à partir de l'entité User
+     */
+    public function findOneByUser($user): ?Subscription
+    {
+        return $this->createQueryBuilder('s')
+        ->join('s.user', 'u')        // jointure explicite sur l'utilisateur
+        ->andWhere('u = :user')      // on filtre sur l'utilisateur
+        ->setParameter('user', $user)
+        ->getQuery()
+        ->getOneOrNullResult();
+    }
 }
