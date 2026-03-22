@@ -1,51 +1,181 @@
 [
   {
+    "title": "Je me sens vide",
+    "description": "J’ai l’impression de ne rien ressentir ou d’être déconnecté(e).",
+    "triggers": ["isolement", "perte de sens"],
+    "emotion": "Tristesse",
+    "color": "#aed6f1"
+  },
+  {
+    "title": "Je me sens seul(e)",
+    "description": "Même entouré(e), je ressens de la solitude.",
+    "triggers": ["manque de soutien", "distance sociale"],
+    "emotion": "Tristesse",
+    "color": "#aed6f1"
+  },
+  {
+    "title": "Je n’ai plus envie de rien",
+    "description": "Les choses que j’aimais ne m’intéressent plus.",
+    "triggers": ["fatigue émotionnelle", "routine"],
+    "emotion": "Tristesse",
+    "color": "#aed6f1"
+  },
+  {
+    "title": "Je ressens un manque",
+    "description": "Quelque chose ou quelqu’un me manque profondément.",
+    "triggers": ["souvenirs", "absence"],
+    "emotion": "Tristesse",
+    "color": "#aed6f1"
+  },
+  {
+    "title": "Je me sens inutile",
+    "description": "J’ai l’impression de ne pas servir à grand-chose.",
+    "triggers": ["échec", "comparaison"],
+    "emotion": "Tristesse",
+    "color": "#aed6f1"
+  },
+
+  {
+    "title": "Je suis irrité(e)",
+    "description": "Tout m’agace plus facilement que d’habitude.",
+    "triggers": ["fatigue", "frustration"],
+    "emotion": "Colère",
+    "color": "#f1948a"
+  },
+  {
+    "title": "Je me sens en colère",
+    "description": "Une forte énergie négative monte en moi.",
+    "triggers": ["injustice", "conflit"],
+    "emotion": "Colère",
+    "color": "#f1948a"
+  },
+  {
+    "title": "Je bouillonne intérieurement",
+    "description": "Je retiens quelque chose qui pourrait exploser.",
+    "triggers": ["accumulation", "non-dit"],
+    "emotion": "Colère",
+    "color": "#f1948a"
+  },
+  {
+    "title": "Je suis frustré(e)",
+    "description": "Je n’arrive pas à obtenir ce que je veux.",
+    "triggers": ["blocage", "échec"],
+    "emotion": "Colère",
+    "color": "#f1948a"
+  },
+  {
+    "title": "Je me sens agressif(ve)",
+    "description": "J’ai envie de réagir de manière dure ou brusque.",
+    "triggers": ["provocation", "stress"],
+    "emotion": "Colère",
+    "color": "#f1948a"
+  },
+
+  {
     "title": "Je redoute le regard des autres",
-    "description": "Je me sens observé(e) et jugé(e), ce qui augmente ma tension intérieure.",
-    "triggers": ["rencontre sociale", "prise de parole", "exposition publique"],
-    "emotion": "Tensions / appréhensions",
+    "description": "Je me sens observé(e) et jugé(e).",
+    "triggers": ["rencontre sociale", "prise de parole"],
+    "emotion": "Anxiété",
     "color": "#f5b7b1"
   },
   {
     "title": "Je me sens jugé(e)",
     "description": "J’ai peur de ce que les autres pensent de moi.",
-    "triggers": ["conversation difficile", "critique perçue"],
-    "emotion": "Tensions / appréhensions",
+    "triggers": ["critique", "conversation difficile"],
+    "emotion": "Anxiété",
     "color": "#f5b7b1"
+  },
+  {
+    "title": "Je m’inquiète pour le futur",
+    "description": "Je pense à tout ce qui pourrait mal se passer.",
+    "triggers": ["incertitude", "changement"],
+    "emotion": "Anxiété",
+    "color": "#f5b7b1"
+  },
+  {
+    "title": "Je suis tendu(e)",
+    "description": "Mon corps est crispé sans raison claire.",
+    "triggers": ["anticipation", "pression"],
+    "emotion": "Anxiété",
+    "color": "#f5b7b1"
+  },
+  {
+    "title": "J’ai peur de faire une erreur",
+    "description": "Je doute constamment de mes actions.",
+    "triggers": ["responsabilités", "perfectionnisme"],
+    "emotion": "Anxiété",
+    "color": "#f5b7b1"
+  },
+
+  {
+    "title": "Je me sens dépassé(e)",
+    "description": "Je ne sais plus par où commencer.",
+    "triggers": ["surcharge", "deadlines"],
+    "emotion": "Stress",
+    "color": "#f9e79f"
   },
   {
     "title": "J’ai peur d’oublier quelque chose",
     "description": "Je redoute d’avoir oublié un détail important.",
-    "triggers": ["travail", "organisation", "responsabilités"],
-    "emotion": "Inquiétudes / stress",
+    "triggers": ["organisation", "responsabilités"],
+    "emotion": "Stress",
     "color": "#f9e79f"
   },
   {
-    "title": "Je me sens dépassé(e) par tout ce que j’ai à faire",
-    "description": "Je ne sais plus par où commencer.",
-    "triggers": ["surcharge", "deadlines", "manque de repos"],
-    "emotion": "Inquiétudes / stress",
+    "title": "Je suis sous pression",
+    "description": "Je ressens une forte exigence extérieure ou intérieure.",
+    "triggers": ["travail", "attentes"],
+    "emotion": "Stress",
     "color": "#f9e79f"
   },
   {
-    "title": "Je me sens vide ou inutile",
-    "description": "Je n’arrive pas à me sentir utile ou motivé(e).",
-    "triggers": ["perte de sens", "isolement"],
-    "emotion": "Malaise intérieur",
-    "color": "#aed6f1"
+    "title": "Je n’arrive pas à me poser",
+    "description": "Mon esprit est toujours en activité.",
+    "triggers": ["charge mentale", "manque de repos"],
+    "emotion": "Stress",
+    "color": "#f9e79f"
   },
   {
-    "title": "J’ai la mâchoire serrée",
-    "description": "Mon corps exprime la colère contenue.",
-    "triggers": ["injustice", "frustration"],
-    "emotion": "Colère / irritation",
-    "color": "#f1948a"
+    "title": "Je me sens débordé(e)",
+    "description": "Tout s’accumule et devient difficile à gérer.",
+    "triggers": ["tâches multiples", "fatigue"],
+    "emotion": "Stress",
+    "color": "#f9e79f"
+  },
+
+  {
+    "title": "Je m’isole",
+    "description": "Je m’éloigne des autres sans forcément le vouloir.",
+    "triggers": ["tristesse", "fatigue"],
+    "emotion": "Comportement",
+    "color": "#d6dbdf"
   },
   {
-    "title": "J’ai la tête lourde",
-    "description": "Mon corps réclame du repos.",
-    "triggers": ["manque de sommeil", "stress accumulé"],
-    "emotion": "Fatigue / surcharge",
+    "title": "Je procrastine",
+    "description": "Je repousse ce que je dois faire.",
+    "triggers": ["peur", "manque de motivation"],
+    "emotion": "Comportement",
+    "color": "#d6dbdf"
+  },
+  {
+    "title": "Je mange sans faim",
+    "description": "Je mange pour compenser une émotion.",
+    "triggers": ["ennui", "stress"],
+    "emotion": "Comportement",
+    "color": "#d6dbdf"
+  },
+  {
+    "title": "Je m’énerve rapidement",
+    "description": "Mes réactions sont plus fortes que d’habitude.",
+    "triggers": ["fatigue", "frustration"],
+    "emotion": "Comportement",
+    "color": "#d6dbdf"
+  },
+  {
+    "title": "Je me disperse",
+    "description": "Je commence plein de choses sans finir.",
+    "triggers": ["stress", "manque de clarté"],
+    "emotion": "Comportement",
     "color": "#d6dbdf"
   }
 ]

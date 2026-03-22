@@ -1,82 +1,165 @@
 [
-    {
-        "title": "Je suis trop timide",
-        "description": "Difficulté à interagir avec les autres par peur du jugement.",
-        "type": "social",
-        "beliefs": ["Je ne suis pas intéressant", "Les autres vont me juger"],
-        "reframings": ["Je peux m'exprimer petit à petit", "Les autres sont souvent bienveillants"],
-        "icon": "shyness.png"
-    },
-    {
-        "title": "Je suis trop fatigué",
-        "description": "Manque d'énergie pour réaliser les actions importantes.",
-        "type": "physique",
-        "beliefs": ["Je n'y arriverai pas", "Je dois tout faire malgré tout"],
-        "reframings": ["Mon corps a besoin de repos", "Je peux déléguer ou reporter certaines tâches"],
-        "icon": "fatigue.png"
-    },
-    {
-        "title": "Je doute de moi",
-        "description": "Incertitude et manque de confiance dans mes capacités.",
-        "type": "émotionnel",
-        "beliefs": ["Je ne suis pas capable", "Je vais échouer"],
-        "reframings": ["J'ai déjà réussi avant", "Je peux apprendre de mes erreurs"],
-        "icon": "self_doubt.png"
-    },
-    {
-        "title": "J'ai peur de mal faire",
-        "description": "Anxiété à l'idée de prendre une mauvaise décision ou d'agir incorrectement.",
-        "type": "cognitif",
-        "beliefs": ["Si je fais mal, ça sera catastrophique", "Je dois être parfait"],
-        "reframings": ["Je peux ajuster en cours de route", "L'erreur est une opportunité d'apprentissage"],
-        "icon": "fear.png"
-    },
-    {
-        "title": "Je me compare aux autres",
-        "description": "Sentiment d'infériorité ou de frustration par rapport aux autres.",
-        "type": "social",
-        "beliefs": ["Les autres sont meilleurs que moi", "Je ne suis jamais assez bien"],
-        "reframings": ["Chacun avance à son rythme", "Je peux me concentrer sur mes progrès"],
-        "icon": "comparison.png"
-    },
-    {
-        "title": "Je manque de sommeil",
-        "description": "Mon corps et mon esprit n’ont pas le repos nécessaire pour fonctionner efficacement.",
-        "type": "physique",
-        "beliefs": ["Je n’ai pas le temps de dormir", "Je dois rester productif coûte que coûte"],
-        "reframings": ["Le repos est une partie essentielle de ma performance", "Dormir m’aide à être plus clair et plus efficace"],
-        "icon": "sleep.png"
-    },
-    {
-        "title": "Je me sens dépassé",
-        "description": "Trop de choses à gérer en même temps, impression d’être submergé.",
-        "type": "émotionnel",
-        "beliefs": ["Je dois tout faire seul", "Je n’ai pas le droit de ralentir"],
-        "reframings": ["Je peux demander de l’aide", "Faire une chose à la fois me permet d’avancer plus sûrement"],
-        "icon": "overwhelmed.png"
-    },
-    {
-        "title": "Je perds ma concentration",
-        "description": "Difficulté à rester focalisé sur une tâche sans se disperser.",
-        "type": "cognitif",
-        "beliefs": ["Je ne peux pas me concentrer", "Je suis nul pour rester attentif"],
-        "reframings": ["Je peux améliorer ma concentration avec des pauses", "Je peux m’organiser par petites étapes"],
-        "icon": "focus.png"
-    },
-    {
-        "title": "Je redoute le conflit",
-        "description": "Je préfère éviter les discussions difficiles ou les désaccords.",
-        "type": "social",
-        "beliefs": ["Le conflit détruit les relations", "Je vais blesser l’autre si je m’affirme"],
-        "reframings": ["Le dialogue peut renforcer la relation", "Je peux m’exprimer calmement et avec respect"],
-        "icon": "conflict.png"
-    },
-    {
-        "title": "Je me sens vidé émotionnellement",
-        "description": "Je n’ai plus d’énergie pour ressentir ou m’impliquer émotionnellement.",
-        "type": "émotionnel",
-        "beliefs": ["Je dois rester fort", "Je n’ai pas le droit d’être vulnérable"],
-        "reframings": ["Je peux me recharger en prenant soin de moi", "Accepter mes émotions est une forme de force"],
-        "icon": "emotional_drain.png"
-    }
+  {
+    "title": "Je suis trop fatigué",
+    "description": "Manque d'énergie pour réaliser les actions importantes.",
+    "type": "Physique",
+    "beliefs": ["Je n'y arriverai pas", "Je dois continuer malgré tout"],
+    "reframings": ["Mon corps a besoin de repos", "Me reposer me rendra plus efficace"],
+    "icon": "fatigue.png"
+  },
+  {
+    "title": "Je manque de sommeil",
+    "description": "Je ne dors pas assez pour être en forme.",
+    "type": "Physique",
+    "beliefs": ["Dormir est une perte de temps", "Je peux compenser autrement"],
+    "reframings": ["Le sommeil est essentiel", "Bien dormir améliore mes performances"],
+    "icon": "sleep.png"
+  },
+  {
+    "title": "Je me sens sans énergie",
+    "description": "Difficulté à me mettre en mouvement.",
+    "type": "Physique",
+    "beliefs": ["Je suis trop fatigué pour commencer", "Ça ne sert à rien d’essayer"],
+    "reframings": ["Commencer petit peut relancer mon énergie", "L’action crée l’énergie"],
+    "icon": "low_energy.png"
+  },
+  {
+    "title": "Je néglige mon corps",
+    "description": "Je ne prends pas soin de mes besoins physiques.",
+    "type": "Physique",
+    "beliefs": ["Ce n’est pas une priorité", "Je peux attendre"],
+    "reframings": ["Prendre soin de mon corps est essentiel", "Mon bien-être impacte tout le reste"],
+    "icon": "body_care.png"
+  },
+  {
+    "title": "Je suis tendu physiquement",
+    "description": "Mon corps est crispé et sous tension.",
+    "type": "Physique",
+    "beliefs": ["Je dois rester comme ça pour avancer", "Je ne peux pas me relâcher"],
+    "reframings": ["Relâcher mon corps m’aide à mieux penser", "La détente améliore mes performances"],
+    "icon": "tension.png"
+  },
+
+  {
+    "title": "Je doute de moi",
+    "description": "Manque de confiance dans mes capacités.",
+    "type": "Émotionnel",
+    "beliefs": ["Je ne suis pas capable", "Je vais échouer"],
+    "reframings": ["J’ai déjà réussi", "Je peux apprendre en avançant"],
+    "icon": "self_doubt.png"
+  },
+  {
+    "title": "Je me sens dépassé",
+    "description": "Trop d’émotions ou de choses à gérer.",
+    "type": "Émotionnel",
+    "beliefs": ["Je dois tout gérer", "Je ne peux pas ralentir"],
+    "reframings": ["Je peux faire une chose à la fois", "Ralentir m’aide à avancer"],
+    "icon": "overwhelmed.png"
+  },
+  {
+    "title": "Je me sens vide",
+    "description": "Manque d’émotions ou de motivation.",
+    "type": "Émotionnel",
+    "beliefs": ["Rien ne m’intéresse", "Ça ne sert à rien"],
+    "reframings": ["Ce sentiment est temporaire", "Je peux retrouver du sens petit à petit"],
+    "icon": "empty.png"
+  },
+  {
+    "title": "Je refoule mes émotions",
+    "description": "Je n’exprime pas ce que je ressens.",
+    "type": "Émotionnel",
+    "beliefs": ["Je dois rester fort", "Exprimer mes émotions est une faiblesse"],
+    "reframings": ["Exprimer mes émotions est sain", "C’est une forme de courage"],
+    "icon": "suppression.png"
+  },
+  {
+    "title": "Je me sens submergé émotionnellement",
+    "description": "Mes émotions prennent toute la place.",
+    "type": "Émotionnel",
+    "beliefs": ["Je perds le contrôle", "Je ne peux rien faire"],
+    "reframings": ["Les émotions passent", "Je peux apprendre à les réguler"],
+    "icon": "emotions.png"
+  },
+
+  {
+    "title": "J'ai peur de mal faire",
+    "description": "Peur de faire une erreur ou de mal agir.",
+    "type": "Mental",
+    "beliefs": ["Je dois être parfait", "L’erreur est grave"],
+    "reframings": ["Je peux apprendre de mes erreurs", "Progresser est plus important que réussir"],
+    "icon": "fear.png"
+  },
+  {
+    "title": "Je perds ma concentration",
+    "description": "Difficulté à rester focalisé.",
+    "type": "Mental",
+    "beliefs": ["Je ne suis pas capable de me concentrer", "Je suis nul"],
+    "reframings": ["Je peux m’améliorer", "Je peux avancer par petites étapes"],
+    "icon": "focus.png"
+  },
+  {
+    "title": "Je réfléchis trop",
+    "description": "Je suis bloqué dans mes pensées.",
+    "type": "Mental",
+    "beliefs": ["Je dois tout analyser", "Je dois être sûr avant d’agir"],
+    "reframings": ["Agir m’apportera des réponses", "Je peux tester et ajuster"],
+    "icon": "overthinking.png"
+  },
+  {
+    "title": "Je manque de clarté",
+    "description": "Je ne sais pas quoi faire ou décider.",
+    "type": "Mental",
+    "beliefs": ["Je suis perdu", "Je ne saurai jamais"],
+    "reframings": ["Je peux clarifier étape par étape", "Commencer aide à voir plus clair"],
+    "icon": "clarity.png"
+  },
+  {
+    "title": "Je procrastine",
+    "description": "Je repousse ce que je dois faire.",
+    "type": "Mental",
+    "beliefs": ["Je le ferai plus tard", "Ce n’est pas le bon moment"],
+    "reframings": ["Commencer petit suffit", "L’action réduit la pression"],
+    "icon": "procrastination.png"
+  },
+
+  {
+    "title": "Je suis trop timide",
+    "description": "Difficulté à interagir avec les autres.",
+    "type": "Relationnel",
+    "beliefs": ["Je ne suis pas intéressant", "Les autres vont me juger"],
+    "reframings": ["Je peux y aller progressivement", "Les autres sont souvent bienveillants"],
+    "icon": "shyness.png"
+  },
+  {
+    "title": "Je me compare aux autres",
+    "description": "Je me sens inférieur aux autres.",
+    "type": "Relationnel",
+    "beliefs": ["Les autres sont meilleurs", "Je ne suis pas assez bien"],
+    "reframings": ["Chacun a son parcours", "Je peux me concentrer sur moi"],
+    "icon": "comparison.png"
+  },
+  {
+    "title": "Je redoute le conflit",
+    "description": "J’évite les désaccords.",
+    "type": "Relationnel",
+    "beliefs": ["Le conflit est mauvais", "Je vais blesser l’autre"],
+    "reframings": ["Le dialogue est sain", "Je peux m’exprimer calmement"],
+    "icon": "conflict.png"
+  },
+  {
+    "title": "J’ai peur du rejet",
+    "description": "Je crains de ne pas être accepté.",
+    "type": "Relationnel",
+    "beliefs": ["On va me rejeter", "Je ne suis pas aimable"],
+    "reframings": ["Je ne peux pas plaire à tout le monde", "Ma valeur ne dépend pas des autres"],
+    "icon": "rejection.png"
+  },
+  {
+    "title": "J’ai du mal à m’affirmer",
+    "description": "Je n’ose pas dire ce que je pense.",
+    "type": "Relationnel",
+    "beliefs": ["Je dois faire plaisir", "Mon avis n’est pas important"],
+    "reframings": ["Mon avis compte", "Je peux m’exprimer avec respect"],
+    "icon": "assertiveness.png"
+  }
 ]

@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Version gratuite",
+    "description": "Comprends tes émotions et identifie tes besoins pour mieux te connaître.",
+    "slug": "version-gratuite",
+    "price": 0,
+    "duration": 1,
+    "features": ["Accès aux feelings", "Accès aux besoins"],
+    "stripeProductId": null,
+    "stripePriceId": null,
+    "createdAt": "2026-03-11T00:00:00+00:00",
+    "updatedAt": "2026-03-11T00:00:00+00:00"
+  },
+  {
+    "title": "Version premium",
+    "description": "Bénéficie d'actions concrètes à mener et suis efficacement tes besoins pour progresser au quotidien.",
+    "slug": "version-premium",
+    "price": 4.99,
+    "duration": 1,
+    "features": ["Accès complet aux feelings", "Accès complet aux besoins", "Actions guidées", "Suivi mensuel"],
+    "stripeProductId": "prod_XXXXX",
+    "stripePriceId": "price_XXXXX",
+    "createdAt": "2026-03-11T00:00:00+00:00",
+    "updatedAt": "2026-03-11T00:00:00+00:00"
+  }
+]

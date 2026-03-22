@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
+use App\Entity\Plan;
 use App\Entity\Feeling;
 use App\Entity\Need;
 use App\Entity\Action;
@@ -29,6 +30,7 @@ class JsonFixturesLoader extends Fixture implements FixtureGroupInterface
         // Mapping entités et repositories
         // -----------------------------
         $entityMap = [
+            'Plan'    => Plan::class,
             'Feeling' => Feeling::class,
             'Need'    => Need::class,
             'Action'  => Action::class,
@@ -44,7 +46,7 @@ class JsonFixturesLoader extends Fixture implements FixtureGroupInterface
         // -----------------------------
         // Chargement des entités depuis JSON
         // -----------------------------
-        $this->loadEntitiesFromFiles($repo, $path, ['feelings', 'needs', 'actions', 'blocks', 'users']);
+        $this->loadEntitiesFromFiles($repo, $path, ['plans', 'feelings', 'needs', 'actions', 'blocks', 'users']);
 
         $this->em->flush();
         echo "[🚀] Toutes les entités et ont été importées avec succès.\n";
@@ -89,6 +91,8 @@ class JsonFixturesLoader extends Fixture implements FixtureGroupInterface
                 foreach ($item as $key => $value) {
                     $setter = 'set' . ucfirst($key);
                     if (method_exists($entity, $setter)) {
+                        if (in_array($key, ['createdAt', 'updatedAt']) && is_string($value)) {
+                        $value = new \DateTimeImmutable($value);}
                         $entity->$setter($value);
                     }
                 }
