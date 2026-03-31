@@ -4,18 +4,11 @@
 @import './plan.css';
 @import './feeling.css';
 @import './dashboard.css';
+@import './login.css';
+@import './register.css';
 
 
-.mobile-user-needs {
-    width: 100%;
-    margin: 0 auto;
-}
 
-@media (max-width: 820px) {
-    .mobile-user-needs {
-        max-width: 70%;
-    }
-}
 
 
 

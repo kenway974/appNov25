@@ -1,22 +1,145 @@
 /* =========================
    GLOBAL
    ========================= */
-body {
-    font-family: 'Roboto', sans-serif;
-    background: #f5f5f5;
-    color: #1A1A1D;
-    margin: 0;
-    padding: 0;
-}
 
 /* =========================
-   HEADER
+   HEADER / HERO
    ========================= */
-header h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    color: #004AAD;
+.hero-compact {
+    min-height: 260px;
+    max-height: 300px;
+    display: flex;
+    align-items: center;
 }
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+
+}
+
+.super-title {
+    font-size: 3.5rem; /* plus gros qu'un h1 par défaut */
+    font-weight: bold;
+}
+
+.hero-text {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.text-block {
+    border: 1px solid #6A5ACD; /* contour violet */
+    padding: 1rem 1rem 1rem 1.5rem; /* espace interne, plus à gauche */
+    border-radius: 8px; /* coins arrondis */
+    margin-top: 3rem; /* espace sous le bloc si besoin */
+    margin-bottom: 3rem; /* espace sous le bloc si besoin */
+    padding: 2.5rem; /* réinitialise le padding pour les titres et paragraphes */
+}
+
+.text-block h1 {
+    margin-bottom: 0.1rem; /* réduit l’espace entre h1 et p */
+}
+
+.text-block p {
+    margin-top: 0; /* supprime marge par défaut */
+}
+
+.btn-text-bloc {
+    padding: 0.3rem 0.9rem;
+    border-radius: 15px;
+
+    /* Dégradé métallisé vert */
+    background: linear-gradient(
+        145deg,
+        #33cc66 0%,
+        #00B140 25%,
+        #009a38 50%,
+        #00B140 75%,
+        #66e699 100%
+    );
+
+    font-weight: 400;
+    font-size: small;
+    color: white;
+
+    /* Effet relief / métal */
+    box-shadow:
+        inset 0 2px 3px rgba(255, 255, 255, 0.5),
+        inset 0 -2px 3px rgba(0, 0, 0, 0.25),
+        0 2px 6px rgba(0, 0, 0, 0.2);
+
+    transition: all 0.3s ease;
+}
+
+.carousel-item .btn,
+.entity-title {
+    width: 70%;
+    margin: 1rem auto;
+    text-align: center;
+
+    /* Effet métallisé */
+    background: linear-gradient(
+        145deg,
+        #7b6df0 0%,
+        #6A5ACD 25%,
+        #5a4bb5 50%,
+        #6A5ACD 75%,
+        #9a8cff 100%
+    );
+
+    color: #ffffff;
+
+    border: none;
+    border-radius: 8px;
+
+    font-weight: 500;
+    padding: 1rem 0;
+    font-size: 1.1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Effet "reflet métal" */
+    box-shadow: 
+        inset 0 2px 4px rgba(255, 255, 255, 0.4),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+        0 4px 10px rgba(0, 0, 0, 0.2);
+
+    transition: all 0.3s ease;
+}
+
+.carousel-item .btn:hover,
+.entity-title:hover {
+    transform: translateY(-2px);
+
+    background: linear-gradient(
+        145deg,
+        #9a8cff 0%,
+        #7b6df0 25%,
+        #6A5ACD 50%,
+        #5a4bb5 75%,
+        #6A5ACD 100%
+    );
+
+    box-shadow: 
+        inset 0 3px 6px rgba(255, 255, 255, 0.5),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.3),
+        0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.category-title {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
 
 /* =========================
    CAROUSEL MOBILE
@@ -34,20 +157,29 @@ header h1 {
     margin-bottom: 1rem;
 }
 
+/* =========================
+   CAROUSEL MOBILE - BOUTONS
+   ========================= */
+
+
 .carousel-item .btn {
-    width: 100%;
-    margin-bottom: 0.5rem;
-    text-align: left;
-    background: #E8EEF0;
-    color: #343232;
-    border: 1px solid #004AAD;
-    border-radius: 6px;
+    width: 70%; /* réduit la largeur */
+    margin: 1rem auto 1rem auto; /* centré horizontalement + espace entre boutons */
+    text-align: center;  /* texte centré */
+    background-color: #6A5ACD; /* violet */
+    color: #ffffff; /* texte blanc */
+    border: none; 
+    border-radius: 8px; 
     font-weight: 500;
+    padding: 1rem 0; /* hauteur du bouton */
+    font-size: 1.1rem; 
+    display: block; /* nécessaire pour margin auto centrer le bouton */
+    transition: background 0.3s, color 0.3s;
 }
 
 .carousel-item .btn:hover {
-    background: #FFFD62;
-    color: #1A1A1D;
+    background-color: #5847B2; /* violet plus foncé au hover */
+    color: #ffffff;
 }
 
 /* =========================
@@ -80,19 +212,272 @@ header h1 {
 }
 
 /* =========================
-   COLLAPSE CONTENT
+   FEELING READ
    ========================= */
-.collapse {
-    margin-top: 0.5rem;
-    padding: 0.5rem;
-    background: #fff;
-    border-left: 4px solid #004AAD;
-    border-radius: 6px;
+
+.entity-container {
+    max-width: 70%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto; /* 👉 centre horizontalement */
+    border: 1px solid #6A5ACD; /* contour violet */
+    border-radius: 8px;
+
 }
 
-.collapse.show {
-    display: block;
+.entity-content {
+    max-width: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* centre les éléments */
+    text-align: center;    /* centre le texte */
+    color: #000;
 }
+
+/* Desktop */
+@media (min-width: 992px) {
+    .entity-content {
+        max-width: 80%;
+    }
+}
+
+/* INTRO */
+
+.trigger-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-bottom: 0.5rem
+}
+
+.trigger-intro{
+    margin-top: 0.5rem;
+    margin-bottom: 1rem
+}
+
+.trigger-note {
+    max-width: 80% ;
+    font-size: small;
+}
+
+.trigger-pill {
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+
+    /* Dégradé métallisé vert */
+    background: linear-gradient(
+        145deg,
+        #33cc66 0%,
+        #00B140 25%,
+        #009a38 50%,
+        #00B140 75%,
+        #66e699 100%
+    );
+
+    font-weight: 500;
+    color: white;
+
+    /* Effet relief / métal */
+    box-shadow:
+        inset 0 2px 3px rgba(255, 255, 255, 0.5),
+        inset 0 -2px 3px rgba(0, 0, 0, 0.25),
+        0 2px 6px rgba(0, 0, 0, 0.2);
+
+    transition: all 0.3s ease;
+}
+
+.trigger-pill:hover {
+    transform: translateY(-1px);
+
+    background: linear-gradient(
+        145deg,
+        #66e699 0%,
+        #33cc66 25%,
+        #00B140 50%,
+        #009a38 75%,
+        #00B140 100%
+    );
+
+    box-shadow:
+        inset 0 3px 5px rgba(255, 255, 255, 0.6),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.3),
+        0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.trigger-note {
+    font-style: italic;
+    color: #6c757d;
+}
+
+
+/* DESCRIPTION */
+
+.description-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+}
+
+.description-content {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f5f6fa;
+    border-radius: 8px;
+    max-width: 600px;
+}
+
+.description-toggle {
+    background: transparent;
+    color: #6A5ACD;
+    border: 2px solid #6A5ACD;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+/* effet au survol */
+.description-toggle:hover {
+    background: #6A5ACD;
+    color: #fff;
+}
+
+
+/* NEEDS */
+
+.sub-entity-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    max-height: 60px;
+    max-width: 80%;
+    margin: 0.5rem auto !important; /* force Bootstrap à lâcher */
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+} 
+
+.sub-entity-title {
+    width: 80%;
+    margin: 1rem auto;
+    text-align: center;
+
+    /* Effet métallisé */
+    background: linear-gradient(
+        145deg,
+        #7b6df0 0%,
+        #6A5ACD 25%,
+        #5a4bb5 50%,
+        #6A5ACD 75%,
+        #9a8cff 100%
+    );
+
+    color: #ffffff;
+
+    border: none;
+    border-radius: 8px;
+
+    font-weight: 300;
+    padding: 1rem 0;
+    font-size: 0.8rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Effet "reflet métal" */
+    box-shadow: 
+        inset 0 2px 4px rgba(255, 255, 255, 0.4),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+        0 4px 10px rgba(0, 0, 0, 0.2);
+
+    transition: all 0.3s ease;
+}
+
+.sub-entity-title:hover {
+    transform: translateY(-2px);
+
+    background: linear-gradient(
+        145deg,
+        #9a8cff 0%,
+        #7b6df0 25%,
+        #6A5ACD 50%,
+        #5a4bb5 75%,
+        #6A5ACD 100%
+    );
+
+    box-shadow: 
+        inset 0 3px 6px rgba(255, 255, 255, 0.5),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.3),
+        0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+
+.need-block {
+    width: 100%;
+}
+
+.sub-entity-content {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+
+.form-toggle {
+    background: transparent;
+    color: #6A5ACD;
+    border: 2px solid #6A5ACD;
+    border-radius: 10px;
+    padding: 0.5rem 1.4rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 1rem !important; 
+}
+
+/* effet au survol */
+.form-toggle:hover {
+    background: #6A5ACD;
+    color: #fff;
+}
+
+
+.entity-form {
+    margin: 0 auto;
+}
+
+.range-input {
+    margin: 0 auto;
+}
+
+.form-label {
+    font-size: small;
+    color: #333;
+}
+
+.btn-submit {
+  background-color: #6A5ACD; /* violet */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* hover stylé */
+.btn-submit:hover {
+  background-color: #695acdcb;
+  transform: translateY(-2px);
+}
+
 
 /* =========================
    FOOTER
@@ -115,3 +500,5 @@ footer {
         margin-bottom: 1.5rem;
     }
 }
+
+ 

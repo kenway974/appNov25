@@ -44,9 +44,20 @@
     max-width: 700px;
 }
 
-.btn-cta {
-    display: inline-block;
-    margin-top: 20px;
+.btn-hero {
+  background-color: transparent; /* fond transparent */
+  color: white; /* texte blanc */
+  border: 1px solid white; /* contour blanc */
+  padding: 10px 20px;
+  margin-top: 15px;
+  border-radius: 5px; /* optionnel pour arrondir */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-hero:hover {
+  background-color: white; /* effet au survol */
+  color: black; /* texte devient noir */
 }
 
 
@@ -155,80 +166,55 @@
             }
         }
 
-/* Container général */
-#home-cta {
-  padding: 60px 15px;
-  background-color: #f9f9f9;
-}
-
-/* Titre principal */
-#home-cta h2 {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #222;
-}
-
 /* Cartes */
 #home-cta .card {
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: #fff;
+  border: 1px solid #6A5ACD; /* contour violet */
+  overflow: hidden; /* important pour l'image pleine largeur */
 }
 
-/* Effet hover pour toutes les cartes */
-#home-cta .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-/* Titre des cartes */
-#home-cta .card h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #111;
-}
-
-/* Texte descriptif */
-#home-cta .card p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.5;
+/* Image pleine largeur */
+#home-cta .card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover; /* évite la déformation */
   margin-bottom: 20px;
 }
 
-/* Boutons */
+/* Titre */
+#home-cta .card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+/* Description style sous-titre */
+#home-cta .card p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-bottom: 25px;
+  padding: 0 15px;
+}
+
+/* Bouton violet */
 #home-cta .btn {
   font-weight: 600;
+  margin: auto;
   padding: 10px 25px;
-  border-radius: 50px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  max-width: 80%;
+  border-radius: 30px;
+  background-color: #6A5ACD;
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
 }
 
-/* Effet hover sur bouton */
+/* Hover bouton */
 #home-cta .btn:hover {
+  background-color: #695acdcb;
   transform: translateY(-2px);
-}
-
-
-
-/* Images des cartes */
-#home-cta .card img {
-  max-width: 120px;
-  height: auto;
-  margin-bottom: 15px;
-}
-
-/* Responsive - mobile */
-@media (max-width: 767px) {
-  #home-cta .row {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #home-cta .col-md-5 {
-    max-width: 90%;
-  }
 }
 
 /* Liste des définitions */
@@ -243,7 +229,7 @@
 
 .definition-list {
   list-style: none;
-  padding: 0 1rem; /* padding horizontal pour ne pas toucher les bords */
+  padding: 0; /* padding horizontal pour ne pas toucher les bords */
   margin: 0 auto;
   max-width: 900px;
 }
@@ -283,11 +269,3 @@
 .definition-item > .definition-text {
   max-width: 60%; /* sur mobile le texte reste à l'intérieur */
 }
-
-/* Sur desktop, on peut garder la largeur plus restreinte */
-@media (min-width: 768px) {
-  .definition-item > .definition-title,
-  .definition-item > .definition-text {
-    max-width: 45%;
-  }
-}  

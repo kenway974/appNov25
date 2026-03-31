@@ -1,4 +1,18 @@
 body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #efefef;
+    color: #1A1A1D;
+    margin: 0;
+    padding: 0;
 }
 
+
+.btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
