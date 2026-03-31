@@ -72,6 +72,34 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+// Sélection de la navbar
+const navbar = document.querySelector('.custom-navbar');
+
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll <= 0) {
+        // en haut de la page
+        navbar.style.top = '0';
+        return;
+    }
+
+    if (currentScroll > lastScroll) {
+        // scroll vers le bas → cacher
+        navbar.style.top = '-100px'; // ajuste selon la hauteur de ta navbar
+    } else {
+        // scroll vers le haut → montrer
+        navbar.style.top = '0';
+    }
+
+    lastScroll = currentScroll;
+});
+
+
+
+
 // MARQUE NOTIF COMME LUE
 document.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver((entries) => {
@@ -107,39 +135,6 @@ function toggleForm(id) {
     const div = document.getElementById("form-" + id);
     div.style.display = div.style.display === "none" ? "block" : "none";
 }
-
-document.addEventListener('click', function(e) {
-    const btn = e.target.closest('.toggle-recurring');
-    if (!btn) return;
-
-    e.stopPropagation(); // si nécessaire pour le collapse
-    const id = btn.dataset.id;
-
-    const isRecurringInput = document.getElementById('isRecurring-' + id);
-    const deadlineField = document.getElementById('deadlineField-' + id);
-    const startDateField = document.getElementById('startDateField-' + id);
-    const frequencyField = document.getElementById('frequencyField-' + id);
-
-    if (!isRecurringInput || !deadlineField || !startDateField || !frequencyField) return;
-
-    const isRecurring = isRecurringInput.value === "1";
-
-    if (isRecurring) {
-        isRecurringInput.value = 0;
-        btn.textContent = "Répéter cette action dans le temps";
-        deadlineField.style.display = '';
-        startDateField.style.display = 'none';
-        frequencyField.style.display = 'none';
-    } else {
-        isRecurringInput.value = 1;
-        btn.textContent = "Définir une date limite unique";
-        deadlineField.style.display = 'none';
-        startDateField.style.display = '';
-        frequencyField.style.display = '';
-    }
-});
-
-
 
 
 
@@ -192,7 +187,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+    const headers = document.querySelectorAll(".user-action-header");
+    headers.forEach(header => {
+        header.addEventListener("click", () => {
+            const id = header.dataset.actionId;
+            const details = document.getElementById("action-details-" + id);
+            if (details) {
+                details.classList.toggle("d-none");
+            }
+        });
+    });
+});
+
+/*document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.user-action-toggle').forEach(el => {
         el.addEventListener('click', () => {
             const id = el.getAttribute('data-action-id');
@@ -216,9 +224,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-});
+});*/
 
-document.addEventListener('DOMContentLoaded', () => {
+/*document.addEventListener('DOMContentLoaded', () => {
     const toggles = document.querySelectorAll('.feeling-toggle-title');
 
     toggles.forEach(toggle => {
@@ -237,7 +245,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-});
+});*/
+
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})
 
 document.addEventListener('DOMContentLoaded', () => {
     const toggles = document.querySelectorAll('#user-action-toggle');
