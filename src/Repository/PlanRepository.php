@@ -26,4 +26,17 @@ class PlanRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Récupère tous les plans avec un prix supérieur à 0
+     *
+     * @return Plan[]
+     */
+    public function findPaidPlans(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.price > 0')
+            ->getQuery()
+            ->getResult();
+    }
 }

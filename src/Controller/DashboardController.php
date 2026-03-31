@@ -77,7 +77,7 @@ final class DashboardController extends AbstractController
         $userNeeds = $userNeedRepo->findBy(['user' => $user]);
         $userActions = $userActionRepo->findBy(['user' => $user]);
 
-        return $this->render('user_dashboard/index.html.twig', [
+        return $this->render('dashboard/index.html.twig', [
             'user' => $user,
             'userNeeds' => $userNeeds,
             'userActions' => $userActions,

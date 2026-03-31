@@ -23,7 +23,7 @@ final class NeedController extends AbstractController
     public function indexNeed(NeedService $needService, NeedRepository $needRepository): Response
     {
         // Récupération des besoins groupés par type
-        $needsByType = $needService->getNeedsGroupedByType($needRepository);
+        $needsByType = $needService->getNeedsByType();
 
         // Récupération de toutes les actions associées aux besoins
         $allActions = $needService->getAllActionsFromNeeds($needsByType);

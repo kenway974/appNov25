@@ -10,19 +10,11 @@ use Doctrine\ODM\MongoDB\DocumentManager;
  * NotificationRepository (doctrrine/mongodb-odm) pour gérer les notifications dans MongoDB.
  */
 class NotificationRepository extends DocumentRepository
-{
-     public function __construct(DocumentManager $dm)
-    {
-        $uow = $dm->getUnitOfWork();
-        $classMetaData = $dm->getClassMetadata(Notification::class);
-        parent::__construct($dm, $uow, $classMetaData);
-    }
-
-
+{    
     /**
      * Récupère notifs d'un  utilisateur,
      * triées par date décroissante.
-     *
+     * 
      * @param int $userId
      * @param int|null $limit
      *

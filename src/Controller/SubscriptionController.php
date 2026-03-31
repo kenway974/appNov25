@@ -26,7 +26,7 @@ class SubscriptionController extends AbstractController
         $subscription = $user->getSubscription();
 
         // Sinon, affiche la liste des plans disponibles
-        $plans = $planRepository->findAllActive();
+        $plans = $planRepository->findPaidPlans();
 
         return $this->render('subscription/plan.html.twig', [
             'plans' => $plans,

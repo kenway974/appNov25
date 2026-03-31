@@ -38,8 +38,8 @@ class UserNeed
     #[Assert\Type('integer')]
     #[Assert\Range(
         notInRangeMessage: 'La priorité doit être comprise entre {{ min }} et {{ max }}.',
-        min: 1,
-        max: 5
+        min: 5,
+        max: 50
     )]
     private ?int $priority = null;
 

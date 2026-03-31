@@ -4,7 +4,7 @@ namespace App\Document;
 use App\Repository\NotificationRepository;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
-#[ODM\Document(collection: 'notifications')]
+#[ODM\Document(collection: 'notifications', repositoryClass: NotificationRepository::class)]
 #[ODM\Index(keys: ['createdAt' => 'desc'])]
 class Notification
 {
@@ -13,6 +13,9 @@ class Notification
 
     #[ODM\Field(type: 'int')]
     private int $userId;
+
+    #[ODM\Field(type: 'int', nullable: true)]
+    private ?int $userActionId = null;
 
     #[ODM\Field(type: 'string')]
     private string $title;
@@ -40,6 +43,11 @@ class Notification
     public function getUserId(): int
     {
         return $this->userId;
+    }
+
+    public function getUserActionId(): ?int
+    {
+        return $this->userActionId;
     }
 
     public function getTitle(): string
@@ -75,6 +83,12 @@ class Notification
     public function setUserId(int $userId): static
     {
         $this->userId = $userId;
+        return $this;
+    }
+
+    public function setUserActionId(?int $userActionId): static
+    {
+        $this->userActionId = $userActionId;
         return $this;
     }
 

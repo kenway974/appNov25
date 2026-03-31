@@ -29,8 +29,8 @@ class UserNeedManager
         $userNeed->setNeed($need);
 
         $priority = (int) ($data['priority'] ?? 0);
-        if ($priority < 0 || $priority > 100) {
-            throw new \InvalidArgumentException('La priorité doit être comprise entre 0 et 100.');
+        if ($priority < 5 || $priority > 50) {
+            throw new \InvalidArgumentException('La priorité doit être comprise entre 5 et 50.');
         }
 
         $userNeed->setPriority($priority);

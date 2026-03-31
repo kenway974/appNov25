@@ -7,14 +7,17 @@ use App\Repository\BlockRepository;
 class BlockService
 {
     private BlockRepository $blockRepository;
-    private array $types;
+
+    private array $types = [
+        'Physique',
+        'Emotionnel',
+        'Mental',
+        'Social'
+    ];
 
     public function __construct(BlockRepository $blockRepository)
     {
         $this->blockRepository = $blockRepository;
-
-        // On charge les types depuis un JSON
-        $this->types = json_decode(file_get_contents(__DIR__ . '/../../assets/data/block_types.json'), true);
     }
 
     /**
@@ -26,22 +29,16 @@ class BlockService
     }
 
     /**
-     * Récupère tous les blocs triés par type
-     */
-    public function getAllBlocksOrderedByType(): array
-    {
-        return $this->blockRepository->findAllOrderByType();
-    }
-
-    /**
      * Récupère tous les blocs regroupés par type
      */
     public function getBlocksByType(): array
     {
-        $result = [];
+        $blocksByType = [];
+
         foreach ($this->types as $type) {
-            $result[$type] = $this->blockRepository->findByType($type);
+            $blocksByType[$type] = $this->blockRepository->findByType($type);
         }
-        return $result;
+
+        return $blocksByType;
     }
 }

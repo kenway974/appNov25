@@ -138,6 +138,7 @@ class UserActionManager
 
                 $this->notificationService->createNotification(
                     $user->getId(),
+                    $userAction->getId(),
                     'Action à faire aujourd’hui',
                     'Votre action "' . $userAction->getAction()->getTitle() . '" arrive à échéance.',
                     'deadline',

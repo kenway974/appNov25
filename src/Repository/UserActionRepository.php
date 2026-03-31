@@ -51,12 +51,10 @@ class UserActionRepository extends ServiceEntityRepository
      * @param \DateTimeInterface $now
      * @return UserAction[]
      */
-    public function findPastDeadlinesWithoutNotification(\DateTimeInterface $now): array
+    public function findPastDeadlines(\DateTimeInterface $now): array
     {
         return $this->createQueryBuilder('ua')
-            ->leftJoin('ua.notification', 'n') // relation Notification
             ->andWhere('ua.deadline < :now')
-            ->andWhere('n.id IS NULL') // pas encore de notification
             ->setParameter('now', $now)
             ->getQuery()
             ->getResult();

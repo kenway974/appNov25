@@ -6,42 +6,43 @@ use App\Repository\NeedRepository;
 
 class NeedService
 {
-    private array $types;
+    private NeedRepository $needRepository;
 
-    public function __construct()
+    private array $types = [
+        'Physique',
+        'Relationnel',
+        'Sens',
+        'Accomplissement',
+        'Émotionnel',
+        'Mental',
+    ];
+
+    public function __construct(NeedRepository $needRepository)
     {
-        // On charge les JSON en mémoire une fois pour toutes
-        $this->types = json_decode(file_get_contents(__DIR__ . '/../../assets/data/need_types.json'), true);
+        $this->needRepository = $needRepository;
     }
 
     public function getTypes(): array
     {
         return $this->types;
     }
- 
+
     /**
      * Récupère les besoins groupés par type
-     *
-     * @param array $types
-     * @param NeedRepository $needRepository
-     * @return array
      */
-    public function getNeedsGroupedByType(NeedRepository $needRepository): array
+    public function getNeedsByType(): array
     {
         $needsByType = [];
 
         foreach ($this->types as $type) {
-            $needsByType[$type] = $needRepository->findByType($type);
+            $needsByType[$type] = $this->needRepository->findByType($type);
         }
 
         return $needsByType;
     }
 
     /**
-     * Récupère toutes les actions liées aux besoins fournis (groupés par type)
-     *
-     * @param array $needsByType
-     * @return array
+     * Récupère toutes les actions liées aux besoins fournis
      */
     public function getAllActionsFromNeeds(array $needsByType): array
     {

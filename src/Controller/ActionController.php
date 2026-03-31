@@ -26,18 +26,11 @@ final class ActionController extends AbstractController
     #[Route(name: 'app_action')]
     public function index(ActionService $actionService): Response
     {
-       
         $actionsByType = $actionService->getActionsByType();
-        $actionsByIntension = $actionService->getActionsByIntension();
-        $instantActions = $actionService->getInstantActions(true);
-        $delayedActions = $actionService->getDelayedActions(true);
 
         return $this->render('action/index.html.twig', [
             'controller_name'   => 'ActionController',
-            'actionsByType'     => $actionsByType,
-            'actionsByIntension'=> $actionsByIntension,
-            'instantActions'     => $instantActions,
-            'delayedActions'     => $delayedActions,
+            'actions'=> $actionsByType,
         ]);
     }
 
@@ -115,11 +108,6 @@ final class ActionController extends AbstractController
         if (!$userAction) {
             throw $this->createNotFoundException('UserAction non trouvée');
         } 
-
-        $this->denyAccessUnlessGranted(
-            UserActionVoter::COMPLETE,
-            $userAction
-        );
 
         // verifie csrf
         if (!$this->isCsrfTokenValid(

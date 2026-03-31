@@ -77,7 +77,7 @@ final class FeelingController extends AbstractController
     ): Response {
 
         // Liste des émotions à afficher
-        $emotions = ['Tristesse', 'Colère', 'Peur', 'Anxiété'];
+        $emotions = ['Tristesse', 'Colère', 'Stress', 'Anxiété', 'Comportement'];
 
         // Récupération des feelings groupés par émotion
         $feelingsByEmotion = $feelingService->getFeelingsGroupedByEmotion($emotions, $feelingRepository);

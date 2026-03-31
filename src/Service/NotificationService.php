@@ -13,11 +13,12 @@ class NotificationService
     /**
      * Crée une notification
      */
-    public function createNotification(int $userId, string $title, string $message, string $type, array $context = []
+    public function createNotification(int $userId, int $userActionId, string $title, string $message, string $type, array $context = []
     ): Notification {
         $notification = new Notification();
 
         $notification->setUserId($userId)
+            ->setUserActionId($userActionId)
             ->setTitle($title)
             ->setMessage($message)
             ->setType($type)
@@ -51,6 +52,7 @@ class NotificationService
 
         return $this->createNotification(
             $userId,
+            $userActionId,
             'Action à faire aujourd’hui',
             sprintf('Votre action "%s" arrive à échéance.', $actionTitle),
             'deadline',
@@ -65,17 +67,16 @@ class NotificationService
     /**
      * Récupère les notifications d'un utilisateur.
      */
-    public function getUserNotifications(int $userId, bool $onlyUnread = false): array
-    {
-        $criteria = ['userId' => $userId];
-
+    public function getUserNotifications(
+    int $userId,
+    bool $onlyUnread = false,
+    int $limit = 10
+    ): iterable {
         if ($onlyUnread) {
-            $criteria['isRead'] = false;
+            return $this->notificationRepository->findByIsRead($userId, false, $limit);
         }
 
-        return $this->dm
-            ->getRepository(Notification::class)
-            ->findBy($criteria, ['createdAt' => 'DESC']);
+        return $this->notificationRepository->findByUser($userId, $limit);
     }
 
     /**

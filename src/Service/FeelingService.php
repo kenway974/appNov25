@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Repository\FeelingRepository;
-
+ 
 class FeelingService
 {
     public function getFeelingsGroupedByEmotion(array $emotions, FeelingRepository $feelingRepository): array

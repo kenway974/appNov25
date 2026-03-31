@@ -17,7 +17,7 @@ final class BlockController extends AbstractController
     {
         // On récupère les blocs groupés par type
         $blocksByType = $blockService->getBlocksByType();
-
+        
         return $this->render('block/index.html.twig', [
             'controller_name' => 'BlockController',
             'blocksByType' => $blocksByType,
