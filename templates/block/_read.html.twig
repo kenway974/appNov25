@@ -1,0 +1,84 @@
+<div class="entity-container">
+
+    <div class="entity-content">
+
+        <!-- =========================
+             DESCRIPTION
+             ========================= -->
+        {% if block.description %}
+            <div class="description-block">
+
+                <button class="description-toggle"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseDescription{{ block.id }}"
+                        aria-expanded="false"
+                        aria-controls="collapseDescription{{ block.id }}">
+                    En apprendre plus
+                </button>
+
+                <div class="collapse" id="collapseDescription{{ block.id }}">
+                    <div class="description-content">
+                        <p>{{ block.description }}</p>
+                    </div>
+                </div>
+
+            </div>
+        {% endif %}
+
+
+        <!-- =========================
+             CROYANCES LIMITANTES
+             ========================= -->
+        {% if block.beliefs %}
+            <h5 class="trigger-intro">
+                <strong>Croyances associées</strong>
+
+                <i class="bi bi-info-circle ms-2 trigger-info"
+                   tabindex="0"
+                   role="button"
+                   data-bs-toggle="popover"
+                   data-bs-trigger="focus"
+                   data-bs-placement="right"
+                   data-bs-content="Les croyances sont les pensées automatiques qui influencent votre perception et peuvent limiter vos actions.">
+                </i>
+            </h5>
+
+            <div class="trigger-list">
+                {% for belief in block.beliefs %}
+                    <span class="trigger-pill">
+                        {{ belief }}
+                    </span>
+                {% endfor %}
+            </div>
+
+            <p class="trigger-note">
+                ... ces pensées influencent souvent vos comportements sans que vous en soyez conscient
+            </p>
+        {% endif %}
+
+
+        <!-- =========================
+             RECADRAGES
+             ========================= -->
+        {% if block.reframings %}
+            <h5 class="sub-entity-title">
+                Repenser autrement :
+            </h5>
+
+            <div class="trigger-list">
+                {% for reframing in block.reframings %}
+                    <span class="trigger-pill">
+                        {{ reframing }}
+                    </span>
+                {% endfor %}
+            </div>
+
+            <p class="trigger-note">
+                ... changer de regard permet d’ouvrir de nouvelles possibilités
+            </p>
+        {% endif %}
+
+    </div>
+
+</div>

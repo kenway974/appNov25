@@ -3,126 +3,124 @@
 {% block title %}Liste des blocages{% endblock %}
 
 {% block body %}
-<div class="mt-5">
-    <h2 class="text-center mb-4">Blocages par type</h2>
 
-    {% if blocksByType is not empty %}
-    <div id="carouselBlocksByType" class="carousel slide">
+{% include 'partials/_hero.html.twig' with {
+    imageUrl: '/images/blocks/hero.jpg',
+    title: 'Comprendre vos blocages',
+    text: 'Identifiez vos freins internes et découvrez des pistes pour les dépasser.',
+    id: 'block-hero'
+} %}
 
-        <!-- 🔹 Indicateurs -->
-        <div class="carousel-indicators">
-            {% for type, blocks in blocksByType %}
-                <button type="button" 
-                        data-bs-target="#carouselBlocksByType" 
-                        data-bs-slide-to="{{ loop.index0 }}" 
-                        class="{{ loop.first ? 'active' : '' }}" 
-                        aria-current="{{ loop.first ? 'true' : 'false' }}" 
-                        aria-label="Slide {{ loop.index }}">
-                    {{ type|capitalize }}
-                </button>
-            {% endfor %}
-        </div>
+<main class="container">
 
-        <!-- 🔹 Slides -->
-        <div class="carousel-inner">
-            {% for type, blocks in blocksByType %}
-                <div class="carousel-item {{ loop.first ? 'active' : '' }}">
-                    <h3 class="text-center mb-3">{{ type|capitalize }}</h3>
+    <!-- =========================
+         MOBILE : CAROUSEL
+         ========================= -->
+    
+    <section class="d-lg-none mt-5" aria-labelledby="mobile-blocks-title">
+    
+        {{ include('block/_text-bloc.html.twig') }}
 
-                    {% if blocks is empty %}
-                        <p class="text-center">Aucun blocage trouvé pour ce type.</p>
-                    {% else %}
-                        <div class="d-flex flex-column align-items-center gap-3">
-                            {% for block in blocks %}
-                                <div class="block-toggle-title text-center"
-                                     data-block-id="{{ block.id }}"
-                                     style="cursor:pointer; width:80%; padding:1rem; border-radius:12px; background-color: rgba(255,255,255,0.1);">
+        <div id="carouselBlocksByType" class="carousel slide" data-bs-ride="carousel" aria-label="Carrousel des blocages">
+            
+            <div class="carousel-inner">
+
+                {% for type, blocks in blocksByType %}
+                    <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                        
+                        <header>
+                            <h2 class="category-title text-center">
+                                <strong>{{ type }}</strong>
+                            </h2>
+                        </header>
+
+                        {% for block in blocks %}
+                            {% set uniqueId = 'mobile-' ~ block.id ~ '-' ~ loop.index %}
+
+                            <article>
+                                <button class="entity-btn entity-title"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#{{ uniqueId }}"
+                                        aria-expanded="false"
+                                        aria-controls="{{ uniqueId }}">
+
                                     {% if block.icon %}
-                                        <img src="{{ asset('images/icons/' ~ block.icon) }}" alt="" width="32" class="me-2">
+                                        <img src="{{ asset('images/icons/' ~ block.icon) }}" width="24" class="me-2">
                                     {% endif %}
-                                    <h5>{{ block.title }}</h5>
+
+                                    <span>{{ block.title }}</span>
+                                </button>
+
+                                <div id="{{ uniqueId }}" class="collapse mt-2">
+                                    {{ include('block/_read.html.twig', { block }) }}
                                 </div>
+                            </article>
 
-                                <div class="block-content d-none mt-2" id="contentBlock{{ block.id }}">
-                                    {% if block.description %}
-                                        <p>{{ block.description }}</p>
-                                    {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
 
-                                    <!-- 🔹 Croyances -->
-                                    {% if block.beliefs is not empty %}
-                                        <strong>Croyances limitantes :</strong>
-                                        <ul>
-                                            {% for belief in block.beliefs %}
-                                                <li>{{ belief }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
+            </div>
 
-                                    <!-- 🔹 Recadrages -->
-                                    {% if block.reframings is not empty %}
-                                        <strong>Recadrages possibles :</strong>
-                                        <ul>
-                                            {% for reframing in block.reframings %}
-                                                <li>{{ reframing }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselBlocksByType" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
 
-                                    <!-- 🔹 Actions liées -->
-                                    {% if block.actions is not empty %}
-                                        <strong>Actions liées :</strong>
-                                        <ul>
-                                            {% for action in block.actions %}
-                                                <li>{{ action.title }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% else %}
-                                        <p>Aucune action liée.</p>
-                                    {% endif %}
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselBlocksByType" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
 
-                                    <!-- 🔹 Feelings liés -->
-                                    {% if block.feelings is not empty %}
-                                        <strong>Émotions liées :</strong>
-                                        <ul>
-                                            {% for feeling in block.feelings %}
-                                                <li>{{ feeling.title }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
-            {% endfor %}
         </div>
+    </section>
 
-        <!-- 🔹 Contrôles -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselBlocksByType" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Précédent</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselBlocksByType" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Suivant</span>
-        </button>
-    </div>
+    <!-- =========================
+         DESKTOP : GRILLE
+         ========================= -->
+    <section class="d-none d-lg-block mt-5" aria-labelledby="desktop-block-title">
 
-    {% else %}
-        <p class="text-center text-white">Aucun bloc trouvé.</p>
-    {% endif %}
-</div>
+        {{ include('block/_text-bloc.html.twig') }}
 
-<!-- 🔹 JS Toggle -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.block-toggle-title').forEach(el => {
-        el.addEventListener('click', () => {
-            const id = el.dataset.blockId;
-            const content = document.querySelector('#contentBlock' + id);
-            content.classList.toggle('d-none');
-        });
-    });
-});
-</script>
+        {% for type, blocks in blocksByType %}
+            <section class="mb-5" aria-labelledby="type-desktop-{{ loop.index }}">
+                <header>
+                    <h2 class="mb-3">{{ type }}</h2>
+                </header>
+
+                <div class="row g-3">
+                    {% for block in blocks %}
+                        {% set uniqueId = 'desktop-' ~ block.id ~ '-' ~ loop.index %}
+                        <article class="col-md-4">
+
+                                <button class="entity-btn entity-title"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#{{ uniqueId }}"
+                                        aria-expanded="false"
+                                        aria-controls="{{ uniqueId }}">
+
+                                    {% if block.icon %}
+                                        <img src="{{ asset('images/icons/' ~ block.icon) }}" width="24" class="me-2">
+                                    {% endif %}
+
+                                    {{ block.title }}
+                                </button>
+
+                            <div id="{{ uniqueId }}" class="collapse mt-2">
+                                {{ include('block/_read.html.twig', { block }) }}
+                            </div>
+
+                        </article>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endfor %}
+    </section>
+
+</main>
+
+<footer class="container text-center mt-5 mb-5">
+    <p class="text-muted">Interface de consultation des blocages</p>
+</footer>
+
 {% endblock %}

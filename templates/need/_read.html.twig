@@ -1,59 +1,91 @@
-<div class="need-read border p-4 rounded shadow mb-4">
-    {#<h3 class="text-xl font-semibold">{{ need.title }}</h3>#}
-    {% if need.type %}
-        <p class="text-gray-700 mt-2"><strong>{{ need.type }}</strong></p>
-    {% endif %}
+<div class="">
 
-    {% if need.description %}
-        <p class="text-gray-700 mt-2">
-            On en a tous besoin, à des degrés différents
-        </p>
-    {# --- Bouton toggle description pour le besoin --- #}
-    <button class="btn btn-outline-light my-3" 
-            type="button" 
-            data-bs-toggle="collapse" 
-            data-bs-target="#descNeed{{ need.id }}" 
-            aria-expanded="false" 
-            aria-controls="descNeed{{ need.id }}">
-        Description
-    </button>
+        <!-- =========================
+             DESCRIPTION
+             ========================= -->
+        {% if need.description %}
+            <div class="description-block">
 
-    <div class="collapse mb-4" id="descNeed{{ need.id }}">
-        <p class="mt-3 px-4">{{ need.description }}</p>
-    </div>
-{% endif %}
+                <button class="description-toggle"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseDescription{{ need.id }}"
+                        aria-expanded="false"
+                        aria-controls="collapseDescription{{ need.id }}">
+                    En apprendre plus
+                </button>
 
-    
-    {% if need.fulfilment is not empty %}
-    <p class="text-sm text-green-700 mt-2"><strong>Comment le combler ?</strong></p>
-    <ul class="list-unstyled ms-3">
-        {% for item in need.fulfilment %}
-            <p>{{ item }}</p>
-        {% endfor %}
-    </ul>
-{% endif %}
+                <div class="collapse" id="collapseDescription{{ need.id }}">
+                    <div class="description-content">
+                        <p>{{ need.description }}</p>
+                    </div>
+                </div>
 
+            </div>
+        {% endif %}
+
+
+        <!-- =========================
+             SATISFACTION (FULFILMENT)
+             ========================= -->
+        {% if need.fulfilment %}
+            <h5 class="trigger-intro">
+                <strong>Comment y répondre ?</strong>
+
+                <i class="bi bi-info-circle ms-2 trigger-info"
+                   tabindex="0"
+                   role="button"
+                   data-bs-toggle="popover"
+                   data-bs-trigger="focus"
+                   data-bs-placement="right"
+                   data-bs-content="Ce niveau représente à quel point ce besoin est actuellement satisfait dans votre vie.">
+                </i>
+            </h5>
  
-    <button
-        class="btn btn-outline-light mt-3"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#form-{{ need.id }}"
-        aria-expanded="false"
-        aria-controls="form-{{ need.id }}"
-    >
-        Ajouter ce besoin à mon profil
-    </button>
+            <div class="trigger-list">
+                {% for fulfilment in need.fulfilment %}
+                    <span class="trigger-pill">
+                        {{ fulfilment }}
+                    </span>
+                {% endfor %}
+            </div>
 
-    <div class="collapse mt-3" id="form-{{ need.id }}">
-    <div class="border p-4 rounded shadow bg-yellow-100">
-        {{ include('need/_form.html.twig') }}
-    </div>
+            <p class="trigger-note">
+                ... un besoin peu satisfait peut générer des tensions internes
+            </p>
+        {% endif %}
+
+
+        <!-- =========================
+            FORMULAIRE / ADDNEED
+            ========================= -->
+        <div class="form-block mt-3">
+
+            {% if app.user %}
+                {# Utilisateur connecté : on affiche le bouton collapse + form #}
+                <button class="form-toggle"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseForm{{ need.id }}"
+                        aria-expanded="false"
+                        aria-controls="collapseForm{{ need.id }}">
+                    Je ressens ce besoin
+                </button>
+
+                <div class="collapse mt-2" id="collapseForm{{ need.id }}">
+                    {{ include('need/_form.html.twig', { need: need }) }}
+                </div>
+
+            {% else %}
+                <p class="trigger-note">
+                    Connecte-toi pour ajouter ce besoin à ta liste.
+                </p>
+                {# Utilisateur non connecté : on affiche un bouton vers la page de login #}
+                <a href="{{ path('app_login') }}" class="btn btn-outline-primary">
+                    Me connecter
+                </a>
+            {% endif %}
+
+        </div>
+
 </div>
-
-
-
-
-
-</div>
-

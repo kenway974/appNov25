@@ -1,40 +1,106 @@
-<!-- Section Besoins -->
-<div class="container text-center mt-4">
-    <div class="row gx-5 row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-        {% for userNeed in userNeeds %}
-            <div class="col" style="padding-bottom: 15px;">
-                
-                <!-- Card header -->
-                <div class="p-3 rounded-3" 
-                     style="background: rgba(0, 0, 0, 0.1); cursor: pointer;"
-                     data-bs-toggle="collapse" 
-                     data-bs-target="#collapseNeed{{ userNeed.id }}" 
-                     aria-expanded="false" 
-                     aria-controls="collapseNeed{{ userNeed.id }}">
-                    
-                    <div class="d-flex flex-column align-items-center">
-                        {% if userNeed.need.icon %}
-                            <img src="{{ asset('icons/need/' ~ userNeed.need.icon) }}" 
-                                 alt="{{ userNeed.need.title }} icon" 
-                                 class="mb-2 rounded-circle"
-                                 style="width: 45px; height: 45px; padding: 5px; background: #f0f0f0;">
-                        {% endif %}
+<section class="d-lg-none mt-4">
 
-                        <p class="mb-1 text-white fs-5">{{ userNeed.need.title }}</p>
-                        <p class="mb-2 text-white fs-6">{{ userNeed.need.type }}</p>
+    <div id="carouselUserNeeds" class="carousel slide" data-bs-ride="carousel">
 
-                        {{ include('user_need/_progress_bar.html.twig') }}
+        <div class="carousel-inner">
+
+            {% for userNeed in userNeeds %}
+                {% set uniqueId = 'collapseMobileNeed' ~ userNeed.id %}
+
+                <div class="carousel-item {{ loop.first ? 'active' : '' }} text-center">
+
+                    <div class="px-3">
+
+                        <button class="p-3 rounded-3 entity-title w-100"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#{{ uniqueId }}"
+                                aria-expanded="false"
+                                aria-controls="{{ uniqueId }}">
+
+                            <div class="d-flex flex-column align-items-center">
+
+                                {% if userNeed.need.icon %}
+                                    <img src="{{ asset('icons/need/' ~ userNeed.need.icon) }}" 
+                                         alt="{{ userNeed.need.title }}"
+                                         class="mb-2 rounded-circle"
+                                         style="width: 55px; height: 55px; padding: 6px; background: #000;">
+                                {% endif %}
+
+                                <p class="mb-1 text-black fs-5">
+                                    {{ userNeed.need.title }}
+                                </p>
+
+                                {{ include('user_need/_progress_bar.html.twig') }}
+
+                            </div>
+                        </button>
+
+                        <!-- Collapse -->
+                        <div id="{{ uniqueId }}" class="collapse mt-3">
+                            {{ include('user_need/_show.html.twig', { userNeed: userNeed }) }}
+                        </div>
+
                     </div>
-                </div>
 
-                <!-- Collapse content -->
-                <div class="collapse mt-2" id="collapseNeed{{ userNeed.id }}">
-                    {{ include('user_need/_show.html.twig', {
-                        userNeed: userNeed
-                    }) }}
                 </div>
+            {% endfor %}
 
-            </div>
-        {% endfor %}
+        </div>
+
+        <!-- CONTROLS -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselUserNeeds" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselUserNeeds" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
     </div>
-</div>
+
+</section>
+
+<section class="d-none d-lg-block">
+
+    <div class="container text-center mt-4">
+        <div class="row gx-5 row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+
+            {% for userNeed in userNeeds %}
+                <div class="col" style="padding-bottom: 15px;">
+                    
+                    {% set uniqueId = 'collapseNeed' ~ userNeed.id %}
+
+                    <button class="p-3 rounded-3 entity-title w-100"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#{{ uniqueId }}">
+
+                        <div class="d-flex flex-column align-items-center">
+
+                            {% if userNeed.need.icon %}
+                                <img src="{{ asset('icons/need/' ~ userNeed.need.icon) }}" 
+                                     class="mb-2 rounded-circle"
+                                     style="width: 45px; height: 45px; padding: 5px; background: #000;">
+                            {% endif %}
+
+                            <p class="mb-1 text-black fs-5">
+                                {{ userNeed.need.title }}
+                            </p>
+
+                            {{ include('user_need/_progress_bar.html.twig') }}
+
+                        </div>
+                    </button>
+
+                    <div class="collapse mt-2" id="{{ uniqueId }}">
+                        {{ include('user_need/_show.html.twig', { userNeed: userNeed }) }}
+                    </div>
+
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</section>

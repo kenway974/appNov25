@@ -1,0 +1,15 @@
+<section class="hero-container hero-compact" id="{{ id|default('hero') }}" aria-labelledby="{{ id|default('hero') }}-title">
+
+    <div class="hero-bg">
+        <img src="{{ imageUrl }}" alt="{{ title }}" class="hero-image">
+        <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="super-title" id="{{ id|default('hero') }}-title">{{ title }}</h1>
+            <p>{{ text }}</p>
+        </div>
+    </div>
+
+</section>

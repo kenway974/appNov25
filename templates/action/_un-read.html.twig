@@ -1,0 +1,26 @@
+<h1>Détails de l'action</h1>
+
+<h2>{{ action.title }}</h2>
+
+<p><strong>Description :</strong> {{ action.description ?: 'Aucune description' }}</p>
+<p><strong>Type :</strong> {{ action.type ?: 'Non spécifié' }}</p>
+<p><strong>Intention :</strong> {{ action.intension ?: 'Non spécifiée' }}</p>
+<p><strong>Durée :</strong> {{ action.duration ?: 'Non définie' }} min</p>
+<p><strong>Faisable maintenant :</strong> {{ action.isDoableNow ? 'Oui' : 'Non' }}</p>
+
+<!-- Bouton toggle Bootstrap -->
+<button class="btn btn-sm btn-outline-primary"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#form-{{ action.id }}"
+        aria-expanded="false"
+        aria-controls="form-{{ action.id }}">
+    Passer à l'action
+</button>
+
+<!-- Formulaire collapsible -->
+<div class="collapse mt-2" id="form-{{ action.id }}">
+        {{ include('action/_form.html.twig', { action: action }) }}
+</div>
+
+<a href="{{ path('app_action') }}" class="btn btn-secondary mt-3">Retour à la liste</a>

@@ -1,15 +1,38 @@
-<section class="container-fluid text-center my-5" id="home-en-savoir-plus" aria-labelledby="learn-more-title">
+<section class="container-fluid text-center my-5" id="home-en-savoir-plus" aria-labelledby="en-savoir-plus-title">
 
-    <h2 id="learn-more-title">Envie d’aller plus loin ?</h2>
+    <h2 id="en-savoir-plus-title" class="section-title">
+        Envie d’aller plus loin ?
+    </h2>
 
-    <p class="lead">
-        Apprends à identifier tes émotions, à clarifier tes besoins et à les transformer en actions concrètes grâce à la Communication NonViolente.
+    <p class="lead section-intro">
+        Apprends à identifier tes émotions, clarifier tes besoins et les transformer en actions concrètes grâce à la Communication NonViolente.
     </p>
 
     <div class="home-definition-container my-5">
-        <img src="{{ asset('images/home-definition.svg') }}" 
-             alt="Illustration expliquant la relation entre émotions, besoins et actions"
-             class="img-fluid">
+
+        <ul class="definition-list" role="list" aria-label="Étapes pour transformer ses émotions en actions">
+            {% set steps = [
+                {
+                    "title": "Émotions",
+                    "text": "Une émotion est un <strong>signal</strong>, pas un problème. Elle peut apparaître à tout moment, même sans lien direct avec la situation. Derrière chaque émotion, il y a un <strong>besoin plus profond</strong>. Tu ne contrôles pas toujours ce que tu ressens, mais tu peux apprendre à <strong>écouter le message</strong>. Tes émotions ne sont pas là contre toi : elles te <strong>guident</strong> vers ce qui compte vraiment et t’aident à <strong>mieux te comprendre</strong>."
+                },
+                {
+                    "title": "Besoins",
+                    "text": "Un besoin personnel, c’est ce qui soutient ton <strong>équilibre</strong>. Sport, relations, sens, calme… chacun a les siens, à des niveaux différents. On les ignore souvent, jusqu’à ressentir <strong>frustration</strong> ou <strong>vide</strong>. Les émotions sont là pour signaler qu’un besoin n’est pas satisfait. Identifier tes besoins, c’est comprendre ce qui te fait réellement du bien et <strong>reprendre le contrôle</strong> sur ta vie."
+                },
+                {
+                    "title": "Actions concrètes",
+                    "text": "Comprendre ne suffit pas. Sans <strong>action</strong>, rien ne change. Tu peux tout analyser, mais sans passer à l’action, ta situation reste la même. L’action transforme tes prises de conscience en <strong>résultats</strong>. Même avec des peurs ou des blocages, c’est en <strong>faisant</strong> que tu avances. Tes émotions te guident, tes besoins te donnent une direction. Mais seule l’action crée un <strong>vrai changement</strong>."
+                }
+            ] %}
+
+            {% for step in steps %}
+                <li class="definition-item" data-step="{{ loop.index }}">
+                    <h3 class="definition-title">{{ step.title }}</h3>
+                    <p class="definition-text">{{ step.text|raw }}</p>                </li>
+            {% endfor %}
+        </ul>
+
     </div>
 
 </section>

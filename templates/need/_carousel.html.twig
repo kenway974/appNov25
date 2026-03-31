@@ -1,0 +1,56 @@
+<section class="d-lg-none mt-5" aria-labelledby="mobile-needs-title">
+    
+    {{ include('need/_text-bloc.html.twig') }}
+
+    <div id="carouselNeedsByType" class="carousel slide" data-bs-ride="carousel" aria-label="Carrousel des besoins">
+        
+        <div class="carousel-inner">
+
+            {% for type, needs in needsByType %}
+                <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                    
+                    <header>
+                        <h2 class="category-title text-center">
+                            <strong>{{ type }}</strong>
+                        </h2>
+                    </header>
+
+                    {% for need in needs %}
+                        {% set uniqueId = 'mobile-' ~ need.id ~ '-' ~ loop.index %}
+
+                        <article>
+                            <button class="entity-btn entity-title"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#{{ uniqueId }}"
+                                    aria-expanded="false"
+                                    aria-controls="{{ uniqueId }}">
+
+                                {% if need.icon %}
+                                    <img src="{{ asset('images/icons/' ~ need.icon) }}" width="24" class="me-2">
+                                {% endif %}
+
+                                <span>{{ need.title }}</span>
+                            </button>
+
+                            <div id="{{ uniqueId }}" class="collapse mt-2">
+                                {{ include('need/_read.html.twig', { need }) }}
+                            </div>
+                        </article>
+
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselNeedsByType" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselNeedsByType" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
+    </div>
+</section>

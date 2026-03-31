@@ -3,113 +3,118 @@
 {% block title %}Liste des actions{% endblock %}
 
 {% block body %}
-<div class="mt-5">
-    <h2 class="text-center mb-4">Actions par type</h2>
 
-    {% if is_granted('ROLE_SUBSCRIBER') %}
-        {% if actionsByType is not empty %}
-            <div id="carouselActionsByType" class="carousel slide">
+{% include 'partials/_hero.html.twig' with {
+    imageUrl: '/images/actions/hero.jpg',
+    title: 'Passez à l’action',
+    text: 'Découvrez des actions concrètes pour avancer malgré vos blocages.',
+    id: 'action-hero'
+} %}
 
-                <!-- 🔹 Indicateurs -->
-                <div class="carousel-indicators">
-                    {% for type, actions in actionsByType %}
-                        <button type="button" 
-                                data-bs-target="#carouselActionsByType" 
-                                data-bs-slide-to="{{ loop.index0 }}" 
-                                class="{{ loop.first ? 'active' : '' }}" 
-                                aria-current="{{ loop.first ? 'true' : 'false' }}" 
-                                aria-label="Slide {{ loop.index }}">
-                            {{ type|capitalize }}
-                        </button>
-                    {% endfor %}
-                </div>
+<main class="container">
 
-                <!-- 🔹 Slides -->
-                <div class="carousel-inner">
-                    {% for type, actions in actionsByType %}
-                        <div class="carousel-item {{ loop.first ? 'active' : '' }}">
-                            <h3 class="text-center mb-3">{{ type|capitalize }}</h3>
+    <!-- =========================
+         MOBILE : CAROUSEL
+         ========================= -->
+    
+    <section class="d-lg-none mt-5" aria-labelledby="mobile-actions-title">
+    
+        {{ include('action/_text-bloc.html.twig') }}
 
-                            {% if actions is empty %}
-                                <p class="text-center">Aucune action trouvée pour ce type.</p>
-                            {% else %}
-                                <div class="d-flex flex-column align-items-center gap-3">
-                                    {% for action in actions %}
-                                        <div class="action-toggle-title text-center"
-                                             data-action-id="{{ action.id }}"
-                                             style="cursor:pointer; width:80%; padding:1rem; border-radius:12px; background-color: rgba(255,255,255,0.1);">
-                                            {% if action.icon %}
-                                                <img src="{{ asset('images/icons/' ~ action.icon) }}" alt="" width="32" class="me-2">
-                                            {% endif %}
-                                            <h5>{{ action.title }}</h5>
-                                        </div>
+        <div id="carouselActionsByType" class="carousel slide" data-bs-ride="carousel" aria-label="Carrousel des actions">
+            
+            <div class="carousel-inner">
 
-                                        <div class="action-content d-none mt-2" id="contentAction{{ action.id }}">
-                                            <p>{{ action.description }}</p>
+                {% for type, actions in actions %}
+                    <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                        
+                        <header>
+                            <h2 class="category-title text-center">
+                                <strong>{{ type }}</strong>
+                            </h2>
+                        </header>
+                    <div class="row g-3">
+                        {% for action in actions %}
+                            {% set uniqueId = 'mobile-' ~ action.id ~ '-' ~ loop.index %}
 
-                                            <ul class="list-unstyled mb-3">
-                                                {% if action.intension %}
-                                                    <li><strong>Intention :</strong> {{ action.intension }}</li>
-                                                {% endif %}
-                                                {% if action.duration %}
-                                                    <li><strong>Durée :</strong> {{ action.duration }} min</li>
-                                                {% endif %}
-                                                {% if action.isDoableNow %}
-                                                    <li><strong>Faisable maintenant :</strong> ✅ Oui</li>
-                                                {% else %}
-                                                    <li><strong>Faisable maintenant :</strong> ❌ Non</li>
-                                                {% endif %}
-                                            </ul>
+                            <article class="col-md-4">
+                                <button class="entity-btn entity-title"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#{{ uniqueId }}"
+                                        aria-expanded="false"
+                                        aria-controls="{{ uniqueId }}">
+                                        {{ action.title }}
+                                    {% if action.icon %}
+                                        <img src="{{ asset('images/icons/' ~ action.icon) }}" width="24" class="me-2">
+                                    {% endif %}
+                                </button>
 
-                                            {% if action.needs is not empty %}
-                                                <strong>Besoins liés :</strong>
-                                                <ul>
-                                                    {% for need in action.needs %}
-                                                        <li>{{ need.title }}</li>
-                                                    {% endfor %}
-                                                </ul>
-                                            {% else %}
-                                                <p>Aucun besoin lié.</p>
-                                            {% endif %}
-                                        </div>
-                                    {% endfor %}
+                                <div id="{{ uniqueId }}" class="collapse mt-2">
+                                    {{ include('action/_read.html.twig', { action }) }}
                                 </div>
-                            {% endif %}
-                        </div>
+                            </article>
+
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselActionsByIntension" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselActionsByIntension" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+
+        </div>
+    </section>
+
+    <!-- =========================
+         DESKTOP : GRILLE
+         ========================= -->
+    <section class="d-none d-lg-block mt-5" aria-labelledby="desktop-action-title">
+
+        {{ include('action/_text-bloc.html.twig') }}
+
+        {% for type, actions in actions %}
+            <section class="mb-5" aria-labelledby="intension-desktop-{{ loop.index }}">
+                <header>
+                    <h2 class="mb-3">{{ type }}</h2>
+                </header>
+
+                <div class="row g-3">
+                    {% for action in actions %}
+                        {% set uniqueId = 'desktop-' ~ action.id ~ '-' ~ loop.index %}
+
+                        <article class="col-md-4">
+                                <button class="entity-btn entity-title"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#{{ uniqueId }}"
+                                        aria-expanded="false"
+                                        aria-controls="{{ uniqueId }}">
+
+                                    {% if action.icon %}
+                                        <img src="{{ asset('images/icons/' ~ action.icon) }}" width="24" class="me-2">
+                                    {% endif %}
+
+                                    {{ action.title }}
+                                </button>
+
+                            <div id="{{ uniqueId }}" class="collapse mt-2">
+                                {{ include('action/_read.html.twig', { action }) }}
+                            </div>
+
+                        </article>
                     {% endfor %}
                 </div>
+            </section>
+        {% endfor %}
+    </section>
 
-                <!-- 🔹 Contrôles -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselActionsByType" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Précédent</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselActionsByType" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Suivant</span>
-                </button>
-            </div>
-        {% else %}
-            <p class="text-center text-white">Aucune action trouvée.</p>
-        {% endif %}
-    {% else %}
-        <div class="text-center mt-5">
-            <p>Vous devez être abonné pour accéder aux actions.</p>
-            <a href="{{ path('app_subscription') }}" class="btn btn-primary">S'abonner</a>
-        </div>
-    {% endif %}
-</div>
+</main>
 
-<!-- 🔹 JS Toggle -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.action-toggle-title').forEach(el => {
-        el.addEventListener('click', () => {
-            const id = el.dataset.actionId;
-            const content = document.querySelector('#contentAction' + id);
-            content.classList.toggle('d-none');
-        });
-    });
-});
-</script>
 {% endblock %}

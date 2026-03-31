@@ -1,84 +1,69 @@
-<div class="user-action text-center">
+<div class="entity-container mt-3">
+    <div class="entity-content">
 
-    <div class="user-action-header"
-         data-action-id="{{ userAction.id }}"
-         style="cursor:pointer">
+        <!-- =========================
+             CONTENU ACTUEL DE USERACTION
+             ========================= -->
+        <div class="user-action-details" id="action-details-{{ userAction.id }}">
 
-        {% if userAction.action.icon %}
-            <img
-                src="{{ asset('images/' ~ userAction.action.icon) }}"
-                alt="{{ userAction.action.title }}"
-                style="max-width:120px; margin-bottom:10px;">
-        {% endif %}
+            {% if userAction.action.isDoableNow %}
+                <p><strong>Faisable à tout moment</strong></p>
+            {% endif %}
 
-        {% if userAction.action.title %}
-            <h5>{{ userAction.action.title }}</h5>
-        {% endif %}
+            {% if userAction.deadline %}
+                <p>J'ai jusqu'au <strong>{{ userAction.deadline|date('d/m/Y') }}</strong></p>
+            {% endif %}
 
-    </div>
+            {% if userAction.action.duration %}
+                <p>Ça me prendra <strong>{{ userAction.action.duration }} minutes</strong></p>
+            {% endif %}
 
-    <div class="user-action-details d-none"
-         id="action-details-{{ userAction.id }}">
+            {% if userAction.action.intension %}
+                <p>Mon intention sera de <strong>{{ userAction.action.intension }}</strong></p>
+            {% endif %}
 
-        {% if userAction.action.isDoableNow %}
-            <p><strong>Faisable à tout moment</strong></p>
-        {% endif %}
+            <hr>
 
-        {% if userAction.deadline %}
-            <p>J'ai jusqu'au <strong>{{ userAction.deadline|date('d/m/Y') }}</strong></p>
-        {% endif %}
+            {% if userAction.action.type %}
+                <p><strong>{{ userAction.action.type }}</strong></p>
+            {% endif %}
 
-        {% if userAction.action.duration %}
-            <p>Ça me prendra <strong>{{ userAction.action.duration }} minutes</strong></p>
-        {% endif %}
+            {% if userAction.action.description %}
+                <p>{{ userAction.action.description }}</p>
+            {% endif %}
 
-        {% if userAction.action.intension %}
-            <p>Mon intention sera de <strong>{{ userAction.action.intension }}</strong></p>
-        {% endif %}
+            <hr>
 
-        <hr>
+            {% if userAction.frequency %}
+                <p>Je le fais tous les <strong>{{ userAction.frequency }}</strong> jours</p>
+            {% endif %}
 
-        {% if userAction.action.type %}
-            <p><strong>{{ userAction.action.type }}</strong></p>
-        {% endif %}
+            {% if userAction.completions is not null %}
+                <p>Déjà fait <strong>{{ userAction.completions }}</strong> fois</p>
+            {% endif %}
 
-        {% if userAction.action.description %}
-            <p>{{ userAction.action.description }}</p>
-        {% endif %}
+            <hr>
 
-        <hr>
+            {% if userAction.action.blocks|length > 0 %}
+                <div>
+                    <p><strong>Blocages possibles :</strong></p>
+                    {% for block in userAction.action.blocks %}
+                        <a href="{{ path('app_block_show_from_need', {'id': userAction.id}) }}">
+                            {{ block.title }}
+                        </a><br>
+                    {% endfor %}
+                </div>
+            {% endif %}
 
-        {% if userAction.frequency %}
-            <p>Je le fais tous les <strong>{{ userAction.frequency }}</strong> jours</p>
-        {% endif %}
+                <form method="post"
+                      action="{{ path('app_action_complete', { id: userAction.id }) }}">
+                    <input type="hidden"
+                           name="_token"
+                           value="{{ csrf_token('complete_user_action_' ~ userAction.id) }}">
+                    <button class="btn btn-success">Terminer</button>
+                </form>
 
-        {% if userAction.completions is not null %}
-            <p>Déjà fait <strong>{{ userAction.completions }}</strong> fois</p>
-        {% endif %}
-
-        <hr>
-
-        {% if userAction.action.blocks|length > 0 %}
-            <div>
-                <p><strong>Blocages possibles :</strong></p>
-                {% for block in userAction.action.blocks %}
-                    <a href="{{ path('app_block_show_from_need', {'id': userAction.id}) }}">
-                        {{ block.title }}
-                    </a><br>
-                {% endfor %}
-            </div>
-        {% endif %}
-
-        {% if is_granted('USER_ACTION_COMPLETE', userAction) %}
-            <form method="post"
-                  action="{{ path('app_action_complete', { id: userAction.id }) }}">
-                <input type="hidden"
-                       name="_token"
-                       value="{{ csrf_token('complete_user_action_' ~ userAction.id) }}">
-                <button class="btn btn-success">Terminer</button>
-            </form>
-        {% endif %}
+        </div>
 
     </div>
-
 </div>

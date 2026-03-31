@@ -1,54 +1,96 @@
-<div class="collapse mt-2" id="collapseNeed{{ userNeed.id }}">
-    <div class="card card-body p-3 text-center" 
-         style="background: rgba(53, 53, 53, 0.2); color: #fff; border-radius: 8px;">
+<div class="entity-container mt-3">
 
-        <p>{{ userNeed.need.description }}</p>
+    <div class="entity-content">
 
-        {% if userNeed.need.fulfilment is not empty %}
-    <strong>Fulfilments :</strong>
-    <ul class="list-unstyled mt-2">
-        {% for item in userNeed.need.fulfilment %}
-            <li><u>{{ item }}</u></li>
-        {% endfor %}
-    </ul>
-{% endif %}
-
-        <p><strong>Type :</strong> {{ userNeed.need.type }}</p>
-
-</div>
-
-<div>
-
-    {% if app.user.subscription.isActive == 1 %}
-        <ul>
-            {% for action in userNeed.need.actions %}
-                <li class="mb-3">
-                    {{ action.title }}
-
-                    <button
-                        class="btn btn-sm btn-outline-primary ms-2"
+        <!-- =========================
+             DESCRIPTION
+             ========================= -->
+        {% if userNeed.need.description %}
+            <div class="description-block">
+                <button class="description-toggle"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#form-{{ userNeed.id }}-{{ action.id }}"
+                        data-bs-target="#collapseDescriptionUserNeed{{ userNeed.id }}"
                         aria-expanded="false"
-                        aria-controls="form-{{ userNeed.id }}-{{ action.id }}"
-                    >
-                        Ajouter
-                    </button>
+                        aria-controls="collapseDescriptionUserNeed{{ userNeed.id }}">
+                    En apprendre plus
+                </button>
 
-                    <div class="collapse mt-2" id="form-{{ userNeed.id }}-{{ action.id }}">
-                        <div class="border p-3 rounded shadow-sm bg-light">
-                            {{ include('action/_form.html.twig', { action: action }) }}
-                        </div>
+                <div class="collapse" id="collapseDescriptionUserNeed{{ userNeed.id }}">
+                    <div class="description-content">
+                        <p>{{ userNeed.need.description }}</p>
                     </div>
-                </li>
-            {% endfor %}
-        </ul>
+                </div>
+            </div>
+        {% endif %}
 
-    {% elseif app.user and 'ROLE_USER' in app.user.roles %}
-        <a href="{{ path('app_subscription') }}" class="btn btn-primary">
-            S’abonner pour accéder aux actions
-        </a>
-    {% endif %}
+        <!-- =========================
+             FULFILMENTS
+             ========================= -->
+        {% if userNeed.need.fulfilment is not empty %}
+            <h5 class="trigger-intro mt-3">
+                <strong>Comment y répondre ?</strong>
+            </h5>
 
+            <div class="trigger-list">
+                {% for item in userNeed.need.fulfilment %}
+                    <span class="trigger-pill">{{ item }}</span>
+                {% endfor %}
+            </div>
+
+            <p class="trigger-note">
+                ... un besoin peu satisfait peut générer des tensions internes
+            </p>
+        {% endif %}
+
+        <!-- =========================
+             TYPE
+             ========================= -->
+        <p class="mt-2"><strong>Type :</strong> {{ userNeed.need.type }}</p>
+
+        <!-- =========================
+             ACTIONS
+             ========================= -->
+        {% if app.user.subscription is defined and app.user.subscription and app.user.subscription.isActive == 1 %}
+            <ul class="list-unstyled mt-3">
+                {% for action in userNeed.need.actions %}
+                    <div class="action-block">
+
+                        <button class="sub-entity-btn entity-title"
+                            role="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseActionForm{{ userNeed.id }}-{{ action.id }}"
+                            aria-expanded="false"
+                            aria-controls="collapseActionForm{{ userNeed.id }}-{{ action.id }}">
+                            
+                            {{ action.title }}
+                        </button>
+
+                        <div class="collapse" id="collapseActionForm{{ userNeed.id }}-{{ action.id }}">
+                            <div class="action-content">
+
+                                {{ include('action/_read.html.twig', { action: action }) }}
+
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </ul>
+
+        {% elseif app.user %}
+            <a href="{{ path('app_subscription') }}" class="btn btn-submit mt-2">
+                S’abonner pour accéder aux actions
+            </a>
+
+        {% else %}
+            <p class="trigger-note mt-2">
+                Connecte-toi pour accéder aux actions
+            </p>
+            <a href="{{ path('app_login') }}" class="btn mt-1">
+                Me connecter
+            </a>
+        {% endif %}
+
+    </div>
 </div>

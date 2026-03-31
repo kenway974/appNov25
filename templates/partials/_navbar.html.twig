@@ -1,5 +1,4 @@
-<nav class="navbar custom-navbar px-4"
-     style="background: linear-gradient(135deg, #001381ff, #050049ff);">
+<nav class="navbar custom-navbar px-4">
 
     <div class="container-fluid navbar-container w-100">
 
@@ -28,9 +27,9 @@
         <div class="navbar-center">
             <a class="navbar-brand"
                href="{{ path('app_home') }}">
-                <img src="{{ asset('icons/logo-192.png') }}"
+                <img src="images/logo.png"
                      alt="Home"
-                     height="24">
+                     height="36">
             </a>
         </div>
 
@@ -40,6 +39,7 @@
         <div class="navbar-menu-desktop">
             <a href="{{ path('app_subscription') }}" class="menu-link">Abonnement</a>
             <a href="{{ path('app_feeling') }}" class="menu-link">Feeling</a>
+            <a href="{{ path('app_need') }}" class="menu-link">Besoins</a>
             <a href="{{ path('app_action') }}" class="menu-link">Actions</a>
             <a href="{{ path('app_block') }}" class="menu-link">Blocages</a>
         </div>
@@ -51,35 +51,40 @@
 
             {% if app.user %}
                 <!-- Notifications -->
-                <div class="nav-item dropdown me-3">
+                <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle"
                        href="#"
                        id="notificationDropdown"
                        role="button"
                        data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        <img src="{{ asset('icons/notifications-icon.png') }}"
+                        <img src="{{ asset('images/navbar/notif.png') }}"
                              alt="Notifications"
-                             height="24">
+                             width="36">
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end">
                         {{ include('notification/_index.html.twig', {
-                            notifications: notifications|default([])
+                            notifications: app.user
+                                ? notification_service.getUserNotifications(app.user.id, true, 10)
+                                : []
                         }) }}
                     </ul>
                 </div>
 
                 <!-- Dashboard -->
                 <a href="{{ path('app_dashboard') }}"
-                   class="btn btn-link dashboard-btn">
-                    Dashboard
+                   class="dashboard-btn"
+                   style="padding-bottom: 8px;">
+                    <img src="{{ asset('images/navbar/dashboard.png') }}"
+                             alt="Notifications"
+                             width="36">
                 </a>
             {% else %}
                 <!-- Login -->
                 <a href="{{ path('app_login') }}"
                    class="btn btn-link login-btn">
-                    Login
+                    Me connecter
                 </a>
             {% endif %}
 

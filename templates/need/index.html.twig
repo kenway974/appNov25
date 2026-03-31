@@ -3,92 +3,124 @@
 {% block title %}Liste des besoins{% endblock %}
 
 {% block body %}
-<div class="mt-5">
-    <h2 class="text-center mb-4">Besoins par type</h2>
 
-    {% if needsByType is not empty %}
-    <div id="carouselNeedsByType" class="carousel slide">
+{% include 'partials/_hero.html.twig' with {
+    imageUrl: '/images/needs/hero.jpg',
+    title: 'Comprendre vos besoins',
+    text: 'Identifiez ce qui vous manque réellement et découvrez comment y répondre.',
+    id: 'need-hero'
+} %}
 
-        <!-- 🔹 Indicateurs -->
-        <div class="carousel-indicators">
-            {% for type, needs in needsByType %}
-                <button type="button" 
-                        data-bs-target="#carouselNeedsByType" 
-                        data-bs-slide-to="{{ loop.index0 }}" 
-                        class="{{ loop.first ? 'active' : '' }}" 
-                        aria-current="{{ loop.first ? 'true' : 'false' }}" 
-                        aria-label="Slide {{ loop.index }}">
-                    {{ type|capitalize }}
-                </button>
-            {% endfor %}
-        </div>
+<main class="container">
 
-        <!-- 🔹 Slides -->
-        <div class="carousel-inner">
-            {% for type, needs in needsByType %}
-                <div class="carousel-item {{ loop.first ? 'active' : '' }}">
-                    <h3 class="text-center mb-3">{{ type|capitalize }}</h3>
+    <!-- =========================
+         MOBILE : CAROUSEL
+         ========================= -->
+    
+    <section class="d-lg-none mt-5" aria-labelledby="mobile-needs-title">
+    
+        {{ include('need/_text-bloc.html.twig') }}
 
-                    {% if needs is empty %}
-                        <p class="text-center">Aucun besoin trouvé pour ce type.</p>
-                    {% else %}
-                        <div class="d-flex flex-column align-items-center gap-3">
-                            {% for need in needs %}
-                                <div class="need-toggle-title text-center"
-                                     data-need-id="{{ need.id }}"
-                                     style="cursor:pointer; width:80%; padding:1rem; border-radius:12px; background-color: rgba(255,255,255,0.1);">
+        <div id="carouselNeedsByType" class="carousel slide" data-bs-ride="carousel" aria-label="Carrousel des besoins">
+            
+            <div class="carousel-inner">
+
+                {% for type, needs in needsByType %}
+                    <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                        
+                        <header>
+                            <h2 class="category-title text-center">
+                                <strong>{{ type }}</strong>
+                            </h2>
+                        </header>
+
+                        {% for need in needs %}
+                            {% set uniqueId = 'mobile-' ~ need.id ~ '-' ~ loop.index %}
+
+                            <article>
+                                <button class="entity-btn entity-title"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#{{ uniqueId }}"
+                                        aria-expanded="false"
+                                        aria-controls="{{ uniqueId }}">
+
                                     {% if need.icon %}
-                                        <img src="{{ asset('images/icons/' ~ need.icon) }}" alt="" width="32" class="me-2">
+                                        <img src="{{ asset('images/icons/' ~ need.icon) }}" width="24" class="me-2">
                                     {% endif %}
-                                    <h5>{{ need.title }}</h5>
-                                </div>
 
-                                <div class="need-content d-none mt-2" id="contentNeed{{ need.id }}">
-                                    <p>{{ need.description }}</p>
+                                    <span>{{ need.title }}</span>
+                                </button>
 
-                                    {% if need.actions is not empty %}
-                                        <strong>Actions liées :</strong>
-                                        <ul>
-                                            {% for action in need.actions %}
-                                                <li>{{ action.title }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    {% else %}
-                                        <p>Aucune action liée.</p>
-                                    {% endif %}
+                                <div id="{{ uniqueId }}" class="collapse mt-2">
+                                    {{ include('need/_read.html.twig', { need }) }}
                                 </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
-            {% endfor %}
+                            </article>
+
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselNeedsByType" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselNeedsByType" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+
         </div>
+    </section>
 
-        <!-- 🔹 Contrôles -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselNeedsByType" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Précédent</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselNeedsByType" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Suivant</span>
-        </button>
-    </div>
+    <!-- =========================
+         DESKTOP : GRILLE
+         ========================= -->
+    <section class="d-none d-lg-block mt-5" aria-labelledby="desktop-need-title">
 
-    {% else %}
-        <p class="text-center text-white">Aucun besoin trouvé.</p>
-    {% endif %}
-</div>
+        {{ include('need/_text-bloc.html.twig') }}
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.need-toggle-title').forEach(el => {
-        el.addEventListener('click', () => {
-            const id = el.dataset.needId;
-            const content = document.querySelector('#contentNeed' + id);
-            content.classList.toggle('d-none');
-        });
-    });
-});
-</script>
+        {% for type, needs in needsByType %}
+            <section class="mb-5" aria-labelledby="type-desktop-{{ loop.index }}">
+                <header>
+                    <h2 class="mb-3">{{ type }}</h2>
+                </header>
+
+                <div class="row g-3">
+                    {% for need in needs %}
+                        {% set uniqueId = 'desktop-' ~ need.id ~ '-' ~ loop.index %}
+
+                        <article class="col-md-4">
+                                <button class="entity-btn entity-title"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#{{ uniqueId }}"
+                                        aria-expanded="false"
+                                        aria-controls="{{ uniqueId }}">
+
+                                    {% if need.icon %}
+                                        <img src="{{ asset('images/icons/' ~ need.icon) }}" width="24" class="me-2">
+                                    {% endif %}
+
+                                    {{ need.title }}
+                                </button>
+
+                            <div id="{{ uniqueId }}" class="collapse mt-2">
+                                {{ include('need/_read.html.twig', { need }) }}
+                            </div>
+
+                        </article>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endfor %}
+    </section>
+
+</main>
+
+<footer class="container text-center mt-5 mb-5">
+    <p class="text-muted">Interface de consultation des besoins</p>
+</footer>
+
 {% endblock %}

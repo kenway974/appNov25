@@ -1,0 +1,16 @@
+{# templates/dashboard/partials/_needs.html.twig #}
+
+<div class="dashboard-entity">
+    <h2 class="text-center">Besoins</h2>
+
+    {% if userNeeds is not empty %}
+        <div class="user-needs">
+            {{ include('user_need/_list.html.twig') }}
+        </div>
+    {% else %}
+        <p class="text-center text-white mt-4">Aucun besoin trouvé.</p>
+        <div class="text-center">
+            <a href="{{ path('app_need') }}" class="btn btn-primary">En ajouter</a>
+        </div>
+    {% endif %}
+</div>

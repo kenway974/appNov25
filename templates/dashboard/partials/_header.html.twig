@@ -1,0 +1,36 @@
+<div class="dashboard-header">
+
+    <h2 class="dashboard-title">
+        Bienvenue, {{ user.username }} !
+    </h2>
+
+    <div class="dashboard-avatar-container">
+
+        <img src="{% if user.dashboardIllustration %}
+                    /images/dashboard/{{ user.dashboardIllustration }}
+                  {% else %}
+                    /images/dashboard/avatar-placeholder.png
+                  {% endif %}"
+             alt="{{ user.username }}'s dashboard"
+             class="dashboard-avatar">
+
+        <span class="dashboard-avatar-badge"
+              data-bs-toggle="collapse"
+              data-bs-target="#dashboardForm"
+              aria-expanded="false"
+              aria-controls="dashboardForm">
+            ✎
+        </span>
+
+    </div>
+
+    <div class="collapse dashboard-form" id="dashboardForm">
+        {{ form_start(form) }}
+            {{ form_row(form.dashboardIllustrationFile) }}
+            <button type="submit" class="btn btn-outline-light mt-2">
+                Mettre à jour
+            </button>
+        {{ form_end(form) }}
+    </div>
+
+</div>

@@ -1,10 +1,22 @@
-<form method="post" action="{{ path('app_feeling') }}">
-        <input type="hidden" name="need_id" value="{{ need.id }}">
+<form method="post" action="{{ path('app_feeling') }}" class="entity-form">
+    <input type="hidden" name="need_id" value="{{ need.id }}">
 
-        <label for="priority_{{ need.id }}">
-            À quel point ça te paraît important ?
-        </label>
-        <input type="number" id="priority_{{ need.id }}" name="priority" min="0" max="100" value="0">
+    <label for="priority_{{ need.id }}" class="form-label">
+        Sur 10, à quel point t'en aurais besoin ?
+    </label>
 
-        <button type="submit">Valider</button>
-    </form>
+    <span id="rangeMinValue_{{ need.id }}">5</span>
+
+    <input 
+        type="range" 
+        id="priority_{{ need.id }}" 
+        name="priority" 
+        min="5" 
+        max="10"
+        class="range-input"
+    >
+
+    <span id="rangeMaxValue_{{ need.id }}">10</span>
+
+    <button class="btn-submit" type="submit">Valider</button>
+</form>

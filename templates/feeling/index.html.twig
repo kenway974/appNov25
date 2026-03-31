@@ -4,191 +4,60 @@
 
 {% block body %}
 
-<header class="container mt-5">
-    <h1 class="text-center">Feelings par émotion</h1>
-</header>
-
+{% include 'partials/_hero.html.twig' with {
+    imageUrl: '/images/feelings/hero.jpg',
+    title: 'Explorez vos émotions',
+    text: 'Choisissez une émotion pour découvrir les ressentis associés et identifier vos besoins.',
+    id: 'feeling-hero'
+} %}
+ 
 <main class="container">
 
-    <!-- SECTION MOBILE -->
-    <section class="d-lg-none mt-5" aria-labelledby="mobile-feelings-title">
-        <h2 id="mobile-feelings-title" class="text-center mb-4">
-            Affichage mobile
-        </h2>
+    <!-- =========================
+         MOBILE : CAROUSEL
+         ========================= -->
+    
+{{ include('feeling/_carousel.html.twig') }}
 
-        <div id="carouselFeelingsByEmotion"
-             class="carousel slide"
-             data-bs-ride="carousel"
-             aria-label="Carrousel des émotions">
-
-            <div class="carousel-inner">
-
-                {% for emotion, feelings in feelingsByEmotion %}
-                    <section class="carousel-item {{ loop.first ? 'active' : '' }}"
-                             aria-labelledby="emotion-mobile-{{ loop.index }}">
-
-                        <header>
-                            <h3 id="emotion-mobile-{{ loop.index }}"
-                                class="text-center mb-3">
-                                {{ emotion }}
-                            </h3>
-                        </header>
-
-                        {% for feeling in feelings %}
-                            <article class="mb-2">
-
-                                <button class="btn btn-outline-light w-100"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#feeling{{ feeling.id }}"
-                                        aria-expanded="false"
-                                        aria-controls="feeling{{ feeling.id }}">
-                                    {{ feeling.title }}
-                                </button>
-
-                                <div id="feeling{{ feeling.id }}"
-                                     class="collapse mt-2">
-                                    {{ include('feeling/_read.html.twig', { feeling }) }}
-                                </div>
-
-                            </article>
-                        {% endfor %}
-
-                    </section>
-                {% endfor %}
-
-            </div>
-
-            <button class="carousel-control-prev"
-                    type="button"
-                    data-bs-target="#carouselFeelingsByEmotion"
-                    data-bs-slide="prev"
-                    aria-label="Émotion précédente">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-
-            <button class="carousel-control-next"
-                    type="button"
-                    data-bs-target="#carouselFeelingsByEmotion"
-                    data-bs-slide="next"
-                    aria-label="Émotion suivante">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-
-        </div>
-    </section>
-
-    <!-- SECTION DESKTOP -->
-    <section class="d-none d-lg-block mt-5" aria-labelledby="desktop-feelings-title">
-        <h2 id="desktop-feelings-title" class="text-center mb-4">
-            Affichage desktop
-        </h2>
-
+    <!-- =========================
+         DESKTOP : GRILLE
+         ========================= -->
+    <section class="d-none d-lg-block mt-5" aria-labelledby="desktop-entity-title">
+        
+        {{ include('feeling/_text-bloc.html.twig') }}
+        
         {% for emotion, feelings in feelingsByEmotion %}
             <section class="mb-5" aria-labelledby="emotion-desktop-{{ loop.index }}">
-
                 <header>
-                    <h3 id="emotion-desktop-{{ loop.index }}" class="mb-3">
-                        {{ emotion }}
-                    </h3>
+                    <h2 class="mb-3">{{ emotion }}</h2>
                 </header>
 
                 <div class="row g-3">
                     {% for feeling in feelings %}
+                        {% set uniqueId = 'desktop-' ~ feeling.id ~ '-' ~ loop.index %}
                         <article class="col-md-4">
-                            <div class="card h-100">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">
-
-                                        <button class="btn btn-link p-0 text-decoration-none"
+                                        <button class="entity-btn entity-title"
                                                 type="button"
                                                 data-bs-toggle="collapse"
-                                                data-bs-target="#feeling{{ feeling.id }}"
+                                                data-bs-target="#{{ uniqueId }}"
                                                 aria-expanded="false"
-                                                aria-controls="feeling{{ feeling.id }}">
+                                                aria-controls="{{ uniqueId }}">
                                             {{ feeling.title }}
                                         </button>
-
-                                    </h4>
-
-                                    <div id="feeling{{ feeling.id }}"
-                                         class="collapse mt-2">
+                                    <div id="{{ uniqueId }}" class="collapse mt-2">
                                         {{ include('feeling/_read.html.twig', { feeling }) }}
                                     </div>
-                                </div>
-
-                            </div>
                         </article>
                     {% endfor %}
                 </div>
-
             </section>
         {% endfor %}
     </section>
 
 </main>
 
-<footer class="container text-center mt-5">
-    <p class="text-muted">
-        Interface de consultation des émotions et ressentis
-    </p>
+<footer class="container text-center mt-5 mb-5">
+    <p class="text-muted">Interface de consultation des émotions et ressentis</p>
 </footer>
-
-{% endblock %}
-
-
-{% block javascripts %}
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.user-need-title').forEach(function(el) {
-                el.addEventListener('click', function() {
-
-                    const id = this.dataset.id;
-
-                    if (!id) {
-                        console.warn('Aucun ID trouvé sur cet élément.');
-                        return;
-                    }
-
-                    fetch('{{ path('set_selected_user_need') }}', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'X-CSRF-TOKEN': '{{ csrf_token('set_user_need') }}'
-                        },
-                        body: JSON.stringify({ id: id })
-                    })
-                    .then(res => {
-                        if (!res.ok) {
-                            throw new Error('Erreur serveur : ' + res.status);
-                        }
-                        return res.text();
-                    })
-                    .then(data => {
-                        console.log('✅ ID enregistré en session :', data);
-                    })
-                    .catch(err => {
-                        console.error('⚠️ Erreur lors de l’enregistrement :', err);
-                    });
-                });
-            });
-        });
-
-        document.querySelectorAll('.feeling-toggle-title').forEach(function(title) {
-        title.addEventListener('click', function() {
-            const id = this.dataset.feelingId;
-            const content = document.getElementById('contentFeeling' + id);
-            if (content) {
-                content.classList.toggle('d-none');
-            }
-        });
-    });
-    </script>
-
 
 {% endblock %}

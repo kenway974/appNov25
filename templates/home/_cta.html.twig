@@ -1,21 +1,28 @@
-<section class="container-fluid d-flex justify-content-center align-items-center my-5 cta"
-         id="home-cta"
-         aria-labelledby="cta-title">
+<section class="container my-5" id="home-cta">
+  <h2 class="text-center mb-5">
+    Transforme tes émotions en actions concrètes
+  </h2>
+  <div class="row justify-content-center g-4">
 
-  <div class="card card-body text-center cta-card position-relative">
+    <!-- Version Gratuite -->
+    <div class="col-md-4">
+      <div class="card">
+        <img src="images/plans/plan-gratuit.jpg" alt="Version gratuite" class="mb-5">
+        <h3>Commence maintenant !</h3>
+        <p>Identifie tes émotions, comprends tes besoins et tes valeurs, et apprends concrètement à mieux te gérer pour retrouver clarté, stabilité et équilibre au quotidien, simplement et à ton rythme.</p>
+        <a href="{{ path('app_feeling') }}" class="btn mt-2">Continuer</a>
+      </div>
+    </div>
 
-    <h2 id="cta-title" class="visually-hidden">
-      Passe à l’action avec ton premier ressenti
-    </h2>
+    <!-- Version Premium -->
+    <div class="col-md-4">
+      <div class="card">
+        <img src="images/plans/plan-premium.jpg" alt="Version premium" class="mb-5">
+        <h3>Donne-toi toutes les chances !</h3>
+        <p>Tu seras guidé pour passer à l\’action avec des étapes concrètes adaptées à tes besoins pour transformer ta vie, dépasser tes blocages, reprendre le contrôle et construire un quotidien plus épanouissant et aligné.</p>
+        <a href="{{ path('app_subscription') }}" class="btn mt-2">Continuer</a>
+      </div>
+    </div>
 
-    <img src="{{ asset('images/goals.png') }}"
-         alt="Atteindre ses objectifs grâce à ses émotions"
-         class="cta-img">
-
-    <a href="{{ path('app_feeling') }}"
-       class="btn btn-cta cta-overlay-btn">
-       Explorer mes émotions
-    </a>
   </div>
-
 </section>

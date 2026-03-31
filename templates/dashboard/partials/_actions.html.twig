@@ -1,0 +1,12 @@
+{# templates/dashboard/partials/_actions.html.twig #}
+
+<div class="dashboard-entity">
+    <h2 class="dashboard-entity-title text-center mb-4">Actions</h2>
+    {% if userActions is not empty %}
+        <div class="user-actions">
+            {{ include('user_action/_list.html.twig') }}
+        </div>
+    {% else %}
+        <p class="text-center text-white">Aucune action trouvée.</p>
+    {% endif %}
+</div>
