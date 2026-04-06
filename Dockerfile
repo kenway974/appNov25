@@ -26,6 +26,9 @@ COPY . .
 
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader --no-scripts
 
+RUN mkdir -p var \
+ && chown -R www-data:www-data var vendor public
+ 
 # Permissions Symfony
 RUN chown -R www-data:www-data /var/www/html/var
 
