@@ -21,7 +21,8 @@ RUN apt-get update && apt-get install -y \
 # Activer rewrite (Symfony)
 RUN a2enmod rewrite
 
-RUN a2dismod mpm_event && a2enmod mpm_prefork
+RUN a2dismod mpm_event mpm_worker && a2enmod mpm_prefork
+COPY mpm-disable.conf /etc/apache2/mods-available/mpm_event.conf
 
 # éviter warning Apache (obligatoire sur certains hosts)
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
