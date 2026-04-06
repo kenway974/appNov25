@@ -7,7 +7,7 @@
              ===================== -->
         <div class="navbar-left">
             <!-- Burger visible sur mobile uniquement -->
-            <button class="btn burger-btn"
+            <button class="btn burger-btn d-lg-none"
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasMenu"
@@ -51,25 +51,28 @@
 
             {% if app.user %}
                 <!-- Notifications -->
-                <div class="nav-item dropdown">
+                <div class="dropdown">
+
                     <a class="nav-link dropdown-toggle"
-                       href="#"
-                       id="notificationDropdown"
-                       role="button"
-                       data-bs-toggle="dropdown"
-                       aria-expanded="false">
+                    href="#"
+                    id="notificationDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+
                         <img src="{{ asset('images/navbar/notif.png') }}"
-                             alt="Notifications"
-                             width="36">
+                            alt="Notifications"
+                            width="36">
                     </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end">
+                    <ul class="dropdown-menu dropdown-menu-start" data-bs-display="static" aria-labelledby="notificationDropdown">
                         {{ include('notification/_index.html.twig', {
                             notifications: app.user
-                                ? notification_service.getUserNotifications(app.user.id, true, 10)
+                                ? notification_service.getUserNotifications(app.user)
                                 : []
                         }) }}
                     </ul>
+
                 </div>
 
                 <!-- Dashboard -->

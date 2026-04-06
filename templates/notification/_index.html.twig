@@ -2,7 +2,7 @@
     {% for notif in notifications %}
         <li class="dropdown-item d-flex justify-content-between align-items-start" data-id="{{ notif.id }}">
 
-            <div>
+            <div class="notif-content">
 
                 {# TITRE #}
                 {% if notif.title %}
@@ -11,7 +11,9 @@
 
                 {# MESSAGE #}
                 {% if notif.message %}
-                    {{ notif.message }}<br>
+                    <p class="mb-0" style="white-space: normal; overflow-wrap: break-word;">
+                        {{ notif.message }}
+                    </p>
                 {% else %}
                     <em>Pas de message</em><br>
                 {% endif %}
@@ -39,14 +41,13 @@
 
             </div>
 
-            <div class="btn-group btn-group-sm ms-2">
-                <a href="{{ path('app_action_complete', {'id': notif.userAction.id}) }}" class="btn btn-success" title="Marquer comme fait">
-                    ✓
-                </a>
-                <a href="{{ path('app_notification_delete', {'id': notif.id}) }}" class="btn btn-danger" title="Supprimer">
-                    🗑
-                </a>
-            </div>
+            <form method="post"
+                      action="{{ path('app_action_complete', { id: notif.userAction.id }) }}">
+                    <input type="hidden"
+                           name="_token"
+                           value="{{ csrf_token('complete_user_action_' ~ notif.userAction.id) }}">
+                    <button class="btn btn-success">Terminer</button>
+                </form>
 
         </li>
 
