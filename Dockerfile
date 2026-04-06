@@ -19,6 +19,13 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /app
 COPY . .
 
+# Installer Node
+RUN apt-get update && apt-get install -y nodejs npm
+
+# Installer les assets
+RUN npm install
+RUN npm run build
+
 # Installer dépendances Symfony
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
