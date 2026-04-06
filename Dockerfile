@@ -14,6 +14,10 @@ RUN apt-get update && apt-get install -y \
 # Activer mod_rewrite (important pour Symfony)
 RUN a2enmod rewrite
 
+RUN a2dismod mpm_event || true \
+ && a2dismod mpm_worker || true \
+ && a2enmod mpm_prefork
+
 # Configurer le dossier public
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
@@ -28,8 +32,5 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader --no-s
 
 RUN mkdir -p var \
  && chown -R www-data:www-data var vendor public
- 
-# Permissions Symfony
-RUN chown -R www-data:www-data /var/www/html/var
 
 CMD ["apache2-foreground"]
