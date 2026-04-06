@@ -1,56 +1,15 @@
-FROM php:8.2-apache
+FROM php:8.2-fpm
 
-# =========================
-# PHP + extensions
-# =========================
 RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    libssl-dev \
-    pkg-config \
-    libicu-dev \
- && pecl install mongodb \
- && docker-php-ext-enable mongodb \
- && docker-php-ext-install intl opcache \
+    git unzip libicu-dev libzip-dev \
+ && docker-php-ext-install intl opcache pdo pdo_mysql zip \
  && rm -rf /var/lib/apt/lists/*
 
-# =========================
-# Apache config
-# =========================
-
-# Activer rewrite (Symfony)
-RUN a2enmod rewrite
-
-RUN a2dismod mpm_event && a2enmod mpm_prefork
-
-# éviter warning Apache (obligatoire sur certains hosts)
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-
-# Config Symfony public/
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
-    /etc/apache2/sites-available/*.conf
-
-# =========================
-# Composer
-# =========================
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www/html
+WORKDIR /app
 COPY . .
 
-# =========================
-# Install deps
-# =========================
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader --no-scripts
+RUN composer install --no-dev --optimize-autoloader
 
-# =========================
-# Permissions Symfony
-# =========================
-RUN mkdir -p var/cache var/log \
- && chown -R www-data:www-data var vendor public
-
-# =========================
-# Runtime
-# =========================
-CMD ["apache2-foreground"]
+CMD ["php-fpm"]
