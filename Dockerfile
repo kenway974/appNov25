@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:8.2-fpm
 
 # =========================
 # PHP + extensions
@@ -13,24 +13,6 @@ RUN apt-get update && apt-get install -y \
  && docker-php-ext-enable mongodb \
  && docker-php-ext-install intl opcache \
  && rm -rf /var/lib/apt/lists/*
-
-# =========================
-# Apache config
-# =========================
-
-# Activer rewrite (Symfony)
-RUN a2enmod rewrite
-
-RUN a2dismod mpm_event mpm_worker && a2enmod mpm_prefork
-COPY mpm-disable.conf /etc/apache2/mods-available/mpm_event.conf
-
-# éviter warning Apache (obligatoire sur certains hosts)
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-
-# Config Symfony public/
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
-    /etc/apache2/sites-available/*.conf
 
 # =========================
 # Composer
@@ -50,8 +32,3 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader --no-s
 # =========================
 RUN mkdir -p var/cache var/log \
  && chown -R www-data:www-data var vendor public
-
-# =========================
-# Runtime
-# =========================
-CMD ["apache2-foreground"]
