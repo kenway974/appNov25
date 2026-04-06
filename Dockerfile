@@ -1,43 +1,61 @@
 FROM php:8.2-fpm
 
-# Variables Symfony (évite crash build)
+# ======================
+# ENV (IMPORTANT)
+# ======================
 ENV APP_ENV=prod
 ENV APP_DEBUG=0
-ENV DATABASE_URL="sqlite:///:memory:"
+
+# ⚠️ NE PAS mettre sqlite ici !
+# Railway injectera DATABASE_URL
 ENV PORT=8080
 
-# Installer nginx + extensions PHP
+# ======================
+# System deps
+# ======================
 RUN apt-get update && apt-get install -y \
     nginx \
-    git unzip libicu-dev libzip-dev \
+    git unzip curl \
+    libicu-dev libzip-dev \
+    nodejs npm \
  && docker-php-ext-install intl opcache pdo pdo_mysql zip \
  && rm -rf /var/lib/apt/lists/*
 
-# Installer Composer
+# ======================
+# Composer
+# ======================
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 COPY . .
 
-# Installer Node
-RUN apt-get update && apt-get install -y nodejs npm
+# ======================
+# Frontend build
+# ======================
+RUN npm install && npm run build
 
-# Installer les assets
-RUN npm install
-RUN npm run build
-
-# Installer dépendances Symfony
+# ======================
+# PHP deps
+# ======================
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
-# Copier config nginx
+# ======================
+# Nginx config
+# ======================
 COPY nginx.conf /etc/nginx/nginx.conf
 
+# ======================
+# Entrypoint
+# ======================
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# ======================
 # Permissions Symfony
+# ======================
 RUN mkdir -p var/cache var/log \
  && chown -R www-data:www-data var
 
-# Exposer port Railway
 EXPOSE 8080
 
-# Lancer PHP-FPM + Nginx
-CMD sh -c "php-fpm & nginx -g 'daemon off;'"
+CMD ["/entrypoint.sh"]
