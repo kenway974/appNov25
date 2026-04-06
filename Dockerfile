@@ -21,9 +21,7 @@ RUN apt-get update && apt-get install -y \
 # Activer rewrite (Symfony)
 RUN a2enmod rewrite
 
-# 🔥 Fix MPM (version SAFE pour Railway)
-RUN a2dismod mpm_event || true \
- && a2dismod mpm_worker || true \
+RUN rm -f /etc/apache2/mods-enabled/mpm_* \
  && a2enmod mpm_prefork
 
 # éviter warning Apache (obligatoire sur certains hosts)
