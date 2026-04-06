@@ -1,14 +1,13 @@
 FROM php:8.2-fpm
 
 # ======================
-# ENV (IMPORTANT)
+# ENV
 # ======================
 ENV APP_ENV=prod
 ENV APP_DEBUG=0
-
-# ⚠️ NE PAS mettre sqlite ici !
-# Railway injectera DATABASE_URL
 ENV PORT=8080
+
+# ⚠️ IMPORTANT : DATABASE_URL vient de Railway (NE PAS override)
 
 # ======================
 # System deps
@@ -30,7 +29,7 @@ WORKDIR /app
 COPY . .
 
 # ======================
-# Frontend build
+# Front build
 # ======================
 RUN npm install && npm run build
 
@@ -38,6 +37,13 @@ RUN npm install && npm run build
 # PHP deps
 # ======================
 RUN composer install --no-dev --optimize-autoloader --no-scripts
+
+# ======================
+# Permissions FIX (IMPORTANT)
+# ======================
+RUN mkdir -p var/cache var/log \
+ && chown -R www-data:www-data var \
+ && chmod -R 775 var
 
 # ======================
 # Nginx config
@@ -51,11 +57,8 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # ======================
-# Permissions Symfony
+# Port Railway
 # ======================
-RUN mkdir -p var/cache var/log \
- && chown -R www-data:www-data var
-
 EXPOSE 8080
 
 CMD ["/entrypoint.sh"]
