@@ -2,13 +2,14 @@
 
 set -e
 
-echo "Fix permissions..."
+echo "Fix permissions (critical)..."
+
+mkdir -p var/cache var/log
 chown -R www-data:www-data var || true
-chmod -R 775 var || true
+chmod -R 777 var/cache var/log || true
 
 echo "Clear cache..."
-rm -rf var/cache/*
-rm -rf var/log/*
+rm -rf var/cache/* || true
 
 echo "Warmup cache..."
 php bin/console cache:warmup --env=prod || true

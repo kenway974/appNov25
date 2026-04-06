@@ -21,6 +21,12 @@ RUN apt-get update && apt-get install -y \
  && rm -rf /var/lib/apt/lists/*
 
 # ======================
+# PHP-FPM USER FIX
+# ======================
+RUN sed -i 's/user = www-data/user = www-data/g' /usr/local/etc/php-fpm.d/www.conf \
+ && sed -i 's/group = www-data/group = www-data/g' /usr/local/etc/php-fpm.d/www.conf
+ 
+# ======================
 # Composer
 # ======================
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
