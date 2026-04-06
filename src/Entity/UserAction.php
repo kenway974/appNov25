@@ -73,6 +73,9 @@ class UserAction
     )]
     private ?string $status = null;
 
+    #[ORM\OneToOne(mappedBy: 'userAction', targetEntity: Notification::class)]
+    private ?Notification $notification = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -206,6 +209,23 @@ class UserAction
     public function setStatus(string $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getNotification(): ?Notification
+    {
+        return $this->notification;
+    }
+
+    public function setNotification(?Notification $notification): self
+    {
+        $this->notification = $notification;
+
+        // synchronisation côté inverse (important si relation bidirectionnelle)
+        if ($notification !== null && $notification->getUserAction() !== $this) {
+            $notification->setUserAction($this);
+        }
 
         return $this;
     }

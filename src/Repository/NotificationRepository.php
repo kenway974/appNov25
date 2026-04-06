@@ -2,118 +2,55 @@
 
 namespace App\Repository;
 
-use App\Document\Notification;
-use Doctrine\ODM\MongoDB\Repository\DocumentRepository;
-use Doctrine\ODM\MongoDB\DocumentManager;
+use App\Entity\Notification;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * NotificationRepository (doctrrine/mongodb-odm) pour gérer les notifications dans MongoDB.
+ * @extends ServiceEntityRepository<Notification>
  */
-class NotificationRepository extends DocumentRepository
-{    
-    /**
-     * Récupère notifs d'un  utilisateur,
-     * triées par date décroissante.
-     * 
-     * @param int $userId
-     * @param int|null $limit
-     *
-     * @return iterable Collection
-     */
-    public function findByUser(int $userId, int $limit = null): iterable
+class NotificationRepository extends ServiceEntityRepository
+{
+    public function __construct(ManagerRegistry $registry)
     {
-        $qb = $this->createQueryBuilder()
-
-            ->field('userId')->equals($userId)
-            ->sort('createdAt', 'desc');
-
-        if ($limit !== null) {
-            $qb->limit($limit);
-        }
-
-        return $qb->getQuery()->execute();
+        parent::__construct($registry, Notification::class);
     }
 
     /**
-     * Récupère les notifs d'un utilisateur
-     * filtrées par context
-     * triées par date décroissante.
-     *
-     * context = { "actionId": 5 } distingue notifs action ou need
-     *
-     * @param int $userId
-     * @param string $contextKey
-     * @param mixed $contextValue
-     * @param int|null $limit
-     *
-     * @return iterable
+     * @return Notification[]
      */
-    public function findByUserAndContext(
-        int $userId,
-        string $contextKey,
-        mixed $contextValue,
-        int $limit = null
-    ): iterable {
-        $qb = $this->createQueryBuilder()
-
-            ->field('userId')->equals($userId)
-            ->field("context.$contextKey")->equals($contextValue)
-            ->sort('createdAt', 'desc');
-
-        if ($limit !== null) {
-            $qb->limit($limit);
-        }
-
-        return $qb->getQuery()->execute();
-    }
-
-    /**
-     * Récupère les notifications d’un utilisateur
-     * selon leur état de lecture (lues ou non lues),
-     * triées par date décroissante.
-     *
-     * @param int $userId
-     * @param bool $isRead true = lues, false = non lues
-     * @param int|null $limit
-     *
-     * @return iterable
-     */
-    public function findByIsRead(int $userId, bool $isRead, int $limit = null): iterable
+    public function findByUser($user): array
     {
-        $qb = $this->createQueryBuilder()
-
-            // Filtre utilisateur
-            ->field('userId')->equals($userId)
-
-            // Filtre état de lecture
-            ->field('isRead')->equals($isRead)
-
-            // Tri par date décroissante
-            ->sort('createdAt', 'desc');
-
-        if ($limit !== null) {
-            $qb->limit($limit);
-        }
-
-        return $qb->getQuery()->execute();
-    }
-
-    /**
-     * Retourne la dernière notification 
-     * pour éviter les doublons
-     */
-    public function findLatestDeadlineForUserAction(
-        int $userId,
-        int $userActionId
-    ): ?Notification {
-
-        return $this->createQueryBuilder()
-            ->field('userId')->equals($userId)
-            ->field('type')->equals('deadline')
-            ->field('context.user_action_id')->equals($userActionId)
-            ->sort('createdAt', 'DESC')
-            ->limit(1)
+        return $this->createQueryBuilder('n')
+            ->andWhere('n.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('n.createdAt', 'DESC')
             ->getQuery()
-            ->getSingleResult();
+            ->getResult();
     }
+
+    //    /**
+    //     * @return Notification[] Returns an array of Notification objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('n')
+    //            ->andWhere('n.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('n.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Notification
+    //    {
+    //        return $this->createQueryBuilder('n')
+    //            ->andWhere('n.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
