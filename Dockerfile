@@ -3,11 +3,12 @@ FROM php:8.2-fpm
 # ======================
 # ENV
 # ======================
-ENV APP_ENV=prod
-ENV APP_DEBUG=0
-ENV PORT=8080
-
-# ⚠️ IMPORTANT : DATABASE_URL vient de Railway (NE PAS override)
+ENV APP_ENV=prod \
+    APP_DEBUG=0 \
+    PORT=8080 \
+    APP_CACHE_DIR=/tmp/symfony/cache \
+    APP_LOG_DIR=/tmp/symfony/log \
+    APP_SESSION_DIR=/tmp/symfony/sessions
 
 # ======================
 # System deps
@@ -21,16 +22,13 @@ RUN apt-get update && apt-get install -y \
  && rm -rf /var/lib/apt/lists/*
 
 # ======================
-# PHP-FPM USER FIX
-# ======================
-RUN sed -i 's/user = www-data/user = www-data/g' /usr/local/etc/php-fpm.d/www.conf \
- && sed -i 's/group = www-data/group = www-data/g' /usr/local/etc/php-fpm.d/www.conf
- 
-# ======================
 # Composer
 # ======================
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# ======================
+# App
+# ======================
 WORKDIR /app
 COPY . .
 
@@ -43,13 +41,6 @@ RUN npm install && npm run build
 # PHP deps
 # ======================
 RUN composer install --no-dev --optimize-autoloader --no-scripts
-
-# ======================
-# Permissions FIX (IMPORTANT)
-# ======================
-RUN mkdir -p var/cache var/log \
- && chown -R www-data:www-data var \
- && chmod -R 775 var
 
 # ======================
 # Nginx config
