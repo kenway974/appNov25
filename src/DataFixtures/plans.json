@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "title": "Version gratuite",
     "description": "Comprends tes émotions et identifie tes besoins pour mieux te connaître.",
     "slug": "version-gratuite",
@@ -12,14 +13,28 @@
     "updatedAt": "2026-03-11T00:00:00+00:00"
   },
   {
-    "title": "Version premium",
+    "id": 2,
+    "title": "Version premium mensuelle",
     "description": "Bénéficie d'actions concrètes à mener et suis efficacement tes besoins pour progresser au quotidien.",
-    "slug": "version-premium",
-    "price": 4.99,
+    "slug": "version-premium-mensuelle",
+    "price": 1.99,
     "duration": 1,
     "features": ["Accès complet aux feelings", "Accès complet aux besoins", "Actions guidées", "Suivi mensuel"],
-    "stripeProductId": "prod_XXXXX",
-    "stripePriceId": "price_XXXXX",
+    "stripeProductId": "prod_TFjUYCPppQpJlX",
+    "stripePriceId": "price_1SJE1HE8ePL6ecqpvje1uEDO",
+    "createdAt": "2026-03-11T00:00:00+00:00",
+    "updatedAt": "2026-03-11T00:00:00+00:00"
+  },
+  {
+    "id": 3,
+    "title": "Version premium à vie",
+    "description": "Bénéficie d'un accès illimité à vie à toutes les fonctionnalités pour progresser durablement.",
+    "slug": "version-premium-vie",
+    "price": 9.99,
+    "duration": 3000,
+    "features": ["Accès complet aux feelings", "Accès complet aux besoins", "Actions guidées", "Suivi illimité"],
+    "stripeProductId": "prod_UKQRYfYBI2lgmR",
+    "stripePriceId": "price_1TLlb4E8ePL6ecqp6vTff2yb",
     "createdAt": "2026-03-11T00:00:00+00:00",
     "updatedAt": "2026-03-11T00:00:00+00:00"
   }

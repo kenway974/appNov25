@@ -1,218 +1,162 @@
 [
   {
-    "title": "j'ai besoin de repos",
+    "id": 1,
+    "title": "Clarté et contrôle",
     "description": "Mon corps et mon esprit ont besoin de récupérer.",
     "type": "Physique",
     "fulfilment": ["Dormir", "Faire une sieste", "S’allonger"],
-    "icon": "rest.png"
+    "icon": "physique.png"
   },
   {
-    "title": "j'ai besoin de sommeil",
+    "id": 2,
+    "title": "Sécurité et préparation (social)",
     "description": "Je manque de sommeil réparateur.",
     "type": "Physique",
     "fulfilment": ["Dormir tôt", "Couper les écrans", "Créer une routine"],
-    "icon": "sleep.png"
+    "icon": "physique.png"
   },
   {
-    "title": "j'ai besoin de bouger",
+    "id": 3,
+    "title": "Légitimité",
     "description": "Mon corps a besoin d’activité physique.",
     "type": "Physique",
     "fulfilment": ["Marcher", "Faire du sport", "S’étirer"],
-    "icon": "movement.png"
+    "icon": "physique.png"
   },
   {
-    "title": "j'ai besoin de bien manger",
+    "id": 4,
+    "title": "Confiance",
     "description": "Mon corps a besoin d’énergie et de nutriments.",
     "type": "Physique",
     "fulfilment": ["Manger équilibré", "Boire de l’eau", "Prendre un vrai repas"],
-    "icon": "food.png"
+    "icon": "physique.png"
   },
   {
-    "title": "j'ai besoin de me détendre physiquement",
+    "id": 5,
+    "title": "Calme mental",
     "description": "Mon corps est tendu et a besoin de relâchement.",
     "type": "Physique",
     "fulfilment": ["Respirer", "Massage", "Étirements"],
-    "icon": "relax.png"
+    "icon": "physique.png"
   },
-
   {
-    "title": "j'ai besoin de lien",
+    "id": 6,
+    "title": "Sécurité (foule)",
     "description": "Je ressens le besoin de me connecter aux autres.",
     "type": "Relationnel",
     "fulfilment": ["Appeler quelqu’un", "Voir un proche", "Discuter"],
-    "icon": "connection.png"
+    "icon": "relationnel.png"
   },
   {
-    "title": "j'ai besoin d’appartenance",
+    "id": 7,
+    "title": "Contrôle et préparation (rencontre)",
     "description": "Je veux me sentir inclus dans un groupe.",
     "type": "Relationnel",
     "fulfilment": ["Rejoindre un groupe", "Participer", "Partager"],
-    "icon": "belonging.png"
+    "icon": "relationnel.png"
   },
   {
-    "title": "j'ai besoin de validation",
+    "id": 8,
+    "title": "Rationalité",
     "description": "J’ai besoin d’être reconnu et accepté.",
     "type": "Relationnel",
     "fulfilment": ["Recevoir un compliment", "Feedback positif", "Encouragement"],
-    "icon": "validation.png"
+    "icon": "relationnel.png"
   },
   {
-    "title": "j'ai besoin de soutien",
+    "id": 9,
+    "title": "Régulation émotionnelle",
     "description": "J’ai besoin d’aide ou d’écoute.",
     "type": "Relationnel",
     "fulfilment": ["Parler à quelqu’un", "Demander de l’aide", "Être écouté"],
-    "icon": "support.png"
+    "icon": "relationnel.png"
   },
   {
-    "title": "j'ai besoin de partager",
+    "id": 10,
+    "title": "Aisance sociale",
     "description": "Je veux exprimer et échanger avec quelqu’un.",
     "type": "Relationnel",
     "fulfilment": ["Discuter", "Écrire", "Exprimer mes émotions"],
-    "icon": "sharing.png"
+    "icon": "relationnel.png"
   },
-
   {
-    "title": "j'ai besoin de comprendre",
+    "id": 11,
+    "title": "Motivation",
     "description": "Je cherche à donner du sens à ce que je vis.",
     "type": "Sens",
     "fulfilment": ["Réfléchir", "Analyser", "Poser des questions"],
-    "icon": "understanding.png"
+    "icon": "sens.png"
   },
   {
-    "title": "j'ai besoin de clarté",
+    "id": 12,
+    "title": "Stimulation / intérêt",
     "description": "Je veux voir plus clair dans mes pensées.",
     "type": "Sens",
     "fulfilment": ["Écrire", "Faire le tri", "Organiser mes idées"],
-    "icon": "clarity.png"
+    "icon": "sens.png"
   },
   {
-    "title": "j'ai besoin de direction",
+    "id": 13,
+    "title": "Acceptation de l'incertitude",
     "description": "Je veux savoir où je vais.",
     "type": "Sens",
     "fulfilment": ["Fixer un objectif", "Planifier", "Décider"],
-    "icon": "direction.png"
+    "icon": "sens.png"
   },
   {
-    "title": "j'ai besoin d’apprendre",
+    "id": 14,
+    "title": "Compréhension de soi",
     "description": "J’ai envie de découvrir et progresser.",
     "type": "Sens",
     "fulfilment": ["Lire", "Regarder un contenu", "Tester"],
-    "icon": "learning.png"
+    "icon": "sens.png"
   },
   {
-    "title": "j'ai besoin d’alignement",
+    "id": 15,
+    "title": "Justice / reconnaissance",
     "description": "Je veux être en accord avec mes valeurs.",
     "type": "Sens",
     "fulfilment": ["Réfléchir à mes valeurs", "Ajuster mes actions", "Dire non"],
-    "icon": "alignment.png"
+    "icon": "sens.png"
   },
-
   {
-    "title": "j'ai besoin de progresser",
+    "id": 16,
+    "title": "Confiance relationnelle",
     "description": "Je veux avancer et m’améliorer.",
     "type": "Accomplissement",
     "fulfilment": ["Apprendre", "S’entraîner", "Passer à l’action"],
-    "icon": "progress.png"
+    "icon": "accomplissement.png"
   },
   {
-    "title": "j'ai besoin de réussir",
+    "id": 17,
+    "title": "Changement de perception",
     "description": "Je veux atteindre un objectif.",
     "type": "Accomplissement",
     "fulfilment": ["Travailler", "Persévérer", "Terminer une tâche"],
-    "icon": "success.png"
+    "icon": "accomplissement.png"
   },
   {
-    "title": "j'ai besoin de contrôle",
+    "id": 18,
+    "title": "Clarté et contrôle",
     "description": "Je veux maîtriser ce qui m’entoure.",
     "type": "Accomplissement",
     "fulfilment": ["Organiser", "Planifier", "Structurer"],
-    "icon": "control.png"
+    "icon": "accomplissement.png"
   },
   {
-    "title": "j'ai besoin d’autonomie",
+    "id": 19,
+    "title": "Sécurité et préparation (social)",
     "description": "Je veux agir par moi-même.",
     "type": "Accomplissement",
     "fulfilment": ["Prendre une décision", "Agir seul", "Choisir"],
-    "icon": "autonomy.png"
+    "icon": "accomplissement.png"
   },
   {
-    "title": "j'ai besoin de résoudre un problème",
+    "id": 20,
+    "title": "Légitimité",
     "description": "Je veux trouver une solution concrète.",
     "type": "Accomplissement",
     "fulfilment": ["Analyser", "Planifier", "Tester"],
-    "icon": "problem.png"
-  },
-
-  {
-    "title": "j'ai besoin de m’apaiser",
-    "description": "Je ressens le besoin de calmer mes émotions.",
-    "type": "Émotionnel",
-    "fulfilment": ["Respirer", "Méditer", "Se poser"],
-    "icon": "calm.png"
-  },
-  {
-    "title": "j'ai besoin de réconfort",
-    "description": "J’ai besoin de douceur et de sécurité.",
-    "type": "Émotionnel",
-    "fulfilment": ["Se blottir", "Écouter de la musique", "Parler à quelqu’un"],
-    "icon": "comfort.png"
-  },
-  {
-    "title": "j'ai besoin de joie",
-    "description": "Je veux ressentir du plaisir et de la légèreté.",
-    "type": "Émotionnel",
-    "fulfilment": ["Rire", "Jouer", "Faire une activité plaisante"],
-    "icon": "joy.png"
-  },
-  {
-    "title": "j'ai besoin de m’exprimer",
-    "description": "Je veux libérer ce que je ressens.",
-    "type": "Émotionnel",
-    "fulfilment": ["Parler", "Écrire", "Créer"],
-    "icon": "expression.png"
-  },
-  {
-    "title": "j'ai besoin de lâcher prise",
-    "description": "Je veux arrêter de tout contrôler.",
-    "type": "Émotionnel",
-    "fulfilment": ["Respirer", "Accepter", "Relâcher la pression"],
-    "icon": "letting_go.png"
-  },
-
-  {
-    "title": "j'ai besoin de concentration",
-    "description": "Je veux rester focalisé et efficace dans ce que je fais.",
-    "type": "Mental",
-    "fulfilment": ["Faire des pauses", "Éliminer les distractions", "Se concentrer par blocs"],
-    "icon": "focus.png"
-  },
-  {
-    "title": "j'ai besoin de clarté mentale",
-    "description": "Je veux organiser mes pensées et prendre de meilleures décisions.",
-    "type": "Mental",
-    "fulfilment": ["Écrire mes idées", "Prioriser", "Structurer mes tâches"],
-    "icon": "clarity.png"
-  },
-  {
-    "title": "j'ai besoin de résoudre des problèmes",
-    "description": "Je veux trouver des solutions concrètes à mes défis.",
-    "type": "Mental",
-    "fulfilment": ["Analyser", "Tester différentes solutions", "Demander des avis"],
-    "icon": "problem_solving.png"
-  },
-  {
-    "title": "j'ai besoin d'apprendre",
-    "description": "Je veux comprendre, acquérir des connaissances et progresser intellectuellement.",
-    "type": "Mental",
-    "fulfilment": ["Lire", "Suivre une formation", "Observer et expérimenter"],
-    "icon": "learning.png"
-  },
-  {
-    "title": "j'ai besoin de réfléchir",
-    "description": "Je veux prendre le temps de penser et de me questionner.",
-    "type": "Mental",
-    "fulfilment": ["Prendre du recul", "Écrire mes pensées", "Méditer sur un problème"],
-    "icon": "thinking.png"
+    "icon": "accomplissement.png"
   }
-
 ]

@@ -1,162 +1,179 @@
 [
   {
+    "id": 1,
     "title": "Je suis trop fatigué",
-    "description": "Manque d'énergie pour réaliser les actions importantes.",
+    "description": "Ce blocage peut venir d’une croyance comme “si je suis fatigué, je ne peux rien faire”, souvent liée à une habitude de se pousser à la performance. Pourtant, une fatigue légère ne signifie pas une incapacité totale. Cela peut réduire ton envie d’agir et te bloquer avant même d’avoir essayé. Tu peux remettre en question ce ressenti en testant doucement, en distinguant vraie fatigue et résistance mentale.",
     "type": "Physique",
     "beliefs": ["Je n'y arriverai pas", "Je dois continuer malgré tout"],
     "reframings": ["Mon corps a besoin de repos", "Me reposer me rendra plus efficace"],
     "icon": "fatigue.png"
   },
   {
+    "id": 2,
     "title": "Je manque de sommeil",
-    "description": "Je ne dors pas assez pour être en forme.",
+    "description": "Ce blocage peut venir de la croyance que dormir est une perte de temps ou qu’on peut compenser autrement. Pourtant, le manque de sommeil impacte réellement tes capacités physiques et mentales. Cela réduit ton énergie, ta concentration et ta motivation. Tu peux questionner cette croyance et reconnaître que le sommeil est un levier essentiel de performance.",
     "type": "Physique",
     "beliefs": ["Dormir est une perte de temps", "Je peux compenser autrement"],
     "reframings": ["Le sommeil est essentiel", "Bien dormir améliore mes performances"],
     "icon": "sleep.png"
   },
   {
+    "id": 3,
     "title": "Je me sens sans énergie",
-    "description": "Difficulté à me mettre en mouvement.",
+    "description": "Ce ressenti peut venir de la croyance que sans énergie initiale, il est inutile d’agir. Pourtant, l’énergie vient souvent avec l’action. Cela te maintient dans l’inaction et renforce la sensation de blocage. Tu peux tester de commencer très petit pour relancer progressivement ton énergie.",
     "type": "Physique",
     "beliefs": ["Je suis trop fatigué pour commencer", "Ça ne sert à rien d’essayer"],
     "reframings": ["Commencer petit peut relancer mon énergie", "L’action crée l’énergie"],
     "icon": "low_energy.png"
   },
   {
+    "id": 4,
     "title": "Je néglige mon corps",
-    "description": "Je ne prends pas soin de mes besoins physiques.",
+    "description": "Ce blocage peut venir de la croyance que prendre soin de son corps n’est pas prioritaire. Pourtant, ton état physique influence directement ton mental et tes actions. Cela peut entraîner fatigue, baisse d’énergie et démotivation. Tu peux reconsidérer l’importance de ton corps comme une base essentielle.",
     "type": "Physique",
     "beliefs": ["Ce n’est pas une priorité", "Je peux attendre"],
     "reframings": ["Prendre soin de mon corps est essentiel", "Mon bien-être impacte tout le reste"],
     "icon": "body_care.png"
   },
   {
+    "id": 5,
     "title": "Je suis tendu physiquement",
-    "description": "Mon corps est crispé et sous tension.",
+    "description": "Ce blocage peut venir de la croyance qu’il faut rester tendu ou sous pression pour être efficace. Pourtant, la tension réduit ta clarté mentale et ton confort. Cela peut te fatiguer inutilement et limiter tes capacités. Tu peux expérimenter le relâchement pour constater que performance et détente peuvent coexister.",
     "type": "Physique",
     "beliefs": ["Je dois rester comme ça pour avancer", "Je ne peux pas me relâcher"],
     "reframings": ["Relâcher mon corps m’aide à mieux penser", "La détente améliore mes performances"],
     "icon": "tension.png"
   },
-
   {
+    "id": 6,
     "title": "Je doute de moi",
-    "description": "Manque de confiance dans mes capacités.",
+    "description": "Ce blocage vient souvent de croyances construites dans le temps comme “je ne suis pas capable”. Pourtant, ces pensées ne reflètent pas toujours la réalité. Cela te freine dans le passage à l’action et limite tes opportunités. Tu peux questionner ces pensées en t’appuyant sur tes expériences passées.",
     "type": "Émotionnel",
     "beliefs": ["Je ne suis pas capable", "Je vais échouer"],
     "reframings": ["J’ai déjà réussi", "Je peux apprendre en avançant"],
     "icon": "self_doubt.png"
   },
   {
+    "id": 7,
     "title": "Je me sens dépassé",
-    "description": "Trop d’émotions ou de choses à gérer.",
+    "description": "Ce blocage peut venir de la croyance que tout doit être géré en même temps. Pourtant, la réalité est souvent plus découpable. Cela crée une sensation d’écrasement et bloque l’action. Tu peux remettre en question cette vision en revenant à une tâche à la fois.",
     "type": "Émotionnel",
     "beliefs": ["Je dois tout gérer", "Je ne peux pas ralentir"],
     "reframings": ["Je peux faire une chose à la fois", "Ralentir m’aide à avancer"],
     "icon": "overwhelmed.png"
   },
   {
+    "id": 8,
     "title": "Je me sens vide",
-    "description": "Manque d’émotions ou de motivation.",
+    "description": "Ce ressenti peut venir de la croyance que l’absence de motivation est permanente. Pourtant, les états émotionnels évoluent. Cela peut te couper de l’action et du sens. Tu peux remettre en question cette permanence et avancer par petites actions.",
     "type": "Émotionnel",
     "beliefs": ["Rien ne m’intéresse", "Ça ne sert à rien"],
     "reframings": ["Ce sentiment est temporaire", "Je peux retrouver du sens petit à petit"],
     "icon": "empty.png"
   },
   {
+    "id": 9,
     "title": "Je refoule mes émotions",
-    "description": "Je n’exprime pas ce que je ressens.",
+    "description": "Ce blocage peut venir de la croyance qu’exprimer ses émotions est une faiblesse. Pourtant, les émotions non exprimées restent présentes. Cela peut créer une tension interne et un mal-être diffus. Tu peux expérimenter l’expression progressive comme un levier d’équilibre.",
     "type": "Émotionnel",
     "beliefs": ["Je dois rester fort", "Exprimer mes émotions est une faiblesse"],
     "reframings": ["Exprimer mes émotions est sain", "C’est une forme de courage"],
     "icon": "suppression.png"
   },
   {
+    "id": 10,
     "title": "Je me sens submergé émotionnellement",
-    "description": "Mes émotions prennent toute la place.",
+    "description": "Ce blocage peut venir de la croyance que les émotions sont incontrôlables. Pourtant, elles évoluent naturellement avec le temps. Cela peut te donner une sensation de perte de contrôle. Tu peux apprendre à les observer plutôt qu’à les subir.",
     "type": "Émotionnel",
     "beliefs": ["Je perds le contrôle", "Je ne peux rien faire"],
     "reframings": ["Les émotions passent", "Je peux apprendre à les réguler"],
     "icon": "emotions.png"
   },
-
   {
+    "id": 11,
     "title": "J'ai peur de mal faire",
-    "description": "Peur de faire une erreur ou de mal agir.",
+    "description": "Ce blocage vient souvent de la croyance que l’erreur est grave. Pourtant, l’erreur est une source d’apprentissage. Cela peut t’empêcher d’agir et de progresser. Tu peux remettre en question cette exigence de perfection.",
     "type": "Mental",
     "beliefs": ["Je dois être parfait", "L’erreur est grave"],
     "reframings": ["Je peux apprendre de mes erreurs", "Progresser est plus important que réussir"],
     "icon": "fear.png"
   },
   {
+    "id": 12,
     "title": "Je perds ma concentration",
-    "description": "Difficulté à rester focalisé.",
+    "description": "Ce blocage peut venir de la croyance que tu es incapable de te concentrer. Pourtant, la concentration est une compétence qui se développe. Cela peut te décourager rapidement. Tu peux expérimenter des périodes courtes de focus pour progresser.",
     "type": "Mental",
     "beliefs": ["Je ne suis pas capable de me concentrer", "Je suis nul"],
     "reframings": ["Je peux m’améliorer", "Je peux avancer par petites étapes"],
     "icon": "focus.png"
   },
   {
+    "id": 13,
     "title": "Je réfléchis trop",
-    "description": "Je suis bloqué dans mes pensées.",
+    "description": "Ce blocage peut venir de la croyance qu’il faut tout comprendre avant d’agir. Pourtant, l’action apporte souvent plus de clarté que la réflexion seule. Cela te maintient dans l’inaction. Tu peux tester et ajuster en avançant.",
     "type": "Mental",
     "beliefs": ["Je dois tout analyser", "Je dois être sûr avant d’agir"],
     "reframings": ["Agir m’apportera des réponses", "Je peux tester et ajuster"],
     "icon": "overthinking.png"
   },
   {
+    "id": 14,
     "title": "Je manque de clarté",
-    "description": "Je ne sais pas quoi faire ou décider.",
+    "description": "Ce blocage peut venir de la croyance qu’il faut une vision parfaite pour agir. Pourtant, la clarté vient souvent en avançant. Cela te bloque dans la prise de décision. Tu peux commencer avec ce que tu sais déjà.",
     "type": "Mental",
     "beliefs": ["Je suis perdu", "Je ne saurai jamais"],
     "reframings": ["Je peux clarifier étape par étape", "Commencer aide à voir plus clair"],
     "icon": "clarity.png"
   },
   {
+    "id": 15,
     "title": "Je procrastine",
-    "description": "Je repousse ce que je dois faire.",
+    "description": "Ce blocage peut venir de la croyance qu’il faut être prêt ou motivé pour agir. Pourtant, l’action précède souvent la motivation. Cela entretient le retard et la pression. Tu peux commencer petit pour enclencher le mouvement.",
     "type": "Mental",
     "beliefs": ["Je le ferai plus tard", "Ce n’est pas le bon moment"],
     "reframings": ["Commencer petit suffit", "L’action réduit la pression"],
     "icon": "procrastination.png"
   },
-
   {
+    "id": 16,
     "title": "Je suis trop timide",
-    "description": "Difficulté à interagir avec les autres.",
+    "description": "Ce blocage peut venir de la croyance que tu n’es pas intéressant. Pourtant, cette perception est souvent biaisée. Cela limite tes interactions et opportunités sociales. Tu peux progresser en t’exposant graduellement.",
     "type": "Relationnel",
     "beliefs": ["Je ne suis pas intéressant", "Les autres vont me juger"],
     "reframings": ["Je peux y aller progressivement", "Les autres sont souvent bienveillants"],
     "icon": "shyness.png"
   },
   {
+    "id": 17,
     "title": "Je me compare aux autres",
-    "description": "Je me sens inférieur aux autres.",
+    "description": "Ce blocage vient de la croyance que les autres sont supérieurs. Pourtant, chaque parcours est différent. Cela diminue ton estime personnelle. Tu peux te recentrer sur ton propre chemin.",
     "type": "Relationnel",
     "beliefs": ["Les autres sont meilleurs", "Je ne suis pas assez bien"],
     "reframings": ["Chacun a son parcours", "Je peux me concentrer sur moi"],
     "icon": "comparison.png"
   },
   {
+    "id": 18,
     "title": "Je redoute le conflit",
-    "description": "J’évite les désaccords.",
+    "description": "Ce blocage peut venir de la croyance que le conflit est forcément négatif. Pourtant, il peut être constructif. Cela t’empêche de t’exprimer pleinement. Tu peux apprendre à communiquer calmement.",
     "type": "Relationnel",
     "beliefs": ["Le conflit est mauvais", "Je vais blesser l’autre"],
     "reframings": ["Le dialogue est sain", "Je peux m’exprimer calmement"],
     "icon": "conflict.png"
   },
   {
+    "id": 19,
     "title": "J’ai peur du rejet",
-    "description": "Je crains de ne pas être accepté.",
+    "description": "Ce blocage vient de la croyance que ton acceptation dépend des autres. Pourtant, ta valeur est indépendante. Cela te freine dans tes interactions. Tu peux accepter que tout le monde ne peut pas te valider.",
     "type": "Relationnel",
     "beliefs": ["On va me rejeter", "Je ne suis pas aimable"],
     "reframings": ["Je ne peux pas plaire à tout le monde", "Ma valeur ne dépend pas des autres"],
     "icon": "rejection.png"
   },
   {
+    "id": 20,
     "title": "J’ai du mal à m’affirmer",
-    "description": "Je n’ose pas dire ce que je pense.",
+    "description": "Ce blocage peut venir de la croyance que ton avis n’est pas important. Pourtant, ton point de vue a de la valeur. Cela te limite dans tes relations. Tu peux commencer à t’exprimer progressivement.",
     "type": "Relationnel",
     "beliefs": ["Je dois faire plaisir", "Mon avis n’est pas important"],
     "reframings": ["Mon avis compte", "Je peux m’exprimer avec respect"],

@@ -1,180 +1,145 @@
 [
   {
-    "title": "Je me sens vide",
-    "description": "J’ai l’impression de ne rien ressentir ou d’être déconnecté(e).",
-    "triggers": ["isolement", "perte de sens"],
-    "emotion": "Tristesse",
-    "color": "#aed6f1"
-  },
-  {
-    "title": "Je me sens seul(e)",
-    "description": "Même entouré(e), je ressens de la solitude.",
-    "triggers": ["manque de soutien", "distance sociale"],
-    "emotion": "Tristesse",
-    "color": "#aed6f1"
-  },
-  {
-    "title": "Je n’ai plus envie de rien",
-    "description": "Les choses que j’aimais ne m’intéressent plus.",
-    "triggers": ["fatigue émotionnelle", "routine"],
-    "emotion": "Tristesse",
-    "color": "#aed6f1"
-  },
-  {
-    "title": "Je ressens un manque",
-    "description": "Quelque chose ou quelqu’un me manque profondément.",
-    "triggers": ["souvenirs", "absence"],
-    "emotion": "Tristesse",
-    "color": "#aed6f1"
-  },
-  {
-    "title": "Je me sens inutile",
-    "description": "J’ai l’impression de ne pas servir à grand-chose.",
-    "triggers": ["échec", "comparaison"],
-    "emotion": "Tristesse",
-    "color": "#aed6f1"
-  },
-
-  {
-    "title": "Je suis irrité(e)",
-    "description": "Tout m’agace plus facilement que d’habitude.",
-    "triggers": ["fatigue", "frustration"],
-    "emotion": "Colère",
-    "color": "#f1948a"
-  },
-  {
-    "title": "Je me sens en colère",
-    "description": "Une forte énergie négative monte en moi.",
-    "triggers": ["injustice", "conflit"],
-    "emotion": "Colère",
-    "color": "#f1948a"
-  },
-  {
-    "title": "Je bouillonne intérieurement",
-    "description": "Je retiens quelque chose qui pourrait exploser.",
-    "triggers": ["accumulation", "non-dit"],
-    "emotion": "Colère",
-    "color": "#f1948a"
-  },
-  {
-    "title": "Je suis frustré(e)",
-    "description": "Je n’arrive pas à obtenir ce que je veux.",
-    "triggers": ["blocage", "échec"],
-    "emotion": "Colère",
-    "color": "#f1948a"
-  },
-  {
-    "title": "Je me sens agressif(ve)",
-    "description": "J’ai envie de réagir de manière dure ou brusque.",
-    "triggers": ["provocation", "stress"],
-    "emotion": "Colère",
-    "color": "#f1948a"
-  },
-
-  {
-    "title": "Je redoute le regard des autres",
-    "description": "Je me sens observé(e) et jugé(e).",
-    "triggers": ["rencontre sociale", "prise de parole"],
-    "emotion": "Anxiété",
-    "color": "#f5b7b1"
-  },
-  {
-    "title": "Je me sens jugé(e)",
-    "description": "J’ai peur de ce que les autres pensent de moi.",
-    "triggers": ["critique", "conversation difficile"],
-    "emotion": "Anxiété",
-    "color": "#f5b7b1"
-  },
-  {
-    "title": "Je m’inquiète pour le futur",
-    "description": "Je pense à tout ce qui pourrait mal se passer.",
-    "triggers": ["incertitude", "changement"],
-    "emotion": "Anxiété",
-    "color": "#f5b7b1"
-  },
-  {
-    "title": "Je suis tendu(e)",
-    "description": "Mon corps est crispé sans raison claire.",
-    "triggers": ["anticipation", "pression"],
-    "emotion": "Anxiété",
-    "color": "#f5b7b1"
-  },
-  {
-    "title": "J’ai peur de faire une erreur",
-    "description": "Je doute constamment de mes actions.",
-    "triggers": ["responsabilités", "perfectionnisme"],
-    "emotion": "Anxiété",
-    "color": "#f5b7b1"
-  },
-
-  {
-    "title": "Je me sens dépassé(e)",
-    "description": "Je ne sais plus par où commencer.",
-    "triggers": ["surcharge", "deadlines"],
+    "id": 1,
+    "title": "Je me sens surchargé de travail",
+    "description": "Tu ressens une pression constante, comme si tout s’accumulait sans pause. Ton esprit est saturé, tu passes d’une tâche à l’autre sans vraiment avancer et une fatigue mentale s’installe. Tu peux aussi avoir des pensées comme “je n’y arriverai jamais” ou “c’est trop pour moi”. Ce ressenti apparaît souvent quand tu fais face à trop d’exigences, que tu as du mal à poser des limites ou que tu veux tout gérer parfaitement. Pour y faire face, essaie de ralentir, prioriser une seule tâche à la fois et accepter que tout ne peut pas être fait immédiatement.",
+    "triggers": ["surcharge", "pression"],
     "emotion": "Stress",
     "color": "#f9e79f"
   },
   {
-    "title": "J’ai peur d’oublier quelque chose",
-    "description": "Je redoute d’avoir oublié un détail important.",
-    "triggers": ["organisation", "responsabilités"],
+    "id": 2,
+    "title": "J'appréhende une situation sociale",
+    "description": "Tu ressens une tension avant d’interagir avec les autres, avec une boule au ventre ou une légère panique. Ton esprit imagine différents scénarios, souvent négatifs, et tu peux penser “je vais être jugé” ou “je ne saurai pas quoi dire”. Cela vient souvent d’un manque de confiance en soi ou d’expériences passées inconfortables. Pour gérer cela, ramène ton attention au moment présent et rappelle-toi que les autres sont souvent moins focalisés sur toi que tu ne le penses.",
+    "triggers": ["interaction sociale", "anticipation"],
+    "emotion": "Anxiété",
+    "color": "#f5b7b1"
+  },
+  {
+    "id": 3,
+    "title": "Je me sens de trop",
+    "description": "Tu as l’impression de ne pas être à ta place, comme si ta présence n’était pas légitime. Cela peut s’accompagner de tristesse et de pensées comme “je dérange” ou “je ne compte pas vraiment”. Ce ressenti peut venir d’un manque de reconnaissance, de comparaisons ou d’expériences de rejet. Pour y faire face, rappelle-toi que ta place ne dépend pas uniquement du regard des autres et essaie de te reconnecter à ce qui te rend unique.",
+    "triggers": ["comparaison", "rejet"],
+    "emotion": "Tristesse",
+    "color": "#aed6f1"
+  },
+  {
+    "id": 4,
+    "title": "Je me sens inférieur",
+    "description": "Tu te compares aux autres et tu te sens en dessous, avec une perte de confiance et une sensation d’infériorité. Des pensées comme “je suis moins capable” ou “je ne suis pas à la hauteur” peuvent apparaître. Cela vient souvent d’une comparaison constante et d’un regard critique sur soi. Pour avancer, essaie de recentrer ton attention sur tes propres progrès plutôt que sur ceux des autres.",
+    "triggers": ["comparaison", "manque de confiance"],
+    "emotion": "Tristesse",
+    "color": "#aed6f1"
+  },
+  {
+    "id": 5,
+    "title": "Mes pensées m'envahissent",
+    "description": "Ton esprit tourne en boucle sans pause, avec une sensation de perte de contrôle. Tu passes d’une pensée à l’autre sans réussir à t’arrêter, ce qui génère du stress. Cela peut venir d’une accumulation de tensions ou d’un besoin de tout anticiper. Pour apaiser cela, essaie de revenir à des sensations concrètes (respiration, corps) pour sortir du mental.",
+    "triggers": ["rumination", "stress"],
     "emotion": "Stress",
     "color": "#f9e79f"
   },
   {
-    "title": "Je suis sous pression",
-    "description": "Je ressens une forte exigence extérieure ou intérieure.",
-    "triggers": ["travail", "attentes"],
-    "emotion": "Stress",
-    "color": "#f9e79f"
+    "id": 6,
+    "title": "Je me sens écrasé par la foule",
+    "description": "Tu te sens submergé par les stimulations autour de toi, avec une envie de fuir ou de t’isoler. Ton corps peut être tendu et ton esprit en alerte. Cela arrive souvent quand il y a trop de bruit, de monde ou de sollicitations. Pour gérer cela, essaie de te recentrer sur ta respiration et, si possible, de t’éloigner temporairement pour retrouver du calme.",
+    "triggers": ["foule", "stimulation"],
+    "emotion": "Anxiété",
+    "color": "#f5b7b1"
   },
   {
-    "title": "Je n’arrive pas à me poser",
-    "description": "Mon esprit est toujours en activité.",
-    "triggers": ["charge mentale", "manque de repos"],
-    "emotion": "Stress",
-    "color": "#f9e79f"
+    "id": 7,
+    "title": "J'appréhende une rencontre",
+    "description": "Avant une rencontre, tu ressens du stress et de l’incertitude. Tu peux imaginer ce qui pourrait mal se passer et avoir des pensées comme “je ne vais pas être intéressant”. Ce ressenti vient souvent d’une peur du jugement ou du rejet. Pour y faire face, rappelle-toi que l’autre personne est probablement dans un état similaire et essaie d’aborder la rencontre avec curiosité plutôt qu’attente.",
+    "triggers": ["rencontre", "anticipation"],
+    "emotion": "Anxiété",
+    "color": "#f5b7b1"
   },
   {
-    "title": "Je me sens débordé(e)",
-    "description": "Tout s’accumule et devient difficile à gérer.",
-    "triggers": ["tâches multiples", "fatigue"],
-    "emotion": "Stress",
-    "color": "#f9e79f"
+    "id": 8,
+    "title": "Je m'imagine des conflits/disputes qui n'existent pas",
+    "description": "Tu construis dans ta tête des scénarios négatifs ou conflictuels, ce qui génère de l’anxiété. Tu peux anticiper des disputes ou des tensions qui ne sont pas réelles. Cela vient souvent d’une insécurité ou d’un besoin de se préparer au pire. Pour apaiser cela, essaie de distinguer ce qui est réel de ce qui est imaginé et ramène-toi aux faits concrets.",
+    "triggers": ["anticipation", "insécurité"],
+    "emotion": "Anxiété",
+    "color": "#f5b7b1"
   },
-
   {
-    "title": "Je m’isole",
-    "description": "Je m’éloigne des autres sans forcément le vouloir.",
-    "triggers": ["tristesse", "fatigue"],
+    "id": 9,
+    "title": "Je veux me couper de mes émotions/ressentis",
+    "description": "Tu ressens le besoin de te fermer émotionnellement, comme pour ne plus rien ressentir. Cela peut donner une sensation de vide ou de distance avec toi-même. Cela arrive souvent quand les émotions deviennent trop intenses ou difficiles à gérer. Pour avancer, essaie de te reconnecter progressivement à ce que tu ressens sans te forcer, en acceptant que les émotions viennent par vagues.",
+    "triggers": ["surcharge émotionnelle", "fatigue"],
     "emotion": "Comportement",
     "color": "#d6dbdf"
   },
   {
-    "title": "Je procrastine",
-    "description": "Je repousse ce que je dois faire.",
-    "triggers": ["peur", "manque de motivation"],
+    "id": 10,
+    "title": "J'ai peur de parler aux gens",
+    "description": "Tu ressens une peur au moment de t’exprimer, avec une tension corporelle et un blocage. Tu peux penser “je vais dire quelque chose de stupide”. Cela vient souvent d’une peur du jugement ou d’un manque de confiance. Pour progresser, commence par de petites interactions et rappelle-toi que l’erreur fait partie du processus.",
+    "triggers": ["prise de parole", "jugement"],
+    "emotion": "Anxiété",
+    "color": "#f5b7b1"
+  },
+  {
+    "id": 11,
+    "title": "Je m'empêche de faire les choses",
+    "description": "Tu ressens un blocage intérieur qui t’empêche d’agir, même si tu sais quoi faire. Tu peux avoir des pensées comme “je ne suis pas prêt” ou “ça ne marchera pas”. Cela vient souvent de la peur de l’échec ou du doute. Pour dépasser cela, essaie de passer à l’action par petites étapes sans attendre de te sentir totalement prêt.",
+    "triggers": ["peur", "doute"],
     "emotion": "Comportement",
     "color": "#d6dbdf"
   },
   {
-    "title": "Je mange sans faim",
-    "description": "Je mange pour compenser une émotion.",
-    "triggers": ["ennui", "stress"],
-    "emotion": "Comportement",
-    "color": "#d6dbdf"
+    "id": 12,
+    "title": "Je n'ai plus d'intérêt pour rien",
+    "description": "Tu ressens une perte d’envie générale, comme si plus rien ne te stimulait. Cela peut s’accompagner de fatigue émotionnelle et de pensées comme “à quoi bon”. Ce ressenti apparaît souvent après une surcharge ou une perte de sens. Pour avancer, commence par de petites actions simples et reconnecte-toi progressivement à ce qui te faisait du bien.",
+    "triggers": ["fatigue émotionnelle", "perte de sens"],
+    "emotion": "Tristesse",
+    "color": "#aed6f1"
   },
   {
-    "title": "Je m’énerve rapidement",
-    "description": "Mes réactions sont plus fortes que d’habitude.",
-    "triggers": ["fatigue", "frustration"],
-    "emotion": "Comportement",
-    "color": "#d6dbdf"
+    "id": 13,
+    "title": "Le changement me fait peur",
+    "description": "Face à une nouveauté, tu ressens de l’incertitude et de l’inquiétude. Ton esprit imagine ce qui pourrait mal se passer. Cela vient souvent d’un besoin de contrôle et de sécurité. Pour gérer cela, essaie de voir le changement comme une évolution progressive plutôt qu’un saut brutal.",
+    "triggers": ["incertitude", "transition"],
+    "emotion": "Anxiété",
+    "color": "#f5b7b1"
   },
   {
-    "title": "Je me disperse",
-    "description": "Je commence plein de choses sans finir.",
-    "triggers": ["stress", "manque de clarté"],
+    "id": 14,
+    "title": "L'inconnu me fait peur",
+    "description": "Tu ressens une peur face à ce que tu ne peux pas anticiper. Cela crée une tension et des scénarios dans ton esprit. Ce ressenti est lié à un manque de repères ou de contrôle. Pour l’apaiser, concentre-toi sur ce que tu peux maîtriser ici et maintenant.",
+    "triggers": ["incertitude", "manque de contrôle"],
+    "emotion": "Anxiété",
+    "color": "#f5b7b1"
+  },
+  {
+    "id": 15,
+    "title": "Je me sens victime de mes pensées",
+    "description": "Tu as l’impression que ton mental prend le dessus, avec des pensées envahissantes que tu subis. Cela peut créer du stress et une perte de contrôle. Cela vient souvent d’une rumination excessive. Pour reprendre la main, essaie d’observer tes pensées sans t’y identifier complètement.",
+    "triggers": ["rumination", "perte de contrôle"],
+    "emotion": "Stress",
+    "color": "#f9e79f"
+  },
+  {
+    "id": 16,
+    "title": "Je me sens victime d'injustice",
+    "description": "Tu ressens une colère ou une frustration face à une situation que tu juges injuste. Des pensées comme “ce n’est pas normal” peuvent apparaître. Cela vient souvent d’un décalage entre tes attentes et la réalité. Pour gérer cela, essaie d’exprimer ce que tu ressens et de distinguer ce que tu peux ou non changer.",
+    "triggers": ["injustice", "comparaison"],
+    "emotion": "Colère",
+    "color": "#f1948a"
+  },
+  {
+    "id": 17,
+    "title": "Je suis mal à l'aise avec les femmes",
+    "description": "Tu ressens une gêne ou une tension dans ces interactions, avec une peur de mal faire ou d’être jugé. Ton esprit peut anticiper des maladresses. Cela vient souvent d’un manque d’expérience ou de confiance. Pour progresser, aborde ces échanges comme des interactions normales, sans pression particulière.",
+    "triggers": ["interaction sociale", "jugement"],
+    "emotion": "Anxiété",
+    "color": "#f5b7b1"
+  },
+  {
+    "id": 18,
+    "title": "Je n'arrive pas à changer mes habitudes",
+    "description": "Tu ressens une frustration face à des comportements répétitifs que tu n’arrives pas à modifier. Tu peux penser “je suis bloqué comme ça”. Cela vient souvent d’automatismes ancrés et d’une résistance au changement. Pour évoluer, commence par de petits ajustements progressifs plutôt que de vouloir tout changer d’un coup.",
+    "triggers": ["routine", "résistance au changement"],
     "emotion": "Comportement",
     "color": "#d6dbdf"
   }
