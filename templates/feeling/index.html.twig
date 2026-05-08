@@ -16,43 +16,13 @@
     <!-- =========================
          MOBILE : CAROUSEL
          ========================= -->
-    
 {{ include('feeling/_carousel.html.twig') }}
 
-    <!-- =========================
+<!-- =========================
          DESKTOP : GRILLE
          ========================= -->
-    <section class="d-none d-lg-block mt-5" aria-labelledby="desktop-entity-title">
-        
-        {{ include('feeling/_text-bloc.html.twig') }}
-        
-        {% for emotion, feelings in feelingsByEmotion %}
-            <section class="mb-5" aria-labelledby="emotion-desktop-{{ loop.index }}">
-                <header>
-                    <h2 class="mb-3">{{ emotion }}</h2>
-                </header>
+{{ include('feeling/_grid.html.twig') }}
 
-                <div class="row g-3">
-                    {% for feeling in feelings %}
-                        {% set uniqueId = 'desktop-' ~ feeling.id ~ '-' ~ loop.index %}
-                        <article class="col-md-4">
-                                        <button class="entity-btn entity-title"
-                                                type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#{{ uniqueId }}"
-                                                aria-expanded="false"
-                                                aria-controls="{{ uniqueId }}">
-                                            {{ feeling.title }}
-                                        </button>
-                                    <div id="{{ uniqueId }}" class="collapse mt-2">
-                                        {{ include('feeling/_read.html.twig', { feeling }) }}
-                                    </div>
-                        </article>
-                    {% endfor %}
-                </div>
-            </section>
-        {% endfor %}
-    </section>
 
 </main>
 

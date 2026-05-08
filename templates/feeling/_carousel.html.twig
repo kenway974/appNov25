@@ -6,25 +6,42 @@
 
                 {% for emotion, feelings in feelingsByEmotion %}
                     <div class="carousel-item {{ loop.first ? 'active' : '' }}">
-                        <header>
-                            <h2 class="category-title text-center"><strong>{{ emotion }}</strong></h2>
+                        <header class="emotion-hero">
+                            <div class="emotion-bg">
+                                <img src="/images/feelings/{{ emotion|lower }}.jpg"
+                                    alt="Bannière {{ emotion }}"
+                                    class="emotion-image">
+
+                                <div class="emotion-overlay"></div>
+                            </div>
+
+                            <div class="emotion-content">
+                                <h2 class="mb-3 text-center emotion-title">{{ emotion }}</h2>
+                            </div>
                         </header>
 
                         {% for feeling in feelings %}
-                            {% set uniqueId = 'mobile-' ~ feeling.id ~ '-' ~ loop.index %}
-                            <article class="">
-                                <button class="entity-btn entity-title"
+                            {% set uniqueId = 'mobile-' ~ emotion ~ '-' ~ feeling.id ~ '-' ~ loop.index %}
+
+                            <article class="feeling-item">
+                                <button
+                                    class="feeling-title"
                                     type="button"
                                     data-bs-toggle="collapse"
                                     data-bs-target="#{{ uniqueId }}"
                                     aria-expanded="false"
-                                    aria-controls="{{ uniqueId }}">
-                                <span>{{ feeling.title }}</span>
-                            </button>
+                                    aria-controls="{{ uniqueId }}"
+                                >
+                                    {{ feeling.title }}
+                                </button>
 
                                 <div id="{{ uniqueId }}" class="collapse mt-2">
                                     {{ include('feeling/_read.html.twig', { feeling }) }}
                                 </div>
+
+                                {% if not loop.last %}
+                                    <hr class="feeling-separator">
+                                {% endif %}
                             </article>
                         {% endfor %}
 

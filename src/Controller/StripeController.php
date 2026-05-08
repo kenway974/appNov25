@@ -2,13 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Plan;
 use App\Entity\User;
 use App\Repository\PlanRepository;
 use App\Service\StripePaymentService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,6 +25,10 @@ class StripeController extends AbstractController
         }
 
         $planId = $request->request->get('planId');
+
+        if (!$planId) {
+            return $this->json(['error' => 'Missing planId'], 400);
+        }
 
         $plan = $planRepository->find($planId);
 
@@ -47,17 +49,37 @@ class StripeController extends AbstractController
         );
 
         $priceId = $plan->getStripePriceId();
-        $session = $this->stripePaymentService->createCheckoutSession(
-            $priceId,
-            $successUrl,
-            $cancelUrl
-        );
 
+        if ($plan->getDuration() > 24) {
+            $session = $this->stripePaymentService->createPaymentSession(
+                $priceId,
+                $successUrl,
+                $cancelUrl,
+                $user->getEmail(),
+                [
+                    'user_id' => $user->getId(),
+                    'plan_id' => $plan->getId()
+                ]
+            );
+        } else {
+            $session = $this->stripePaymentService->createSubscriptionSession(
+                $priceId,
+                $successUrl,
+                $cancelUrl,
+                $user->getEmail(),
+                [
+                    'user_id' => $user->getId(),
+                    'plan_id' => $plan->getId()
+                ]
+            );
+        }
+
+        // ✅ IMPORTANT : redirection vers Stripe
         return $this->redirect($session->url);
     }
 
     #[Route('/subscription/success', name:'app_subscription_success', methods:['GET'])]
-    public function success(Request $request): Response
+    public function success(): Response
     {
         return $this->render('subscription/success.html.twig');
     }

@@ -3,8 +3,10 @@
 namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
+
 use App\Entity\Plan;
 use App\Entity\Feeling;
 use App\Entity\Need;
@@ -14,8 +16,6 @@ use App\Entity\User;
 
 class JsonFixturesLoader extends Fixture implements FixtureGroupInterface
 {
-    private ObjectManager $em;
-
     public static function getGroups(): array
     {
         return ['json'];
@@ -23,84 +23,111 @@ class JsonFixturesLoader extends Fixture implements FixtureGroupInterface
 
     public function load(ObjectManager $manager): void
     {
-        $this->em = $manager;
-        $path = __DIR__ . '/'; // chemin vers src/DataFixtures/
+        /** @var EntityManagerInterface $em */
+        $em = $manager;
 
-        // -----------------------------
-        // Mapping entités et repositories
-        // -----------------------------
+        $basePath = __DIR__;
+
         $entityMap = [
-            'Plan'    => Plan::class,
-            'Feeling' => Feeling::class,
-            'Need'    => Need::class,
-            'Action'  => Action::class,
-            'Block'   => Block::class,
-            'User'    => User::class
+            'plans'    => Plan::class,
+            'feelings' => Feeling::class,
+            'needs'    => Need::class,
+            'actions'  => Action::class,
+            'blocks'   => Block::class,
+            'users'    => User::class,
         ];
 
-        $repo = [];
-        foreach ($entityMap as $name => $class) {
-            $repo[$name] = $this->em->getRepository($class);
-        }
+        // 1. JSON
+        $this->loadEntitiesFromJson($em, $basePath, $entityMap);
 
-        // -----------------------------
-        // Chargement des entités depuis JSON
-        // -----------------------------
-        $this->loadEntitiesFromFiles($repo, $path, ['plans', 'feelings', 'needs', 'actions', 'blocks', 'users']);
+        $em->flush();
 
-        $this->em->flush();
-        echo "[🚀] Toutes les entités et ont été importées avec succès.\n";
+        echo "[OK] JSON chargé\n";
+
+        // 2. SQL relations
+        $this->executeSqlFile($em, __DIR__ . '/relations.sql');
+
+        echo "[OK] SQL exécuté\n";
     }
 
-    // -----------------------------
-    // Charge les entités depuis un tableau de fichiers JSON
-    // -----------------------------
-    private function loadEntitiesFromFiles(array $repo, string $path, array $files): void
-    {
-        foreach ($files as $fileBase) {
-            // trouve chaque fichier JSON correspondant
-            $file = $path . $fileBase . '.json';
-            if (!file_exists($file)) {
-                echo "[⚠️] $fileBase.json introuvable, skip.\n";
+    private function loadEntitiesFromJson(
+        EntityManagerInterface $em,
+        string $basePath,
+        array $entityMap
+    ): void {
+        foreach ($entityMap as $fileName => $entityClass) {
+
+            $filePath = $basePath . '/' . $fileName . '.json';
+
+            if (!file_exists($filePath)) {
+                echo "[MISS] $fileName.json\n";
                 continue;
             }
 
-            // lit et décode le JSON
-            $jsonData = json_decode(file_get_contents($file), true);
-            if (!$jsonData) {
-                echo "[❌] $fileBase.json est vide ou invalide.\n";
+            $data = json_decode(file_get_contents($filePath), true);
+
+            if (!$data) {
+                echo "[ERR] $fileName.json invalide\n";
                 continue;
             }
 
-            // trouve la classe d'entité correspondante
-            $entityName  = ucfirst(rtrim($fileBase, 's'));
-            $entityClass = $repo[$entityName]->getClassName() ?? null;
+            foreach ($data as $item) {
 
-            if (!$entityClass) continue;
-
-            // crée entités à partir des données JSON
-            foreach ($jsonData as $item) {
                 if (empty($item['title'])) {
-                    echo "[⚠️] Une entrée sans title dans $fileBase.json a été ignorée.\n";
                     continue;
                 }
 
-                $entity = $repo[$entityName]->findOneBy(['title' => $item['title']]) ?? new $entityClass();
+                $entity = $em->getRepository($entityClass)
+                    ->findOneBy(['title' => $item['title']])
+                    ?? new $entityClass();
 
-                // remplit tous les champs avec les setters
                 foreach ($item as $key => $value) {
+
                     $setter = 'set' . ucfirst($key);
-                    if (method_exists($entity, $setter)) {
-                        if (in_array($key, ['createdAt', 'updatedAt']) && is_string($value)) {
-                        $value = new \DateTimeImmutable($value);}
-                        $entity->$setter($value);
+
+                    if (!method_exists($entity, $setter)) {
+                        continue;
                     }
+
+                    if (
+                        in_array($key, ['createdAt', 'updatedAt']) &&
+                        is_string($value)
+                    ) {
+                        $value = new \DateTimeImmutable($value);
+                    }
+
+                    $entity->$setter($value);
                 }
 
-                $this->em->persist($entity);
+                $em->persist($entity);
             }
 
-            echo "[✅] $fileBase.json chargé avec succès !\n";
+            echo "[OK] $fileName.json\n";
+        }
+    }
+
+    private function executeSqlFile(EntityManagerInterface $em, string $filePath): void
+    {
+        if (!file_exists($filePath)) {
+            echo "[MISS] relations.sql\n";
+            return;
+        }
+
+        $sql = file_get_contents($filePath);
+
+        if (!$sql) {
+            echo "[ERR] SQL vide\n";
+            return;
+        }
+
+        $connection = $em->getConnection();
+
+        $queries = array_filter(array_map('trim', explode(';', $sql)));
+
+        foreach ($queries as $query) {
+            if (!empty($query)) {
+                $connection->executeStatement($query);
+            }
         }
     }
 }

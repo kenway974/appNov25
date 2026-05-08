@@ -1,23 +1,109 @@
--- action_block
-INSERT INTO action_block (action_id, block_id)
-VALUES (1, 2),
-VALUES (1, 2),
-VALUES (1, 2);
+INSERT INTO feeling_need (feeling_id, need_id) VALUES
 
--- feeling_block
-INSERT INTO feeling_block (feeling_id, block_id)
-VALUES (1, 2),
-VALUES (1, 2),
-VALUES (1, 2);
+-- 1. Surcharge de travail
+(1,1),(1,5),(1,11),(1,13),
 
--- feeling_need
-INSERT INTO feeling_need (feeling_id, need_id)
-VALUES (1, 2),
-VALUES (1, 2),
-VALUES (1, 2);
+-- 2. Anxiété sociale
+(2,2),(2,5),(2,7),(2,10),
 
--- need_action
-INSERT INTO need_action (need_id, action_id)
-VALUES (1, 2),
-VALUES (1, 2),
-VALUES (1, 2);
+-- 3. Se sentir de trop
+(3,3),(3,9),(3,10),
+
+-- 4. Sentiment d’infériorité
+(4,3),(4,8),(4,16),
+
+-- 5. Pensées envahissantes
+(5,1),(5,5),(5,9),
+
+-- 6. Écrasé par la foule
+(6,5),(6,6),(6,9),
+
+-- 7. Appréhension rencontre
+(7,2),(7,7),(7,10),
+
+-- 8. Scénarios de conflits imaginés
+(8,1),(8,5),(8,13),
+
+-- 9. Se couper de ses émotions
+(9,5),(9,9),(9,4),
+
+-- 10. Peur de parler
+(10,2),(10,10),(10,16),
+
+-- 11. Blocage à l’action
+(11,3),(11,11),(11,16),(11,17),
+
+-- 12. Plus d’intérêt
+(12,4),(12,11),(12,12),
+
+-- 13. Peur du changement
+(13,1),(13,13),(13,11),
+
+-- 14. Peur de l’inconnu
+(14,1),(14,13),(14,5),
+
+-- 15. Victime de ses pensées
+(15,1),(15,5),(15,9),
+
+-- 16. Sentiment d’injustice
+(16,9),(16,15),(16,8),
+
+-- 17. Malaise avec les femmes
+(17,2),(17,10),(17,16),
+
+-- 18. Difficulté à changer ses habitudes
+(18,1),(18,11),(18,17);
+
+
+INSERT INTO need_action (need_id, action_id) VALUES
+
+-- 1
+(1,1),(1,2),(1,3),(1,4),(1,69),(1,70),(1,71),(1,72),
+
+-- 2
+(2,5),(2,6),(2,7),(2,8),(2,73),(2,74),(2,75),(2,76),
+
+-- 3
+(3,9),(3,10),(3,11),(3,12),(3,77),(3,78),(3,79),(3,80),
+
+-- 4
+(4,13),(4,14),(4,15),(4,16),
+
+-- 5
+(5,17),(5,18),(5,19),(5,20),
+
+-- 6
+(6,21),(6,22),(6,23),(6,24),
+
+-- 7
+(7,25),(7,26),(7,27),(7,28),
+
+-- 8
+(8,29),(8,30),(8,31),(8,32),
+
+-- 9
+(9,33),(9,34),(9,35),(9,36),
+
+-- 10
+(10,37),(10,38),(10,39),(10,40),
+
+-- 11
+(11,41),(11,42),(11,43),(11,44),
+
+-- 12
+(12,45),(12,46),(12,47),(12,48),
+
+-- 13
+(13,49),(13,50),(13,51),(13,52),
+
+-- 14
+(14,53),(14,54),(14,55),(14,56),
+
+-- 15
+(15,57),(15,58),(15,59),(15,60),
+
+-- 16
+(16,61),(16,62),(16,63),(16,64),
+
+-- 17
+(17,65),(17,66),(17,67),(17,68);

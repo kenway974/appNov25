@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Feeling
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     #[ORM\Column]
     private ?int $id = null;
 

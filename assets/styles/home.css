@@ -1,70 +1,105 @@
    
 /* HOME */
 
- 
 .hero-container {
     position: relative;
     width: 100%;
-    height: 100vh; /* prend toute la hauteur de l'écran */
+    height: 100vh;
+    height: 100dvh; /* mobile moderne */
     overflow: hidden;
 }
 
+/* Image */
 .hero-bg {
     position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-    inset: 0;
 }
 
 .hero-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* remplit sans déformation */
+    object-fit: cover;
 }
 
+/* Overlay plus lisible */
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4); /* assombrit légèrement */
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0.65)
+    );
 }
 
+/* Centrage contenu */
 .hero-content {
     position: relative;
     z-index: 2;
     height: 100%;
     display: flex;
-    justify-content: center; /* centre horizontal */
-    align-items: center;     /* centre vertical */
+    justify-content: center;
+    align-items: center;
     text-align: center;
     padding: 0 20px;
     color: white;
+    
 }
 
 .hero-text {
     max-width: 700px;
-}
+    }
 
+/* Bouton HERO corrigé (problème mobile + état initial) */
 .btn-hero {
-  background-color: transparent; /* fond transparent */
-  color: white; /* texte blanc */
-  border: 1px solid white; /* contour blanc */
-  padding: 10px 20px;
-  margin-top: 15px;
-  border-radius: 5px; /* optionnel pour arrondir */
-  cursor: pointer;
-  transition: all 0.3s ease;
+    background-color: transparent !important;
+    color: white !important;
+    border: 1px solid white;
+    padding: 16px 28px;
+    display: inline-block;
+    margin-top: 1rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+
+    /* IMPORTANT : évite gris/noir mobile */
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .btn-hero:hover {
-  background-color: white; /* effet au survol */
-  color: black; /* texte devient noir */
+    background-color: white;
+    color: black;
 }
 
+/* Fix focus (mobile tap reste propre) */
+.btn-hero:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.4);
+}
+
+/* =========================
+   MOBILE FIX
+   ========================= */
+@media (max-width: 768px) {
+
+    .hero-container {
+        height: 70vh;
+        height: 70dvh;
+    }
+
+    .hero-text {
+        max-width: 90%;
+    }
+
+}
 
     /* BENEFITS */
 
 .benefits-section {
-    padding: 80px 20px;       /* espace haut et bas généreux */
+    padding: 100px 0;       /* espace haut et bas généreux */
     text-align: center;
 }
 
@@ -165,6 +200,28 @@
                 transform: translateX(0);
             }
         }
+
+
+.banner-container {
+  height: 120px;
+  overflow: hidden;
+}
+
+.banner-wrapper {
+  height: 100%;
+  will-change: transform;
+}
+
+.banner-image {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+}
+
+#home-cta {
+  padding: 80px 20px;
+  text-align: center;
+}
 
 /* Cartes */
 #home-cta .card {

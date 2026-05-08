@@ -1,67 +1,60 @@
-.dashboard-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 3rem;
+/* CONTAINER */
+.dashboard-container {
+    padding: 2rem;
 }
 
-.dashboard-title {
-    font-weight: bold;           /* gras */
-    margin-top: 2.5rem !important; /* force le margin au-dessus */
-    margin-bottom: 1.5rem !important; /* force le margin en dessous */
+/* BLOCS VISUELS */
+.dashboard-block {
+    background: rgba(255, 255, 255, 0.342);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+
+    border: 1px solid rgba(255,255,255,0.05);
+
+    transition: all 0.25s ease;
 }
 
-.dashboard-avatar-container {
+/* HOVER SAFE */
+.dashboard-block:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.142);
+}
+
+/* TITRES (sans casser classes existantes) */
+.dashboard-block h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    color: #c7a6ff;
+}
+
+/* NE TOUCHE PAS AUX CLASSES JS */
+.carousel,
+.js-carousel,
+[data-carousel],
+.slider {
+    /* rien ici volontairement */
+}
+
+/* BACKGROUND GLOBAL */
+body {
+    background: url('../images/dashboard/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* OVERLAY (important pour lisibilité) */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 20, 0.25); /* assombrit */
+    backdrop-filter: blur(3px); /* effet moderne */
+    z-index: -1;
+}
+
+/* pour que ton contenu passe au-dessus */
+.dashboard-container {
     position: relative;
-}
-
-.dashboard-avatar {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.dashboard-avatar-badge {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    transform: translate(-30%, 30%);
-    cursor: pointer;
-}
-
-.dashboard-title {
-    margin: 0;
-}
-
-.dashboard-btn {
-    margin-top: 0.5rem;
-}
-
-.dashboard-entity {
-    margin-top: 7rem;
-}
-
-
-.user-needs {
-    width: 100%;
-    margin: 0 auto;
-}
-
-@media (max-width: 820px) {
-    .user-needs {
-        max-width: 70%;
-    }
-}
-
-.user-actions {
-    width: 100%;
-    margin: 0 auto;
-}
-
-@media (max-width: 820px) {
-    .user-actions {
-        max-width: 70%;
-    }
+    z-index: 1;
 }

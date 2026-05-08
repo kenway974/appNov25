@@ -3,13 +3,22 @@
 {% block title %}Dashboard - {{ user.username }}{% endblock %}
 
 {% block body %}
-    {{ include('dashboard/partials/_header.html.twig') }}
-    {{ include('dashboard/partials/_actions.html.twig') }}
-    {{ include('dashboard/partials/_needs.html.twig') }}
-    {# Bouton de déconnexion #}
-    <div class="text-center mb-3">
-        <a href="{{ path('app_logout') }}" class="btn btn-danger">
-            Déconnexion
-        </a>
+    <div class="dashboard-container container">
+
+        <!-- HEADER -->
+        <div class="dashboard-block">
+            {{ include('dashboard/partials/_header.html.twig') }}
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="dashboard-block">
+            {{ include('dashboard/partials/_actions.html.twig') }}
+        </div>
+
+        <!-- BESOINS -->
+        <div class="dashboard-block">
+            {{ include('dashboard/partials/_needs.html.twig') }}
+        </div>
+
     </div>
 {% endblock %}

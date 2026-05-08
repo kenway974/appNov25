@@ -135,8 +135,19 @@
 
 /* Fond du menu */
 .offcanvas {
-    background-color: #6A5ACD !important;
+    background-color: #000 !important;
     color: #fff;
+}
+
+.offcanvas .dropdown-item {
+    color: #fff;
+}
+
+.offcanvas hr {
+    border: none;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 5px 20px;
 }
 
 #notificationDropdown + .dropdown-menu {

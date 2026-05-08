@@ -41,6 +41,14 @@
     margin-top: 3rem; /* espace sous le bloc si besoin */
     margin-bottom: 3rem; /* espace sous le bloc si besoin */
     padding: 2.5rem; /* réinitialise le padding pour les titres et paragraphes */
+    
+}
+
+@media (max-width: 768px) {
+    .text-block {
+        max-height: 180px;
+        overflow-y: auto;
+    }
 }
 
 .text-block h1 {
@@ -55,27 +63,141 @@
     padding: 0.3rem 0.9rem;
     border-radius: 15px;
 
-    /* Dégradé métallisé vert */
-    background: linear-gradient(
-        145deg,
-        #33cc66 0%,
-        #00B140 25%,
-        #009a38 50%,
-        #00B140 75%,
-        #66e699 100%
-    );
+    background: transparent;
+    border: 2px solid #009a38;
+
+    color: #009a38;
 
     font-weight: 400;
-    font-size: small;
-    color: white;
+    font-size: medium;
 
-    /* Effet relief / métal */
-    box-shadow:
-        inset 0 2px 3px rgba(255, 255, 255, 0.5),
-        inset 0 -2px 3px rgba(0, 0, 0, 0.25),
-        0 2px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
 
     transition: all 0.3s ease;
+}
+
+.btn-text-bloc:hover {
+    background: #009a38;
+    color: white;
+}
+
+/* =========================
+   EMOTION HERO
+   ========================= */
+
+.emotion-hero {
+    position: relative;
+    min-height: 120px;
+    max-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+/* 📱 mobile */
+@media (max-width: 768px) {
+    .emotion-hero {
+        min-height: 90px;
+        max-height: 110px;
+    }
+}
+
+/* image background */
+.emotion-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.emotion-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* overlay comme ton hero */
+.emotion-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* contenu centré */
+.emotion-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+}
+
+/* titre */
+.emotion-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+}
+
+.feeling-item {
+    width: 100%;
+    padding: 0 1rem;
+    margin: 1rem auto;
+    text-align: center;
+    transition: background-color 0.5s ease;
+    border-radius: 12px;
+}
+
+.feeling-title {
+    all: unset;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 1rem 0;
+    font: inherit;
+    font-size: 1.2rem; /* ou plus */
+    color: #000;
+    cursor: pointer;
+}
+
+.feeling-title:focus {
+    outline: 2px solid #6A5ACD;
+    outline-offset: 2px;
+}
+
+.feeling-item:active {
+    background-color: #6A5ACD;
+}
+
+/* option UX : petit effet au hover */
+.feeling-item:hover {
+    background-color: #6A5ACD;
+}
+
+/* séparateur propre */
+.feeling-separator {
+    border: none;
+    border-top: 2px solid #6A5ACD;
+    width: 60%;
+    margin: 1rem auto;
+}
+
+/* Desktop : éviter que ça soit trop étroit dans les colonnes */
+@media (min-width: 992px) {
+    .feeling-item {
+        padding: 0.5rem;
+    }
+
+    .feeling-separator {
+        width: 80%; /* un peu plus large en desktop */
+    }
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1) !important;
 }
 
 .carousel-item .btn,

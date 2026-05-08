@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Align{% endblock %}
+{% block title %}Selfly{% endblock %}
 
 {% block meta_description %}
-<meta name="description" content="Align vous aide à gérer vos émotions, améliorer votre bien-être mental et mieux vous connaître au quotidien.">
+<meta name="description" content="Selfly vous aide à gérer vos émotions, améliorer votre bien-être mental et mieux vous connaître au quotidien.">
 {% endblock %}
 
 {% block body %}
@@ -14,11 +14,20 @@
 <!-- SECTION BENEFITS -->
 {{ include('home/_benefits.html.twig') }}
 
-
+{% include 'partials/_banner.html.twig' with {
+    imageUrl: 'images/home/home-hero.jpg',
+    alt: 'Bannière home',
+    id: 'home-banner'
+} %}
 
 <!-- CTA -->
 {{ include('home/_cta.html.twig') }}
 
+{% include 'partials/_banner.html.twig' with {
+    imageUrl: 'images/home/home-hero.jpg',
+    alt: 'Bannière home',
+    id: 'home-banner'
+} %}
 
 <!-- EXPLAINS -->
 {{ include('home/_explains.html.twig') }}

@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Action
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     #[ORM\Column]
     private ?int $id = null;
 

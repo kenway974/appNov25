@@ -27,7 +27,7 @@
         <div class="navbar-center">
             <a class="navbar-brand"
                href="{{ path('app_home') }}">
-                <img src="images/logo.png"
+                <img src="{{ asset('icons/logo.png') }}"
                      alt="Home"
                      height="36">
             </a>
@@ -86,7 +86,7 @@
             {% else %}
                 <!-- Login -->
                 <a href="{{ path('app_login') }}"
-                   class="btn btn-link login-btn">
+                   class="login-btn">
                     Me connecter
                 </a>
             {% endif %}

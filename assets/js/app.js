@@ -73,6 +73,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+document.addEventListener("scroll", () => {
+  const banners = document.querySelectorAll(".banner-image");
+
+  banners.forEach((img) => {
+    const rect = img.getBoundingClientRect();
+
+    // mouvement TRÈS léger
+    const offset = rect.top * 0.12;
+
+    img.style.transform = `translateY(${offset}px)`;
+  });
+});
+
 // Sélection de la navbar
 const navbar = document.querySelector('.custom-navbar');
 

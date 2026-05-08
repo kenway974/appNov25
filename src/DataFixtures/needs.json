@@ -2,161 +2,120 @@
   {
     "id": 1,
     "title": "Clarté et contrôle",
-    "description": "Mon corps et mon esprit ont besoin de récupérer.",
-    "type": "Physique",
-    "fulfilment": ["Dormir", "Faire une sieste", "S’allonger"],
-    "icon": "physique.png"
+    "description": "Besoin de retrouver de l’ordre dans ses pensées et de mieux comprendre ce qui se passe en soi. Il apparaît en cas de confusion mentale ou de surcharge cognitive. On y répond en organisant ses idées, en planifiant ou en prenant du recul.",
+    "type": "Cognitif",
+    "fulfilment": ["Organiser", "Planifier", "Structurer"]
   },
   {
     "id": 2,
-    "title": "Sécurité et préparation (social)",
-    "description": "Je manque de sommeil réparateur.",
-    "type": "Physique",
-    "fulfilment": ["Dormir tôt", "Couper les écrans", "Créer une routine"],
-    "icon": "physique.png"
+    "title": "Sécurité et préparation",
+    "description": "Besoin de se sentir prêt et en sécurité face à une situation. Il apparaît lors d’incertitude ou d’anticipation d’un événement. On y répond en se préparant, en créant des routines ou en réduisant les inconnues.",
+    "type": "Émotionnel",
+    "fulfilment": ["Créer une routine", "Anticiper", "Se préparer"]
   },
   {
     "id": 3,
     "title": "Légitimité",
-    "description": "Mon corps a besoin d’activité physique.",
-    "type": "Physique",
-    "fulfilment": ["Marcher", "Faire du sport", "S’étirer"],
-    "icon": "physique.png"
+    "description": "Besoin de se sentir valide dans ses actions et dans sa place. Il apparaît lors de doute ou de remise en question. On y répond en passant à l’action et en se confrontant à la réalité.",
+    "type": "Accomplissement",
+    "fulfilment": ["Agir", "Tester", "Passer à l’action"]
   },
   {
     "id": 4,
     "title": "Confiance",
-    "description": "Mon corps a besoin d’énergie et de nutriments.",
-    "type": "Physique",
-    "fulfilment": ["Manger équilibré", "Boire de l’eau", "Prendre un vrai repas"],
-    "icon": "physique.png"
+    "description": "Besoin de sécurité intérieure et de stabilité émotionnelle. Il apparaît lors de stress ou d’incertitude. On y répond en prenant soin de soi et en renforçant ses bases.",
+    "type": "Émotionnel",
+    "fulfilment": ["Respirer", "Se recentrer", "Ralentir"]
   },
   {
     "id": 5,
     "title": "Calme mental",
-    "description": "Mon corps est tendu et a besoin de relâchement.",
-    "type": "Physique",
-    "fulfilment": ["Respirer", "Massage", "Étirements"],
-    "icon": "physique.png"
+    "description": "Besoin de diminuer la tension mentale et émotionnelle. Il apparaît lors de surcharge ou de stress prolongé. On y répond par des pratiques apaisantes.",
+    "type": "Émotionnel",
+    "fulfilment": ["Respirer", "Méditer", "Se détendre"]
   },
   {
     "id": 6,
-    "title": "Sécurité (foule)",
-    "description": "Je ressens le besoin de me connecter aux autres.",
+    "title": "Connexion sociale",
+    "description": "Besoin de lien avec les autres et de proximité relationnelle. Il apparaît lors d’isolement ou de solitude. On y répond en échangeant avec d’autres personnes.",
     "type": "Relationnel",
-    "fulfilment": ["Appeler quelqu’un", "Voir un proche", "Discuter"],
-    "icon": "relationnel.png"
+    "fulfilment": ["Appeler quelqu’un", "Voir un proche", "Discuter"]
   },
   {
     "id": 7,
-    "title": "Contrôle et préparation (rencontre)",
-    "description": "Je veux me sentir inclus dans un groupe.",
+    "title": "Appartenance",
+    "description": "Besoin de se sentir inclus dans un groupe. Il apparaît lors de sentiment d’exclusion ou de décalage. On y répond en participant et en partageant.",
     "type": "Relationnel",
-    "fulfilment": ["Rejoindre un groupe", "Participer", "Partager"],
-    "icon": "relationnel.png"
+    "fulfilment": ["Rejoindre un groupe", "Participer", "Partager"]
   },
   {
     "id": 8,
-    "title": "Rationalité",
-    "description": "J’ai besoin d’être reconnu et accepté.",
+    "title": "Reconnaissance",
+    "description": "Besoin d’être vu et reconnu par les autres. Il apparaît lors de manque de validation. On y répond par des échanges et du feedback.",
     "type": "Relationnel",
-    "fulfilment": ["Recevoir un compliment", "Feedback positif", "Encouragement"],
-    "icon": "relationnel.png"
+    "fulfilment": ["Recevoir un feedback", "Être encouragé", "Partager ses réussites"]
   },
   {
     "id": 9,
-    "title": "Régulation émotionnelle",
-    "description": "J’ai besoin d’aide ou d’écoute.",
+    "title": "Soutien émotionnel",
+    "description": "Besoin d’écoute et de compréhension. Il apparaît lors de difficulté émotionnelle. On y répond en parlant et en étant écouté.",
     "type": "Relationnel",
-    "fulfilment": ["Parler à quelqu’un", "Demander de l’aide", "Être écouté"],
-    "icon": "relationnel.png"
+    "fulfilment": ["Parler", "Se confier", "Être écouté"]
   },
   {
     "id": 10,
-    "title": "Aisance sociale",
-    "description": "Je veux exprimer et échanger avec quelqu’un.",
-    "type": "Relationnel",
-    "fulfilment": ["Discuter", "Écrire", "Exprimer mes émotions"],
-    "icon": "relationnel.png"
+    "title": "Expression",
+    "description": "Besoin d’exprimer ce que l’on ressent ou pense. Il apparaît lors de blocage ou de frustration. On y répond en extériorisant.",
+    "type": "Émotionnel",
+    "fulfilment": ["Écrire", "Parler", "Exprimer ses émotions"]
   },
   {
     "id": 11,
     "title": "Motivation",
-    "description": "Je cherche à donner du sens à ce que je vis.",
-    "type": "Sens",
-    "fulfilment": ["Réfléchir", "Analyser", "Poser des questions"],
-    "icon": "sens.png"
+    "description": "Besoin de direction et de sens dans ses actions. Il apparaît lors de perte d’élan. On y répond en redéfinissant ses objectifs.",
+    "type": "Cognitif",
+    "fulfilment": ["Fixer des objectifs", "Clarifier ses priorités", "Se recentrer"]
   },
   {
     "id": 12,
-    "title": "Stimulation / intérêt",
-    "description": "Je veux voir plus clair dans mes pensées.",
-    "type": "Sens",
-    "fulfilment": ["Écrire", "Faire le tri", "Organiser mes idées"],
-    "icon": "sens.png"
+    "title": "Stimulation",
+    "description": "Besoin de nouveauté et d’intérêt. Il apparaît lors d’ennui. On y répond en découvrant ou en explorant.",
+    "type": "Cognitif",
+    "fulfilment": ["Explorer", "Apprendre", "Tester"]
   },
   {
     "id": 13,
-    "title": "Acceptation de l'incertitude",
-    "description": "Je veux savoir où je vais.",
-    "type": "Sens",
-    "fulfilment": ["Fixer un objectif", "Planifier", "Décider"],
-    "icon": "sens.png"
+    "title": "Clarté sur l’avenir",
+    "description": "Besoin de visibilité sur ce qui va arriver. Il apparaît lors d’incertitude. On y répond en planifiant.",
+    "type": "Cognitif",
+    "fulfilment": ["Planifier", "Décider", "Organiser"]
   },
   {
     "id": 14,
     "title": "Compréhension de soi",
-    "description": "J’ai envie de découvrir et progresser.",
-    "type": "Sens",
-    "fulfilment": ["Lire", "Regarder un contenu", "Tester"],
-    "icon": "sens.png"
+    "description": "Besoin de mieux se connaître. Il apparaît lors d’introspection. On y répond par la réflexion.",
+    "type": "Cognitif",
+    "fulfilment": ["Analyser", "Réfléchir", "Observer"]
   },
   {
     "id": 15,
-    "title": "Justice / reconnaissance",
-    "description": "Je veux être en accord avec mes valeurs.",
-    "type": "Sens",
-    "fulfilment": ["Réfléchir à mes valeurs", "Ajuster mes actions", "Dire non"],
-    "icon": "sens.png"
+    "title": "Alignement",
+    "description": "Besoin d’être en accord avec ses valeurs. Il apparaît lors de conflit interne. On y répond en ajustant ses actions.",
+    "type": "Cognitif",
+    "fulfilment": ["Réfléchir", "Décider", "Dire non"]
   },
   {
     "id": 16,
-    "title": "Confiance relationnelle",
-    "description": "Je veux avancer et m’améliorer.",
+    "title": "Progression",
+    "description": "Besoin d’avancer et de s’améliorer. Il apparaît lors de stagnation. On y répond en apprenant et en pratiquant.",
     "type": "Accomplissement",
-    "fulfilment": ["Apprendre", "S’entraîner", "Passer à l’action"],
-    "icon": "accomplissement.png"
+    "fulfilment": ["Apprendre", "S’entraîner", "Passer à l’action"]
   },
   {
     "id": 17,
-    "title": "Changement de perception",
-    "description": "Je veux atteindre un objectif.",
+    "title": "Atteinte d’objectif",
+    "description": "Besoin de réussir et de finaliser. Il apparaît lors de projets en cours. On y répond en persévérant.",
     "type": "Accomplissement",
-    "fulfilment": ["Travailler", "Persévérer", "Terminer une tâche"],
-    "icon": "accomplissement.png"
-  },
-  {
-    "id": 18,
-    "title": "Clarté et contrôle",
-    "description": "Je veux maîtriser ce qui m’entoure.",
-    "type": "Accomplissement",
-    "fulfilment": ["Organiser", "Planifier", "Structurer"],
-    "icon": "accomplissement.png"
-  },
-  {
-    "id": 19,
-    "title": "Sécurité et préparation (social)",
-    "description": "Je veux agir par moi-même.",
-    "type": "Accomplissement",
-    "fulfilment": ["Prendre une décision", "Agir seul", "Choisir"],
-    "icon": "accomplissement.png"
-  },
-  {
-    "id": 20,
-    "title": "Légitimité",
-    "description": "Je veux trouver une solution concrète.",
-    "type": "Accomplissement",
-    "fulfilment": ["Analyser", "Planifier", "Tester"],
-    "icon": "accomplissement.png"
+    "fulfilment": ["Travailler", "Persévérer", "Terminer"]
   }
 ]
