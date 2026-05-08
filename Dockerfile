@@ -40,8 +40,7 @@ RUN npm install && npm run build
 # ======================
 # PHP deps
 # ======================
-ENV COMPOSER_ALLOW_SUPERUSER=1
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 # ======================
 # Nginx config
