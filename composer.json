@@ -85,15 +85,7 @@
         "symfony/polyfill-php82": "*"
     },
     "scripts": {
-        "auto-scripts": {
-            "cache:clear": "symfony-cmd"
-        },
-        "post-install-cmd": [
-            "@auto-scripts"
-        ],
-        "post-update-cmd": [
-            "@auto-scripts"
-        ]
+        "auto-scripts": {}
     },
     "conflict": {
         "symfony/symfony": "*"
