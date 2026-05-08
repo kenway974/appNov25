@@ -29,6 +29,24 @@ rm -rf $APP_CACHE_DIR/* || true
 echo "Warming up cache..."
 php bin/console cache:warmup --env=prod || true
 
+echo "=============================="
+echo " SYMFONY DEBUG CHECK"
+echo "=============================="
+
+echo "PHP version:"
+php -v
+
+echo "Composer vendor check:"
+ls -la vendor || echo "❌ vendor missing"
+
+echo "Symfony runtime check:"
+ls -la vendor/symfony/runtime || echo "❌ runtime missing"
+
+echo "Autoload check:"
+ls -la vendor/autoload.php || echo "❌ autoload missing"
+
+php -r "echo is_dir('vendor/symfony/runtime') ? 'OK runtime' : 'MISSING runtime'; echo PHP_EOL;"
+
 # ======================
 # Migrations (optionnel mais pratique)
 # ======================

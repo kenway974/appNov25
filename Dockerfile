@@ -40,7 +40,7 @@ RUN npm install && npm run build
 # ======================
 # PHP deps
 # ======================
-RUN composer install --no-dev --optimize-autoloader --no-scripts
+RUN composer install --no-dev --optimize-autoloader
 
 # ======================
 # Nginx config
