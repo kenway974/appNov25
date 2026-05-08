@@ -6,52 +6,63 @@ echo " Symfony Railway Entrypoint"
 echo "=============================="
 
 # ======================
-# Setup dossiers writable
+# Safety check vendor
+# ======================
+echo "Checking Symfony installation..."
+
+if [ ! -f vendor/autoload.php ]; then
+  echo "❌ FATAL: vendor/autoload.php missing"
+  exit 1
+fi
+
+if [ ! -d vendor/symfony/runtime ]; then
+  echo "❌ FATAL: symfony/runtime missing"
+  exit 1
+fi
+
+# ======================
+# Setup writable dirs
 # ======================
 echo "Creating writable directories in /tmp..."
 
-mkdir -p $APP_CACHE_DIR
-mkdir -p $APP_LOG_DIR
-mkdir -p $APP_SESSION_DIR
-
-# Permissions safe (pas besoin de 777 global)
+mkdir -p "$APP_CACHE_DIR" "$APP_LOG_DIR" "$APP_SESSION_DIR"
 chmod -R 777 /tmp/symfony
 
 # ======================
-# Nettoyage cache
+# Cache clean + warmup
 # ======================
 echo "Clearing cache..."
-rm -rf $APP_CACHE_DIR/* || true
+rm -rf "$APP_CACHE_DIR"/* || true
 
-# ======================
-# Warmup Symfony
-# ======================
 echo "Warming up cache..."
-php bin/console cache:warmup --env=prod || true
+php bin/console cache:clear --env=prod
+php bin/console cache:warmup --env=prod
 
+# ======================
+# Debug info
+# ======================
 echo "=============================="
 echo " SYMFONY DEBUG CHECK"
 echo "=============================="
 
-echo "PHP version:"
 php -v
 
-echo "Composer vendor check:"
-ls -la vendor || echo "❌ vendor missing"
+echo "Vendor check:"
+ls -la vendor
 
-echo "Symfony runtime check:"
-ls -la vendor/symfony/runtime || echo "❌ runtime missing"
+echo "Runtime check:"
+ls -la vendor/symfony/runtime
 
 echo "Autoload check:"
-ls -la vendor/autoload.php || echo "❌ autoload missing"
+ls -la vendor/autoload.php
 
 php -r "echo is_dir('vendor/symfony/runtime') ? 'OK runtime' : 'MISSING runtime'; echo PHP_EOL;"
 
 # ======================
-# Migrations (optionnel mais pratique)
+# Migrations (IMPORTANT: fail fast)
 # ======================
 echo "Running migrations..."
-php bin/console doctrine:migrations:migrate --no-interaction || true
+php bin/console doctrine:migrations:migrate --no-interaction
 
 # ======================
 # Start services
