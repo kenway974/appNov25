@@ -23,8 +23,12 @@ chmod -R 777 /tmp/symfony
 echo "Warming Symfony cache..."
 php bin/console cache:warmup --env=prod
 
-echo "Running migrations..."
-php bin/console doctrine:migrations:migrate --no-interaction
+if [ "$PENDING_MIGRATIONS" != "0" ]; then
+  echo "Running migrations..."
+  php bin/console doctrine:migrations:migrate --no-interaction
+else
+  echo "✅ No pending migrations"
+fi
 
 php -v
 php -r "echo is_dir('vendor/symfony/runtime') ? 'OK runtime' : 'MISSING runtime'; echo PHP_EOL;"
