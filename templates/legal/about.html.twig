@@ -1,20 +1,112 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}À propos{% endblock %}
+{% block title %}À propos — Align{% endblock %}
 
 {% block body %}
-<div class="container py-5">
-    <h1>À propos de notre application</h1>
-    <p>Cette application a été conçue pour vous aider à mieux comprendre vos besoins, vos émotions et à passer à l’action de manière efficace.</p>
+<div class="container py-5" style="max-width: 860px;">
 
-    <h2>Fonctionnalités principales</h2>
-    <ul>
-        <li><strong>Needs</strong> : Identifiez vos besoins fondamentaux pour mieux orienter vos actions.</li>
-        <li><strong>Feelings</strong> : Notez et analysez vos ressentis pour comprendre vos émotions.</li>
-        <li><strong>Actions</strong> : Transformez vos objectifs et intentions en actions concrètes.</li>
-        <li><strong>Blocks</strong> : Repérez les blocages qui vous empêchent de passer à l’action et découvrez des stratégies pour les surmonter.</li>
-    </ul>
+    <h1 class="mb-2">À propos d'Align</h1>
+    <p class="lead text-muted mb-5">Un espace personnel pour mieux se comprendre, agir avec intention et lever ses blocages.</p>
 
-    <p>L'application vous accompagne pas à pas pour progresser, mieux gérer vos émotions et atteindre vos objectifs plus facilement.</p>
+    <section class="mb-5">
+        <h2 class="h4 mb-3">Notre mission</h2>
+        <p>
+            Align est né d'une conviction simple : avant d'agir efficacement, il faut d'abord comprendre ce que l'on ressent
+            et ce dont on a réellement besoin. Trop souvent, nous accumulons des to-do lists sans jamais questionner pourquoi
+            certaines tâches restent bloquées, ou pourquoi certaines émotions reviennent en boucle.
+        </p>
+        <p>
+            Align vous offre un espace structuré pour faire ce travail d'introspection — et le relier directement à des actions
+            concrètes dans votre quotidien.
+        </p>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="h4 mb-3">Les 4 piliers de l'application</h2>
+
+        <div class="row g-4 mt-1">
+            <div class="col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="h5 card-title">Needs — Besoins</h3>
+                        <p class="card-text text-muted">
+                            Identifiez vos besoins fondamentaux (sécurité, connexion, autonomie, reconnaissance…).
+                            Comprendre ce qui vous manque ou ce qui vous motive est le point de départ de tout changement durable.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="h5 card-title">Feelings — Émotions</h3>
+                        <p class="card-text text-muted">
+                            Notez et analysez vos ressentis au quotidien. Mettre des mots sur vos émotions vous aide à mieux
+                            les comprendre, éviter les réactions impulsives et prendre du recul sur vos situations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="h5 card-title">Actions</h3>
+                        <p class="card-text text-muted">
+                            Transformez vos intentions en étapes concrètes et suivables. Chaque action est reliée à un besoin
+                            ou un objectif, ce qui vous donne une raison claire d'avancer — et de célébrer vos progrès.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="h5 card-title">Blocks — Blocages</h3>
+                        <p class="card-text text-muted">
+                            Identifiez ce qui vous freine : peur, croyance limitante, manque de ressources, fatigue…
+                            Nommer un blocage est la première étape pour le dépasser.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="h4 mb-3">Pour qui est fait Align ?</h2>
+        <p>Align s'adresse à toute personne qui souhaite :</p>
+        <ul>
+            <li>mieux se connaître et comprendre ses réactions émotionnelles ;</li>
+            <li>sortir de la procrastination en identifiant ses vraies résistances ;</li>
+            <li>passer à l'action de façon plus alignée avec ses valeurs et ses besoins ;</li>
+            <li>tenir un journal de bord personnel, structuré et bienveillant.</li>
+        </ul>
+        <p>
+            Align n'est pas un outil de thérapie, mais un compagnon de réflexion au quotidien. Il peut être utilisé
+            en autonomie ou en complément d'un suivi professionnel (coach, thérapeute, psychologue).
+        </p>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="h4 mb-3">Nos valeurs</h2>
+        <ul>
+            <li><strong>Bienveillance :</strong> aucun jugement, aucune injonction à la performance.</li>
+            <li><strong>Confidentialité :</strong> vos données vous appartiennent, nous ne les exploitons pas à des fins commerciales.</li>
+            <li><strong>Simplicité :</strong> une interface épurée pour ne pas ajouter de charge mentale.</li>
+            <li><strong>Progressivité :</strong> chaque petit pas compte, l'application s'adapte à votre rythme.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2 class="h4 mb-3">Contact</h2>
+        <p>
+            Une question, une suggestion ou un retour d'expérience ? Écrivez-nous à
+            <a href="mailto:[EMAIL]">[EMAIL]</a> — nous lisons tous les messages.
+        </p>
+        <p>
+            Vous avez des questions sur le fonctionnement de l'application ? Consultez notre <a href="{{ path('app_faq') }}">FAQ</a>.
+        </p>
+    </section>
+
 </div>
 {% endblock %}

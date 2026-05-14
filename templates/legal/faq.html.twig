@@ -1,64 +1,184 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}FAQ{% endblock %}
+{% block title %}FAQ — Align{% endblock %}
 
 {% block body %}
-<div class="container py-5">
-    <h1>FAQ</h1>
-    <div class="accordion" id="faqAccordion">
+<div class="container py-5" style="max-width: 860px;">
+
+    <h1 class="mb-2">Questions fréquentes</h1>
+    <p class="text-muted mb-5">Vous ne trouvez pas la réponse ? Écrivez-nous à <a href="mailto:[EMAIL]">[EMAIL]</a>.</p>
+
+    <h2 class="h5 text-uppercase text-muted mb-3 mt-4">L'application</h2>
+    <div class="accordion mb-5" id="faqGeneral">
 
         <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Comment fonctionne la section <strong>Needs</strong> ?
+            <h3 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#g1" aria-expanded="true" aria-controls="g1">
+                    À quoi sert Align ?
                 </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+            </h3>
+            <div id="g1" class="accordion-collapse collapse show" data-bs-parent="#faqGeneral">
                 <div class="accordion-body">
-                    Dans cette section, vous pouvez identifier vos besoins fondamentaux et comprendre ce qui influence vos actions et vos émotions.
+                    Align est un espace de réflexion personnelle structuré autour de 4 dimensions : vos <strong>besoins</strong>,
+                    vos <strong>émotions</strong>, vos <strong>actions</strong> et vos <strong>blocages</strong>. L'objectif est
+                    de vous aider à mieux vous comprendre pour agir de façon plus intentionnelle et alignée avec ce qui compte
+                    vraiment pour vous.
                 </div>
             </div>
         </div>
 
         <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Que sont les <strong>Feelings</strong> ?
+            <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#g2" aria-expanded="false" aria-controls="g2">
+                    Align est-il un substitut à un suivi psychologique ou thérapeutique ?
                 </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+            </h3>
+            <div id="g2" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
                 <div class="accordion-body">
-                    Les Feelings vous permettent de noter et analyser vos émotions pour mieux comprendre vos réactions et vos besoins.
+                    Non. Align est un outil d'accompagnement personnel, pas un dispositif médical ou thérapeutique. Il peut
+                    être utilisé en autonomie ou en complément d'un suivi avec un professionnel (thérapeute, coach, psychologue),
+                    mais ne le remplace pas. Si vous traversez une période difficile, nous vous encourageons à consulter un professionnel.
                 </div>
             </div>
         </div>
 
         <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Comment utiliser les <strong>Actions</strong> ?
+            <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#g3" aria-expanded="false" aria-controls="g3">
+                    Par où commencer si je suis nouveau sur Align ?
                 </button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+            </h3>
+            <div id="g3" class="accordion-collapse collapse" data-bs-parent="#faqGeneral">
                 <div class="accordion-body">
-                    Cette section vous aide à transformer vos intentions en actions concrètes pour progresser sur vos objectifs.
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingFour">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                    Que sont les <strong>Blocks</strong> ?
-                </button>
-            </h2>
-            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                    Les Blocks représentent les obstacles ou blocages qui vous empêchent de passer à l’action. Vous pouvez découvrir des stratégies pour les surmonter.
+                    Commencez par la section <strong>Feelings</strong> : notez ce que vous ressentez en ce moment sans filtre.
+                    Ensuite, explorez <strong>Needs</strong> pour identifier quel besoin est derrière cette émotion. Une fois
+                    ces deux éléments posés, vous pouvez définir une <strong>Action</strong> ou nommer un <strong>Blocage</strong>
+                    si quelque chose vous freine.
                 </div>
             </div>
         </div>
 
     </div>
+
+    <h2 class="h5 text-uppercase text-muted mb-3 mt-4">Les fonctionnalités</h2>
+    <div class="accordion mb-5" id="faqFeatures">
+
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f1" aria-expanded="false" aria-controls="f1">
+                    Comment fonctionne la section <strong>Needs</strong> ?
+                </button>
+            </h3>
+            <div id="f1" class="accordion-collapse collapse" data-bs-parent="#faqFeatures">
+                <div class="accordion-body">
+                    La section Needs s'inspire de la théorie des besoins fondamentaux (comme la Communication Non Violente).
+                    Vous pouvez y lister les besoins que vous ressentez — satisfaits ou non — et les relier à vos émotions ou
+                    à vos actions. Identifier un besoin non satisfait est souvent la clé pour comprendre une frustration ou
+                    une procrastination.
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f2" aria-expanded="false" aria-controls="f2">
+                    Que puis-je enregistrer dans <strong>Feelings</strong> ?
+                </button>
+            </h3>
+            <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faqFeatures">
+                <div class="accordion-body">
+                    Tout ce que vous ressentez : une émotion ponctuelle (joie, frustration, anxiété, enthousiasme…), une
+                    humeur de fond, ou une réaction face à un événement précis. Chaque entrée est datée, ce qui vous permet
+                    de voir des tendances sur la durée et de mieux comprendre vos cycles émotionnels.
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f3" aria-expanded="false" aria-controls="f3">
+                    Comment utiliser la section <strong>Actions</strong> ?
+                </button>
+            </h3>
+            <div id="f3" class="accordion-collapse collapse" data-bs-parent="#faqFeatures">
+                <div class="accordion-body">
+                    Créez des actions concrètes, avec un intitulé clair et, si besoin, une date cible. Vous pouvez les
+                    relier à un besoin ou à un objectif plus large. Quand une action est accomplie, marquez-la comme terminée —
+                    chaque victoire compte, même petite. Les actions non terminées restent visibles pour ne rien oublier.
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f4" aria-expanded="false" aria-controls="f4">
+                    Que sont les <strong>Blocks</strong> et comment les utiliser ?
+                </button>
+            </h3>
+            <div id="f4" class="accordion-collapse collapse" data-bs-parent="#faqFeatures">
+                <div class="accordion-body">
+                    Un blocage est tout ce qui vous empêche de passer à l'action : une peur, une croyance limitante,
+                    un manque de clarté, de la fatigue, un contexte défavorable… Nommer un blocage dans Align vous aide
+                    à le sortir de votre tête et à l'observer avec plus de recul. Vous pouvez ensuite réfléchir à ce
+                    qui pourrait le lever et créer une action associée.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <h2 class="h5 text-uppercase text-muted mb-3 mt-4">Compte et données</h2>
+    <div class="accordion mb-5" id="faqAccount">
+
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a1" aria-expanded="false" aria-controls="a1">
+                    Mes données sont-elles confidentielles ?
+                </button>
+            </h3>
+            <div id="a1" class="accordion-collapse collapse" data-bs-parent="#faqAccount">
+                <div class="accordion-body">
+                    Oui. Vos données (besoins, émotions, actions, blocages) sont strictement personnelles et ne sont
+                    jamais partagées avec des tiers à des fins commerciales ou publicitaires. Pour en savoir plus,
+                    consultez notre <a href="{{ path('app_privacy_policy') }}">Politique de Confidentialité</a>.
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2" aria-expanded="false" aria-controls="a2">
+                    Comment supprimer mon compte ?
+                </button>
+            </h3>
+            <div id="a2" class="accordion-collapse collapse" data-bs-parent="#faqAccount">
+                <div class="accordion-body">
+                    Vous pouvez supprimer votre compte depuis les paramètres de votre profil. La suppression est définitive
+                    et entraîne l'effacement de toutes vos données dans un délai de 30 jours. Si vous rencontrez un problème,
+                    contactez-nous à <a href="mailto:[EMAIL]">[EMAIL]</a>.
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a3" aria-expanded="false" aria-controls="a3">
+                    J'ai oublié mon mot de passe, que faire ?
+                </button>
+            </h3>
+            <div id="a3" class="accordion-collapse collapse" data-bs-parent="#faqAccount">
+                <div class="accordion-body">
+                    Sur la page de connexion, cliquez sur « Mot de passe oublié ». Vous recevrez un e-mail avec un lien
+                    pour réinitialiser votre mot de passe. Si l'e-mail n'arrive pas, vérifiez vos spams ou contactez-nous.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <p class="text-muted">
+        Vous avez une question non listée ici ? Contactez-nous à <a href="mailto:[EMAIL]">[EMAIL]</a>.
+    </p>
+
 </div>
 {% endblock %}
