@@ -1,22 +1,29 @@
-<form method="post" action="{{ path('app_feeling') }}" class="entity-form">
+{#
+  need/_form.html.twig
+  Formulaire d'ajout d'un besoin à son profil.
+  Bug corrigé : l'action pointait vers app_feeling au lieu de app_need_add.
+#}
+<form method="post"
+      action="{{ path('app_need_add', { id: need.id }) }}"
+      class="entity-form">
+
     <input type="hidden" name="need_id" value="{{ need.id }}">
 
     <label for="priority_{{ need.id }}" class="form-label">
-        Sur 10, à quel point t'en aurais besoin ?
+        À quel point en as-tu besoin en ce moment ?
     </label>
 
-    <span id="rangeMinValue_{{ need.id }}">5</span>
-
-    <input 
-        type="range" 
-        id="priority_{{ need.id }}" 
-        name="priority" 
-        min="5" 
-        max="10"
-        class="range-input"
-    >
-
-    <span id="rangeMaxValue_{{ need.id }}">10</span>
+    <div class="d-flex align-items-center gap-2 mt-1 mb-3">
+        <span>1</span>
+        <input type="range"
+               id="priority_{{ need.id }}"
+               name="priority"
+               min="1"
+               max="10"
+               value="5"
+               class="range-input form-range flex-grow-1">
+        <span>10</span>
+    </div>
 
     <button class="btn-submit" type="submit">Valider</button>
 </form>
