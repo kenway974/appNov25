@@ -1,0 +1,94 @@
+{#
+  Partial générique : liste responsive — carousel mobile / grille desktop
+  -----------------------------------------------------------------------
+  Variables attendues :
+    - carousel_id      (string) : id unique du carousel Bootstrap
+    - items_by_group   (array)  : tableau groupé, ex. feelingsByEmotion
+    - item_key         (string) : nom de l'item dans la boucle, ex. "feeling"
+    - read_template    (string) : chemin du partial _read
+    - text_bloc_vars   (object) : variables passées au partial _entity_text_bloc
+    - prefix           (string) : préfixe d'id unique pour les collapsibles
+    - image_base_path  (string) : base du chemin image des bannières
+    - carousel_label   (string, optionnel) : aria-label lisible du carousel
+#}
+
+<section class="mt-5" aria-labelledby="{{ prefix }}-title">
+
+    {{ include('partials/_entity_text_bloc.html.twig', text_bloc_vars) }}
+
+    <div id="{{ carousel_id }}"
+         class="carousel slide entity-carousel"
+         data-bs-ride="false"
+         data-bs-touch="true"
+         aria-label="{{ carousel_label|default(text_bloc_vars.title) }}">
+
+        <div class="carousel-inner">
+
+            {% for group_name, items in items_by_group %}
+                <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+
+                    <header class="category-hero">
+                        <div class="category-bg">
+                            <img src="{{ image_base_path ~ '/' ~ group_name|lower ~ '.jpg' }}"
+                                 alt="Bannière {{ group_name }}"
+                                 class="category-image">
+                            <div class="category-overlay"></div>
+                        </div>
+                        <div class="category-content">
+                            <h2 class="category-title text-center mb-3">{{ group_name }}</h2>
+                        </div>
+                    </header>
+
+                    <div class="row g-3 mt-2">
+                        {% for item in items %}
+                            {% set uniqueId = prefix ~ '-' ~ item.id %}
+
+                            <article class="col-md-4 entity-item">
+                                <button class="entity-title"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#{{ uniqueId }}"
+                                        aria-expanded="false"
+                                        aria-controls="{{ uniqueId }}">
+
+                                    {% if item.icon is defined and item.icon %}
+                                        <img src="{{ asset('images/icons/' ~ item.icon) }}" width="24" class="me-2" alt="">
+                                    {% endif %}
+
+                                    <span>{{ item.title }}</span>
+                                </button>
+
+                                <div id="{{ uniqueId }}" class="collapse mt-2">
+                                    {{ include(read_template, { (item_key): item }) }}
+                                </div>
+
+                                {% if not loop.last %}
+                                    <hr class="entity-separator">
+                                {% endif %}
+                            </article>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            {% endfor %}
+
+        </div>
+
+        <button class="carousel-control-prev entity-carousel-ctrl"
+                type="button"
+                data-bs-target="#{{ carousel_id }}"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next entity-carousel-ctrl"
+                type="button"
+                data-bs-target="#{{ carousel_id }}"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Suivant</span>
+        </button>
+
+    </div>
+
+</section>
