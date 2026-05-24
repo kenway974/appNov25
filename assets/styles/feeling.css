@@ -493,15 +493,6 @@
 
 
 /* =========================
-   FOOTER
-   ========================= */
-footer {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    color: #8b97a1;
-}
-
-/* =========================
    RESPONSIVE
    ========================= */
 @media (min-width: 992px) {

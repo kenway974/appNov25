@@ -16,3 +16,81 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+:root {
+    --shadow-relief:
+        inset 0 3px 5px rgba(255, 255, 255, 0.6),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.3),
+        0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+.site-footer {
+    background: linear-gradient(135deg, #3b4b63, #4a657d);
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+    text-align: center;
+    color: #cbd5e1;
+}
+
+.site-footer a {
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.site-footer a:hover {
+    color: #ffffff;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+.footer-brand-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.footer-auth {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.footer-nav {
+    margin-bottom: 1rem;
+}
+
+.footer-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 1rem;
+}
+
+.footer-legal {
+    font-size: 0.85rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 0.75rem;
+    margin-top: 1rem;
+}
+
+.footer-copy {
+    width: 100%;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #8b97a1;
+}

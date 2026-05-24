@@ -1,34 +1,29 @@
-{# templates/partials/_footer.html.twig #}
-<footer style="background: linear-gradient(135deg, #3b4b63, #4a657d); padding: 1rem; margin-top: 2rem; text-align: center;">
-    <!-- Logo du site -->
-    <div>
-        <img src="{{ asset('icons/logo.png') }}" alt="Logo du site" style="height:40px;">
-        <div>MonSite</div>
+<footer class="site-footer">
+
+    <div class="footer-brand">
+        <img src="{{ asset('icons/logo.png') }}" alt="Logo Selfly" style="height: 40px;">
+        <span class="footer-brand-name">Selfly</span>
     </div>
 
-    <!-- Boutons Connexion / Inscription -->
-    <div style="margin: 0.5rem 0;">
-        <a href="{{ path('app_login') }}">Se connecter</a> |
+    <div class="footer-auth">
+        <a href="{{ path('app_login') }}">Se connecter</a>
         <a href="{{ path('app_register') }}">S'inscrire</a>
     </div>
 
-    <!-- Sommaire -->
-    <div style="margin: 0.5rem 0;">
-        <span>Sommaire :</span>
-        <ul style="list-style: none; padding: 0; margin: 0;">
+    <nav class="footer-nav" aria-label="Navigation secondaire">
+        <ul class="footer-nav-list">
             <li><a href="{{ path('app_home') }}">Accueil</a></li>
             <li><a href="{{ path('app_about') }}">À propos</a></li>
-            <li><a href="{{ path('app_feeling') }}">Voir les ressentis</a></li>
-            <li><a href="{{ path('app_action') }}">Voir les actions</a></li>
+            <li><a href="{{ path('app_feeling') }}">Ressentis</a></li>
+            <li><a href="{{ path('app_action') }}">Actions</a></li>
         </ul>
+    </nav>
+
+    <div class="footer-legal">
+        <a href="{{ path('app_cgu') }}">CGU</a>
+        <a href="{{ path('app_privacy_policy') }}">Politique de confidentialité</a>
+        <a href="{{ path('app_cookies') }}">Politique de cookies</a>
+        <span class="footer-copy">© {{ "now"|date("Y") }} Selfly. Tous droits réservés.</span>
     </div>
 
-    <!-- Liens légaux -->
-    <div style="margin-top: 1rem;">
-        <a href="{{ path('app_cgu') }}">CGU</a> |
-        <a href="{{ path('app_privacy_policy') }}">Politique de confidentialité</a> |
-        <a href="{{ path('app_cookies') }}">Politique de cookies</a>
-        <br>
-        <span>© {{ "now"|date("Y") }} MonSite. Tous droits réservés.</span>
-    </div>
 </footer>
