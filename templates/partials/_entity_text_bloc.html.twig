@@ -1,0 +1,32 @@
+{#
+  Partial générique : bandeau d'intro d'une page entité
+  -------------------------------------------------------
+  Variables attendues :
+    - title        (string) : titre principal, ex. "Actions"
+    - subtitle     (string) : sous-titre, ex. "par intention"
+    - description  (string) : texte explicatif court
+    - popover_text (string) : contenu du popover d'info
+    - btn_label    (string, optionnel) : label du bouton (défaut "Que faire ?")
+    - heading_id   (string, optionnel) : id du h2 pour aria
+#}
+
+<div class="text-block">
+    <div>
+        <h2 id="{{ heading_id|default('entity-title') }}">
+            <strong>{{ title }}</strong>{% if subtitle %} {{ subtitle }}{% endif %}
+        </h2>
+        <p class="text-muted text-bloc-description mb-0">
+            {{ description }}
+        </p>
+    </div>
+
+    <button type="button"
+            class="btn-text-bloc"
+            data-bs-toggle="popover"
+            data-bs-placement="left"
+            data-bs-trigger="focus"
+            title="Infos"
+            data-bs-content="{{ popover_text }}">
+        {{ btn_label|default('Que faire ?') }}
+    </button>
+</div>

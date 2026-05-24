@@ -457,6 +457,10 @@
 }
 
 
+.text-bloc-description {
+    font-size: 0.85rem;
+}
+
 .entity-form {
     margin: 0 auto;
 }
