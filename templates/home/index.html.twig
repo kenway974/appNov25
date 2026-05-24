@@ -1,10 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Selfly{% endblock %}
+{% block title %}Selfly — Accompagnement personnel basé sur vos besoins et émotions{% endblock %}
 
-{% block meta_description %}
-<meta name="description" content="Selfly vous aide à gérer vos émotions, améliorer votre bien-être mental et mieux vous connaître au quotidien.">
-{% endblock %}
+{% block meta_description %}Identifiez vos besoins, comprenez vos émotions et passez à l'action. Selfly est un espace personnel bienveillant pour mieux vous connaître et avancer au quotidien.{% endblock %}
 
 {% block body %}
 <!-- HERO -->
@@ -17,7 +15,7 @@
 {% include 'partials/_banner.html.twig' with {
     imageUrl: 'images/home/home-hero.jpg',
     alt: 'Bannière home',
-    id: 'home-banner'
+    id: 'home-banner-top'
 } %}
 
 <!-- CTA -->
@@ -26,7 +24,7 @@
 {% include 'partials/_banner.html.twig' with {
     imageUrl: 'images/home/home-hero.jpg',
     alt: 'Bannière home',
-    id: 'home-banner'
+    id: 'home-banner-bottom'
 } %}
 
 <!-- EXPLAINS -->
