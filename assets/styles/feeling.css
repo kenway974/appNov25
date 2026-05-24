@@ -35,19 +35,22 @@
 }
 
 .text-block {
-    border: 1px solid #6A5ACD; /* contour violet */
-    padding: 1rem 1rem 1rem 1.5rem; /* espace interne, plus à gauche */
-    border-radius: 8px; /* coins arrondis */
-    margin-top: 3rem; /* espace sous le bloc si besoin */
-    margin-bottom: 3rem; /* espace sous le bloc si besoin */
-    padding: 2.5rem; /* réinitialise le padding pour les titres et paragraphes */
-    
+    border: 1px solid #6A5ACD;
+    padding: 2.5rem;
+    border-radius: 8px;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    box-shadow: var(--shadow-relief);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 @media (max-width: 768px) {
     .text-block {
-        max-height: 180px;
-        overflow-y: auto;
+        max-height: none;
+        overflow: visible;
     }
 }
 
@@ -62,18 +65,13 @@
 .btn-text-bloc {
     padding: 0.3rem 0.9rem;
     border-radius: 15px;
-
     background: transparent;
     border: 2px solid #009a38;
-
-    color: #009a38;
-
+    color: #ffffff;
     font-weight: 400;
-    font-size: medium;
-
-    box-shadow: none;
-
+    font-size: 1.2rem;
     transition: all 0.3s ease;
+    box-shadow: var(--shadow-relief);
 }
 
 .btn-text-bloc:hover {
@@ -82,10 +80,10 @@
 }
 
 /* =========================
-   EMOTION HERO
+   CATEGORY HERO
    ========================= */
 
-.emotion-hero {
+.category-hero {
     position: relative;
     min-height: 120px;
     max-height: 160px;
@@ -99,34 +97,34 @@
 
 /* 📱 mobile */
 @media (max-width: 768px) {
-    .emotion-hero {
+    .category-hero {
         min-height: 90px;
         max-height: 110px;
     }
 }
 
 /* image background */
-.emotion-bg {
+.category-bg {
     position: absolute;
     inset: 0;
     z-index: 1;
 }
 
-.emotion-image {
+.category-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
 /* overlay comme ton hero */
-.emotion-overlay {
+.category-overlay {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.35);
 }
 
 /* contenu centré */
-.emotion-content {
+.category-content {
     position: relative;
     z-index: 2;
     text-align: center;
@@ -134,50 +132,39 @@
 }
 
 /* titre */
-.emotion-title {
+.category-title {
     font-size: 2.2rem;
     font-weight: bold;
     color: white;
-    margin: 0;
+    margin: 2rem 0;
 }
 
-.feeling-item {
-    width: 100%;
-    padding: 0 1rem;
-    margin: 1rem auto;
-    text-align: center;
-    transition: background-color 0.5s ease;
-    border-radius: 12px;
-}
-
-.feeling-title {
+.entity-title {
     all: unset;
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 1rem 0;
-    font: inherit;
-    font-size: 1.2rem; /* ou plus */
-    color: #000;
+    display: block;
+    color: #ffffff;
     cursor: pointer;
+    text-align: center;
+    font-size: large;
+    width: 100%;
+    padding: 0.5rem 0;
+
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.feeling-title:focus {
-    outline: 2px solid #6A5ACD;
-    outline-offset: 2px;
+/* hover = léger effet "élevé" */
+.entity-title:hover {
+    transform: translateY(-2px);
+    opacity: 0.85;
 }
 
-.feeling-item:active {
-    background-color: #6A5ACD;
-}
-
-/* option UX : petit effet au hover */
-.feeling-item:hover {
-    background-color: #6A5ACD;
+/* focus propre (accessibilité) */
+.entity-title:focus {
+    outline: none;
 }
 
 /* séparateur propre */
-.feeling-separator {
+.entity-separator {
     border: none;
     border-top: 2px solid #6A5ACD;
     width: 60%;
@@ -186,11 +173,11 @@
 
 /* Desktop : éviter que ça soit trop étroit dans les colonnes */
 @media (min-width: 992px) {
-    .feeling-item {
+    .entity-item {
         padding: 0.5rem;
     }
 
-    .feeling-separator {
+    .entity-separator {
         width: 80%; /* un peu plus large en desktop */
     }
 }
@@ -198,68 +185,6 @@
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     filter: invert(1) !important;
-}
-
-.carousel-item .btn,
-.entity-title {
-    width: 70%;
-    margin: 1rem auto;
-    text-align: center;
-
-    /* Effet métallisé */
-    background: linear-gradient(
-        145deg,
-        #7b6df0 0%,
-        #6A5ACD 25%,
-        #5a4bb5 50%,
-        #6A5ACD 75%,
-        #9a8cff 100%
-    );
-
-    color: #ffffff;
-
-    border: none;
-    border-radius: 8px;
-
-    font-weight: 500;
-    padding: 1rem 0;
-    font-size: 1.1rem;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    /* Effet "reflet métal" */
-    box-shadow: 
-        inset 0 2px 4px rgba(255, 255, 255, 0.4),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.2),
-        0 4px 10px rgba(0, 0, 0, 0.2);
-
-    transition: all 0.3s ease;
-}
-
-.carousel-item .btn:hover,
-.entity-title:hover {
-    transform: translateY(-2px);
-
-    background: linear-gradient(
-        145deg,
-        #9a8cff 0%,
-        #7b6df0 25%,
-        #6A5ACD 50%,
-        #5a4bb5 75%,
-        #6A5ACD 100%
-    );
-
-    box-shadow: 
-        inset 0 3px 6px rgba(255, 255, 255, 0.5),
-        inset 0 -3px 6px rgba(0, 0, 0, 0.3),
-        0 6px 14px rgba(0, 0, 0, 0.3);
-}
-
-.category-title {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
 }
 
 
@@ -288,7 +213,6 @@
     width: 70%; /* réduit la largeur */
     margin: 1rem auto 1rem auto; /* centré horizontalement + espace entre boutons */
     text-align: center;  /* texte centré */
-    background-color: #6A5ACD; /* violet */
     color: #ffffff; /* texte blanc */
     border: none; 
     border-radius: 8px; 
@@ -299,10 +223,6 @@
     transition: background 0.3s, color 0.3s;
 }
 
-.carousel-item .btn:hover {
-    background-color: #5847B2; /* violet plus foncé au hover */
-    color: #ffffff;
-}
 
 /* =========================
    DESKTOP GRID
@@ -338,17 +258,17 @@
    ========================= */
 
 .entity-container {
-    max-width: 70%;
+    max-width: 90%;
     display: flex;
     justify-content: center;
     margin: 0 auto; /* 👉 centre horizontalement */
     border: 1px solid #6A5ACD; /* contour violet */
     border-radius: 8px;
 
+    box-shadow: var(--shadow-relief);
 }
 
 .entity-content {
-    max-width: 60%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -376,61 +296,37 @@
 
 .trigger-intro{
     margin-top: 0.5rem;
-    margin-bottom: 1rem
-}
-
-.trigger-note {
-    max-width: 80% ;
-    font-size: small;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    font-size: 1.1rem;
 }
 
 .trigger-pill {
     padding: 0.3rem 0.9rem;
     border-radius: 20px;
 
-    /* Dégradé métallisé vert */
-    background: linear-gradient(
-        145deg,
-        #33cc66 0%,
-        #00B140 25%,
-        #009a38 50%,
-        #00B140 75%,
-        #66e699 100%
-    );
+    background: transparent;
+    border: 1px solid #00B140;
 
+    color: #ffffff;
     font-weight: 500;
-    color: white;
 
-    /* Effet relief / métal */
-    box-shadow:
-        inset 0 2px 3px rgba(255, 255, 255, 0.5),
-        inset 0 -2px 3px rgba(0, 0, 0, 0.25),
-        0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
 
-    transition: all 0.3s ease;
+    box-shadow: var(--shadow-relief);
 }
 
 .trigger-pill:hover {
     transform: translateY(-1px);
 
-    background: linear-gradient(
-        145deg,
-        #66e699 0%,
-        #33cc66 25%,
-        #00B140 50%,
-        #009a38 75%,
-        #00B140 100%
-    );
-
-    box-shadow:
-        inset 0 3px 5px rgba(255, 255, 255, 0.6),
-        inset 0 -3px 5px rgba(0, 0, 0, 0.3),
-        0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-relief);
 }
 
 .trigger-note {
     font-style: italic;
-    color: #6c757d;
+    color: #ffffff;
+    max-width: 80% ;
+    font-size: small;
 }
 
 
@@ -446,15 +342,16 @@
 .description-content {
     margin-top: 1rem;
     padding: 1rem;
-    background: #f5f6fa;
+    background: #71717153;
     border-radius: 8px;
     max-width: 600px;
+    color : #ffffff;
 }
 
 .description-toggle {
     background: transparent;
-    color: #6A5ACD;
-    border: 2px solid #6A5ACD;
+    color: #ffffff;
+    border: 1px solid #6A5ACD;
     padding: 0.5rem 1rem;
     border-radius: 15px;
     font-size: 1rem;
@@ -462,6 +359,8 @@
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
+
+    box-shadow: var(--shadow-relief);
 }
 
 /* effet au survol */
@@ -473,70 +372,36 @@
 
 /* NEEDS */
 
-.sub-entity-btn {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    max-height: 60px;
-    max-width: 80%;
-    margin: 0.5rem auto !important; /* force Bootstrap à lâcher */
-    border-radius: 6px;
-    padding: 0.5rem 1rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
-} 
-
+.sub-entity-btn,
 .sub-entity-title {
-    width: 80%;
-    margin: 1rem auto;
+    background: none;
+    border: none;
+    padding: 0.5rem 0;
+
+    display: block;
+    width: 100%;
+
     text-align: center;
-
-    /* Effet métallisé */
-    background: linear-gradient(
-        145deg,
-        #7b6df0 0%,
-        #6A5ACD 25%,
-        #5a4bb5 50%,
-        #6A5ACD 75%,
-        #9a8cff 100%
-    );
-
     color: #ffffff;
 
-    border: none;
-    border-radius: 8px;
+    font-weight: 500;
 
-    font-weight: 300;
-    padding: 1rem 0;
-    font-size: 0.8rem;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    /* Effet "reflet métal" */
-    box-shadow: 
-        inset 0 2px 4px rgba(255, 255, 255, 0.4),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.2),
-        0 4px 10px rgba(0, 0, 0, 0.2);
-
-    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.sub-entity-title:hover {
-    transform: translateY(-2px);
+.sub-entity-intro {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
 
-    background: linear-gradient(
-        145deg,
-        #9a8cff 0%,
-        #7b6df0 25%,
-        #6A5ACD 50%,
-        #5a4bb5 75%,
-        #6A5ACD 100%
-    );
 
-    box-shadow: 
-        inset 0 3px 6px rgba(255, 255, 255, 0.5),
-        inset 0 -3px 6px rgba(0, 0, 0, 0.3),
-        0 6px 14px rgba(0, 0, 0, 0.3);
+.need-separator {
+    display: block;
+    width: 60%;
+    margin: 0.5rem auto;
+    border: 0;
+    border-top: 3px solid #6A5ACD;
 }
 
 
@@ -550,6 +415,26 @@
     border-radius: 8px;
 }
 
+
+.action-premium-cta {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    border-radius: 15px;
+    border: 2px solid #f59e0b;
+    background: transparent;
+    color: #f59e0b;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-relief);
+}
+
+.action-premium-cta:hover {
+    background: #f59e0b;
+    color: #fff;
+}
 
 .form-toggle {
     background: transparent;
@@ -620,6 +505,21 @@ footer {
 
     .card {
         margin-bottom: 1.5rem;
+    }
+
+    /* Carousel → grille sur desktop : on affiche tous les groupes simultanément */
+    .entity-carousel .carousel-item {
+        display: block !important;
+        position: static !important;
+        transform: none !important;
+        transition: none !important;
+        float: none;
+        margin-right: 0;
+    }
+
+    /* Masquer les contrôles prev/next inutiles sur desktop */
+    .entity-carousel-ctrl {
+        display: none !important;
     }
 }
 
