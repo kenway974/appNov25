@@ -6,8 +6,10 @@
     </div>
     <div class="offcanvas-body">
         <ul class="list-unstyled">
-            <li><a class="dropdown-item" href="#">Profil</a></li>
+            {% if app.user %}
+            <li><a class="dropdown-item" href="{{ path('app_dashboard') }}">Mon tableau de bord</a></li>
             <hr>
+            {% endif %}
             <li><a class="dropdown-item" href="{{ path('app_subscription') }}">Abonnement</a></li>
             <hr>
             <li><a class="dropdown-item" href="{{ path('app_feeling') }}">Feeling</a></li>
