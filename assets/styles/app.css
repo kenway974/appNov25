@@ -31,9 +31,9 @@
 }
 
 .belief-text {
-            color: #8b97a1; /* gris neutre, proche de text-muted Bootstrap */
-            font-style: italic; /* optionnel, pour donner un effet "pensée" */
-        }
+    color: #8b97a1;
+    font-style: italic;
+}
 
 
 
