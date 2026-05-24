@@ -159,8 +159,10 @@
 }
 
 /* focus propre (accessibilité) */
-.entity-title:focus {
-    outline: none;
+.entity-title:focus-visible {
+    outline: 2px solid #6A5ACD;
+    outline-offset: 2px;
+    border-radius: 4px;
 }
 
 /* séparateur propre */
