@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\kenny\\\\Documents\\\\DEV\\\\Align\" -Recurse -Filter \"*.twig\")",
+      "Bash(Select-Object FullName)",
+      "Bash(git checkout *)"
+    ]
+  }
+}

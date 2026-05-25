@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Zones privées — hors index
+Disallow: /dashboard
+Disallow: /action
+Disallow: /notification
+Disallow: /webhook
+Disallow: /create-checkout-session
+Disallow: /subscription/success
+Disallow: /subscription/cancel
+Disallow: /set-user-need
+Disallow: /set-selected-need
+Disallow: /set-selected-user-action
+Disallow: /verify/email
+Disallow: /add-need/
+Disallow: /add-action/
+Disallow: /access-denied
+
+Sitemap: https://selfly.fr/sitemap.xml

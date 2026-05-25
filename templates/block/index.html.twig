@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des blocages{% endblock %}
+{% block title %}Blocages et freins internes — Selfly{% endblock %}
+
+{% block meta_description %}Identifiez vos blocages et freins internes par type. Nommer ce qui vous empêche d'avancer est la première étape pour le dépasser.{% endblock %}
 
 {% block body %}
 
@@ -13,114 +15,23 @@
 
 <main class="container">
 
-    <!-- =========================
-         MOBILE : CAROUSEL
-         ========================= -->
-    
-    <section class="d-lg-none mt-5" aria-labelledby="mobile-blocks-title">
-    
-        {{ include('block/_text-bloc.html.twig') }}
-
-        <div id="carouselBlocksByType" class="carousel slide" data-bs-ride="carousel" aria-label="Carrousel des blocages">
-            
-            <div class="carousel-inner">
-
-                {% for type, blocks in blocksByType %}
-                    <div class="carousel-item {{ loop.first ? 'active' : '' }}">
-                        
-                        <header>
-                            <h2 class="category-title text-center">
-                                <strong>{{ type }}</strong>
-                            </h2>
-                        </header>
-
-                        {% for block in blocks %}
-                            {% set uniqueId = 'mobile-' ~ block.id ~ '-' ~ loop.index %}
-
-                            <article>
-                                <button class="entity-btn entity-title"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#{{ uniqueId }}"
-                                        aria-expanded="false"
-                                        aria-controls="{{ uniqueId }}">
-
-                                    {% if block.icon %}
-                                        <img src="{{ asset('images/icons/' ~ block.icon) }}" width="24" class="me-2">
-                                    {% endif %}
-
-                                    <span>{{ block.title }}</span>
-                                </button>
-
-                                <div id="{{ uniqueId }}" class="collapse mt-2">
-                                    {{ include('block/_read.html.twig', { block }) }}
-                                </div>
-                            </article>
-
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselBlocksByType" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselBlocksByType" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-
-        </div>
-    </section>
-
-    <!-- =========================
-         DESKTOP : GRILLE
-         ========================= -->
-    <section class="d-none d-lg-block mt-5" aria-labelledby="desktop-block-title">
-
-        {{ include('block/_text-bloc.html.twig') }}
-
-        {% for type, blocks in blocksByType %}
-            <section class="mb-5" aria-labelledby="type-desktop-{{ loop.index }}">
-                <header>
-                    <h2 class="mb-3">{{ type }}</h2>
-                </header>
-
-                <div class="row g-3">
-                    {% for block in blocks %}
-                        {% set uniqueId = 'desktop-' ~ block.id ~ '-' ~ loop.index %}
-                        <article class="col-md-4">
-
-                                <button class="entity-btn entity-title"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#{{ uniqueId }}"
-                                        aria-expanded="false"
-                                        aria-controls="{{ uniqueId }}">
-
-                                    {% if block.icon %}
-                                        <img src="{{ asset('images/icons/' ~ block.icon) }}" width="24" class="me-2">
-                                    {% endif %}
-
-                                    {{ block.title }}
-                                </button>
-
-                            <div id="{{ uniqueId }}" class="collapse mt-2">
-                                {{ include('block/_read.html.twig', { block }) }}
-                            </div>
-
-                        </article>
-                    {% endfor %}
-                </div>
-            </section>
-        {% endfor %}
-    </section>
+    {{ include('partials/_entity_carousel.html.twig', {
+        carousel_id:    'carouselBlocksByType',
+        items_by_group: blocksByType,
+        item_key:       'block',
+        read_template:  'block/_read.html.twig',
+        prefix:         'block',
+        image_base_path:'/images/blocks',
+        text_bloc_vars: {
+            title:        'Blocages',
+            subtitle:     'par type',
+            description:  'Identifiez vos freins internes et découvrez des pistes pour les dépasser',
+            popover_text: 'Les blocages sont des pensées ou croyances qui limitent vos actions. Les reconnaître est la première étape pour les dépasser.',
+            btn_label:    'Comment les dépasser ?',
+            heading_id:   'block-title'
+        }
+    }) }}
 
 </main>
-
-<footer class="container text-center mt-5 mb-5">
-    <p class="text-muted">Interface de consultation des blocages</p>
-</footer>
 
 {% endblock %}

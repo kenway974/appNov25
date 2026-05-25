@@ -1,19 +1,9 @@
-<div class="text-block d-flex align-items-start justify-content-between">
-            <div>
-                <h1 id="desktop-entity-title">
-                    <strong>Ressentis</strong> par émotion
-                </h1>
-                <p class="text-muted mb-0">
-                    Apprenez à reconnaître et à comprendre vos ressentis et émotions
-                </p>
-            </div>
-
-            <button type="button" class="btn btn-sm btn-info ms-3"
-                    data-bs-toggle="popover"
-                    data-bs-placement="left"
-                    data-bs-trigger="focus"
-                    title="Infos"
-                    data-bs-content="Ici, tu peux expliquer plus en détail le concept de ressentis et émotions.">
-                Que faire ?
-            </button>
-        </div>
+{# Déprécié : utiliser partials/_entity_text_bloc.html.twig directement #}
+{{ include('partials/_entity_text_bloc.html.twig', {
+    title:        'Blocages',
+    subtitle:     'par type',
+    description:  'Identifiez vos freins internes et découvrez des pistes pour les dépasser',
+    popover_text: 'Les blocages sont des pensées ou croyances qui limitent vos actions.',
+    btn_label:    'Comment les dépasser ?',
+    heading_id:   'desktop-entity-title'
+}) }}

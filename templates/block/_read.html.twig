@@ -1,13 +1,14 @@
+{#
+  block/_read.html.twig
+  Affichage du détail d'un blocage (dans un collapse).
+  Structure identique à feeling/_read et action/_read.
+#}
 <div class="entity-container">
-
     <div class="entity-content">
 
-        <!-- =========================
-             DESCRIPTION
-             ========================= -->
+        {# DESCRIPTION #}
         {% if block.description %}
             <div class="description-block">
-
                 <button class="description-toggle"
                         type="button"
                         data-bs-toggle="collapse"
@@ -16,24 +17,18 @@
                         aria-controls="collapseDescription{{ block.id }}">
                     En apprendre plus
                 </button>
-
                 <div class="collapse" id="collapseDescription{{ block.id }}">
                     <div class="description-content">
                         <p>{{ block.description }}</p>
                     </div>
                 </div>
-
             </div>
         {% endif %}
 
-
-        <!-- =========================
-             CROYANCES LIMITANTES
-             ========================= -->
+        {# CROYANCES LIMITANTES #}
         {% if block.beliefs %}
             <h5 class="trigger-intro">
                 <strong>Croyances associées</strong>
-
                 <i class="bi bi-info-circle ms-2 trigger-info"
                    tabindex="0"
                    role="button"
@@ -46,9 +41,7 @@
 
             <div class="trigger-list">
                 {% for belief in block.beliefs %}
-                    <span class="trigger-pill">
-                        {{ belief }}
-                    </span>
+                    <span class="trigger-pill">{{ belief }}</span>
                 {% endfor %}
             </div>
 
@@ -57,10 +50,7 @@
             </p>
         {% endif %}
 
-
-        <!-- =========================
-             RECADRAGES
-             ========================= -->
+        {# RECADRAGES #}
         {% if block.reframings %}
             <h5 class="sub-entity-title">
                 Repenser autrement :
@@ -68,17 +58,14 @@
 
             <div class="trigger-list">
                 {% for reframing in block.reframings %}
-                    <span class="trigger-pill">
-                        {{ reframing }}
-                    </span>
+                    <span class="trigger-pill">{{ reframing }}</span>
                 {% endfor %}
             </div>
 
             <p class="trigger-note">
-                ... changer de regard permet d’ouvrir de nouvelles possibilités
+                ... changer de regard permet d'ouvrir de nouvelles possibilités
             </p>
         {% endif %}
 
     </div>
-
 </div>

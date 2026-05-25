@@ -1,22 +1,32 @@
-<form method="post" action="{{ path('app_dashboard') }}">
+{#
+  action/_form.html.twig
+  Formulaire d'ajout d'une action à son profil.
+  Variables attendues : action
+  Variable optionnelle : userNeed (contexte dashboard)
+#}
+<form method="post" action="{{ path('app_dashboard') }}" class="entity-form">
 
-    <input type="hidden" name="needId" value="{{ userNeed.id }}">
+    {% if userNeed is defined and userNeed %}
+        <input type="hidden" name="needId" value="{{ userNeed.id }}">
+    {% endif %}
+
     <input type="hidden" name="actionId" value="{{ action.id }}">
     <input type="hidden" name="user_action[_token]" value="{{ csrf_token('user_action') }}">
 
-
     <div class="mb-3">
-        <label class="form-label">Date limite</label>
+        <label class="form-label" for="deadline_{{ action.id }}">Date limite</label>
         <input type="date"
+               id="deadline_{{ action.id }}"
                name="user_action[deadline]"
                class="form-control"
                required>
     </div>
 
-    {% if action.isRecurring == true %}
+    {% if action.isRecurring %}
         <div class="mb-3">
-            <label class="form-label">Fréquence (par semaine)</label>
+            <label class="form-label" for="frequency_{{ action.id }}">Fréquence (par semaine)</label>
             <input type="number"
+                   id="frequency_{{ action.id }}"
                    name="user_action[frequency]"
                    min="1"
                    max="7"
@@ -25,8 +35,7 @@
         </div>
     {% endif %}
 
-
-    <button type="submit" class="btn btn-submit">
+    <button type="submit" class="btn-submit">
         Ajouter cette action à mon profil
     </button>
 

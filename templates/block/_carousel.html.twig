@@ -1,0 +1,17 @@
+{# Déprécié : la page block/index utilise désormais partials/_entity_carousel.html.twig directement #}
+{{ include('partials/_entity_carousel.html.twig', {
+    carousel_id:    'carouselBlocksByType',
+    items_by_group: blocksByType,
+    item_key:       'block',
+    read_template:  'block/_read.html.twig',
+    prefix:         'mobile-block',
+    has_image_hero: false,
+    text_bloc_vars: {
+        title:        'Blocages',
+        subtitle:     'par type',
+        description:  'Identifiez vos freins internes et découvrez des pistes pour les dépasser',
+        popover_text: 'Les blocages sont des pensées ou croyances qui limitent vos actions.',
+        btn_label:    'Comment les dépasser ?',
+        heading_id:   'mobile-block-title'
+    }
+}) }}

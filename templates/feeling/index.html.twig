@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des émotions{% endblock %}
+{% block title %}Ressentis et émotions — Selfly{% endblock %}
+
+{% block meta_description %}Explorez vos émotions et ressentis par catégorie. Apprenez à les reconnaître, les comprendre et identifier les besoins qui se cachent derrière elles.{% endblock %}
 
 {% block body %}
 
@@ -10,24 +12,26 @@
     text: 'Choisissez une émotion pour découvrir les ressentis associés et identifier vos besoins.',
     id: 'feeling-hero'
 } %}
- 
+
 <main class="container">
 
-    <!-- =========================
-         MOBILE : CAROUSEL
-         ========================= -->
-{{ include('feeling/_carousel.html.twig') }}
-
-<!-- =========================
-         DESKTOP : GRILLE
-         ========================= -->
-{{ include('feeling/_grid.html.twig') }}
-
+    {{ include('partials/_entity_carousel.html.twig', {
+        carousel_id:    'carouselFeelingsByEmotion',
+        items_by_group: feelingsByEmotion,
+        item_key:       'feeling',
+        read_template:  'feeling/_read.html.twig',
+        prefix:         'feeling',
+        image_base_path:'/images/feelings',
+        text_bloc_vars: {
+            title:        'Ressentis',
+            subtitle:     'par émotion',
+            description:  'Apprenez à reconnaître et à comprendre vos ressentis et émotions',
+            popover_text: 'Ici, tu peux expliquer plus en détail le concept de ressentis et émotions.',
+            btn_label:    'Que faire de mes émotions ?',
+            heading_id:   'feeling-title'
+        }
+    }) }}
 
 </main>
-
-<footer class="container text-center mt-5 mb-5">
-    <p class="text-muted">Interface de consultation des émotions et ressentis</p>
-</footer>
 
 {% endblock %}

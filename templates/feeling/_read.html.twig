@@ -1,10 +1,13 @@
+{#
+  feeling/_read.html.twig
+  Affichage du détail d'un ressenti (dans un collapse).
+#}
 <div class="entity-container">
-
     <div class="entity-content">
 
+        {# DESCRIPTION #}
         {% if feeling.description %}
             <div class="description-block">
-
                 <button class="description-toggle"
                         type="button"
                         data-bs-toggle="collapse"
@@ -13,35 +16,31 @@
                         aria-controls="collapseDescription{{ feeling.id }}">
                     En apprendre plus
                 </button>
-
                 <div class="collapse" id="collapseDescription{{ feeling.id }}">
                     <div class="description-content">
                         <p>{{ feeling.description }}</p>
                     </div>
                 </div>
-
             </div>
         {% endif %}
 
+        {# DÉCLENCHEURS #}
         {% if feeling.triggers %}
             <h6 class="trigger-intro">
                 <strong>Déclencheurs</strong>
-
                 <i class="bi bi-info-circle ms-2 trigger-info"
-                tabindex="0"
-                role="button"
-                data-bs-toggle="popover"
-                data-bs-trigger="focus"
-                data-bs-placement="right"
-                data-bs-content="Les déclencheurs sont les situations, pensées ou événements qui activent une émotion ou une réaction intérieure.">
+                   tabindex="0"
+                   role="button"
+                   data-bs-toggle="popover"
+                   data-bs-trigger="focus"
+                   data-bs-placement="right"
+                   data-bs-content="Les déclencheurs sont les situations, pensées ou événements qui activent une émotion ou une réaction intérieure.">
                 </i>
             </h6>
 
             <div class="trigger-list">
                 {% for trigger in feeling.triggers %}
-                    <span class="trigger-pill">
-                        {{ trigger }}
-                    </span>
+                    <span class="trigger-pill">{{ trigger }}</span>
                 {% endfor %}
             </div>
 
@@ -50,25 +49,22 @@
             </p>
         {% endif %}
 
-
+        {# BESOINS ASSOCIÉS #}
         {% if feeling.needs|length > 0 %}
-
-            <h5 class="">
-                Besoins courants :
-            </h5>
+            <h5 class="sub-entity-intro">Besoins courants :</h5>
 
             {% for need in feeling.needs %}
                 <div class="need-block">
 
                     <button class="sub-entity-btn sub-entity-title"
-                        role="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseNeedDetails{{ need.id }}"
-                        aria-expanded="false"
-                        aria-controls="collapseNeedDetails{{ need.id }}">
+                            role="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseNeedDetails{{ need.id }}"
+                            aria-expanded="false"
+                            aria-controls="collapseNeedDetails{{ need.id }}">
                         {{ need.title }}
                     </button>
- 
+
                     <div class="collapse" id="collapseNeedDetails{{ need.id }}">
                         <div class="sub-entity-content">
                             {{ include('need/_read.html.twig', { need: need }) }}
@@ -76,10 +72,10 @@
                     </div>
 
                 </div>
-            {% endfor %}
 
+                <hr class="need-separator">
+            {% endfor %}
         {% endif %}
 
     </div>
-
 </div>

@@ -1,11 +1,14 @@
-<div class="">
+{#
+  need/_read.html.twig
+  Affichage du détail d'un besoin (dans un collapse).
+  Utilise les classes communes entity-container / entity-content.
+#}
+<div class="entity-container">
+    <div class="entity-content">
 
-        <!-- =========================
-             DESCRIPTION
-             ========================= -->
+        {# DESCRIPTION #}
         {% if need.description %}
             <div class="description-block">
-
                 <button class="description-toggle"
                         type="button"
                         data-bs-toggle="collapse"
@@ -14,24 +17,18 @@
                         aria-controls="collapseDescription{{ need.id }}">
                     En apprendre plus
                 </button>
-
                 <div class="collapse" id="collapseDescription{{ need.id }}">
                     <div class="description-content">
                         <p>{{ need.description }}</p>
                     </div>
                 </div>
-
             </div>
         {% endif %}
 
-
-        <!-- =========================
-             SATISFACTION (FULFILMENT)
-             ========================= -->
+        {# SATISFACTION (FULFILMENT) #}
         {% if need.fulfilment %}
             <h5 class="trigger-intro">
                 <strong>Comment y répondre ?</strong>
-
                 <i class="bi bi-info-circle ms-2 trigger-info"
                    tabindex="0"
                    role="button"
@@ -41,12 +38,10 @@
                    data-bs-content="Ce niveau représente à quel point ce besoin est actuellement satisfait dans votre vie.">
                 </i>
             </h5>
- 
+
             <div class="trigger-list">
                 {% for fulfilment in need.fulfilment %}
-                    <span class="trigger-pill">
-                        {{ fulfilment }}
-                    </span>
+                    <span class="trigger-pill">{{ fulfilment }}</span>
                 {% endfor %}
             </div>
 
@@ -55,14 +50,9 @@
             </p>
         {% endif %}
 
-
-        <!-- =========================
-            FORMULAIRE / ADDNEED
-            ========================= -->
+        {# FORMULAIRE / AJOUT BESOIN #}
         <div class="form-block mt-3">
-
             {% if app.user %}
-                {# Utilisateur connecté : on affiche le bouton collapse + form #}
                 <button class="form-toggle"
                         type="button"
                         data-bs-toggle="collapse"
@@ -71,21 +61,16 @@
                         aria-controls="collapseForm{{ need.id }}">
                     Je ressens ce besoin
                 </button>
-
                 <div class="collapse mt-2" id="collapseForm{{ need.id }}">
                     {{ include('need/_form.html.twig', { need: need }) }}
                 </div>
-
             {% else %}
-                <p class="trigger-note">
-                    Connecte-toi pour ajouter ce besoin à ta liste.
-                </p>
-                {# Utilisateur non connecté : on affiche un bouton vers la page de login #}
+                <p class="trigger-note">Connecte-toi pour ajouter ce besoin à ta liste.</p>
                 <a href="{{ path('app_login') }}" class="btn btn-outline-primary">
                     Me connecter
                 </a>
             {% endif %}
-
         </div>
 
+    </div>
 </div>

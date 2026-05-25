@@ -26,11 +26,15 @@ final class ActionController extends AbstractController
     #[Route(name: 'app_action')]
     public function index(ActionService $actionService): Response
     {
-        $actionsByType = $actionService->getActionsByType();
+        /** @var \App\Entity\User|null $user */
+        $user = $this->getUser();
+        $isPremium = $user !== null
+            && $user->getSubscription() !== null
+            && $user->getSubscription()->isActive() === true;
 
         return $this->render('action/index.html.twig', [
-            'controller_name'   => 'ActionController',
-            'actions'=> $actionsByType,
+            'actions'    => $actionService->getActionsByIntensionLimited(2),
+            'isPremium'  => $isPremium,
         ]);
     }
 

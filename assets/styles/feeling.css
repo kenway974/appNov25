@@ -45,6 +45,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 1.5rem;
+    color: #ffffff;
 }
 
 @media (max-width: 768px) {
@@ -276,7 +277,7 @@
     flex-direction: column;
     align-items: center;   /* centre les éléments */
     text-align: center;    /* centre le texte */
-    color: #000;
+    color: #ffffff;
 }
 
 /* Desktop */
@@ -459,6 +460,7 @@
 
 .text-bloc-description {
     font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75) !important;
 }
 
 .entity-form {
@@ -471,7 +473,7 @@
 
 .form-label {
     font-size: small;
-    color: #333;
+    color: #e0e0e0;
 }
 
 .btn-submit {

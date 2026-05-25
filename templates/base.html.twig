@@ -2,31 +2,43 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Bootstrap CSS -->
+
+    <title>{% block title %}Selfly{% endblock %}</title>
+
+    {# ── SEO ──────────────────────────────────────────────────────────── #}
+    <meta name="description" content="{% block meta_description %}Selfly vous aide à identifier vos besoins, comprendre vos émotions et passer à l'action. Un accompagnement personnel simple et bienveillant.{% endblock %}">
+    <meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}">
+    <link rel="canonical" href="{% block canonical %}{{ absolute_url(app.request.pathInfo) }}{% endblock %}">
+
+    {# ── Open Graph ───────────────────────────────────────────────────── #}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Selfly">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:title" content="{{ block('title') }}">
+    <meta property="og:description" content="{{ block('meta_description') }}">
+    <meta property="og:url" content="{{ absolute_url(app.request.pathInfo) }}">
+    <meta property="og:image" content="{% block og_image %}{{ absolute_url('/images/og-selfly.jpg') }}{% endblock %}">
+
+    {# ── Twitter Card ─────────────────────────────────────────────────── #}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ block('title') }}">
+    <meta name="twitter:description" content="{{ block('meta_description') }}">
+    <meta name="twitter:image" content="{{ block('og_image') }}">
+
+    {# ── Styles ───────────────────────────────────────────────────────── #}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- CSS personnalisé 
-    <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
-    -->
     <meta name="theme-color" content="#4CAF50">
 
-    <style>
-        
-    </style>
-
     {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('app') }}
     {% endblock %}
 </head>
 
 <body>
-
- 
     <div class="content-wrapper">
         {{ include('partials/_navbar.html.twig') }}
-        
+
         <main>
             {% block body %}{% endblock %}
         </main>
@@ -37,6 +49,5 @@
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
-
 </body>
 </html>

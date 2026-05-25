@@ -1,13 +1,14 @@
+{#
+  action/_read.html.twig
+  Affichage du détail d'une action (dans un collapse).
+  Structure identique à feeling/_read et need/_read.
+#}
 <div class="entity-container">
-
     <div class="entity-content">
 
-        <!-- =========================
-             DESCRIPTION
-             ========================= -->
+        {# DESCRIPTION #}
         {% if action.description %}
             <div class="description-block">
-
                 <button class="description-toggle"
                         type="button"
                         data-bs-toggle="collapse"
@@ -16,61 +17,19 @@
                         aria-controls="collapseDescription{{ action.id }}">
                     En apprendre plus
                 </button>
-
                 <div class="collapse" id="collapseDescription{{ action.id }}">
                     <div class="description-content">
                         <p>{{ action.description }}</p>
                     </div>
                 </div>
-
             </div>
         {% endif %}
 
-
-        <!-- =========================
-             INFORMATIONS PRATIQUES
-             ========================= -->
+        {# INFORMATIONS PRATIQUES #}
         {% if action.duration or action.isDoableNow is not null or action.isRecurring is not null %}
             <h5 class="trigger-intro">
                 <strong>Informations pratiques</strong>
-            </h5>
-
-            <div class="trigger-list">
-
-                {% if action.duration %}
-                    <span class="trigger-pill">
-                        ⏱ {{ action.duration }} min
-                    </span>
-                {% endif %}
-
-                {% if action.isDoableNow is not null %}
-                    <span class="trigger-pill">
-                        {{ action.isDoableNow ? '⚡ Faisable maintenant' : '⏳ À planifier' }}
-                    </span>
-                {% endif %}
-
-                {% if action.isRecurring is not null %}
-                    <span class="trigger-pill">
-                        {{ action.isRecurring ? '🔁 À répéter' : '🎯 À ne faire qu\'une fois' }}
-                    </span>
-                {% endif %}
-
-            </div>
-
-            <p class="trigger-note">
-                ... choisissez une action simple pour commencer
-            </p>
-        {% endif %}
-
-
-        <!-- =========================
-             INTENTION
-             ========================= -->
-        {% if action.intension %}
-            <h5 class="sub-entity-title">
-                Intention :
-
-            <i class="bi bi-info-circle ms-2 trigger-info"
+                <i class="bi bi-info-circle ms-2 trigger-info"
                    tabindex="0"
                    role="button"
                    data-bs-toggle="popover"
@@ -81,29 +40,65 @@
             </h5>
 
             <div class="trigger-list">
-                <span class="trigger-pill">
-                    {{ action.intension }}
-                </span>
+                {% if action.duration %}
+                    <span class="trigger-pill">⏱ {{ action.duration }} min</span>
+                {% endif %}
+                {% if action.isDoableNow is not null %}
+                    <span class="trigger-pill">
+                        {{ action.isDoableNow ? '⚡ Faisable maintenant' : '⏳ À planifier' }}
+                    </span>
+                {% endif %}
+                {% if action.isRecurring is not null %}
+                    <span class="trigger-pill">
+                        {{ action.isRecurring ? '🔁 À répéter' : '🎯 À ne faire qu\'une fois' }}
+                    </span>
+                {% endif %}
+            </div>
+
+            <p class="trigger-note">... choisissez une action simple pour commencer</p>
+        {% endif %}
+
+        {# INTENTION #}
+        {% if action.intension %}
+            <h5 class="sub-entity-title">
+                Intention :
+                <i class="bi bi-info-circle ms-2 trigger-info"
+                   tabindex="0"
+                   role="button"
+                   data-bs-toggle="popover"
+                   data-bs-trigger="focus"
+                   data-bs-placement="right"
+                   data-bs-content="L'intention vous aide à choisir une action alignée avec ce que vous cherchez à accomplir.">
+                </i>
+            </h5>
+            <div class="trigger-list">
+                <span class="trigger-pill">{{ action.intension }}</span>
             </div>
         {% endif %}
 
-    <!-- Bouton toggle Bootstrap -->
-    <button class="btn btn-submit"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#form-{{ action.id }}"
-            aria-expanded="false"
-            aria-controls="form-{{ action.id }}">
-        Passer à l'action
-    </button>
+        {# BOUTON PASSER À L'ACTION — réservé aux abonnés #}
+        {% if isPremium is defined and isPremium %}
 
-    <!-- Contenu collapse -->
-    <div class="collapse mt-2" id="form-{{ action.id }}">
-            {{ include('action/_form.html.twig', { action: action }) }}
+            <button class="form-toggle mt-2"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#form-{{ action.id }}"
+                    aria-expanded="false"
+                    aria-controls="form-{{ action.id }}">
+                Passer à l'action
+            </button>
+
+            <div class="collapse mt-2" id="form-{{ action.id }}">
+                {{ include('action/_form.html.twig', { action: action }) }}
+            </div>
+
+        {% else %}
+
+            <a href="{{ path('app_subscription') }}" class="action-premium-cta mt-3">
+                <i class="bi bi-lock-fill me-2"></i>S'abonner pour ajouter cette action
+            </a>
+
+        {% endif %}
+
     </div>
-
-    
-
-    </div>
-
 </div>

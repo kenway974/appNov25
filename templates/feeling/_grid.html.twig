@@ -1,49 +1,21 @@
-<section class="d-none d-lg-block mt-5" aria-labelledby="desktop-entity-title">
-    
-    {{ include('feeling/_text-bloc.html.twig') }}
-    
-    {% for emotion, feelings in feelingsByEmotion %}
-        <section class="mb-5" aria-labelledby="emotion-desktop-{{ loop.index }}">
-            <header class="emotion-hero">
-                <div class="emotion-bg">
-                    <img src="/images/feelings/{{ emotion|lower }}.jpg"
-                        alt="Bannière {{ emotion }}"
-                        class="emotion-image">
-
-                    <div class="emotion-overlay"></div>
-                </div>
-
-                <div class="emotion-content">
-                    <h2 class="mb-3 text-center emotion-title">{{ emotion }}</h2>
-                </div>
-            </header>
-
-            <div class="row g-3">
-                {% for feeling in feelings %}
-                    {% set uniqueId = 'desktop-' ~ feeling.id ~ '-' ~ loop.index %}
-
-                    <article class="col-md-4 feeling-item">
-
-                        <button class="feeling-title"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#{{ uniqueId }}"
-                                aria-expanded="false"
-                                aria-controls="{{ uniqueId }}">
-                            {{ feeling.title }}
-                        </button>
-
-                        <div id="{{ uniqueId }}" class="collapse mt-2">
-                            {{ include('feeling/_read.html.twig', { feeling }) }}
-                        </div>
-
-                        {% if not loop.last %}
-                            <hr class="feeling-separator">
-                        {% endif %}
-
-                    </article>
-                {% endfor %}
-            </div>
-        </section>
-    {% endfor %}
-</section>
+{#
+  feeling/_grid.html.twig
+  Délègue au partial générique _entity_grid.
+  Conservé pour rétrocompatibilité si utilisé directement ailleurs.
+#}
+{{ include('partials/_entity_grid.html.twig', {
+    items_by_group:  feelingsByEmotion,
+    item_key:        'feeling',
+    read_template:   'feeling/_read.html.twig',
+    prefix:          'desktop-feeling',
+    image_base_path: '/images/feelings',
+    section_aria_id: 'emotion-desktop',
+    text_bloc_vars: {
+        title:        'Ressentis',
+        subtitle:     'par émotion',
+        description:  'Apprenez à reconnaître et à comprendre vos ressentis et émotions',
+        popover_text: 'Ici, tu peux expliquer plus en détail le concept de ressentis et émotions.',
+        btn_label:    'Que faire de mes émotions ?',
+        heading_id:   'desktop-feeling-title'
+    }
+}) }}

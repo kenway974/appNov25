@@ -1,119 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des actions{% endblock %}
+{% block title %}Actions concrètes — Selfly{% endblock %}
+
+{% block meta_description %}Découvrez des actions concrètes classées par intention pour avancer malgré vos blocages. Physique, mental, social ou créatif : trouvez ce qui vous correspond.{% endblock %}
 
 {% block body %}
 
 {% include 'partials/_hero.html.twig' with {
     imageUrl: '/images/actions/hero.jpg',
-    title: 'Passez à l’action',
+    title: 'Passez à l\'action',
     text: 'Découvrez des actions concrètes pour avancer malgré vos blocages.',
     id: 'action-hero'
 } %}
 
 <main class="container">
 
-    <!-- =========================
-         MOBILE : CAROUSEL
-         ========================= -->
-    
-    <section class="d-lg-none mt-5" aria-labelledby="mobile-actions-title">
-    
-        {{ include('action/_text-bloc.html.twig') }}
-
-        <div id="carouselActionsByType" class="carousel slide" data-bs-ride="carousel" aria-label="Carrousel des actions">
-            
-            <div class="carousel-inner">
-
-                {% for type, actions in actions %}
-                    <div class="carousel-item {{ loop.first ? 'active' : '' }}">
-                        
-                        <header>
-                            <h2 class="category-title text-center">
-                                <strong>{{ type }}</strong>
-                            </h2>
-                        </header>
-                    <div class="row g-3">
-                        {% for action in actions %}
-                            {% set uniqueId = 'mobile-' ~ action.id ~ '-' ~ loop.index %}
-
-                            <article class="col-md-4">
-                                <button class="entity-btn entity-title"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#{{ uniqueId }}"
-                                        aria-expanded="false"
-                                        aria-controls="{{ uniqueId }}">
-                                        {{ action.title }}
-                                    {% if action.icon %}
-                                        <img src="{{ asset('images/icons/' ~ action.icon) }}" width="24" class="me-2">
-                                    {% endif %}
-                                </button>
-
-                                <div id="{{ uniqueId }}" class="collapse mt-2">
-                                    {{ include('action/_read.html.twig', { action }) }}
-                                </div>
-                            </article>
-
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselActionsByIntension" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselActionsByIntension" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-
-        </div>
-    </section>
-
-    <!-- =========================
-         DESKTOP : GRILLE
-         ========================= -->
-    <section class="d-none d-lg-block mt-5" aria-labelledby="desktop-action-title">
-
-        {{ include('action/_text-bloc.html.twig') }}
-
-        {% for type, actions in actions %}
-            <section class="mb-5" aria-labelledby="intension-desktop-{{ loop.index }}">
-                <header>
-                    <h2 class="mb-3">{{ type }}</h2>
-                </header>
-
-                <div class="row g-3">
-                    {% for action in actions %}
-                        {% set uniqueId = 'desktop-' ~ action.id ~ '-' ~ loop.index %}
-
-                        <article class="col-md-4">
-                                <button class="entity-btn entity-title"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#{{ uniqueId }}"
-                                        aria-expanded="false"
-                                        aria-controls="{{ uniqueId }}">
-
-                                    {% if action.icon %}
-                                        <img src="{{ asset('images/icons/' ~ action.icon) }}" width="24" class="me-2">
-                                    {% endif %}
-
-                                    {{ action.title }}
-                                </button>
-
-                            <div id="{{ uniqueId }}" class="collapse mt-2">
-                                {{ include('action/_read.html.twig', { action }) }}
-                            </div>
-
-                        </article>
-                    {% endfor %}
-                </div>
-            </section>
-        {% endfor %}
-    </section>
+    {{ include('partials/_entity_carousel.html.twig', {
+        carousel_id:    'carouselActionsByIntension',
+        items_by_group: actions,
+        item_key:       'action',
+        read_template:  'action/_read.html.twig',
+        prefix:         'action',
+        image_base_path:'/images/actions',
+        text_bloc_vars: {
+            title:        'Actions',
+            subtitle:     'par intention',
+            description:  'Découvrez des actions concrètes adaptées à vos besoins',
+            popover_text: 'Les actions sont classées par intention pour vous aider à trouver rapidement ce qui vous correspond.',
+            btn_label:    'Comment choisir ?',
+            heading_id:   'action-title'
+        }
+    }) }}
 
 </main>
 

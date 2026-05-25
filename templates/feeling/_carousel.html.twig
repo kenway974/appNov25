@@ -1,61 +1,22 @@
-<section class="d-lg-none mt-5" aria-labelledby="mobile-feelings-title">
-        {{ include('feeling/_text-bloc.html.twig') }}
-
-        <div id="carouselFeelingsByEmotion" class="carousel slide" data-bs-ride="false" aria-label="Carrousel des émotions">
-            <div class="carousel-inner">
-
-                {% for emotion, feelings in feelingsByEmotion %}
-                    <div class="carousel-item {{ loop.first ? 'active' : '' }}">
-                        <header class="emotion-hero">
-                            <div class="emotion-bg">
-                                <img src="/images/feelings/{{ emotion|lower }}.jpg"
-                                    alt="Bannière {{ emotion }}"
-                                    class="emotion-image">
-
-                                <div class="emotion-overlay"></div>
-                            </div>
-
-                            <div class="emotion-content">
-                                <h2 class="mb-3 text-center emotion-title">{{ emotion }}</h2>
-                            </div>
-                        </header>
-
-                        {% for feeling in feelings %}
-                            {% set uniqueId = 'mobile-' ~ emotion ~ '-' ~ feeling.id ~ '-' ~ loop.index %}
-
-                            <article class="feeling-item">
-                                <button
-                                    class="feeling-title"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#{{ uniqueId }}"
-                                    aria-expanded="false"
-                                    aria-controls="{{ uniqueId }}"
-                                >
-                                    {{ feeling.title }}
-                                </button>
-
-                                <div id="{{ uniqueId }}" class="collapse mt-2">
-                                    {{ include('feeling/_read.html.twig', { feeling }) }}
-                                </div>
-
-                                {% if not loop.last %}
-                                    <hr class="feeling-separator">
-                                {% endif %}
-                            </article>
-                        {% endfor %}
-
-                    </div>
-                {% endfor %}
-
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselFeelingsByEmotion" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselFeelingsByEmotion" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-        </div>
-    </section>
+{#
+  feeling/_carousel.html.twig
+  Délègue au partial générique _entity_carousel.
+  Conservé pour rétrocompatibilité si utilisé directement ailleurs.
+#}
+{{ include('partials/_entity_carousel.html.twig', {
+    carousel_id:    'carouselFeelingsByEmotion',
+    items_by_group: feelingsByEmotion,
+    item_key:       'feeling',
+    read_template:  'feeling/_read.html.twig',
+    prefix:         'mobile-feeling',
+    has_image_hero: true,
+    image_base_path:'/images/feelings',
+    text_bloc_vars: {
+        title:        'Ressentis',
+        subtitle:     'par émotion',
+        description:  'Apprenez à reconnaître et à comprendre vos ressentis et émotions',
+        popover_text: 'Ici, tu peux expliquer plus en détail le concept de ressentis et émotions.',
+        btn_label:    'Que faire de mes émotions ?',
+        heading_id:   'mobile-feeling-title'
+    }
+}) }}

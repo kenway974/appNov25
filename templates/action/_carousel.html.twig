@@ -1,56 +1,17 @@
-<section class="d-lg-none mt-5" aria-labelledby="mobile-actions-title">
-    
-    {{ include('action/_text-bloc.html.twig') }}
-
-    <div id="carouselActionsByIntension" class="carousel slide" data-bs-ride="carousel" aria-label="Carrousel des actions">
-        
-        <div class="carousel-inner">
-
-            {% for intension, actions in actionsByIntension %}
-                <div class="carousel-item {{ loop.first ? 'active' : '' }}">
-                    
-                    <header>
-                        <h2 class="category-title text-center">
-                            <strong>{{ intension }}</strong>
-                        </h2>
-                    </header>
-
-                    {% for action in actions %}
-                        {% set uniqueId = 'mobile-' ~ action.id ~ '-' ~ loop.index %}
-                        
-                        <article>
-                            <button class="entity-btn entity-title"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#{{ uniqueId }}"
-                                    aria-expanded="false"
-                                    aria-controls="{{ uniqueId }}">
-                                
-                                {% if action.icon %}
-                                    <i class="{{ action.icon }}"></i>
-                                {% endif %}
-
-                                <span>{{ action.title }}</span>
-                            </button>
-
-                            <div id="{{ uniqueId }}" class="collapse mt-2">
-                                {{ include('action/_read.html.twig', { action }) }}
-                            </div>
-                        </article>
-
-                    {% endfor %}
-                </div>
-            {% endfor %}
-
-        </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselActionsByIntension" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselActionsByIntension" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
-
-    </div>
-</section>
+{# Déprécié : la page action/index utilise désormais partials/_entity_carousel.html.twig directement #}
+{{ include('partials/_entity_carousel.html.twig', {
+    carousel_id:    'carouselActionsByIntension',
+    items_by_group: actionsByIntension,
+    item_key:       'action',
+    read_template:  'action/_read.html.twig',
+    prefix:         'mobile-action',
+    has_image_hero: false,
+    text_bloc_vars: {
+        title:        'Actions',
+        subtitle:     'par intention',
+        description:  'Découvrez des actions concrètes adaptées à vos besoins',
+        popover_text: 'Les actions sont classées par intention pour vous aider à trouver rapidement ce qui vous correspond.',
+        btn_label:    'Comment choisir ?',
+        heading_id:   'mobile-action-title'
+    }
+}) }}

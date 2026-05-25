@@ -62,6 +62,20 @@ class ActionService
         return $actionsByIntension;
     }
 
+    public function getActionsByIntensionLimited(int $limit = 2): array
+    {
+        $result = [];
+
+        foreach ($this->intensions as $intension) {
+            $actions = $this->actionRepository->findByIntension($intension);
+            if (!empty($actions)) {
+                $result[$intension] = array_slice($actions, 0, $limit);
+            }
+        }
+
+        return $result;
+    }
+
     public function getInstantActions(): array
     {
         return $this->actionRepository->findByIsDoableNow(true);
