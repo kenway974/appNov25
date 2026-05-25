@@ -1,13 +1,18 @@
 <footer class="site-footer">
 
     <div class="footer-brand">
-        <img src="{{ asset('icons/logo.png') }}" alt="Logo Selfly" style="height: 40px;">
+        <img src="{{ asset('icons/logo.png') }}" alt="Logo Selfly" height="40">
         <span class="footer-brand-name">Selfly</span>
     </div>
 
     <div class="footer-auth">
-        <a href="{{ path('app_login') }}">Se connecter</a>
-        <a href="{{ path('app_register') }}">S'inscrire</a>
+        {% if app.user %}
+            <a href="{{ path('app_dashboard') }}">Mon espace</a>
+            <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        {% else %}
+            <a href="{{ path('app_login') }}">Se connecter</a>
+            <a href="{{ path('app_register') }}">S'inscrire</a>
+        {% endif %}
     </div>
 
     <nav class="footer-nav" aria-label="Navigation secondaire">
@@ -15,14 +20,17 @@
             <li><a href="{{ path('app_home') }}">Accueil</a></li>
             <li><a href="{{ path('app_about') }}">À propos</a></li>
             <li><a href="{{ path('app_feeling') }}">Ressentis</a></li>
+            <li><a href="{{ path('app_need') }}">Besoins</a></li>
             <li><a href="{{ path('app_action') }}">Actions</a></li>
+            <li><a href="{{ path('app_block') }}">Blocages</a></li>
+            <li><a href="{{ path('app_faq') }}">FAQ</a></li>
         </ul>
     </nav>
 
     <div class="footer-legal">
         <a href="{{ path('app_cgu') }}">CGU</a>
-        <a href="{{ path('app_privacy_policy') }}">Politique de confidentialité</a>
-        <a href="{{ path('app_cookies') }}">Politique de cookies</a>
+        <a href="{{ path('app_privacy_policy') }}">Confidentialité</a>
+        <a href="{{ path('app_cookies') }}">Cookies</a>
         <span class="footer-copy">© {{ "now"|date("Y") }} Selfly. Tous droits réservés.</span>
     </div>
 
