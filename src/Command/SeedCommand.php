@@ -33,6 +33,7 @@ class SeedCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $basePath = dirname(__DIR__) . '/DataFixtures';
 
+
         $entityMap = [
             'plans'    => Plan::class,
             'feelings' => Feeling::class,
@@ -71,6 +72,14 @@ class SeedCommand extends Command
             }
 
             foreach ($data as $item) {
+                // Skip si l'entrée existe déjà
+                if (isset($item['id']) && $this->em->find($entityClass, $item['id'])) {
+                    continue;
+                }
+                if (isset($item['email']) && $this->em->getRepository($entityClass)->findOneBy(['email' => $item['email']])) {
+                    continue;
+                }
+
                 $entity = new $entityClass();
 
                 foreach ($item as $key => $value) {

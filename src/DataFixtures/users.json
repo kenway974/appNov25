@@ -1,6 +1,7 @@
 [
   {
     "email": "admin@example.com",
+    "username": "admin",
     "password": "$2y$10$mHy9VFMjONu6C9STVqBoZ.ajAZ7DX.2QoV6oQM/9L3X56In6yiWSi",
     "roles": ["ROLE_ADMIN"],
     "isVerified": true,

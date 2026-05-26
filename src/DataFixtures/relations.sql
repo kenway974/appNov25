@@ -1,4 +1,4 @@
-INSERT INTO feeling_need (feeling_id, need_id) VALUES
+INSERT IGNORE INTO feeling_need (feeling_id, need_id) VALUES
 
 -- 1. Surcharge de travail
 (1,1),(1,5),(1,11),(1,13),
@@ -55,7 +55,7 @@ INSERT INTO feeling_need (feeling_id, need_id) VALUES
 (18,1),(18,11),(18,17);
 
 
-INSERT INTO need_action (need_id, action_id) VALUES
+INSERT IGNORE INTO need_action (need_id, action_id) VALUES
 
 -- 1
 (1,1),(1,2),(1,3),(1,4),(1,69),(1,70),(1,71),(1,72),
