@@ -81,7 +81,9 @@ class SeedCommand extends Command
                     }
 
                     if (in_array($key, ['createdAt', 'updatedAt']) && is_string($value)) {
-                        $value = new \DateTimeImmutable($value);
+                        $value = new \DateTimeImmutable(
+                            strtoupper(trim($value)) === 'NOW()' ? 'now' : $value
+                        );
                     }
 
                     $entity->$setter($value);
